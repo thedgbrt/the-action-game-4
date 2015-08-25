@@ -1,0 +1,1 @@
+json.extract! @aktion, :id, :timeslot, :focus, :player_id, :verb_id, :project_id, :flow, :flow_notes, :value, :value_notes, :visible_to, :status, :intensity, :how_it_went, :time_zone, :location_id, :role_id, :properties, :created_at, :updated_at

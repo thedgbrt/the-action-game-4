@@ -1,0 +1,53 @@
+%h1= "Listing #{I18n.t :Aktions}"
+
+%table
+  %thead
+    %tr
+      %th Timeslot
+      %th Focus
+      %th Player
+      %th Verb
+      %th Project
+      %th Flow
+      %th Flow notes
+      %th Value
+      %th Value notes
+      %th Visible to
+      %th Status
+      %th Intensity
+      %th How it went
+      %th Time zone
+      %th Location
+      %th Role
+      %th Properties
+      %th
+      %th
+      %th
+
+  %tbody
+    - @aktions.each do |aktion|
+      %tr
+        %td= aktion.timeslot
+        %td= aktion.focus
+        %td= aktion.player_id
+        %td= aktion.verb_id
+        %td= aktion.project_id
+        %td= aktion.flow
+        %td= aktion.flow_notes
+        %td= aktion.value
+        %td= aktion.value_notes
+        %td= aktion.visible_to
+        %td= aktion.status
+        %td= aktion.intensity
+        %td= aktion.how_it_went
+        %td= aktion.time_zone
+        %td= aktion.location_id
+        %td= aktion.role_id
+        %td= aktion.properties
+        %td= link_to 'Show', aktion
+        %td= link_to 'Edit', edit_aktion_path(aktion)
+        %td= link_to 'Destroy', aktion, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Aktion', new_aktion_path

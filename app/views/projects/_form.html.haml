@@ -1,0 +1,13 @@
+= simple_form_for(@project) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :team_id
+    = f.input :active
+    = f.input :commitment
+    = f.input :visible_to
+    = f.input :ancestry
+
+  .form-actions
+    = f.button :submit

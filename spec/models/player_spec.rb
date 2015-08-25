@@ -14,8 +14,6 @@ RSpec.describe Player, type: :model do
 
   it '#admin? should return true for admins' do
     @player.role = :admin
-    pp @player
-    pp '@player.role', @player.role
     expect(@player.admin?).to be true
   end
 end

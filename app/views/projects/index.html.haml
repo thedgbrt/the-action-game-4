@@ -1,0 +1,31 @@
+%h1 Listing projects
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Team
+      %th Active
+      %th Commitment
+      %th Visible to
+      %th Ancestry
+      %th
+      %th
+      %th
+
+  %tbody
+    - @projects.each do |project|
+      %tr
+        %td= project.name
+        %td= project.team_id
+        %td= project.active
+        %td= project.commitment
+        %td= project.visible_to
+        %td= project.ancestry
+        %td= link_to 'Show', project
+        %td= link_to 'Edit', edit_project_path(project)
+        %td= link_to 'Destroy', project, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Project', new_project_path

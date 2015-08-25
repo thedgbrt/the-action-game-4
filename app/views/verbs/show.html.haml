@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @verb.name
+%p
+  %b Description:
+  = @verb.description
+%p
+  %b Intensity:
+  = @verb.intensity
+%p
+  %b Creator:
+  = @verb.creator_id
+%p
+  %b Examples:
+  = @verb.examples
+%p
+  %b Level:
+  = @verb.level
+
+= link_to 'Edit', edit_verb_path(@verb)
+\|
+= link_to 'Back', verbs_path

@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @project.name
+%p
+  %b Team:
+  = @project.team_id
+%p
+  %b Active:
+  = @project.active
+%p
+  %b Commitment:
+  = @project.commitment
+%p
+  %b Visible to:
+  = @project.visible_to
+%p
+  %b Ancestry:
+  = @project.ancestry
+
+= link_to 'Edit', edit_project_path(@project)
+\|
+= link_to 'Back', projects_path

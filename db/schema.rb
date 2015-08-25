@@ -11,10 +11,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150825080220) do
+ActiveRecord::Schema.define(version: 20150825100251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "aktions", force: :cascade do |t|
+    t.datetime "timeslot"
+    t.string   "focus"
+    t.integer  "player_id"
+    t.integer  "verb_id"
+    t.integer  "project_id"
+    t.integer  "flow"
+    t.text     "flow_notes"
+    t.integer  "value"
+    t.text     "value_notes"
+    t.integer  "visible_to"
+    t.string   "status"
+    t.integer  "intensity"
+    t.text     "how_it_went"
+    t.string   "time_zone"
+    t.integer  "location_id"
+    t.integer  "role_id"
+    t.text     "properties"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string   "name"
+    t.string   "address"
+    t.float    "longitude"
+    t.float    "latitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "players", force: :cascade do |t|
     t.string   "name"
@@ -28,6 +59,35 @@ ActiveRecord::Schema.define(version: 20150825080220) do
     t.datetime "updated_at",                                               null: false
   end
 
+  create_table "projects", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "team_id"
+    t.boolean  "active"
+    t.boolean  "commitment"
+    t.integer  "visible_to"
+    t.string   "ancestry"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "team_id"
+    t.string   "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.integer  "creator_id"
+    t.string   "name"
+    t.text     "description"
+    t.string   "url"
+    t.string   "logo_url"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "provider"
@@ -38,6 +98,17 @@ ActiveRecord::Schema.define(version: 20150825080220) do
     t.string   "email"
     t.boolean  "fictional",         default: false
     t.string   "current_time_zone", default: "Pacific Time (US & Canada)"
+  end
+
+  create_table "verbs", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "intensity"
+    t.integer  "creator_id"
+    t.string   "examples"
+    t.integer  "level"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
 end

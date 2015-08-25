@@ -13,3 +13,13 @@
  *= require_tree .
  *= require_self
  */
+
+.datetime {
+    width: auto;
+    select {
+      background-color: yellow;
+    }
+}
+.date {
+    width: auto;
+}

@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  resources :projects
+  resources :locations
+  resources :teams
+  resources :roles
+  resources :verbs
+  resources :aktions
+  resources :aktions, path: "actions"
   resources :players
   resources :users
   root to: 'visitors#index'

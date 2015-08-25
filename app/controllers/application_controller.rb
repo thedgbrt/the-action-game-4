@@ -14,11 +14,7 @@ class ApplicationController < ActionController::Base
     end
 
     def current_player
-      begin
-        @current_player ||= Player.find(session[:player_id]) if session[:player_id]
-      rescue Exception => e
-        nil
-      end
+      @current_player ||= Player.find_by_id(session[:player_id]) if session[:player_id]
     end
 
     def player_signed_in?

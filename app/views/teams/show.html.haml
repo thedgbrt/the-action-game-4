@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Captain:
+  = @team.captain_id
+%p
+  %b Name:
+  = @team.name
+%p
+  %b Description:
+  = @team.description
+%p
+  %b Url:
+  = @team.url
+%p
+  %b Logo url:
+  = @team.logo_url
+
+= link_to 'Edit', edit_team_path(@team)
+\|
+= link_to 'Back', teams_path

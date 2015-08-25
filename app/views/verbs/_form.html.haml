@@ -1,0 +1,13 @@
+= simple_form_for(@verb) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :description
+    = f.input :intensity
+    = f.input :creator_id
+    = f.input :examples
+    = f.input :level
+
+  .form-actions
+    = f.button :submit
