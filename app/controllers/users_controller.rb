@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   private
 
   def secure_params
-    params.require(:user).permit(:email)
+    params.require(:user).permit(:email, :current_time_zone, :email, :fictional)
   end
 
 end

@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @player.name
+%p
+  %b Provider:
+  = @player.provider
+%p
+  %b Uid:
+  = @player.uid
+%p
+  %b Role:
+  = @player.role
+%p
+  %b Email:
+  = @player.email
+%p
+  %b Fictional:
+  = @player.fictional
+%p
+  %b Current time zone:
+  = @player.current_time_zone
+
+= link_to 'Edit', edit_player_path(@player)
+\|
+= link_to 'Back', players_path

@@ -1,0 +1,14 @@
+= simple_form_for(@player) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :provider
+    = f.input :uid
+    = f.input :role
+    = f.input :email
+    = f.input :fictional
+    = f.input :current_time_zone
+
+  .form-actions
+    = f.button :submit
