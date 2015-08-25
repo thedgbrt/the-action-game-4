@@ -4,32 +4,36 @@ class ApplicationController < ActionController::Base
   include Pundit
   protect_from_forgery with: :exception
 
-  helper_method :current_user
-  helper_method :user_signed_in?
-  helper_method :correct_user?
+  helper_method :current_player
+  helper_method :player_signed_in?
+  helper_method :correct_player?
 
   private
     def current_user
+      current_player
+    end
+
+    def current_player
       begin
-        @current_user ||= User.find(session[:user_id]) if session[:user_id]
+        @current_player ||= Player.find(session[:player_id]) if session[:player_id]
       rescue Exception => e
         nil
       end
     end
 
-    def user_signed_in?
-      return true if current_user
+    def player_signed_in?
+      return true if current_player
     end
 
-    def correct_user?
-      @user = User.find(params[:id])
-      unless current_user == @user
+    def correct_player?
+      @player = Player.find(params[:id])
+      unless current_player == @player
         redirect_to root_url, :alert => "Access denied."
       end
     end
 
-    def authenticate_user!
-      if !current_user
+    def authenticate_player!
+      if !current_player
         redirect_to root_url, :alert => 'You need to sign in for access to this page.'
       end
     end
