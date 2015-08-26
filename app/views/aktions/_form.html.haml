@@ -11,13 +11,6 @@
       .large-12.columns= f.association :project
     %h4.large-3.columns.text-center
       .focus FOCUS
-      %button= link_to 'Ticking', new_team_aktion_path(@current_team, sound_choice: 'ticking')
-      %br
-      %button= link_to 'Nature Sounds', new_team_aktion_path(@current_team, sound_choice: 'nature')
-      %br
-      %button= link_to 'My Own Music', new_team_aktion_path(@current_team, sound_choice: 'music')
-      %br
-      %button= link_to 'Silence', new_team_aktion_path(@current_team, sound_choice: nil)
     %h4.large-3.columns.text-center
       .review REVIEW
     %h4.large-3.columns.text-center
@@ -40,4 +33,9 @@
 
   .form-actions
     = f.button :submit, "Create #{I18n.t :Aktion}"
+    %span.sound-option= link_to 'Ticking', new_team_aktion_path(@current_team, sound_choice: 'ticking')
+    %span.sound-option= link_to 'Nature Sounds', new_team_aktion_path(@current_team, sound_choice: 'nature')
+    %span.sound-option= link_to 'My Own Music', new_team_aktion_path(@current_team, sound_choice: 'music')
+    %span.sound-option= link_to 'Silence', new_team_aktion_path(@current_team, sound_choice: nil)
+
   = render '/visitors/sounds'

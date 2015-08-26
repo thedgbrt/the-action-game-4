@@ -49,22 +49,30 @@ $(function() {
         return ending
     }
     
-    function updateClass(i) {
-        if (i < 2) {
+    function updateClass(m) {
+        if (m < 2) {
+            document.getElementById('time').classList.remove('focus', 'review', 'relax');
             document.getElementById('time').classList.add('commit');
-        } else if (i < 23) {
+        } else if (m < 23) {
+            document.getElementById('time').classList.remove('commit', 'review', 'relax');
             document.getElementById('time').classList.add('focus');
-        } else if (i < 25) {
+        } else if (m < 25) {
+            document.getElementById('time').classList.remove('commit', 'focus', 'relax');
             document.getElementById('time').classList.add('review');
-        } else if (i < 30) {
+        } else if (m < 30) {
+            document.getElementById('time').classList.remove('commit', 'focus', 'review');
             document.getElementById('time').classList.add('relax');
-        } else if (i < 32) {
+        } else if (m < 32) {
+            document.getElementById('time').classList.remove('focus', 'review', 'relax');
             document.getElementById('time').classList.add('commit');
-        } else if (i < 53) {
+        } else if (m < 53) {
+            document.getElementById('time').classList.remove('commit', 'review', 'relax');
             document.getElementById('time').classList.add('focus');
-        } else if (i < 55) {
+        } else if (m < 55) {
+            document.getElementById('time').classList.remove('commit', 'focus', 'relax');
             document.getElementById('time').classList.add('review');
         } else {
+            document.getElementById('time').classList.remove('commit', 'focus', 'review');
             document.getElementById('time').classList.add('relax');
         }
     }
@@ -72,11 +80,13 @@ $(function() {
     function startTime() {
         var now = new Date();
         var ending = actionTime();
-        var delta_time = ending - now
+        var delta_time = ending - now;
 
-        var m = ending.getMinutes() - now.getMinutes() - 1;
+        var m = now.getMinutes()
+        updateClass(now.getMinutes());
+        m = ending.getMinutes() - m - 1;
+
         var s = 60 - now.getSeconds() - 1;
-        updateClass(m)
         // add a zero in front of numbers<10
         m = checkTime(m);
         s = checkTime(s);
