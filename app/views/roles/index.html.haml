@@ -5,7 +5,7 @@
     %tr
       %th Name
       %th Team
-      %th Url
+      %th.not-too-wide Description
       %th
       %th
       %th
@@ -15,7 +15,7 @@
       %tr
         %td= role.name
         %td= role.team.try(:name)
-        %td= role.url
+        %td= role.description
         %td= link_to 'Show', role
         %td= link_to 'Edit', edit_role_path(role)
         %td= link_to 'Destroy', role, :method => :delete, :data => { :confirm => 'Are you sure?' }

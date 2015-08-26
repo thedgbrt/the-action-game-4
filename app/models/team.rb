@@ -8,7 +8,7 @@ class Team < ActiveRecord::Base
   default_scope { order(:updated_at) }
 
   def add(playa)
-    tm = team_memberships.build(player_id: playa.id)
+    tm = team_memberships.create!(player_id: playa.id)
     tm ? {notice: 'Successfully added you to this team'} : {alert: 'Unable to add you to this team'}
   end
 

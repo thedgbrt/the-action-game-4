@@ -54,6 +54,7 @@ class TeamsController < ApplicationController
 
   def activate
     @current_team = Team.find_by_id(params[:team_id])
+    redirect_to :back
   end
 
   def join

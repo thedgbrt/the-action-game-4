@@ -6,11 +6,11 @@ class Role < ActiveRecord::Base
   def self.initialize_for(solo_team)
     return 'Roles already initialized' if solo_team.roles.first
     [
-      solo_team.roles.create!(name: 'Fearless Leader', description: 'Chooses vision and strategy, does everything else that another role has not yet been created for.'),
-      solo_team.roles.create!(name: 'Director of Finance', description: 'Budgets, pays the bills.'),
-      solo_team.roles.create!(name: 'Executive Assistant', description: 'Triages e-mail, schedules, pays the bills.'),
-      solo_team.roles.create!(name: 'Lifelong Student', description: 'Explores and learns new things.'),
-      solo_team.roles.create!(name: 'Court Jester', description: 'Helps everyone to enjoy life more.'),      
+      solo_team.roles.create!(name: 'Fearless Leader', description: 'Chooses vision and strategy, does everything else that another role has not yet been created for'),
+      solo_team.roles.create!(name: 'Director of Finance', description: 'Budgets, pays the bills'),
+      solo_team.roles.create!(name: 'Executive Assistant', description: 'Triages e-mail, schedules events, maintains everything'),
+      solo_team.roles.create!(name: 'Lifelong Student', description: 'Explores and learns new things'),
+      solo_team.roles.create!(name: 'Court Jester', description: 'Helps everyone to enjoy life more'),      
     ]
   end
   
