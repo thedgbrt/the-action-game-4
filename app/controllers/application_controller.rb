@@ -13,6 +13,10 @@ class ApplicationController < ActionController::Base
       current_player
     end
 
+    def current_team
+      @current_team ||= @current_player.teams.last
+    end
+
     def current_player
       @current_player ||= Player.find_by_id(session[:player_id]) if session[:player_id]
     end

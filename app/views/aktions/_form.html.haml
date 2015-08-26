@@ -4,13 +4,13 @@
   .form-inputs
     .large-4.small-3.columns= f.association :player, selected: current_player.try(:current_time_zone)
     .large-4.small-6.columns= f.input :timeslot, label: 'Time Slot', minute_step: 30
-    .large-4.small-3.columns= f.input :time_zone    
+    .large-4.small-3.columns= f.input :time_zone, selected: Time.now, include_blank: true
     %div
-    .large-1.small-2.columns= f.input :intensity
-    .large-3.small-6.columns= f.input :focus
-    .large-2.small-4.columns= f.association :role
-    .large-2.small-4.columns= f.association :verb
-    .large-2.small-4.columns= f.association :project
+    .large-1.small-2.columns= f.input :intensity, collection: (1..5)
+    .large-3.small-6.columns= f.input :focus, placeholder: 'Focus'
+    .large-2.small-4.columns= f.association :verb, prompt: 'Doing what?'
+    .large-2.small-4.columns= f.association :role, label_method: :team_role, prompt: 'In what role?'
+    .large-2.small-4.columns= f.association :project, label_method: :team_project
     .large-2.small-4.columns= f.association :location
       
     /

@@ -7,15 +7,15 @@ class PlayerPolicy
   end
 
   def index?
-    @current_player.admin?
+    @current_player.try(:admin?)
   end
 
   def show?
-    @current_player.admin? or @current_player == @player
+    @current_player.try(:admin?) or @current_player == @player
   end
 
   def destroy?
-    @current_player.admin?
+    @current_player.try(:admin?)
   end
 
 end

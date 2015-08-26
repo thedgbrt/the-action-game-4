@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Player:
+  = @team_membership.player_id
+%p
+  %b Team:
+  = @team_membership.team_id
+%p
+  %b Active:
+  = @team_membership.active
+%p
+  %b Admin:
+  = @team_membership.admin
+
+= link_to 'Edit', edit_team_membership_path(@team_membership)
+\|
+= link_to 'Back', team_memberships_path

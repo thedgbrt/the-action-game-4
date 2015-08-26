@@ -1,28 +1,21 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :join, :leave]
 
-  # GET /teams
-  # GET /teams.json
   def index
-    @teams = Team.all
+    @my_teams = current_player.teams
+    @other_teams = Team.all - current_player.teams
   end
 
-  # GET /teams/1
-  # GET /teams/1.json
   def show
   end
 
-  # GET /teams/new
   def new
     @team = Team.new
   end
 
-  # GET /teams/1/edit
   def edit
   end
 
-  # POST /teams
-  # POST /teams.json
   def create
     @team = Team.new(team_params)
 
@@ -37,8 +30,6 @@ class TeamsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /teams/1
-  # PATCH/PUT /teams/1.json
   def update
     respond_to do |format|
       if @team.update(team_params)
@@ -51,8 +42,6 @@ class TeamsController < ApplicationController
     end
   end
 
-  # DELETE /teams/1
-  # DELETE /teams/1.json
   def destroy
     @team.destroy
     respond_to do |format|
@@ -61,13 +50,23 @@ class TeamsController < ApplicationController
     end
   end
 
+  def join
+    raise 'No current player' unless current_player
+    msg = @team.add(current_player)
+    redirect_to :back, msg
+  end
+
+  def leave
+    raise 'No current player' unless current_player
+    msg = @team.remove(current_player)
+    redirect_to :back, msg
+  end
+
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_team
       @team = Team.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
       params.require(:team).permit(:captain_id, :name, :description, :url, :logo_url)
     end

@@ -3,11 +3,10 @@ class PlayersController < ApplicationController
 
   def index
     @players = Player.all
-    authorize Player
   end
 
   def show
-    authorize @player
+    # authorize @player
   end
 
   def new
@@ -19,10 +18,9 @@ class PlayersController < ApplicationController
 
   def create
     @player = Player.new(player_params)
-
     respond_to do |format|
       if @player.save
-        format.html { redirect_to @player, notice: 'Player was successfully created.' }
+        format.html { redirect_to @player, notice: "Player was successfully created.  Results: #{results}" }
         format.json { render :show, status: :created, location: @player }
       else
         format.html { render :new }
@@ -57,6 +55,6 @@ class PlayersController < ApplicationController
     end
 
     def player_params
-      params.require(:player).permit(:email, :current_time_zone, :email, :fictional)
+      params.require(:player).permit(:name, :role, :email, :current_time_zone, :email, :fictional)
     end
 end

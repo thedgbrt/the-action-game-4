@@ -1,8 +1,8 @@
 %p#notice= notice
 
 %p
-  %b Captain:
-  = @team.captain_id
+  %b Creator:
+  = @team.creator.try(:name)
 %p
   %b Name:
   = @team.name

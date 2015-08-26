@@ -2,9 +2,9 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :captain_id
     = f.input :name
     = f.input :description
+    = f.association :creator
     = f.input :url
     = f.input :logo_url
 

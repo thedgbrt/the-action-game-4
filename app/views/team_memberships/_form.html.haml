@@ -1,0 +1,11 @@
+= simple_form_for(@team_membership) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :player_id
+    = f.input :team_id
+    = f.input :active
+    = f.input :admin
+
+  .form-actions
+    = f.button :submit

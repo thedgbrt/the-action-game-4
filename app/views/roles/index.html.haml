@@ -14,7 +14,7 @@
     - @roles.each do |role|
       %tr
         %td= role.name
-        %td= role.team_id
+        %td= role.team.try(:name)
         %td= role.url
         %td= link_to 'Show', role
         %td= link_to 'Edit', edit_role_path(role)

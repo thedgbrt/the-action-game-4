@@ -1,12 +1,11 @@
-%h1 Listing players
+%h1= "Listing #{I18n.t :Players}"
 
 %table
   %thead
     %tr
+      %th
       %th Name
-      %th Provider
-      %th Uid
-      %th Role
+      %th TAG.com role
       %th Email
       %th Fictional
       %th Current time zone
@@ -17,9 +16,8 @@
   %tbody
     - @players.each do |player|
       %tr
+        %td= image_tag player.gravatar
         %td= player.name
-        %td= player.provider
-        %td= player.uid
         %td= player.role
         %td= player.email
         %td= player.fictional

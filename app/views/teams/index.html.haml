@@ -1,29 +1,6 @@
-%h1 Listing teams
-
-%table
-  %thead
-    %tr
-      %th Captain
-      %th Name
-      %th Description
-      %th Url
-      %th Logo url
-      %th
-      %th
-      %th
-
-  %tbody
-    - @teams.each do |team|
-      %tr
-        %td= team.captain_id
-        %td= team.name
-        %td= team.description
-        %td= team.url
-        %td= team.logo_url
-        %td= link_to 'Show', team
-        %td= link_to 'Edit', edit_team_path(team)
-        %td= link_to 'Destroy', team, :method => :delete, :data => { :confirm => 'Are you sure?' }
+= render 'teams', teams: @my_teams, mine: true if @my_teams.first
+= render 'teams', teams: @other_teams, mine: false if @other_teams.first
 
 %br
 
-= link_to 'New Team', new_team_path
+%button= link_to 'New Team', new_team_path

@@ -1,0 +1,27 @@
+%h1 Listing team_memberships
+
+%table
+  %thead
+    %tr
+      %th Player
+      %th Team
+      %th Active
+      %th Admin
+      %th
+      %th
+      %th
+
+  %tbody
+    - @team_memberships.each do |team_membership|
+      %tr
+        %td= team_membership.player_id
+        %td= team_membership.team_id
+        %td= team_membership.active
+        %td= team_membership.admin
+        %td= link_to 'Show', team_membership
+        %td= link_to 'Edit', edit_team_membership_path(team_membership)
+        %td= link_to 'Destroy', team_membership, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Team membership', new_team_membership_path

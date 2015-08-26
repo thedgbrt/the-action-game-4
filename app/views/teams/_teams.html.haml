@@ -1,0 +1,35 @@
+%h2= mine ? 'My Teams' : 'Other Teams'
+%table
+  %thead
+    %tr
+      %th Creator
+      %th Name
+      %td Players
+      %td Roles
+      %td Projects
+      %th Description
+      %th Logo url
+      %th
+      %th
+      %th
+      %th
+  %tbody
+    - teams.each do |team|
+      %tr
+        %td= team.creator.try(:name)
+        %td= link_to team.name, team
+        %td= team.players.map(&:name).join(', ')
+        %td= "#{team.roles.count} Roles"
+        %td= "#{team.projects.count} Projects"
+        - if team.url
+          %td= link_to team.description, team.url
+        - else
+          %td= team.description
+        %td= team.logo_url
+        %td= link_to 'Show', team
+        %td= link_to 'Edit', edit_team_path(team)
+        %td= link_to 'Destroy', team, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        - if mine
+          %td= link_to 'Leave', leave_team_path(team)
+        - else
+          %td= link_to 'Join', join_team_path(team)
