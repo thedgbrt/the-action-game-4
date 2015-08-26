@@ -30,4 +30,20 @@ class Aktion < ActiveRecord::Base
   belongs_to :role
   belongs_to :location
 
+  def self.current_timeslot(t = nil)
+    t ||= Time.zone.now
+    if t.min < 30
+      t.at_beginning_of_hour
+    else
+      t.at_beginning_of_hour + 30.minutes
+    end
+  end
+
+  def self.intensities
+    [ ['1 - Quasi Action', 1],
+      ['2 - Split Focus', 2], 
+      ['3 - Maintenance', 3],
+      ['4 - Important', 4],
+      ['5 - Urgent', 5]]
+  end
 end

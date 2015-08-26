@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Project:
+  = @project_membership.project_id
+%p
+  %b Player:
+  = @project_membership.player_id
+%p
+  %b Active:
+  = @project_membership.active
+%p
+  %b Owner:
+  = @project_membership.owner
+
+= link_to 'Edit', edit_project_membership_path(@project_membership)
+\|
+= link_to 'Back', project_memberships_path

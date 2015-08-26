@@ -1,7 +1,4 @@
-%h1 Editing aktion
+%h1= "Editing #{I18n.t aktion}"
 
 = render 'form'
 
-= link_to 'Show', @aktion
-\|
-= link_to 'Back', aktions_path

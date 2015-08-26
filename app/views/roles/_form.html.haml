@@ -3,7 +3,9 @@
 
   .form-inputs
     = f.input :name
-    = f.input :team_id
+    = f.association :team
+    = f.association :parent
+    = f.input :description
     = f.input :url
 
   .form-actions

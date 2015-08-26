@@ -1,9 +1,10 @@
 class TeamsController < ApplicationController
+  before_action :authenticate_player!, except: [:index]
   before_action :set_team, only: [:show, :edit, :update, :destroy, :join, :leave]
 
   def index
-    @my_teams = current_player.teams
-    @other_teams = Team.all - current_player.teams
+    @my_teams = current_player.try(:teams)
+    @other_teams = Team.all - @my_teams.to_a
   end
 
   def show
@@ -33,6 +34,7 @@ class TeamsController < ApplicationController
   def update
     respond_to do |format|
       if @team.update(team_params)
+        @current_team = @team
         format.html { redirect_to @team, notice: 'Team was successfully updated.' }
         format.json { render :show, status: :ok, location: @team }
       else
@@ -48,6 +50,10 @@ class TeamsController < ApplicationController
       format.html { redirect_to teams_url, notice: 'Team was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def activate
+    @current_team = Team.find_by_id(params[:team_id])
   end
 
   def join
@@ -68,6 +74,6 @@ class TeamsController < ApplicationController
     end
 
     def team_params
-      params.require(:team).permit(:captain_id, :name, :description, :url, :logo_url)
+      params.require(:team).permit(:creator_id, :name, :description, :url, :logo_url)
     end
 end

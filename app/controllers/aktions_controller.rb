@@ -1,5 +1,7 @@
 class AktionsController < ApplicationController
   before_action :set_aktion, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_player!
+  before_action :select_team!
 
   def index
     @aktions = Aktion.all
@@ -9,8 +11,9 @@ class AktionsController < ApplicationController
   end
 
   def new
-    @aktion = Aktion.new
-    @current_team = current_player.teams.last
+    @aktion = @current_player.aktions.new
+    @aktion.time_zone = @current_player.current_time_zone
+    @aktion.timeslot = Aktion.current_timeslot
   end
 
   def edit

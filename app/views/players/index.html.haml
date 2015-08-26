@@ -5,10 +5,7 @@
     %tr
       %th
       %th Name
-      %th TAG.com role
       %th Email
-      %th Fictional
-      %th Current time zone
       %th
       %th
       %th
@@ -17,11 +14,8 @@
     - @players.each do |player|
       %tr
         %td= image_tag player.gravatar
-        %td= player.name
-        %td= player.role
+        %td= link_to player.name, player
         %td= player.email
-        %td= player.fictional
-        %td= player.current_time_zone
         %td= link_to 'Show', player
         %td= link_to 'Edit', edit_player_path(player)
         %td= link_to 'Destroy', player, :method => :delete, :data => { :confirm => 'Are you sure?' }

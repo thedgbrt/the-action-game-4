@@ -1,4 +1,5 @@
 class PlayersController < ApplicationController
+  before_action :authenticate_player!, except: [:index]
   before_action :set_player, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -6,27 +7,10 @@ class PlayersController < ApplicationController
   end
 
   def show
-    # authorize @player
-  end
-
-  def new
-    @player = Player.new
+    @current_team ||= @player.teams.last
   end
 
   def edit
-  end
-
-  def create
-    @player = Player.new(player_params)
-    respond_to do |format|
-      if @player.save
-        format.html { redirect_to @player, notice: "Player was successfully created.  Results: #{results}" }
-        format.json { render :show, status: :created, location: @player }
-      else
-        format.html { render :new }
-        format.json { render json: @player.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   def update

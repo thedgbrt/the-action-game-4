@@ -12,14 +12,45 @@
  *
  *= require_tree .
  *= require_self
+ *= require jquery.dataTables
  */
 
 .datetime {
     width: auto;
     select {
-      background-color: yellow;
+      padding-right: 20px;
     }
 }
 .date {
     width: auto;
+}
+
+.yellow-text {
+  color: yellow;
+  a, a:visited {
+    color: yellow !important;
+  }
+}
+
+.red-text {
+  color: red;
+  a, a:visited {
+    color: red !important;
+  }
+}
+
+.green-text {
+  color: #00aa00;
+  a, a:visited {
+    color: #00aa00 !important;
+  }
+}
+
+#time {
+  padding: 0px 10px;
+  height: 40px;
+  display: table-cell;
+  vertical-align: middle;
+  height: 45px;
+  font-size: 200%;
 }

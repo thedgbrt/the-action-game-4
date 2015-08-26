@@ -1,0 +1,11 @@
+= simple_form_for(@role_assignment) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :role_id
+    = f.input :player_id
+    = f.input :active
+    = f.input :primary
+
+  .form-actions
+    = f.button :submit

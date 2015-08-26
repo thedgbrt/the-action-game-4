@@ -14,8 +14,8 @@
   %tbody
     - @team_memberships.each do |team_membership|
       %tr
-        %td= team_membership.player_id
-        %td= team_membership.team_id
+        %td= team_membership.player.try(:name)
+        %td= team_membership.team.try(:name)
         %td= team_membership.active
         %td= team_membership.admin
         %td= link_to 'Show', team_membership

@@ -8,7 +8,7 @@ RSpec.describe Player, type: :model do
 
   it { should respond_to(:name) }
 
-  it "#name returns a string" do
+  it "#name should return a string" do
     expect(@player.name).to match 'Test Player'
   end
 
@@ -24,7 +24,7 @@ RSpec.describe Player, type: :model do
     expect(player.roles.count).to eq(0)
     expect(player.projects.count).to eq(0)
 
-    results = player.init('Foo Bar')
+    results = player.init
     player.save!
 
     expect(player.teams.count).to eq(1)

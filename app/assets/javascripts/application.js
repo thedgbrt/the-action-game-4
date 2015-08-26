@@ -12,11 +12,78 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.dataTables
 //= require foundation
 //= require react
 //= require react_ujs
 //= require components
 //= require_tree .
 $(function() {
-  $(document).foundation();
+    $(document).foundation();
+
+    function checkTime(i) {
+        if (i < 10) {
+            i = "0" + i;
+        }
+        return i;
+    }
+
+    function actionTime() {
+        var now = new Date();
+        var ending = new Date();
+        var h = now.getHours();
+        var m = now.getMinutes();
+        if (m < 25) {
+            ending.setHours(h);
+            ending.setMinutes(25);
+        } else if (m < 30) {
+            ending.setHours(h);
+            ending.setMinutes(30)
+        } else if (m < 55) {
+            ending.setHours(h);
+            ending.setMinutes(55)
+        } else {
+            ending.setHours(h + 1)
+            ending.setMinutes(0);
+        }
+        return ending
+    }
+    
+    function updateClass(i) {
+        if (i < 2) {
+            document.getElementById('time').classList.add('commit');
+        } else if (i < 23) {
+            document.getElementById('time').classList.add('focus');
+        } else if (i < 25) {
+            document.getElementById('time').classList.add('review');
+        } else if (i < 30) {
+            document.getElementById('time').classList.add('relax');
+        } else if (i < 32) {
+            document.getElementById('time').classList.add('commit');
+        } else if (i < 53) {
+            document.getElementById('time').classList.add('focus');
+        } else if (i < 55) {
+            document.getElementById('time').classList.add('review');
+        } else {
+            document.getElementById('time').classList.add('relax');
+        }
+    }
+
+    function startTime() {
+        var now = new Date();
+        var ending = actionTime();
+        var delta_time = ending - now
+
+        var m = ending.getMinutes() - now.getMinutes() - 1;
+        var s = 60 - now.getSeconds() - 1;
+        updateClass(m)
+        // add a zero in front of numbers<10
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById('time').innerHTML = m + ":" + s;
+        t = setTimeout(function () {
+            startTime()
+        }, 400);
+    }
+    startTime();
 });

@@ -1,13 +1,15 @@
 %li= link_to 'Teams', teams_path
 %li= link_to 'Players', players_path
 - if player_signed_in?
-  - team = Team.first
-  / %li= link_to 'New Action', new_team_aktion_path(team)
-  %li= link_to 'Roles', roles_path
-  %li= link_to 'Projects', projects_path
-  - if current_player.try(:admin?)
-    %li= link_to 'Players', players_path
+  - if team_selected?
+    %li.yellow-text= link_to "Active Team: #{current_team.try(:name)}", current_team
+    %li= link_to 'Roles', team_roles_path(team_id: current_team.id)
+    %li= link_to 'Projects', team_projects_path(team_id: current_team.id)
+    %li= link_to 'New Action', new_team_aktion_path(team_id: current_team.id)
+  - else
+    %li.red-text= link_to 'Choose Your Team', teams_path
   %li= link_to 'My Profile', current_player
-  %li= link_to "Sign out #{current_player.name}", signout_path
+  %li.red-text= link_to "Sign out #{current_player.name}", signout_path
 - else
-  %li= link_to 'Sign in', signin_path
+  %li.green-text= link_to 'Sign in with Google', signin_path
+

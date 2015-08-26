@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
+  resources :aktions
+  resources :role_assignments
+  resources :project_memberships
   resources :team_memberships
   resources :locations, :verbs, :players
   resources :teams do
-    member { get :join, :leave }
+    member { get :join, :leave, :activate }
     resources :projects
     resources :roles
     resources :aktions, path: "actions"

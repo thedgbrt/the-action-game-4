@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Role:
+  = @role_assignment.role_id
+%p
+  %b Player:
+  = @role_assignment.player_id
+%p
+  %b Active:
+  = @role_assignment.active
+%p
+  %b Primary:
+  = @role_assignment.primary
+
+= link_to 'Edit', edit_role_assignment_path(@role_assignment)
+\|
+= link_to 'Back', role_assignments_path

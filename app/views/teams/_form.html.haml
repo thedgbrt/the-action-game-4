@@ -4,7 +4,10 @@
   .form-inputs
     = f.input :name
     = f.input :description
-    = f.association :creator
+    - if @team.creator_id
+      = f.association :creator, include_blank: true
+    - else
+      = f.association :creator, include_blank: true, selected: @current_player.try(:id)
     = f.input :url
     = f.input :logo_url
 

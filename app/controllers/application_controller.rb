@@ -6,15 +6,15 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_player
   helper_method :player_signed_in?
+  helper_method :current_team
+  helper_method :team_selected?
   helper_method :correct_player?
+
+  around_filter :user_time_zone, if: :current_user
 
   private
     def current_user
       current_player
-    end
-
-    def current_team
-      @current_team ||= @current_player.teams.last
     end
 
     def current_player
@@ -32,10 +32,29 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def current_team
+      @current_team ||= @current_player.teams.last
+    end
+
+    def team_selected?
+      return true if current_player && current_team
+    end
+
+    def select_team!
+      if !current_team
+        redirect_to teams_url, alert: 'Team required.  Please join or create one.'
+      end
+    end
+
     def authenticate_player!
       if !current_player
-        redirect_to root_url, :alert => 'You need to sign in for access to this page.'
+        redirect_to root_url, alert: 'You need to sign in for access to this page.'
       end
+    end
+
+    def user_time_zone(&block)
+      tz = @current_player.try(:current_time_zone) || 'Pacific Time (US & Canada)'
+      Time.use_zone(tz, &block)
     end
 
 end

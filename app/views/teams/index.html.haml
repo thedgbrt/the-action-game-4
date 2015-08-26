@@ -1,6 +1,2 @@
-= render 'teams', teams: @my_teams, mine: true if @my_teams.first
-= render 'teams', teams: @other_teams, mine: false if @other_teams.first
-
-%br
-
-%button= link_to 'New Team', new_team_path
+= render 'teams', teams: @my_teams, mine: true
+= render 'teams', teams: @other_teams, mine: false

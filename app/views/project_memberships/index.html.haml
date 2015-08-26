@@ -1,0 +1,27 @@
+%h1 Listing project_memberships
+
+%table
+  %thead
+    %tr
+      %th Project
+      %th Player
+      %th Active
+      %th Owner
+      %th
+      %th
+      %th
+
+  %tbody
+    - @project_memberships.each do |project_membership|
+      %tr
+        %td= project_membership.project_id
+        %td= project_membership.player_id
+        %td= project_membership.active
+        %td= project_membership.owner
+        %td= link_to 'Show', project_membership
+        %td= link_to 'Edit', edit_project_membership_path(project_membership)
+        %td= link_to 'Destroy', project_membership, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Project membership', new_project_membership_path

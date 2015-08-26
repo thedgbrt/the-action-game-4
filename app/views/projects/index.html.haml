@@ -1,4 +1,4 @@
-%h1 Listing projects
+%h1 Projects
 
 %table
   %thead
@@ -8,7 +8,7 @@
       %th Active
       %th Commitment
       %th Visible to
-      %th Ancestry
+      %th Parent Project
       %th
       %th
       %th
@@ -16,12 +16,12 @@
   %tbody
     - @projects.each do |project|
       %tr
-        %td= project.name
-        %td= project.team_id
+        %td= link_to project.name, project
+        %td= link_to project.team.try(:name), project.team
         %td= project.active
         %td= project.commitment
         %td= project.visible_to
-        %td= project.ancestry
+        %td= project.parent.try(:name)
         %td= link_to 'Show', project
         %td= link_to 'Edit', edit_project_path(project)
         %td= link_to 'Destroy', project, :method => :delete, :data => { :confirm => 'Are you sure?' }

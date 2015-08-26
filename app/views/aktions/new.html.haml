@@ -1,5 +1,3 @@
-%h1= "New #{I18n.t :Aktion}"
+%h3= "New #{I18n.t :Aktion} for #{@current_team.name} (#{@aktion.timeslot.strftime('%H:%M')} timeslot)"
 
 = render 'form'
-
-= link_to 'Back', aktions_path

@@ -1,21 +1,12 @@
-%p#notice= notice
-
-%h2= @player.name
+%h2
+  = @player.name
+  = link_to '(Edit)', edit_player_path(@player)
 
 %p
   %b Current time zone:
   = @player.current_time_zone
+%hr
 
-%h5 My Teams
-= render @player.teams
-
-%h5 My Roles
-= render @player.roles
-
-%h5 My Projects
-= render @player.projects
-
-= link_to 'Edit', edit_player_path(@player)
-\|
-= link_to 'Back', players_path
-
+- @player.teams.each do |team|
+  %h4= team.name
+  = render '/teams/roles_projects', team: team

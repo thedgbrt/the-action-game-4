@@ -3,11 +3,11 @@
 
   .form-inputs
     = f.input :name
-    = f.input :team_id
+    = f.association :team, selected: @current_team
     = f.input :active
     = f.input :commitment
     = f.input :visible_to
-    = f.input :ancestry
+    = f.association :parent, label: 'Parent Project'
 
   .form-actions
     = f.button :submit

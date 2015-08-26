@@ -22,9 +22,6 @@
 /       %th Location
 /       %th Role
 /       %th Properties
-/       %th
-/       %th
-/       %th
 /
 /   %tbody
 /     - @aktions.each do |aktion|
@@ -46,10 +43,5 @@
 /         %td= aktion.location_id
 /         %td= aktion.role_id
 /         %td= aktion.properties
-/         %td= link_to 'Show', aktion
-/         %td= link_to 'Edit', edit_aktion_path(aktion)
-/         %td= link_to 'Destroy', aktion, :method => :delete, :data => { :confirm => 'Are you sure?' }
 /
 / %br
-/
-/ = link_to 'New Aktion', new_aktion_path
