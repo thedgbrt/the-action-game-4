@@ -23,13 +23,13 @@
     /
     / = f.input :visible_to
     / %hr
-    / = f.input :status
-    / = f.input :how_it_went
-    / = f.input :flow
-    / = f.input :flow_notes
-    / = f.input :value
-    / = f.input :value_notes
-    / = f.input :properties
+    = f.input :status
+    = f.input :how_it_went
+    = f.input :flow
+    = f.input :flow_notes
+    = f.input :value
+    = f.input :value_notes
+    = f.input :properties
 
   .form-actions
     = f.button :submit, "Create #{I18n.t :Aktion}"

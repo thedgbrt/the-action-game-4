@@ -39,6 +39,11 @@ class Aktion < ActiveRecord::Base
     end
   end
 
+  def simple_time
+    return '0:00' if !timeslot
+    timeslot.strftime('%b-_d')
+  end
+
   def self.intensities
     [ ['1 - Quasi Action', 1],
       ['2 - Split Focus', 2], 
