@@ -21,6 +21,32 @@
 $(function() {
     $(document).foundation();
 
+    $('#roles-table').DataTable({
+        paging: false,
+        searching: false,
+        order: [2, 'asc'],
+        orderClasses: true,
+        columnDefs: [
+            { targets: 'nosort', orderable: false}
+        ]
+    });
+
+    $('#projects-table').DataTable({
+        paging: false,
+        searching: false,
+        order: [1, 'asc'],
+        orderClasses: true,
+        columnDefs: [
+            { targets: 'nosort', orderable: false}
+        ]
+    });
+    
+    $('.datatables').DataTable({
+        paging: false,
+        searching: false
+    })
+    
+    
     function checkTime(i) {
         if (i < 10) {
             i = "0" + i;

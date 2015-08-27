@@ -2,14 +2,19 @@
 %li= link_to 'Players', players_path
 - if player_signed_in?
   - if team_selected?
-    %li.yellow-text= link_to "Active Team: #{current_team.try(:name)}", current_team
     %li= link_to 'Roles', team_roles_path(team_id: current_team.id)
     %li= link_to 'Projects', team_projects_path(team_id: current_team.id)
     %li= link_to 'New Action', new_team_aktion_path(team_id: current_team.id)
-  - else
-    %li.red-text= link_to 'Choose Your Team', teams_path
-  %li= link_to 'My Profile', current_player
-  %li.red-text= link_to "Sign out #{current_player.name}", signout_path
+  %li
+    %a{"data-dropdown" => "hover1", "data-options" => "is_hover:true; hover_timeout:200", href: ""}
+      = image_tag(current_player.gravatar(42))
+    %ul#hover1.f-dropdown.tiny{"data-dropdown-content" => ""}
+      %li.dropdown_item= link_to "Sign out #{current_player.first_name}", signout_path
+      %li.dropdown_item= link_to 'Show Profile', current_player
+      %li.dropdown_item= link_to 'Edit Profile', edit_player_path(current_player)
 - else
   %li.green-text= link_to 'Sign in with Google', signin_path
-
+- if team_selected?
+  %li.yellow-text= link_to "#{current_team.try(:name)} (Switch)", current_team
+- else
+  %li.red-text= link_to 'Choose Your Team', teams_path

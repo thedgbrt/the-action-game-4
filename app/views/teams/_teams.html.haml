@@ -4,7 +4,7 @@
     = link_to '(Add)', mine ? new_team_path(creator_id: @current_player.try(:id)) : new_team_path
 
 - if teams.try(:first)
-  %table
+  %table.datatables
     %thead
       %tr
         %th
@@ -13,7 +13,6 @@
         %td Roles
         %td Projects
         %th Description
-        %th Logo url
         %th
         %th
         %th
@@ -23,14 +22,13 @@
         %tr
           %td= link_to 'Activate', activate_team_path(id: team.id)
           %td= link_to team.name, team
-          %td= team.players.map(&:name).join(', ')
+          %td= team.players.map(&:first_name).join(', ')
           %td= "#{team.roles.count} Roles"
           %td= "#{team.projects.count} Projects"
           - if team.url
             %td= link_to team.description, team.url
           - else
             %td= team.description
-          %td= team.logo_url
           %td= link_to 'Show', team
           %td= link_to 'Edit', edit_team_path(team)
           %td= link_to 'Destroy', team, :method => :delete, :data => { :confirm => 'Are you sure?' }

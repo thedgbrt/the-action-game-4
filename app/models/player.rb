@@ -16,6 +16,10 @@ class Player < ActiveRecord::Base
     role == 'admin'
   end
 
+  def first_name
+    name.split(' ').first
+  end
+
   def gravatar(size = 24)
     gravatar_id = Digest::MD5.hexdigest(email.downcase) unless email.blank?
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}&d=monsterid"

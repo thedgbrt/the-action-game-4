@@ -1,11 +1,11 @@
-%h1 Listing roles
+%h1 Roles
 
-%table
+%table#roles-table.compact
   %thead
     %tr
       %th Name
       %th Team
-      %th.not-too-wide Description
+      %th Description
       %th
       %th
       %th
@@ -19,7 +19,3 @@
         %td= link_to 'Show', role
         %td= link_to 'Edit', edit_role_path(role)
         %td= link_to 'Destroy', role, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Role', new_role_path
