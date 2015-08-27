@@ -2,13 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.aktion-form {
-  min-height: 40em;
-  padding-top: 10px;
-  border: 1px solid black;
-  background-color: white;
-}
-
 .clock {
   min-height: 300px;
   height: 300px;
@@ -39,6 +32,22 @@
   color: white;
 }
 
+.commit-bg {
+  background-color: #ffcccc;
+}
+
+.focus-bg {
+  background-color: #ccffcc;
+}
+
+.review-bg {
+  background-color: #ffffcc;
+}
+
+.relax-bg {
+  background-color: #ccccff;
+}
+
 .media {
   width: 100%;
   height: 400px;
@@ -49,5 +58,19 @@
   padding: 10px;
   margin: 10px;
   font-weight: bold;
-  float: right;
+  text-align: center;
+}
+
+.aktion-quadrant {
+  height: 500px;
+}
+
+.aktion-quadrant-header {
+  margin: 15px 0px;
+}
+
+.bigger {
+  font-weight: bold;
+  font-size: 140%;
+  padding: 10px;
 }
