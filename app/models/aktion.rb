@@ -25,6 +25,7 @@ class Aktion < ActiveRecord::Base
   belongs_to :verb
   belongs_to :role
   belongs_to :location
+  belongs_to :team
 
   def self.current_timeslot(t = nil)
     t ||= Time.zone.now
@@ -70,9 +71,10 @@ class Aktion < ActiveRecord::Base
 
   def self.status_options
     [
-      ['Attempting'],
-      ['Successful'],
-      ['Interrupted']
+      ['Committing', 'committing'],
+      ['Attempting', 'attempting'],
+      ['Successful', 'successful'],
+      ['Interrupted', 'interrupted']
     ]
   end
 end

@@ -14,6 +14,8 @@ class AktionsController < ApplicationController
     @aktion = @current_player.aktions.new
     @aktion.time_zone = @current_player.current_time_zone
     @aktion.timeslot = Aktion.current_timeslot
+    @aktion.team = @current_team
+    @aktion.status = 'committing'
   end
 
   def edit
@@ -24,7 +26,7 @@ class AktionsController < ApplicationController
 
     respond_to do |format|
       if @aktion.save
-        format.html { redirect_to @aktion, notice: 'Aktion was successfully created.' }
+        format.html { redirect_to aktion_form, notice: 'Aktion was successfully created.' }
         format.json { render :show, status: :created, location: @aktion }
       else
         format.html { render :new }
@@ -36,7 +38,7 @@ class AktionsController < ApplicationController
   def update
     respond_to do |format|
       if @aktion.update(aktion_params)
-        format.html { redirect_to @aktion, notice: 'Aktion was successfully updated.' }
+        format.html { redirect_to aktion_form, notice: 'Aktion was successfully updated.' }
         format.json { render :show, status: :ok, location: @aktion }
       else
         format.html { render :edit }
@@ -61,6 +63,10 @@ class AktionsController < ApplicationController
     def aktion_params
       params.require(:aktion).permit(:timeslot, :focus, :player_id, :verb_id, :project_id, :flow, :flow_notes, :value,
         :value_notes, :visible_to, :status, :intensity, :how_it_went, :time_zone, :location_id, :role_id, :properties,
-        :water, :breaths, :pushups)
+        :team_id, :water, :breaths, :pushups)
+    end
+
+    def aktion_form
+      edit_team_aktion_path(@aktion, team_id: @current_team.id)
     end
 end

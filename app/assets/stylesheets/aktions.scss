@@ -34,6 +34,11 @@
 
 .commit-bg {
   background-color: #ffcccc;
+  input {
+    background-color: red;
+    color: white;
+    font-size: 130%;
+  }
 }
 
 .focus-bg {
@@ -42,6 +47,11 @@
 
 .review-bg {
   background-color: #ffffcc;
+  input {
+    background-color: yellow;
+    color: black;
+    font-size: 130%;
+  }
 }
 
 .relax-bg {
@@ -73,4 +83,7 @@
   font-weight: bold;
   font-size: 140%;
   padding: 10px;
+}
+
+.commit-bg, .review-bg {
 }
