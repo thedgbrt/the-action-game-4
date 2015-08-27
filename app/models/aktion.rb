@@ -1,28 +1,24 @@
 class Aktion < ActiveRecord::Base
-  class Properties
-    include ActiveModel::Conversion
-    extend ActiveModel::Naming
+  def self.serialize(attr_name, class_name = Object, exposed_fields = [])
+    super(attr_name, class_name)
+    serialized_attr_accessor attr_name, exposed_fields
+  end
 
-    attr_accessor :drank_water, :conscious_breaths, :pushups
-
-    def persisted?; true end
-    def id; 1 end
-
-    def self.load json
-      obj = self.new
-      unless json.nil?
-        attrs = JSON.parse json
-        obj.twitter_handle = attrs['twitter_handle']
-        obj.location = attrs['location']
-      end
-      obj
-    end
-
-    def self.dump obj
-      obj.to_json if obj
+  def self.serialized_attr_accessor(attr_name, *args)
+    args.first.each do |method_name|
+      eval "
+        def #{method_name}
+          (self[:#{attr_name}] || {})[:#{method_name}]
+        end
+        def #{method_name}=(value)
+          self[:#{attr_name}] ||= {}
+          self[:#{attr_name}][:#{method_name}] = value
+        end
+      "
     end
   end
-  serialize :properties, Properties
+
+  serialize :properties, Hash, %w(pushups breaths water)
 
   belongs_to :player
   belongs_to :project
