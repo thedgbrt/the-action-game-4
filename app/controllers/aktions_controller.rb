@@ -23,7 +23,7 @@ class AktionsController < ApplicationController
 
   def create
     @aktion = Aktion.new(aktion_params)
-
+    @aktion.status = 'attempting'
     respond_to do |format|
       if @aktion.save
         format.html { redirect_to aktion_form, notice: 'Aktion was successfully created.' }

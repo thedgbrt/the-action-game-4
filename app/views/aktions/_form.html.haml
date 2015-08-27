@@ -14,6 +14,13 @@
         .large-12.columns= f.association :project, collection: current_team.projects, prompt: 'For what project?', label: false
         .large-12.columns= f.input :timeslot, minute_step: 30, use_short_month: true, label: false
         .large-12.columns= f.input :time_zone, selected: Time.now, include_blank: true, label: false, prompt: 'Time Zone?'
+      - else
+        .large-12= "Time Slot: #{@aktion.timeslot.strftime('%b-%d, %H:%M%P')}" if @aktion.timeslot
+        .large-12= "Verb: #{@aktion.verb.name}" if @aktion.verb
+        .large-12= "Focus: #{@aktion.focus}" if @aktion.focus
+        .large-12= "Intensity: #{@aktion.intensity}" if @aktion.intensity
+        .large-12= "Role: #{@aktion.role.name}" if @aktion.role
+        .large-12= "Project: #{@aktion.project.name}" if @aktion.project
     .large-2.medium-4.small-12.columns.aktion-quadrant.focus-bg
       .focus.bigger.text-center.aktion-quadrant-header FOCUS
       - if @aktion.status == 'attempting'
@@ -26,6 +33,7 @@
       .large-3.columns= f.button :submit, "GO!"
       - if @aktion.status == 'attempting'
         .large-4.columns.bigger= 'STATUS'
+        .large-8.columns= f.input :status, collection: Aktion.status_options, label: false
         / = f.input :how_it_went, as: :hidden
         .large-4.columns.bigger= 'FLOW'
         .large-8.columns= f.input :flow, collection: Aktion.focus_options, label: false
@@ -33,6 +41,11 @@
         .large-4.columns.bigger= 'VALUE'
         .large-8.columns= f.input :value, collection: Aktion.focus_options, label: false
         .large-12= f.input :value_notes, label: false, input_html: {rows: 5}, placeholder: Aktion.value_placeholder
+      - else
+        .large-12= "Flow Rating: #{@aktion.flow}" if @aktion.flow
+        .large-12= "Flow Notes: #{@aktion.flow_notes}" if @aktion.flow_notes && @aktion.flow_notes != ''
+        .large-12= "Value Rating: #{@aktion.value}" if @aktion.value
+        .large-12= "Value Notes: #{@aktion.value_notes}" if @aktion.value_notes && @aktion.value_notes != ''
     .large-2.medium-4.small-12.columns.aktion-quadrant.relax-bg
       .relax.bigger.text-center.aktion-quadrant-header RELAX
       - if @aktion.status == 'successful' || @aktion.status == 'interrupted'
@@ -42,6 +55,10 @@
         .large-6.columns= f.input :pushups, as: :integer, label: false
         .large-6.columns.my-label peaceful breaths
         .large-6.columns= f.input :breaths, as: :integer, label: false
+      - else
+        .large-12= "Water: #{@aktion.water}" if @aktion.water
+        .large-12= "Push-ups: #{@aktion.pushups}" if @aktion.pushups
+        .large-12= "Breaths: #{@aktion.breaths}" if @aktion.breaths
 
     .large-6.small-6= f.association :location, as: :hidden
     .large-12.medium-12.small-12= f.association :player, include_blank: true, as: :hidden
