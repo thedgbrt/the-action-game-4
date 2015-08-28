@@ -1,0 +1,18 @@
+%h4
+  Roles
+  = link_to '(New)', new_team_role_path(@team)
+  - team = Team.find_by_id(params[:team_id])
+  = "for #{team.name}" if team
+
+%table#roles-table.compact
+  %thead
+    %tr
+      %th Name
+      %th Team
+      %th Description
+      %th
+      %th
+      %th
+
+  %tbody
+    = render roles

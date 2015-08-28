@@ -1,6 +1,7 @@
 class Team < ActiveRecord::Base
   has_many :roles, dependent: :destroy
   has_many :projects, dependent: :destroy
+  has_many :aktions
   has_many :team_memberships, dependent: :destroy
   has_many :players, through: :team_memberships
   belongs_to :creator, foreign_key: 'creator_id', class_name: 'Player'

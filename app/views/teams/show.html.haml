@@ -1,8 +1,6 @@
 
-%p
-  %b Creator:
-  = @team.creator.try(:name)
+= render 'roles/roles', roles: @team.roles
 
-%h2= @team.name
+%hr
 
-= render 'roles_projects', team: @team
+= render 'projects/projects', projects: @team.projects

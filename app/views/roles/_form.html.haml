@@ -1,9 +1,9 @@
-= simple_form_for(@role) do |f|
+= simple_form_for [@team, @role] do |f|
   = f.error_notification
 
   .form-inputs
     = f.input :name
-    = f.association :team
+    = f.association :team, selected: @team.id
     = f.association :parent
     = f.input :description
     = f.input :url

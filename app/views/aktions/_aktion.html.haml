@@ -1,0 +1,14 @@
+%tr
+  %td= aktion.simple_time
+  %td= link_to aktion.summary
+  %td= link_to aktion.verb.name, aktion.verb if aktion.verb
+  %td= aktion.intensity
+  %td= link_to aktion.project.name, aktion.project if aktion.project
+  %td= link_to aktion.role.name, aktion.role if aktion.role
+  %td
+    = link_to 'Show', aktion
+    |
+    = link_to 'Edit', edit_aktion_path(aktion)
+    |
+    = link_to 'Destroy', aktion, :method => :delete, :data => { :confirm => 'Are you sure?' }
+    

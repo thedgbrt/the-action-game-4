@@ -38,7 +38,11 @@ class Aktion < ActiveRecord::Base
 
   def simple_time
     return '0:00' if !timeslot
-    timeslot.strftime('%b-_d')
+    timeslot.strftime('%b-%d %H:%M')
+  end
+  
+  def summary
+    focus? ? focus : 'Focus Missing'
   end
 
   def self.intensities

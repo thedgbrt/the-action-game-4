@@ -1,7 +1,8 @@
 %h1
   Projects
   = link_to '(New)', new_project_path
-
+  - team = Team.find_by_id(params[:team_id])
+  = "for #{team.name}" if team
 
 %table#projects-table.compact
   %thead

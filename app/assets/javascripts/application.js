@@ -73,7 +73,7 @@ $(function() {
             ending.setHours(h + 1)
             ending.setMinutes(0);
         }
-        return ending
+        return ending;
     }
     
     function updateClass(m) {
@@ -107,13 +107,23 @@ $(function() {
     function startTime() {
         var now = new Date();
         var ending = actionTime();
-        var delta_time = ending - now;
+        var time_delta = ending - now;
 
         var m = now.getMinutes()
         updateClass(now.getMinutes());
-        m = ending.getMinutes() - m - 1;
+
+        // current m is between 55 and 59
+        // ending m is 60
+        // we want new m to be 4..1
+        // that's 60 - m
+        if (ending.getMinutes() == 0) {
+            m = 59 - m
+        } else {
+            m = ending.getMinutes() - m - 1;
+        };
 
         var s = 60 - now.getSeconds() - 1;
+
         // add a zero in front of numbers<10
         m = checkTime(m);
         s = checkTime(s);

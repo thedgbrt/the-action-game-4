@@ -1,8 +1,9 @@
 class RolesController < ApplicationController
   before_action :set_role, only: [:show, :edit, :update, :destroy]
+  before_action :set_team, except: [:destroy]
 
   def index
-    @roles = Role.all
+    @roles = params[:team_id] ? current_team.roles : current_player.roles
   end
 
   def show
@@ -20,7 +21,7 @@ class RolesController < ApplicationController
 
     respond_to do |format|
       if @role.save
-        format.html { redirect_to @role, notice: 'Role was successfully created.' }
+        format.html { redirect_to @team, notice: 'Role was successfully created.' }
         format.json { render :show, status: :created, location: @role }
       else
         format.html { render :new }
@@ -32,7 +33,7 @@ class RolesController < ApplicationController
   def update
     respond_to do |format|
       if @role.update(role_params)
-        format.html { redirect_to @role, notice: 'Role was successfully updated.' }
+        format.html { redirect_to @team, notice: 'Role was successfully updated.' }
         format.json { render :show, status: :ok, location: @role }
       else
         format.html { render :edit }
@@ -52,6 +53,10 @@ class RolesController < ApplicationController
   private
     def set_role
       @role = Role.find(params[:id])
+    end
+
+    def set_team
+      @team = Team.find(params[:team_id])
     end
 
     def role_params

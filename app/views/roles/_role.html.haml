@@ -1,5 +1,13 @@
-.row
-  .large-3.small-4.columns= role.name
-  .large-6.small-8.columns= role.description
-  .large-6.small-12.columns
-%br
+/ .row
+/   .large-3.small-4.columns= role.name
+/   .large-6.small-8.columns= role.description
+/   .large-6.small-12.columns
+/ %br
+
+%tr
+  %td= role.name
+  %td= link_to role.team.name, role.team if role.team
+  %td= role.description
+  %td= link_to 'Show', team_role_path(@team, role)
+  %td= link_to 'Edit', edit_team_role_path(@team, role)
+  %td= link_to 'Destroy', role, :method => :delete, :data => { :confirm => 'Are you sure?' }

@@ -12,7 +12,7 @@
         %td Players
         %td Roles
         %td Projects
-        %th Description
+        %th Aktions
         %th
         %th
         %th
@@ -29,8 +29,9 @@
               = link_to 'Join', join_team_path(team)
           %td= link_to team.name, team
           %td= team.players.map(&:first_name).join(', ')
-          %td= "#{team.roles.count} Roles"
-          %td= "#{team.projects.count} Projects"
+          %td= link_to "#{team.roles.count} Roles", team_roles_path(team_id: team.id)
+          %td= link_to "#{team.projects.count} Projects", team_projects_path(team_id: team.id)
+          %td= link_to "#{team.aktions.count} Actions", team_aktions_path(team_id: team.id)
           - if team.url
             %td= link_to team.description, team.url
           - else

@@ -1,0 +1,14 @@
+%h2= "#{aktions.count} #{I18n.t 'Aktions'}"
+
+%table.datatables.compact
+  %thead
+    %tr
+      %th Time
+      %th Focus
+      %th Verb
+      %th Intensity
+      %th Project
+      %th Role
+      %th
+  %tbody
+    = render aktions

@@ -4,8 +4,8 @@
 
   .form-inputs
     .large-4.medium-8.small-12.columns.aktion-quadrant.commit-bg
-      .large-9.columns.commit.bigger.text-center.aktion-quadrant-header COMMIT
-      .large-3.columns= f.button :submit, "GO!"
+      .large-9.medium-8.small-8.columns.commit.bigger.text-center.aktion-quadrant-header COMMIT
+      .large-3.medium-4.small-4.columns= f.button :submit, "GO!"
       - if @aktion.status == 'committing'
         .large-12.columns= f.association :verb, prompt: 'Doing what?', autofocus: true, label: false
         .large-12.columns= f.input :focus, placeholder: 'With what specific focus?', label: false
@@ -29,8 +29,8 @@
         .sound-option= link_to 'My Own Music', new_team_aktion_path(@current_team, sound_choice: 'music')
         .sound-option= link_to 'Silence', new_team_aktion_path(@current_team, sound_choice: nil)
     .large-4.medium-8.small-12.columns.aktion-quadrant.review-bg
-      .large-9.columns.review.bigger.text-center.aktion-quadrant-header REVIEW
-      .large-3.columns= f.button :submit, "GO!"
+      .large-9.medium-8.small-8.columns.review.bigger.text-center.aktion-quadrant-header REVIEW
+      .large-3.medium-4.small-4.columns= f.button :submit, "GO!"
       - if @aktion.status == 'attempting'
         .large-4.columns.bigger= 'STATUS'
         .large-8.columns= f.input :status, collection: Aktion.status_options, label: false
