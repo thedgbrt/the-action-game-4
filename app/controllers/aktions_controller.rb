@@ -1,7 +1,7 @@
 class AktionsController < ApplicationController
   before_action :set_aktion, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_player!
-  before_action :select_team!
+  # before_action :select_team!
 
   def index
     @aktions = Aktion.all

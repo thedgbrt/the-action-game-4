@@ -1,3 +1,4 @@
+%li.dropdown_item= link_to 'Teams', teams_path
 - if team_selected?
   %li= link_to 'New Action', new_team_aktion_path(team_id: current_team.id)
   %li
@@ -7,7 +8,6 @@
       %li.dropdown_item= link_to 'Team Roles', team_roles_path(team_id: current_team.id)
       %li.dropdown_item= link_to 'Team Projects', team_projects_path(team_id: current_team.id)
       %li.dropdown_item= link_to 'Switch Current', teams_path
-      %li.dropdown_item= link_to 'Show All Teams', teams_path
       %li.dropdown_item= link_to 'All Players', players_path
 - else
   %li.red-text= link_to 'Choose Your Team', teams_path
