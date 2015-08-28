@@ -25,7 +25,7 @@ feature 'Team Memberships' do
     expect(page).to have_content 'Other Teams'
 
     @current_player.teams = [t1, t2, t3]
-    expect(@current_player.curent_team_id).to eq nil
+    expect(current_team).to eq nil
     expect(page).to have_content 'FooTeam'
     expect(page).to have_content 'BarTeam'
     expect(page).to have_content 'BazTeam'
@@ -34,7 +34,7 @@ feature 'Team Memberships' do
       click_link "Activate"
     end
 
-    expect(@current_player.curent_team_id).to eq t1.id
+    expect(current_team).to eq t1
   end
 
 end

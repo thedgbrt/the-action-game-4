@@ -1,17 +1,5 @@
-%li.dropdown_item= link_to 'Teams', teams_path
 - if team_selected?
   %li= link_to 'New Action', new_team_aktion_path(team_id: current_team.id)
-  %li
-    %a{"data-dropdown" => "hover2", "data-options" => "is_hover:true; hover_timeout:200", href: "#{team_path(current_team)}"}
-      = current_team.name
-    %ul#hover2.f-dropdown.tiny{"data-dropdown-content" => ""}
-      %li.dropdown_item= link_to 'Team Roles', team_roles_path(team_id: current_team.id)
-      %li.dropdown_item= link_to 'Team Projects', team_projects_path(team_id: current_team.id)
-      %li.dropdown_item= link_to 'Switch Current', teams_path
-      %li.dropdown_item= link_to 'All Players', players_path
-- else
-  %li.red-text= link_to 'Choose Your Team', teams_path
-
 - if player_signed_in?
   %li= link_to 'My Actions', player_aktions_path(player_id: current_player.id)
   %li
@@ -23,3 +11,16 @@
       %li.text-right.dropdown_item= link_to 'Edit Profile', edit_player_path(current_player)
 - else
   %li.green-text= link_to 'Sign in with Google', signin_path
+
+%li= link_to 'Teams', teams_path
+- if team_selected?
+  %li.yellow-text
+    %a{"data-dropdown" => "hover2", "data-options" => "is_hover:true; hover_timeout:200", href: "#{team_path(current_team)}"}
+      = current_team.name
+    %ul#hover2.f-dropdown.tiny{"data-dropdown-content" => ""}
+      %li.dropdown_item= link_to 'Team Roles', team_roles_path(team_id: current_team.id)
+      %li.dropdown_item= link_to 'Team Projects', team_projects_path(team_id: current_team.id)
+      %li.dropdown_item= link_to 'Switch Current', teams_path
+      %li.dropdown_item= link_to 'All Players', players_path
+- else
+  %li.yellow-text= link_to 'Choose Your Team', teams_path
