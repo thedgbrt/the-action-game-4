@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :authenticate_player!, except: [:index]
+  before_action :authenticate_player!
   before_action :set_team, only: [:show, :edit, :update, :destroy, :join, :leave]
 
   def index
@@ -53,13 +53,15 @@ class TeamsController < ApplicationController
   end
 
   def activate
-    @current_team = Team.find_by_id(params[:team_id])
+    current_player.update_attributes(current_team_id: params[:team_id])
     redirect_to :back
   end
 
   def join
     raise 'No current player' unless current_player
     msg = @team.add(current_player)
+    @current_team = @team
+    current_player.update_attributes(current_team_id: @team.id)
     redirect_to :back, msg
   end
 

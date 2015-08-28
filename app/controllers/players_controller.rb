@@ -7,7 +7,7 @@ class PlayersController < ApplicationController
   end
 
   def show
-    @current_team ||= @player.teams.last
+    @current_team ||= current_team
   end
 
   def edit
@@ -39,6 +39,7 @@ class PlayersController < ApplicationController
     end
 
     def player_params
-      params.require(:player).permit(:name, :role, :email, :current_time_zone, :email, :fictional)
+      params.require(:player).permit(:name, :role, :email, :current_time_zone, :email, :fictional,
+        :current_team_id, :sound_choice)
     end
 end

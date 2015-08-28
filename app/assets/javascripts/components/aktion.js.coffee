@@ -1,7 +1,7 @@
 @Aktion = React.createClass
   render: ->
     React.DOM.tr null,
-      React.DOM.td null, @props.aktion.simple_time
+      React.DOM.td null, @props.aktion.created_at
       React.DOM.td null, @props.aktion.verb
       React.DOM.td null, @props.aktion.focus
       React.DOM.td null, @props.aktion.intensity

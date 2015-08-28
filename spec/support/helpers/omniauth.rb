@@ -2,17 +2,18 @@ module Omniauth
 
   module Mock
     def auth_mock
-      OmniAuth.config.mock_auth[:twitter] = {
-        'provider' => 'twitter',
+      OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
+        'provider' => 'google_oauth2',
         'uid' => '123545',
-        'user_info' => {
-          'name' => 'mockuser'
+        'info' => {
+          'name' => 'Example User',
+          'email' => 'example.user@holacracyone.com'
         },
         'credentials' => {
           'token' => 'mock_token',
           'secret' => 'mock_secret'
         }
-      }
+      })
     end
   end
 

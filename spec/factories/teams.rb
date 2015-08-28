@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :team do
-    captain_id 1
+    creator_id 1
 name "MyString"
 description "MyText"
 url "MyString"

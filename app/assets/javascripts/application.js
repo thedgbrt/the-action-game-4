@@ -43,7 +43,8 @@ $(function() {
     
     $('.datatables').DataTable({
         paging: false,
-        searching: false
+        searching: false,
+        order: [1, 'asc']
     })
     
     

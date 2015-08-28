@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
                       :uid => auth['uid'].to_s).first || Player.create_with_omniauth(auth)
     reset_session
     session[:player_id] = player.id
-    @current_team = player.teams.try(:last)
+    @current_team = current_team
     redirect_to player, :notice => 'Signed in!'
   end
 

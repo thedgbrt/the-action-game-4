@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
     end
 
     def current_team
-      @current_team ||= @current_player.teams.last
+      @current_team ||= Team.find_by_id(current_player.current_team_id)
     end
 
     def team_selected?

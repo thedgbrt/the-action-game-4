@@ -1,4 +1,25 @@
 class Player < ActiveRecord::Base
+  def self.serialize(attr_name, class_name = Object, exposed_fields = [])
+    super(attr_name, class_name)
+    serialized_attr_accessor attr_name, exposed_fields
+  end
+
+  def self.serialized_attr_accessor(attr_name, *args)
+    args.first.each do |method_name|
+      eval "
+        def #{method_name}
+          (self[:#{attr_name}] || {})[:#{method_name}]
+        end
+        def #{method_name}=(value)
+          self[:#{attr_name}] ||= {}
+          self[:#{attr_name}][:#{method_name}] = value
+        end
+      "
+    end
+  end
+
+  serialize :preferences, Hash, %w(current_team_id sound_choice)
+
   enum role: [:user, :vip, :admin]
   after_initialize :set_default_role, :if => :new_record?
 

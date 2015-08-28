@@ -14,7 +14,7 @@ class AktionsController < ApplicationController
     @aktion = @current_player.aktions.new
     @aktion.time_zone = @current_player.current_time_zone
     @aktion.timeslot = Aktion.current_timeslot
-    @aktion.team = @current_team
+    @aktion.team = current_team
     @aktion.status = 'committing'
   end
 
@@ -23,9 +23,9 @@ class AktionsController < ApplicationController
 
   def create
     @aktion = Aktion.new(aktion_params)
-    @aktion.status = 'attempting'
     respond_to do |format|
       if @aktion.save
+        @aktion.update_attributes(status: 'attempting')
         format.html { redirect_to aktion_form, notice: 'Aktion was successfully created.' }
         format.json { render :show, status: :created, location: @aktion }
       else
@@ -67,6 +67,6 @@ class AktionsController < ApplicationController
     end
 
     def aktion_form
-      edit_team_aktion_path(@aktion, team_id: @current_team.id)
+      edit_team_aktion_path(@aktion, team_id: current_team.id)
     end
 end
