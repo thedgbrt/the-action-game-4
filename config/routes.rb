@@ -14,8 +14,8 @@ Rails.application.routes.draw do
     resources :aktions, path: "actions"
   end
 
-  resources :roles, only: :destroy
-  resources :projects, only: :destroy
+  resources :roles
+  resources :projects
 
   root to: 'visitors#index'
   get '/help' => 'visitors#help'

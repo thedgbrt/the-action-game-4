@@ -1,4 +1,6 @@
 %tr
-  %td= project.name
+  %td= link_to project.name, project
   %td= project.description
-  %td Show, Edit, Delete
+  %td
+    = link_to 'Show', project
+    = link_to 'Edit', edit_project_path(project)

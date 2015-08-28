@@ -1,8 +1,7 @@
 %h4
   Roles
   = link_to '(New)', new_team_role_path(@team)
-  - team = Team.find_by_id(params[:team_id])
-  = "for #{team.name}" if team
+  = "for #{@team.name}"
 
 %table#roles-table.compact
   %thead

@@ -5,9 +5,9 @@
 / %br
 
 %tr
-  %td= role.name
+  %td= link_to role.name, role
   %td= link_to role.team.name, role.team if role.team
-  %td= role.description
+  %td= role.description.first(50)
   %td= link_to 'Show', team_role_path(@team, role)
   %td= link_to 'Edit', edit_team_role_path(@team, role)
   %td= link_to 'Destroy', role, :method => :delete, :data => { :confirm => 'Are you sure?' }
