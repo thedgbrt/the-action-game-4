@@ -3,73 +3,41 @@
   = f.error_notification
 
   .form-inputs
-    .large-4.medium-8.small-12.columns.aktion-quadrant.commit-bg
-      .large-9.medium-8.small-8.columns.commit.bigger.text-center.aktion-quadrant-header COMMIT
-      .large-3.medium-4.small-4.columns= f.button :submit, "GO!"
-      - if @aktion.status == 'committing'
-        .large-12.columns= f.association :verb, prompt: 'Doing what?', autofocus: true, label: false
-        .large-12.columns= f.input :focus, placeholder: 'With what specific focus?', label: false
-        .large-12.columns= f.input :intensity, collection: Aktion.intensities, prompt: 'And what intensity?', label: false
-        .large-12.columns= f.association :role, collection: current_team.roles, prompt: 'In which role?', label: false
-        .large-12.columns= f.association :project, collection: current_team.projects, prompt: 'For what project?', label: false
-        .large-12.columns= f.input :timeslot, minute_step: 30, use_short_month: true, label: false
-        .large-12.columns= f.input :time_zone, selected: Time.now, include_blank: true, label: false, prompt: 'Time Zone?'
-      - else
-        .large-12= "Time Slot: #{@aktion.timeslot.strftime('%b-%d, %H:%M%P')}" if @aktion.timeslot
-        .large-12= "Verb: #{@aktion.verb.name}" if @aktion.verb
-        .large-12= "Focus: #{@aktion.focus}" if @aktion.focus
-        .large-12= "Intensity: #{@aktion.intensity}" if @aktion.intensity
-        .large-12= "Role: #{@aktion.role.name}" if @aktion.role
-        .large-12= "Project: #{@aktion.project.name}" if @aktion.project
-    .large-2.medium-4.small-12.columns.aktion-quadrant.focus-bg
-      .focus.bigger.text-center.aktion-quadrant-header FOCUS
-      - if @aktion.status == 'attempting'
-        .sound-option= link_to 'Ticking', new_team_aktion_path(@current_team, sound_choice: 'ticking')
-        .sound-option= link_to 'Nature Sounds', new_team_aktion_path(@current_team, sound_choice: 'nature')
-        .sound-option= link_to 'My Own Music', new_team_aktion_path(@current_team, sound_choice: 'music')
-        .sound-option= link_to 'Silence', new_team_aktion_path(@current_team, sound_choice: nil)
-    .large-4.medium-8.small-12.columns.aktion-quadrant.review-bg
-      .large-9.medium-8.small-8.columns.review.bigger.text-center.aktion-quadrant-header REVIEW
-      .large-3.medium-4.small-4.columns= f.button :submit, "GO!"
-      - if @aktion.status == 'attempting'
-        .large-4.columns.bigger= 'STATUS'
-        .large-8.columns= f.input :status, collection: Aktion.status_options, label: false
-        / = f.input :how_it_went, as: :hidden
-        .large-4.columns.bigger= 'FLOW'
-        .large-8.columns= f.input :flow, collection: Aktion.focus_options, label: false
-        .large-12= f.input :flow_notes, label: false, input_html: {rows: 5}, placeholder: Aktion.focus_placeholder
-        .large-4.columns.bigger= 'VALUE'
-        .large-8.columns= f.input :value, collection: Aktion.focus_options, label: false
-        .large-12= f.input :value_notes, label: false, input_html: {rows: 5}, placeholder: Aktion.value_placeholder
-      - else
-        .large-12= "Flow Rating: #{@aktion.flow}" if @aktion.flow
-        .large-12= "Flow Notes: #{@aktion.flow_notes}" if @aktion.flow_notes && @aktion.flow_notes != ''
-        .large-12= "Value Rating: #{@aktion.value}" if @aktion.value
-        .large-12= "Value Notes: #{@aktion.value_notes}" if @aktion.value_notes && @aktion.value_notes != ''
-    .large-2.medium-4.small-12.columns.aktion-quadrant.relax-bg
-      .relax.bigger.text-center.aktion-quadrant-header RELAX
-      - if @aktion.status == 'successful' || @aktion.status == 'interrupted'
-        .large-6.columns.my-label water
-        .large-6.columns= f.input :water, as: :boolean, label: false
-        .large-6.columns.my-label push-ups
-        .large-6.columns= f.input :pushups, as: :integer, label: false
-        .large-6.columns.my-label peaceful breaths
-        .large-6.columns= f.input :breaths, as: :integer, label: false
-      - else
-        .large-12= "Water: #{@aktion.water}" if @aktion.water
-        .large-12= "Push-ups: #{@aktion.pushups}" if @aktion.pushups
-        .large-12= "Breaths: #{@aktion.breaths}" if @aktion.breaths
+    .large-1.medium-1.small-1.columns.bigger.text-right TEAM
+    .large-3.medium-3.small-3.columns.text-left= f.association :team, collection: @current_player.teams, label: false
+    .large-1.medium-2.small-2.columns.bigger.text-right STATUS
+    .large-3.medium-2.small-2.columns.text-left= f.input :status, collection: Aktion.status_options, label: false
+    %hr
+    .quadrants-container
+      .large-3.medium-4.small-4.columns.aktion-quadrant.commit-bg
+        .large-12.medium-12.small-12.columns.commit.bigger.text-center.aktion-quadrant-header COMMIT
+        = render 'quadrant_commit', aktion: @aktion, f: f
+
+      .large-3.medium-2.small-2.columns.aktion-quadrant.focus-bg
+        .large-12.focus.bigger.text-center.aktion-quadrant-header FOCUS
+        - if @aktion.status == 'attempting'
+          .large-12 Sound preference?
+          .large-12.columns.text-center.sound-option.button
+            = link_to 'TICKING', set_sound_player_path(current_player, sound_choice: 'ticking')
+          .large-12.columns.text-center.sound-option.button
+            = link_to 'NATURE', set_sound_player_path(current_player, sound_choice: 'nature')
+          .large-12.columns.text-center.sound-option.button
+            = link_to 'MUSIC', set_sound_player_path(current_player, sound_choice: 'music')
+          .large-12.columns.text-center.sound-option.button
+            = link_to 'SILENCE', set_sound_player_path(current_player, sound_choice: 'silence')
+
+      .large-3.medium-4.small-4.columns.aktion-quadrant.review-bg
+        .large-12.medium-12.small-12.columns.review.bigger.text-center.aktion-quadrant-header REVIEW
+        = render 'quadrant_review', aktion: @aktion, f: f
+
+      .large-3.medium-2.small-2.columns.aktion-quadrant.relax-bg
+        .relax.bigger.text-center.aktion-quadrant-header RELAX
+        = render 'quadrant_relax', aktion: @aktion, f: f
 
     .large-6.small-6= f.association :location, as: :hidden
     .large-12.medium-12.small-12= f.association :player, include_blank: true, as: :hidden
 
     %hr
-    .large-12.clear-both
-      .large-1.columns.bigger.text-right TEAM
-      .large-3.columns.text-left= f.association :team, collection: @current_player.teams, label: false
-      .large-1.columns.bigger.text-right STATUS
-      .large-3.columns.text-left= f.input :status, collection: Aktion.status_options, label: false
-      .large-4.columns.text-center= f.button :submit, "Create/Confirm/Update #{I18n.t :Aktion}"
-    %hr
     %h5 Sound Choices
+    %hr
     = render '/visitors/sounds'

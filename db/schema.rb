@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150828065908) do
+ActiveRecord::Schema.define(version: 20150829045502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,16 +27,17 @@ ActiveRecord::Schema.define(version: 20150828065908) do
     t.integer  "value"
     t.text     "value_notes"
     t.integer  "visible_to"
-    t.string   "status"
+    t.integer  "status"
     t.integer  "intensity"
     t.text     "how_it_went"
     t.string   "time_zone"
     t.integer  "location_id"
     t.integer  "role_id"
     t.text     "properties"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.integer  "team_id"
+    t.boolean  "completed",   default: false
   end
 
   create_table "locations", force: :cascade do |t|

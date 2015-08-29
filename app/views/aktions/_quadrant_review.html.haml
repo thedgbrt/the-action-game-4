@@ -1,0 +1,20 @@
+- if @aktion.status == 'attempting'
+  / = f.input :how_it_went, as: :hidden
+  .large-4.medium-4.small-4.columns.bigger= 'FLOW'
+  .large-8.medium-8.small-8.columns= f.input :flow, collection: Aktion.focus_options, label: false, autofocus: true
+  .large-12= f.input :flow_notes, label: false, input_html: {rows: 5}, placeholder: Aktion.focus_placeholder
+  .large-4.medium-4.small-4.columns.bigger= 'VALUE'
+  .large-8.medium-8.small-8.columns= f.input :value, collection: Aktion.focus_options, label: false
+  .large-12= f.input :value_notes, label: false, input_html: {rows: 5}, placeholder: Aktion.value_placeholder
+  .large-6.medium-6.small-6.text-center.columns= f.button :submit, "COUNT IT"
+  .large-6.medium-6.small-6.text-center.columns= f.button :submit, "MISSED IT"
+- else
+  .large-12.review-item
+    %span.bold Status:
+    %span= aktion.status_full
+  .large-12.review-item
+    %span.bold= "Flow #{aktion.flow}:"
+    %span= "#{aktion.flow_notes}"
+  .large-12.review-item
+    %span.bold= "Value #{aktion.value}:"
+    %span= "#{aktion.value_notes}"

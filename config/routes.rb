@@ -5,13 +5,14 @@ Rails.application.routes.draw do
   resources :team_memberships
   resources :locations, :verbs
   resources :players do
+    member { get :set_sound }
     resources :aktions
   end
   resources :teams do
     member { get :join, :leave, :activate }
     resources :projects
     resources :roles
-    resources :aktions, path: "actions"
+    resources :aktions, path: 'actions'
   end
 
   resources :roles

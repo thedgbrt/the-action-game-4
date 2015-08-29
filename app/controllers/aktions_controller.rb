@@ -15,7 +15,7 @@ class AktionsController < ApplicationController
     @aktion.time_zone = @current_player.current_time_zone
     @aktion.timeslot = Aktion.current_timeslot
     @aktion.team = current_team
-    @aktion.status = 'committing'
+    @aktion.status = :committing
   end
 
   def edit
@@ -23,9 +23,9 @@ class AktionsController < ApplicationController
 
   def create
     @aktion = Aktion.new(aktion_params)
+    @aktion.status = :attempting
     respond_to do |format|
       if @aktion.save
-        @aktion.update_attributes(status: 'attempting')
         format.html { redirect_to aktion_form, notice: 'Aktion was successfully created.' }
         format.json { render :show, status: :created, location: @aktion }
       else
@@ -38,6 +38,13 @@ class AktionsController < ApplicationController
   def update
     respond_to do |format|
       if @aktion.update(aktion_params)
+        if params[:commit] == 'COUNT IT'
+          @aktion.update_attributes(status: :reviewed, completed: true)
+        elsif params[:commit] == 'MISSED IT'
+          @aktion.update_attributes(status: :reviewed, completed: false)
+        else
+          @aktion.update_attributes(status: :finished)          
+        end
         format.html { redirect_to aktion_form, notice: 'Aktion was successfully updated.' }
         format.json { render :show, status: :ok, location: @aktion }
       else
@@ -63,7 +70,7 @@ class AktionsController < ApplicationController
     def aktion_params
       params.require(:aktion).permit(:timeslot, :focus, :player_id, :verb_id, :project_id, :flow, :flow_notes, :value,
         :value_notes, :visible_to, :status, :intensity, :how_it_went, :time_zone, :location_id, :role_id, :properties,
-        :team_id, :water, :breaths, :pushups)
+        :team_id, :water, :breaths, :pushups, :choice, :snack, :tidy, :stop, :restroom, :stretch)
     end
 
     def aktion_form

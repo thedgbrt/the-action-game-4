@@ -1,0 +1,22 @@
+- if @aktion.status == 'reviewed'
+  .large-6.medium-12.columns= f.input :stop, as: :boolean, inline_label: 'stop', autofocus: true
+  .large-6.medium-12.columns= f.input :restroom, as: :boolean, inline_label: 'restroom'
+  .large-6.medium-12.columns= f.input :water, as: :boolean, inline_label: 'water'
+  .large-6.medium-12.columns= f.input :snack, as: :boolean, inline_label: 'snack'
+  .large-6.medium-12.columns= f.input :stretch, as: :boolean, inline_label: 'stretch'
+  .large-6.medium-12.columns= f.input :tidy, as: :boolean, inline_label: 'tidy up'
+  .large-6.medium-12.columns= f.input :pushups, as: :string, label: 'push-ups'
+  .large-6.medium-12.columns= f.input :situps, as: :string, label: 'sit-ups'
+  .large-6.medium-12.columns= f.input :breaths, as: :string, label: 'breaths'
+  .large-6.medium-12.columns= f.button :submit, "UPDATE"
+- else
+  .large-6.columns.review-item= "#{Aktion.checkmark(@aktion.choice)} Choice"
+  .large-6.columns.review-item= "#{Aktion.checkmark(@aktion.stop)} Stop"
+  .large-6.columns.review-item= "#{Aktion.checkmark(@aktion.restroom)} Restroom"
+  .large-6.columns.review-item= "#{Aktion.checkmark(@aktion.water)} Water"
+  .large-6.columns.review-item= "#{Aktion.checkmark(@aktion.snack)} Snack"
+  .large-6.columns.review-item= "#{Aktion.checkmark(@aktion.stretch)} Stretch"
+  .large-6.columns.review-item= "#{Aktion.checkmark(@aktion.tidy)} Tidy"
+  .large-6.columns.review-item= "#{@aktion.pushups || 0} Push-ups"
+  .large-6.columns.review-item= "#{@aktion.situps || 0} Sit-ups"
+  .large-6.columns.review-item= "#{@aktion.breaths || 0} Breaths"

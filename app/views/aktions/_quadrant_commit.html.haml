@@ -1,0 +1,32 @@
+- if aktion.status == 'committing'
+  .large-12.columns= f.input :choice, as: :boolean, inline_label: Aktion.choice, autofocus: true
+  .large-12.columns= f.input :focus, placeholder: 'Single focus?', label: false
+  .large-12.columns= f.association :verb, prompt: 'Doing?', label: false
+  .large-12.columns= f.association :role, collection: current_team.roles, prompt: 'In which role?', label: false
+  .large-12.columns= f.association :project, collection: current_team.projects, prompt: 'For what project?', label: false
+  .large-9.medium-9.columns= f.input :intensity, collection: Aktion.intensities, prompt: 'Intensity?', label: false
+  .large-3.medium-3.columns.commit-button= f.button :submit, "GO"
+  .large-12.columns= f.input :timeslot, minute_step: 30, use_short_month: true, label: false, discard_year: true
+  .large-12.columns= f.input :time_zone, selected: Time.now, include_blank: true, label: false, prompt: 'Time Zone?'
+- else
+  .large-12.review-item
+    %span.bold Choice: 
+    %span= aktion.choice == 1 ? 'Affirmed' : 'Unspecified'
+  .large-12.review-item
+    %span.bold Time Slot:
+    %span= aktion.timeslot.strftime('%b-%d, %H:%M')
+  .large-12.review-item
+    %span.bold Verb: 
+    %span= aktion.verb.name
+  .large-12.review-item
+    %span.bold Focus: 
+    %span= aktion.focus
+  .large-12.review-item
+    %span.bold Intensity: 
+    %span= aktion.intensity
+  .large-12.review-item
+    %span.bold Role: 
+    %span= aktion.role.name
+  .large-12.review-item
+    %span.bold Project: 
+    %span= aktion.project.name

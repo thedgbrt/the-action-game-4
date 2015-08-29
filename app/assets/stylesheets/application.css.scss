@@ -26,6 +26,13 @@
     width: auto;
 }
 
+.white-text {
+  color: white;
+  input, a, a:visited {
+    color: white !important;
+  }
+}
+
 .yellow-text {
   color: yellow;
   a, a:visited {
@@ -61,13 +68,17 @@
   font-size: 60%;
 }
 
-.my-label {
-  clear: both;
-  text-align: right;
-  padding: 0px;
-  text-weight: bold;
-}
-
 .clear-both {
   clear: both;
+}
+
+.xrow {
+  display: flex;
+}
+
+.bold {
+  font-weight: bold;    
+  input {
+    font-weight: bold;    
+  }
 }

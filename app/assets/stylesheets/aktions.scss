@@ -34,28 +34,47 @@
 
 .commit-bg {
   background-color: #ffcccc;
+}
+
+.commit-button {
   input {
-    background-color: red;
-    color: white;
-    font-size: 130%;
+    font-weight: bold;
+    padding: 10px;
+    font-size: 130%;    
   }
 }
 
 .focus-bg {
   background-color: #ccffcc;
+  .button {
+    background-color: green;
+    a {
+      color: white;
+    }
+    color: white;
+    padding: 10px;
+    font-size: 130%;
+    font-weight: bold;
+  }
 }
 
 .review-bg {
   background-color: #ffffcc;
   input {
-    background-color: yellow;
-    color: black;
+    padding: 10px;
     font-size: 130%;
+    font-weight: bold;
   }
 }
 
 .relax-bg {
   background-color: #ccccff;
+  input {
+    font-weight: bold;
+    margin: 15px 0px;
+    padding: 10px;
+    font-size: 130%;
+  }
 }
 
 .media {
@@ -71,19 +90,28 @@
   text-align: center;
 }
 
-.aktion-quadrant {
-  min-height: 500px;
+.quadrants-container {
+  display: flex;
 }
 
 .aktion-quadrant-header {
+  padding-top: 10px;
+  padding-bottom: 10px;
   margin: 15px 0px;
 }
 
 .bigger {
   font-weight: bold;
   font-size: 140%;
-  padding: 10px;
+}
+
+.bigger130 {
+  font-size: 110%;
 }
 
 .commit-bg, .review-bg {
+}
+
+.review-item {
+  margin-bottom: 5px;
 }
