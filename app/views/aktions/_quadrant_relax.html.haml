@@ -5,18 +5,24 @@
   .large-6.medium-12.columns= f.input :snack, as: :boolean, inline_label: 'snack'
   .large-6.medium-12.columns= f.input :stretch, as: :boolean, inline_label: 'stretch'
   .large-6.medium-12.columns= f.input :tidy, as: :boolean, inline_label: 'tidy up'
+  .large-6.medium-12.columns= f.input :games, as: :boolean, inline_label: 'games'
+  .large-6.medium-12.columns= f.input :friends, as: :boolean, inline_label: 'friends'
   .large-6.medium-12.columns= f.input :pushups, as: :string, label: 'push-ups'
   .large-6.medium-12.columns= f.input :situps, as: :string, label: 'sit-ups'
   .large-6.medium-12.columns= f.input :breaths, as: :string, label: 'breaths'
-  .large-6.medium-12.columns= f.button :submit, "UPDATE"
-- else
+  .large-6.medium-12.columns= f.input :other, as: :string, label: 'other'
+  .large-6.medium-12.columns= f.button :submit, "FINISH"
+- elsif @aktion.status == 'finished'
   .large-6.columns.review-item= "#{Aktion.checkmark(@aktion.choice)} Choice"
   .large-6.columns.review-item= "#{Aktion.checkmark(@aktion.stop)} Stop"
   .large-6.columns.review-item= "#{Aktion.checkmark(@aktion.restroom)} Restroom"
   .large-6.columns.review-item= "#{Aktion.checkmark(@aktion.water)} Water"
   .large-6.columns.review-item= "#{Aktion.checkmark(@aktion.snack)} Snack"
   .large-6.columns.review-item= "#{Aktion.checkmark(@aktion.stretch)} Stretch"
-  .large-6.columns.review-item= "#{Aktion.checkmark(@aktion.tidy)} Tidy"
-  .large-6.columns.review-item= "#{@aktion.pushups || 0} Push-ups"
-  .large-6.columns.review-item= "#{@aktion.situps || 0} Sit-ups"
-  .large-6.columns.review-item= "#{@aktion.breaths || 0} Breaths"
+  .large-6.columns.review-item= "#{Aktion.checkmark(@aktion.tidy)} Tidy Up"
+  .large-6.columns.review-item= "#{Aktion.checkmark(@aktion.games)} Games"
+  .large-6.columns.review-item= "#{Aktion.checkmark(@aktion.friends)} Friends"
+  .large-6.columns.review-item= @aktion.pushups && @aktion.pushups != '' ? "#{@aktion.pushups} Push-ups" : '✘ Push-ups'
+  .large-6.columns.review-item= @aktion.situps && @aktion.situps != '' ? "#{@aktion.situps} Sit-ups" : '✘ Sit-ups'
+  .large-6.columns.review-item= @aktion.breaths && @aktion.breaths != '' ? "#{@aktion.breaths} Push-ups" : '✘ Breaths'
+  .large-6.columns.review-item= @aktion.other

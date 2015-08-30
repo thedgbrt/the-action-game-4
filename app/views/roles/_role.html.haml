@@ -1,13 +1,12 @@
-/ .row
-/   .large-3.small-4.columns= role.name
-/   .large-6.small-8.columns= role.description
-/   .large-6.small-12.columns
-/ %br
-
 %tr
-  %td= link_to role.name, role
+  - if current_player.has_role(role)
+    %td.blue-text FILLING
+  - else
+    %td.green-text= link_to 'TAKE ON', new_role_assignment_path(role_id: role.id, player_id: current_player.id)
+  %td= link_to role.parent_role, role
+  %td= link_to role.parent_role_short, role if role.short
+  %td= link_to role.parent.name, role.parent if role.parent
   %td= link_to role.team.name, role.team if role.team
-  %td= role.description.first(50)
-  %td= link_to 'Show', team_role_path(@team, role)
-  %td= link_to 'Edit', edit_team_role_path(@team, role)
+  %td= link_to 'Show', role
+  %td= link_to 'Edit', edit_role_path(role)
   %td= link_to 'Destroy', role, :method => :delete, :data => { :confirm => 'Are you sure?' }

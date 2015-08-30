@@ -3,7 +3,6 @@ class Aktion < ActiveRecord::Base
     super(attr_name, class_name)
     serialized_attr_accessor attr_name, exposed_fields
   end
-
   def self.serialized_attr_accessor(attr_name, *args)
     args.first.each do |method_name|
       eval "
@@ -17,8 +16,7 @@ class Aktion < ActiveRecord::Base
       "
     end
   end
-
-  serialize :properties, Hash, %w(choice pushups situps breaths water snack tidy stop restroom stretch)
+  serialize :properties, Hash, %w(choice pushups situps breaths water snack tidy stop restroom stretch games friends other)
   enum status: [:committing, :attempting, :reviewed, :finished]
 
   belongs_to :player
@@ -28,15 +26,21 @@ class Aktion < ActiveRecord::Base
   belongs_to :location
   belongs_to :team
 
+  validates :team_id, presence: true
+  validates :timeslot, presence: true, uniqueness: {scope: :player_id}
 #  validate :focus_or_verb#, :must_be_at_choice, 
 
   def self.current_timeslot(t = nil)
-    t ||= Time.zone.now
+    t ||= DateTime.now
     if t.min < 30
       t.at_beginning_of_hour
     else
       t.at_beginning_of_hour + 30.minutes
     end
+  end
+
+  def self.current_aktion
+    find_by(timeslot: Aktion.current_timeslot)
   end
 
   def break
@@ -48,16 +52,29 @@ class Aktion < ActiveRecord::Base
     !output || output == '' ? '😰 no break' : output
   end
 
+  def flow_str
+    flow.to_i > 0 ? "+#{flow}" : flow.to_s
+  end
+
+  def value_str
+    value.to_i > 0 ? "+#{value}" : value.to_s
+  end
+
   def to_do
-    if status == :committing
+    if status == 'committing'
       'ATTEMPT ACTION'
-    elsif status == :attempting
+    elsif status == 'attempting'
       'CONFIRM ACTION'
-    elsif status == :reviewed
+    elsif status == 'reviewed'
       'UPDATE ACTION'
     else
       'DONE'
     end
+  end
+
+  def action_time(timestamp)
+    timestamp ||= DateTime.now
+    timestamp.strftime('%b-%d %H:%M')    
   end
 
   def simple_time
@@ -66,10 +83,11 @@ class Aktion < ActiveRecord::Base
   end
 
   def self.checkmark(int)
-    int == 1 ? '✔︎' : '✘'
+    int == '1' ? '✔︎' : '✘'
   end
 
   def status_full
+    return '' if !status
     if ['reviewed', 'finished'].include?(status)
       status.capitalize + (completed? ? ' ✔︎' : ' ✘')
     else

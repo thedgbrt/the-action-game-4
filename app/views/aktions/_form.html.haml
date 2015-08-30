@@ -4,9 +4,14 @@
 
   .form-inputs
     .large-1.medium-1.small-1.columns.bigger.text-right TEAM
-    .large-3.medium-3.small-3.columns.text-left= f.association :team, collection: @current_player.teams, label: false
+    - if params[:team_id]
+      .large-3.medium-3.small-3.columns.text-left= f.association :team, collection: @current_player.teams, selected: current_team.id, label: false, disabled: true
+    - else
+      .large-3.medium-3.small-3.columns.text-left= f.association :team, collection: @current_player.teams, selected: @aktion.team.try(:id) || current_team.id, label: false, include_blank: true
     .large-1.medium-2.small-2.columns.bigger.text-right STATUS
     .large-3.medium-2.small-2.columns.text-left= f.input :status, collection: Aktion.status_options, label: false
+    - unless params[:action] == 'show'
+      .large-4.medium-4.small-4.columns.text-center.bold= f.button :submit, @aktion.to_do
     %hr
     .quadrants-container
       .large-3.medium-4.small-4.columns.aktion-quadrant.commit-bg
@@ -15,7 +20,7 @@
 
       .large-3.medium-2.small-2.columns.aktion-quadrant.focus-bg
         .large-12.focus.bigger.text-center.aktion-quadrant-header FOCUS
-        - if @aktion.status == 'attempting'
+        - if params[:action] == 'edit' && @aktion.status == 'attempting'
           .large-12 Sound preference?
           .large-12.columns.text-center.sound-option.button
             = link_to 'TICKING', set_sound_player_path(current_player, sound_choice: 'ticking')
@@ -39,5 +44,5 @@
 
     %hr
     %h5 Sound Choices
-    %hr
     = render '/visitors/sounds'
+    %hr

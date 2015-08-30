@@ -1,4 +1,4 @@
-%h2
+%h3
   = @player.name
   = link_to '(Edit)', edit_player_path(@player)
 
@@ -9,4 +9,7 @@
 
 - @player.teams.each do |team|
   %h4= team.name
-  = render '/teams/roles_projects', team: team
+  = render '/roles/roles', roles: team.roles, team: team
+  .clear-both
+  = render '/projects/projects', projects: team.projects, team: team
+  %hr

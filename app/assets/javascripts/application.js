@@ -41,13 +41,6 @@ $(function() {
         ]
     });
     
-    $('.datatables').DataTable({
-        paging: false,
-        searching: false,
-        order: [1, 'asc']
-    })
-    
-    
     function checkTime(i) {
         if (i < 10) {
             i = "0" + i;

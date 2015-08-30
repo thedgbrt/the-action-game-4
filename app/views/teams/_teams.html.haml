@@ -4,7 +4,8 @@
     = link_to '(Add)', mine ? new_team_path(creator_id: @current_player.try(:id)) : new_team_path
 
 - if teams.try(:first)
-  %table.datatables.compact
+  - table_id = mine ? 'my-teams' : 'other-teams'
+  %table.compact{id: "#{table_id}"}
     %thead
       %tr
         %th
@@ -18,28 +19,4 @@
         %th
         %th
     %tbody
-      - teams.each do |team|
-        %tr{id: "team-#{team.id}"}
-          %td
-            - if current_team == team
-              .red-text= 'CURRENT'
-            - elsif @current_player.teams.include?(team)
-              = link_to 'Activate', activate_team_path(team_id: team.id, id: team.id) 
-            - else
-              = link_to 'Join', join_team_path(team)
-          %td= link_to team.name, team
-          %td= team.players.map(&:first_name).join(', ')
-          %td= link_to "#{team.roles.count} Roles", team_roles_path(team_id: team.id)
-          %td= link_to "#{team.projects.count} Projects", team_projects_path(team_id: team.id)
-          %td= link_to "#{team.aktions.count} Actions", team_aktions_path(team_id: team.id)
-          - if team.url
-            %td= link_to team.description, team.url
-          - else
-            %td= team.description
-          %td= link_to 'Show', team
-          %td= link_to 'Edit', edit_team_path(team)
-          %td= link_to 'Destroy', team, :method => :delete, :data => { :confirm => 'Are you sure?' }
-          - if mine
-            %td= link_to 'Leave', leave_team_path(team)
-          - else
-            %td= link_to 'Join', join_team_path(team)
+      = render teams

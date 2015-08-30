@@ -17,4 +17,12 @@ class Role < ActiveRecord::Base
   def team_role
     "#{team.name}: #{name}"
   end
+
+  def parent_role
+    parent_id ? "#{parent.parent_role}/#{name}" : name
+  end
+
+  def parent_role_short
+    parent_id ? "#{parent.parent_role_short}/#{short}" : short
+  end
 end

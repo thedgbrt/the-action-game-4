@@ -1,12 +1,15 @@
-= simple_form_for [@team, @role] do |f|
+= simple_form_for [current_team, @role] do |f|
   = f.error_notification
 
   .form-inputs
-    = f.input :name
-    = f.association :team, selected: @team.id
-    = f.association :parent
-    = f.input :description
-    = f.input :url
-
+    .large-6.medium-12.columns
+      .large-6.medium-6.small-6.columns= f.input :name
+      .large-6.medium-6.small-6.columns= f.input :short
+      .large-6.medium-6.small-6.columns= f.association :team, collection: current_player.teams, selected: current_team.id, label: false, prompt: 'Team'
+      .large-6.medium-6.small-6.columns= f.association :parent, collection: current_team.roles - [@role] - @role.children, label: false, prompt: 'Parent Role?'
+    .large-6.medium-12.columns
+      .large-12= f.input :description
+      .large-12= f.input :url
+    %hr
   .form-actions
     = f.button :submit

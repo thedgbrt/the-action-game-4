@@ -14,19 +14,33 @@ class AktionsController < ApplicationController
     @aktion = @current_player.aktions.new
     @aktion.time_zone = @current_player.current_time_zone
     @aktion.timeslot = Aktion.current_timeslot
-    @aktion.team = current_team
     @aktion.status = :committing
+    if params[:previous_aktion_id]
+      @old = Aktion.find_by_id(params[:previous_aktion_id])
+      @aktion.team = @old.team
+      @aktion.verb = @old.verb
+      @aktion.role = @old.role
+      @aktion.project = @old.project
+      # @aktion.intensity = @old.intensity
+    end
   end
+  #
+  # def continue
+  #   id = params[:previous_aktion_id]
+  #   @previous = Aktion.find_by_id[id]
+  #   raise
+  # end
 
   def edit
   end
 
   def create
     @aktion = Aktion.new(aktion_params)
+    @aktion.team_id = current_team.id
     @aktion.status = :attempting
     respond_to do |format|
       if @aktion.save
-        format.html { redirect_to aktion_form, notice: 'Aktion was successfully created.' }
+        format.html { redirect_to aktion_form }
         format.json { render :show, status: :created, location: @aktion }
       else
         format.html { render :new }
@@ -42,10 +56,10 @@ class AktionsController < ApplicationController
           @aktion.update_attributes(status: :reviewed, completed: true)
         elsif params[:commit] == 'MISSED IT'
           @aktion.update_attributes(status: :reviewed, completed: false)
-        else
+        elsif params[:commit] == 'FINISH'
           @aktion.update_attributes(status: :finished)          
         end
-        format.html { redirect_to aktion_form, notice: 'Aktion was successfully updated.' }
+        format.html { redirect_to aktion_form }
         format.json { render :show, status: :ok, location: @aktion }
       else
         format.html { render :edit }
@@ -70,7 +84,7 @@ class AktionsController < ApplicationController
     def aktion_params
       params.require(:aktion).permit(:timeslot, :focus, :player_id, :verb_id, :project_id, :flow, :flow_notes, :value,
         :value_notes, :visible_to, :status, :intensity, :how_it_went, :time_zone, :location_id, :role_id, :properties,
-        :team_id, :water, :breaths, :pushups, :choice, :snack, :tidy, :stop, :restroom, :stretch)
+        :team_id, :water, :breaths, :pushups, :choice, :snack, :tidy, :stop, :restroom, :stretch, :games, :friends, :other)
     end
 
     def aktion_form

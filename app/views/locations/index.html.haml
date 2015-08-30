@@ -1,27 +1,31 @@
-%h1 Listing locations
+- @locations.each do |loc|
+  = [loc.name, loc.address, loc.latitude, loc.longitude]
+  %br
 
-%table
-  %thead
-    %tr
-      %th Name
-      %th Address
-      %th Longitude
-      %th Latitude
-      %th
-      %th
-      %th
+= react_component 'Locations', { data: @locations }
 
-  %tbody
-    - @locations.each do |location|
-      %tr
-        %td= location.name
-        %td= location.address
-        %td= location.longitude
-        %td= location.latitude
-        %td= link_to 'Show', location
-        %td= link_to 'Edit', edit_location_path(location)
-        %td= link_to 'Destroy', location, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Location', new_location_path
+/ %table
+/   %thead
+/     %tr
+/       %th Name
+/       %th Address
+/       %th Longitude
+/       %th Latitude
+/       %th
+/       %th
+/       %th
+/
+/   %tbody
+/     - @locations.each do |location|
+/       %tr
+/         %td= location.name
+/         %td= location.address
+/         %td= location.longitude
+/         %td= location.latitude
+/         %td= link_to 'Show', location
+/         %td= link_to 'Edit', edit_location_path(location)
+/         %td= link_to 'Destroy', location, :method => :delete, :data => { :confirm => 'Are you sure?' }
+/
+/ %br
+/
+/ = link_to 'New Location', new_location_path

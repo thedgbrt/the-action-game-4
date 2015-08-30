@@ -33,6 +33,26 @@ class Player < ActiveRecord::Base
   has_many :role_assignments
   has_many :roles, through: :role_assignments
 
+  def actions
+    aktions
+  end
+
+  def todays_actions
+    aktions.select{ |a| a.timeslot.to_date == DateTime.now.to_date }
+  end
+
+  def todays_breaths
+    aktions.map(&:breaths).compact.sum
+  end
+
+  def active_roles(team)
+    roles.to_set.intersection(team.roles.to_set)
+  end
+
+  def has_role(role)
+    roles.include?(role)
+  end
+
   def admin?
     role == 'admin'
   end
@@ -62,6 +82,12 @@ class Player < ActiveRecord::Base
     else
       self.role ||= :user
     end
+  end
+
+  def self.sound_choices(current=nil)
+    all = ['music', 'ticking', 'nature', 'silence']
+    return all if !current
+    all - [current.downcase]
   end
 
   def self.create_with_omniauth(auth)

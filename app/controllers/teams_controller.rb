@@ -53,7 +53,8 @@ class TeamsController < ApplicationController
   end
 
   def activate
-    current_player.update_attributes(current_team_id: params[:team_id])
+    @current_team = Team.find_by_id(params[:id])
+    current_player.update_attributes(current_team_id: @current_team.id) if @current_team
     redirect_to :back
   end
 

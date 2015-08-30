@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_team, except: [:show, :edit, :update, :destroy]
 
   def index
     @projects = Project.all
@@ -52,6 +53,10 @@ class ProjectsController < ApplicationController
   private
     def set_project
       @project = Project.find(params[:id])
+    end
+
+    def set_team
+      @team = Team.find_by_id(params[:team_id]) || current_team      
     end
 
     def project_params

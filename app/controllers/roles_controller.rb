@@ -1,6 +1,6 @@
 class RolesController < ApplicationController
   before_action :set_role, only: [:show, :edit, :update, :destroy]
-  before_action :set_team, except: [:destroy]
+  before_action :set_team, except: [:show, :edit, :update, :destroy]
 
   def index
     @roles = params[:team_id] ? current_team.roles : current_player.roles
@@ -18,10 +18,12 @@ class RolesController < ApplicationController
 
   def create
     @role = Role.new(role_params)
-
+    if @role.short.nil? || @role.short == ''
+      @role.short = @role.name
+    end
     respond_to do |format|
       if @role.save
-        format.html { redirect_to @team, notice: 'Role was successfully created.' }
+        format.html { redirect_to current_team, notice: 'Role was successfully created.' }
         format.json { render :show, status: :created, location: @role }
       else
         format.html { render :new }
@@ -33,7 +35,7 @@ class RolesController < ApplicationController
   def update
     respond_to do |format|
       if @role.update(role_params)
-        format.html { redirect_to @team, notice: 'Role was successfully updated.' }
+        format.html { redirect_to current_team, notice: 'Role was successfully updated.' }
         format.json { render :show, status: :ok, location: @role }
       else
         format.html { render :edit }
@@ -56,10 +58,10 @@ class RolesController < ApplicationController
     end
 
     def set_team
-      @team = Team.find(params[:team_id])
+      @team = Team.find_by_id(params[:team_id]) || current_team
     end
 
     def role_params
-      params.require(:role).permit(:name, :team_id, :url, :description, :parent_id)
+      params.require(:role).permit(:name, :team_id, :url, :description, :parent_id, :short)
     end
 end

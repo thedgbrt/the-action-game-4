@@ -9,10 +9,16 @@ class ApplicationController < ActionController::Base
   helper_method :current_team
   helper_method :team_selected?
   helper_method :correct_player?
+  helper_method :back_or_home
+  helper_method :last_action
 
   around_filter :user_time_zone, if: :current_user
 
   private
+    def last_action
+      current_player.aktions.order(:timeslot).last
+    end
+
     def current_user
       current_player
     end
@@ -57,4 +63,8 @@ class ApplicationController < ActionController::Base
       Time.use_zone(tz, &block)
     end
 
+    def back_or_home
+      temp = :back
+      temp || player_path(current_player)
+    end
 end
