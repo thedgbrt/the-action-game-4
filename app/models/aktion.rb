@@ -16,7 +16,7 @@ class Aktion < ActiveRecord::Base
       "
     end
   end
-  serialize :properties, Hash, %w(choice pushups situps breaths water snack tidy stop restroom stretch games friends other)
+  serialize :properties, Hash, %w(choice pushups situps breaths water snack tidy stop restroom stretch games friends other music)
   enum status: [:committing, :attempting, :reviewed, :finished]
 
   belongs_to :player
@@ -29,6 +29,8 @@ class Aktion < ActiveRecord::Base
   validates :team_id, presence: true
   validates :timeslot, presence: true, uniqueness: {scope: :player_id}
 #  validate :focus_or_verb#, :must_be_at_choice, 
+
+  default_scope { order('timeslot DESC') }
 
   def self.current_timeslot(t = nil)
     t ||= DateTime.now
@@ -62,13 +64,13 @@ class Aktion < ActiveRecord::Base
 
   def to_do
     if status == 'committing'
-      'ATTEMPT ACTION'
+      'ATTEMPT'
     elsif status == 'attempting'
-      'CONFIRM ACTION'
+      'CONFIRM'
     elsif status == 'reviewed'
-      'UPDATE ACTION'
+      'UPDATE'
     else
-      'DONE'
+      'EDIT'
     end
   end
 
@@ -96,7 +98,7 @@ class Aktion < ActiveRecord::Base
   end
   
   def summary
-    focus? ? focus : 'Focus Missing'
+    [focus.try(:name), verb.try(:name), team.try(:short), role.try(:short)].compact.join('-')
   end
 
   def self.choice

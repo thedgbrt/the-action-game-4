@@ -7,6 +7,7 @@
     - else
       .blue-text= link_to 'JOIN', join_team_path(team)
   %td= link_to team.name, team
+  %td= link_to team.short, team if team.short
   %td= team.players.map(&:first_name).join(', ')
   %td= link_to "#{team.roles.count} Roles", team_roles_path(team_id: team.id)
   %td= link_to "#{team.projects.count} Projects", team_projects_path(team_id: team.id)

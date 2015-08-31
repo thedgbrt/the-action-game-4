@@ -35,7 +35,7 @@ class TeamsController < ApplicationController
     respond_to do |format|
       if @team.update(team_params)
         @current_team = @team
-        format.html { redirect_to @team, notice: 'Team was successfully updated.' }
+        format.html { redirect_to back_or_home, notice: 'Team was successfully updated.' }
         format.json { render :show, status: :ok, location: @team }
       else
         format.html { render :edit }
@@ -47,7 +47,7 @@ class TeamsController < ApplicationController
   def destroy
     @team.destroy
     respond_to do |format|
-      format.html { redirect_to teams_url, notice: 'Team was successfully destroyed.' }
+      format.html { redirect_to back_or_home, notice: 'Team was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -55,7 +55,7 @@ class TeamsController < ApplicationController
   def activate
     @current_team = Team.find_by_id(params[:id])
     current_player.update_attributes(current_team_id: @current_team.id) if @current_team
-    redirect_to :back
+    redirect_to back_or_home
   end
 
   def join
@@ -63,13 +63,13 @@ class TeamsController < ApplicationController
     msg = @team.add(current_player)
     @current_team = @team
     current_player.update_attributes(current_team_id: @team.id)
-    redirect_to :back, msg
+    redirect_to back_or_home, msg
   end
 
   def leave
     raise 'No current player' unless current_player
     msg = @team.remove(current_player)
-    redirect_to :back, msg
+    redirect_to back_or_home, msg
   end
 
   private
@@ -78,6 +78,6 @@ class TeamsController < ApplicationController
     end
 
     def team_params
-      params.require(:team).permit(:creator_id, :name, :description, :url, :logo_url)
+      params.require(:team).permit(:creator_id, :name, :description, :url, :logo_url, :short)
     end
 end

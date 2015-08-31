@@ -2,14 +2,15 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :name
-    = f.input :description
+    .large-4.medium-4.small-6.columns= f.input :name
+    .large-4.medium-4.small-6.columns= f.input :short
     - if @team.creator_id
-      = f.association :creator, include_blank: true
+      .large-4.medium-4.small-6.columns= f.association :creator, include_blank: true
     - else
-      = f.association :creator, include_blank: true, selected: @current_player.try(:id)
-    = f.input :url
-    = f.input :logo_url
-
+      .large-4.medium-4.small-6.columns= f.association :creator, include_blank: true, selected: @current_player.try(:id)
+    .large-4.medium-4.small-6.columns= f.input :description
+    .large-4.medium-4.small-6.columns= f.input :url
+    .large-4.medium-4.small-6.columns= f.input :logo_url
+    %hr
   .form-actions
     = f.button :submit

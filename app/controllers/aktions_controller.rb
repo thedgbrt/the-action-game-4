@@ -17,6 +17,7 @@ class AktionsController < ApplicationController
     @aktion.status = :committing
     if params[:previous_aktion_id]
       @old = Aktion.find_by_id(params[:previous_aktion_id])
+      @current_team = @old.team
       @aktion.team = @old.team
       @aktion.verb = @old.verb
       @aktion.role = @old.role
@@ -24,12 +25,6 @@ class AktionsController < ApplicationController
       # @aktion.intensity = @old.intensity
     end
   end
-  #
-  # def continue
-  #   id = params[:previous_aktion_id]
-  #   @previous = Aktion.find_by_id[id]
-  #   raise
-  # end
 
   def edit
   end
@@ -84,7 +79,8 @@ class AktionsController < ApplicationController
     def aktion_params
       params.require(:aktion).permit(:timeslot, :focus, :player_id, :verb_id, :project_id, :flow, :flow_notes, :value,
         :value_notes, :visible_to, :status, :intensity, :how_it_went, :time_zone, :location_id, :role_id, :properties,
-        :team_id, :water, :breaths, :pushups, :choice, :snack, :tidy, :stop, :restroom, :stretch, :games, :friends, :other)
+        :team_id, :water, :breaths, :pushups, :choice, :snack, :tidy, :stop, :restroom, :stretch, :games, :friends,
+        :other, :music)
     end
 
     def aktion_form

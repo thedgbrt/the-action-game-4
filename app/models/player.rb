@@ -37,12 +37,20 @@ class Player < ActiveRecord::Base
     aktions
   end
 
+  # start with the player's aktions, sorted by timeslot DESC
+  # filter out Aktions with duplicate summaries
+  # return latest 5
+  def previous_actions
+    previous_aktions_hash = aktions.order('timeslot DESC').first(10).group_by{ |a| a.summary }
+    previous_aktions_hash.keys.map{ |key| previous_aktions_hash[key].first }.sort_by{ |a| a.timeslot}
+  end
+
   def todays_actions
     aktions.select{ |a| a.timeslot.to_date == DateTime.now.to_date }
   end
 
   def todays_breaths
-    aktions.map(&:breaths).compact.sum
+    aktions.map{ |a| a.breaths.to_i}.compact.sum
   end
 
   def active_roles(team)
