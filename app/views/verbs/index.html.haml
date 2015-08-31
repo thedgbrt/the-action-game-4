@@ -3,27 +3,25 @@
 %table
   %thead
     %tr
+      %th id
       %th Name
-      %th Description
       %th Intensity
       %th Creator
       %th Examples
       %th Level
       %th
       %th
-      %th
 
   %tbody
     - @verbs.each do |verb|
       %tr
-        %td= verb.name
-        %td= verb.description
+        %td= verb.id
+        %td= link_to verb.name, verb
+        %td= link_to verb.description, edit_verb_path(verb)
         %td= verb.intensity
-        %td= verb.creator_id
+        %td= verb.creator.try(:name)
         %td= verb.examples
         %td= verb.level
-        %td= link_to 'Show', verb
-        %td= link_to 'Edit', edit_verb_path(verb)
         %td= link_to 'Destroy', verb, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br

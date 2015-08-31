@@ -54,7 +54,9 @@ class TeamsController < ApplicationController
 
   def activate
     @current_team = Team.find_by_id(params[:id])
-    current_player.update_attributes(current_team_id: @current_team.id) if @current_team
+    pp 'Found', @current_team
+    pp 'current_player', current_player
+    current_player.update_attributes(current_team_id: @current_team.id)
     redirect_to back_or_home
   end
 

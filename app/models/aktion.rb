@@ -98,7 +98,11 @@ class Aktion < ActiveRecord::Base
   end
   
   def summary
-    [focus.try(:name), verb.try(:name), team.try(:short), role.try(:short)].compact.join('-')
+    {
+      verb: verb.try(:name),
+      team: team.try(:name),
+      role: role.try(:short_safe)
+    }
   end
 
   def self.choice

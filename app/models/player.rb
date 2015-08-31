@@ -42,7 +42,7 @@ class Player < ActiveRecord::Base
   # return latest 5
   def previous_actions
     previous_aktions_hash = aktions.order('timeslot DESC').first(10).group_by{ |a| a.summary }
-    previous_aktions_hash.keys.map{ |key| previous_aktions_hash[key].first }.sort_by{ |a| a.timeslot}
+    previous_aktions_hash.keys.map{ |key| previous_aktions_hash[key].first }.sort_by{ |a| a.timeslot}.reverse
   end
 
   def todays_actions
@@ -50,7 +50,7 @@ class Player < ActiveRecord::Base
   end
 
   def todays_breaths
-    aktions.map{ |a| a.breaths.to_i}.compact.sum
+    todays_actions.map{ |a| a.breaths.to_i}.compact.sum
   end
 
   def active_roles(team)

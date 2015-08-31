@@ -1,6 +1,10 @@
 %tr
+  %td= link_to 'Edit', edit_project_path(project)
+  %td= link_to project.team.short_safe, project.team if project.team
   %td= link_to project.name, project
+  %td= project.created_at.strftime('%b-%d')
+  %td= project.active
+  %td= project.commitment
+  %td= project.aktions.count
+  %td= project.updated_at
   %td= project.description
-  %td
-    = link_to 'Show', project
-    = link_to 'Edit', edit_role_path(project)

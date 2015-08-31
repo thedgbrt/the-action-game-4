@@ -8,6 +8,10 @@ class Team < ActiveRecord::Base
 
   default_scope { order(:updated_at) }
 
+  def short_safe
+    short || name
+  end
+
   def add(playa)
     tm = team_memberships.create!(player_id: playa.id)
     tm ? {notice: 'Successfully added you to this team'} : {alert: 'Unable to add you to this team'}
@@ -15,6 +19,7 @@ class Team < ActiveRecord::Base
 
   def self.initialize_for(player)
     return 'First team already exists' if player.teams.first
+    return 'Player not yet saved' if player.new_record?
     player.teams.create!(name: player.name.to_s + ' Enterprises')
   end
 

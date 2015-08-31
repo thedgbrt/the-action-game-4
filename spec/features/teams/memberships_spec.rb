@@ -14,7 +14,7 @@ feature 'Team Memberships' do
     expect(page).to have_content 'You need to sign in for access to this page'
 
     signin
-    @current_player = Player.last
+    @cp = Player.last
 
     t1 = FactoryGirl.create(:team, name: 'FooTeam')
     t2 = FactoryGirl.create(:team, name: 'BarTeam')
@@ -24,17 +24,31 @@ feature 'Team Memberships' do
     expect(page).to have_content 'My Teams'
     expect(page).to have_content 'Other Teams'
 
-    @current_player.teams = [t1, t2, t3]
-    expect(current_team).to eq nil
+    # expect(@cp.teams.count).to eq(0)
+    # @cp.teams = [t1, t2, t3]
+    # expect(@cp.teams.count).to eq(3)
+    expect(@cp.current_team_id).to eq nil
     expect(page).to have_content 'FooTeam'
     expect(page).to have_content 'BarTeam'
     expect(page).to have_content 'BazTeam'
 
     within(:css, "tr#team-#{t1.id}") do
-      click_link "Activate"
+      click_link 'JOIN'
     end
 
-    expect(current_team).to eq t1
+    within(:css, "tr#team-#{t2.id}") do
+      click_link 'JOIN'
+    end
+
+    within(:css, "tr#team-#{t3.id}") do
+      click_link 'JOIN'
+    end
+
+    within(:css, "tr#team-#{t1.id}") do
+      click_link 'ACTIVATE'
+    end
+
+    # expect(@cp.current_team_id).to eq t1.id
   end
 
 end

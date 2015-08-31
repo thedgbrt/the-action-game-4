@@ -1,13 +1,17 @@
 = simple_form_for(@project) do |f|
   = f.error_notification
-
+  
   .form-inputs
-    = f.input :name
-    = f.association :team, selected: @current_team
-    = f.input :active
-    = f.input :commitment
-    = f.input :visible_to
-    = f.association :parent, label: 'Parent Project'
-
+    .large-4.medium-6.small-12.columns= f.input :name, autofocus: true
+    .large-4.medium-6.small-12.columns= f.association :parent, label: 'Parent Project'
+    .large-4.medium-6.small-12.columns= f.input :visible_to
+    .large-4.medium-6.small-12.columns
+      = f.input :active
+      = f.input :commitment
+    .large-4.medium-6.small-12.columns
+  %hr
   .form-actions
-    = f.button :submit
+    .large-4.medium-6.small-12.columns= f.button :submit
+    .large-4.medium-6.small-12.columns= f.association :team, include_blank: true
+    .large-4.medium-6.small-12.columns
+  %hr

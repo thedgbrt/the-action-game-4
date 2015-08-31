@@ -3,10 +3,11 @@
     %td.blue-text FILLING
   - else
     %td.green-text= link_to 'TAKE ON', new_role_assignment_path(role_id: role.id, player_id: current_player.id)
-  %td= link_to role.parent_role, role
-  %td= link_to role.parent_role_short, role if role.short
+  %td= link_to role.name, role
+  %td= link_to role.team.short_safe, role.team if role.team
   %td= link_to role.parent.name, role.parent if role.parent
-  %td= link_to role.team.name, role.team if role.team
+  %td= role.aktions.count
+  %td= role.updated_at
   %td= link_to 'Show', role
   %td= link_to 'Edit', edit_role_path(role)
   %td= link_to 'Destroy', role, :method => :delete, :data => { :confirm => 'Are you sure?' }

@@ -24,17 +24,18 @@ RSpec.describe Player, type: :model do
     expect(player.roles.count).to eq(0)
     expect(player.projects.count).to eq(0)
 
-    results = player.init
     player.save!
+    results = player.init
 
     expect(player.teams.count).to eq(1)
     team = results[0]
+
     pp team
     pp team.persisted?
     pp results
     pp team.id
-    expect(player.projects.count).to eq(2)
-    expect(player.roles.count).to eq(3)
+    expect(team.projects.count).to eq(2)
+    expect(team.roles.count).to eq(5)
   end
 
 end

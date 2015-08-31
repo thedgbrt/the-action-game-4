@@ -1,13 +1,17 @@
-- team ||= current_team
 %h5
   Projects
-  = link_to '(New)', new_team_project_path(team)
-  = "for #{team.name}"
+  = link_to "(New for #{current_team.name})", new_team_project_path(current_team)
 
 %table#projects-table.compact
   %thead
-    %th Name
-    %th Description
     %th
+    %th Tm
+    %th Name
+    %th Created
+    %th Active
+    %th Commitment
+    %th Actions
+    %th Last Updated
+    %th Description
   %tbody
     = render projects

@@ -2,6 +2,7 @@ class Project < ActiveRecord::Base
   belongs_to :team
   belongs_to :parent, class_name: 'Project'
   has_many :children, class_name: 'Project', foreign_key: 'parent_id'
+  has_many :aktions
 
   def self.initialize_for(solo_team)
     return 'Already initialized' if solo_team.projects.first

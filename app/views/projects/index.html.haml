@@ -1,32 +1,6 @@
-%h1
+- team = Team.find_by_id(params[:team_id]) || current_team
+%h4
   Projects
-  = link_to '(New)', new_project_path
-  - team = Team.find_by_id(params[:team_id])
-  = "for #{team.name}" if team
+  = link_to "(new for #{team.name})", new_team_project_path(team)
 
-%table#projects-table.compact
-  %thead
-    %tr
-      %th Name
-      %th Team
-      %th Active
-      %th Commitment
-      %th Visible to
-      %th Parent Project
-      %th
-      %th
-      %th
-
-  %tbody
-    - @projects.each do |project|
-      %tr
-        %td= link_to project.name, project
-        %td= link_to project.team.try(:name), project.team
-        %td= project.active
-        %td= project.commitment
-        %td= project.visible_to
-        %td= project.parent.try(:name)
-        %td= link_to 'Show', project
-        %td= link_to 'Edit', edit_project_path(project)
-        %td= link_to 'Destroy', project, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
+= render 'projects', projects: @projects

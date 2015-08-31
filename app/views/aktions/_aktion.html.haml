@@ -1,14 +1,13 @@
 %tr
   %td= aktion.simple_time
   %td= aktion.status_full
-  %td= link_to aktion.summary
+  %td= link_to aktion.focus, aktion
   %td= link_to aktion.verb.name, aktion.verb if aktion.verb
   %td= link_to aktion.role.name, aktion.role if aktion.role
   %td= link_to aktion.project.name, aktion.project if aktion.project
   %td= aktion.intensity
   %td= aktion.flow
   %td= aktion.value
-  %td= aktion.break
   %td
     = link_to 'Show', aktion
     |

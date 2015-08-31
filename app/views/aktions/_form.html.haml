@@ -5,9 +5,9 @@
   .form-inputs
     .large-1.medium-1.small-1.columns.bigger.text-right TEAM
     - if params[:team_id]
-      .large-3.medium-3.small-3.columns.text-left= f.association :team, collection: @current_player.teams, selected: current_team.id, label: false, disabled: true
+      .large-3.medium-3.small-3.columns.text-left= f.association :team, collection: @current_player.teams, label: false, disabled: true
     - else
-      .large-3.medium-3.small-3.columns.text-left= f.association :team, collection: @current_player.teams, selected: @aktion.team.try(:id) || current_team.id, label: false, include_blank: true
+      .large-3.medium-3.small-3.columns.text-left= f.association :team, collection: @current_player.teams, label: false, include_blank: true
     .large-1.medium-2.small-2.columns.bigger.text-right STATUS
     .large-3.medium-2.small-2.columns.text-left= f.input :status, collection: Aktion.status_options, label: false
     - unless params[:action] == 'show'

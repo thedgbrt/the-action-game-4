@@ -2,6 +2,7 @@ class Role < ActiveRecord::Base
   belongs_to :team
   belongs_to :parent, class_name: 'Role'
   has_many :children, class_name: 'Role', foreign_key: 'parent_id'
+  has_many :aktions
 
   def self.initialize_for(solo_team)
     return 'Roles already initialized' if solo_team.roles.first
@@ -13,16 +14,20 @@ class Role < ActiveRecord::Base
       solo_team.roles.create!(name: 'Court Jester', description: 'Helps everyone to enjoy life more'),      
     ]
   end
+
+  def short_safe
+    short || name
+  end
   
   def team_role
     "#{team.name}: #{name}"
   end
 
-  def parent_role
-    parent_id ? "#{parent.parent_role}/#{name}" : name
+  def name_with_parent
+    parent_id ? "#{parent.name_with_parent}/#{name}" : name
   end
 
-  def parent_role_short
-    parent_id ? "#{parent.parent_role_short}/#{short}" : short
+  def short_name_with_short_parent
+    parent_id ? "#{parent.short_name_with_short_parent}/#{short}" : short
   end
 end

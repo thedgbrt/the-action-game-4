@@ -1,28 +1,20 @@
 class VerbsController < ApplicationController
   before_action :set_verb, only: [:show, :edit, :update, :destroy]
 
-  # GET /verbs
-  # GET /verbs.json
   def index
     @verbs = Verb.all
   end
 
-  # GET /verbs/1
-  # GET /verbs/1.json
   def show
   end
 
-  # GET /verbs/new
   def new
     @verb = Verb.new
   end
 
-  # GET /verbs/1/edit
   def edit
   end
 
-  # POST /verbs
-  # POST /verbs.json
   def create
     @verb = Verb.new(verb_params)
 
@@ -37,8 +29,6 @@ class VerbsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /verbs/1
-  # PATCH/PUT /verbs/1.json
   def update
     respond_to do |format|
       if @verb.update(verb_params)
@@ -51,8 +41,6 @@ class VerbsController < ApplicationController
     end
   end
 
-  # DELETE /verbs/1
-  # DELETE /verbs/1.json
   def destroy
     @verb.destroy
     respond_to do |format|
@@ -62,12 +50,10 @@ class VerbsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_verb
       @verb = Verb.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def verb_params
       params.require(:verb).permit(:name, :description, :intensity, :creator_id, :examples, :level)
     end
