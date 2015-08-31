@@ -12,10 +12,5 @@
   %td= link_to "#{team.roles.count} Roles", team_roles_path(team_id: team.id)
   %td= link_to "#{team.projects.count} Projects", team_projects_path(team_id: team.id)
   %td= link_to "#{team.aktions.count} Actions", team_aktions_path(team_id: team.id)
-  - if team.url
-    %td= link_to team.description, team.url
-  - else
-    %td= team.description
-  %td= link_to 'Show', team
   %td= link_to 'Edit', edit_team_path(team)
   %td= link_to 'Destroy', team, :method => :delete, :data => { :confirm => 'Are you sure?' }

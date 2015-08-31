@@ -36,6 +36,7 @@
       %hr
       %li.text-right.dropdown_item= link_to 'Roles', roles_path
       %li.text-right.dropdown_item= link_to 'Projects', projects_path
+      %li.text-right.dropdown_item= link_to 'All Players', players_path
   %li
     %a{"data-dropdown" => "hover3", "data-options" => "is_hover:true; hover_timeout:200", href: "#{player_path(current_player)}"}
       = current_player.sound_choice.try(:upcase)

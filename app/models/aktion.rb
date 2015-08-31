@@ -100,8 +100,7 @@ class Aktion < ActiveRecord::Base
   def summary
     {
       verb: verb.try(:name),
-      team: team.try(:name),
-      role: role.try(:short_safe)
+      team: team.try(:name)
     }
   end
 

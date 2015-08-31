@@ -4,7 +4,7 @@
     # yeah... jQuery doesn't have a $.delete shortcut method
     $.ajax
       method: 'DELETE'
-      url: "/locations/#{ @props.record.id }"
+      url: "/locations/#{ @props.location.id }"
       dataType: 'JSON'
       success: () =>
         @props.handleDeleteLocation @props.location
@@ -17,4 +17,5 @@
       React.DOM.td null,
         React.DOM.a
           className: 'button'
+          onClick: @handleDelete
           'Delete'

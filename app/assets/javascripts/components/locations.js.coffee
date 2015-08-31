@@ -8,7 +8,7 @@
         locations.push location
         @setState locations: locations
     deleteLocation: (location) ->
-      location = @state.location.slice()
+      locations = @state.locations.slice()
       index = locations.indexOf location
       locations.splice index, 1
       @replaceState locations: locations
