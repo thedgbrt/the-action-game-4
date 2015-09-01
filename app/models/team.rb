@@ -32,5 +32,13 @@ class Team < ActiveRecord::Base
   def self.last_active_or_create(user)
     user.teams.last || Team.create(creator_id: user.id, name: user.name.split(' ').first.to_s + ' Corporation')
   end
+
+  def roles_api_url(api_key)
+    if name == 'HolacracyOne'
+      "https://glassfrog.holacracy.org/api/v3/roles?api_key=#{api_key}"
+    else
+      "Sorry, no roles API URL has been provided for this team."
+    end
+  end
   
 end

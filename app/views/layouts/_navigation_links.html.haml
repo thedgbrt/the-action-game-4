@@ -46,10 +46,3 @@
       - Player.sound_choices(session[:sound_choice]).each do |choice|
         %li.dropdown_item= link_to choice.upcase, sounds_path(sound_choice: choice)
   %li.green-text= link_to 'Sign in with Google', signin_path
-
-  / %li
-  /   %a{"data-dropdown" => "hover3", "data-options" => "is_hover:true; hover_timeout:200", href: ""}
-  /     = session[:sound_choice] ? current_player.sound_choice.try(:upcase) : 'SILENCE'
-  /   %ul#hover3.f-dropdown.tiny{"data-dropdown-content" => ""}
-  /     - Player.sound_choices(current_player.sound_choice).each do |choice|
-  /       %li.text-right.dropdown_item= link_to choice.upcase, set_sound_player_path(current_player, sound_choice: choice)

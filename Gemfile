@@ -14,6 +14,7 @@ group :development do
   gem 'spring'
 end
 gem 'react-rails'
+gem 'httparty'
 gem 'bugsnag'
 gem 'figaro', '>= 1.0.0.rc1'
 gem 'foundation-rails'

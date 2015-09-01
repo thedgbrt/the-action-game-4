@@ -2,8 +2,9 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :player_id
-    = f.input :team_id
+    = f.association :player
+    = f.association :team
+    = f.input :api_key
     = f.input :active
     = f.input :admin
 
