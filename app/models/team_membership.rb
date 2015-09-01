@@ -50,7 +50,7 @@ class TeamMembership < ActiveRecord::Base
   def create_description(accountabilities)
     return '' unless accountabilities
     accountabilities = accountabilities.map{ |acc_id| accountabilities_hash(acc_id) }
-    "\n" + accountabilities.join("\n\n")
+    "\n" + accountabilities.join("\n")
   end
 
   private

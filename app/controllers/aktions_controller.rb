@@ -4,7 +4,11 @@ class AktionsController < ApplicationController
   # before_action :select_team!
 
   def index
-    @aktions = Aktion.all
+    if params[:role_id]
+      @aktions = @current_player.aktions.select{ |a| a.role_id == params[:role_id].to_i}
+    else
+      @aktions = @current_player.aktions
+    end
   end
 
   def show

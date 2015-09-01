@@ -6,7 +6,7 @@
   %td= link_to role.name, role, title: role.description
   %td= link_to role.team.short_safe, role.team if role.team
   %td= link_to role.parent.name, role.parent if role.parent
-  %td= role.aktions.count
+  %td= link_to role.aktions.count, aktions_path(role_id: role.id)
   %td= role.last_energized
   %td= link_to 'Show', role
   %td= link_to 'Edit', edit_role_path(role)
