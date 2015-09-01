@@ -64,7 +64,6 @@ class ApplicationController < ActionController::Base
     end
 
     def back_or_home
-      temp = :back
-      temp || player_path(current_player)
+      request[:http_referer] || player_path(current_player) || root_path
     end
 end
