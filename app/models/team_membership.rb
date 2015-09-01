@@ -7,4 +7,12 @@ class TeamMembership < ActiveRecord::Base
   def get_roles_from_api
     response = HTTParty.get(team.roles_api_url(api_key, external_id))
   end
+
+  def api_response
+    get_roles_from_api
+  end
+
+  def my_circles
+    api_response["linked"]['circles'].map{ |c| {id: c['id'], name: c['name']} }
+  end
 end

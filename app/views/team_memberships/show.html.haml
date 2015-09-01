@@ -18,6 +18,16 @@
   = @team_membership.external_id
 
 - response = @team_membership.get_roles_from_api
+
+%hr
+
+%h4 My Circles
+- @team_membership.my_circles.each do |circle|
+  = circle
+  %br
+
+%hr
+
+%h4 My Roles
 - response['roles'].each do |role|
   = link_to role['name'], "http://glassfrog.holacracy.org/roles/#{role['id']}"
-  %br
