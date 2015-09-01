@@ -55,6 +55,6 @@ class TeamMembershipsController < ApplicationController
     end
 
     def team_membership_params
-      params.require(:team_membership).permit(:player_id, :team_id, :active, :admin, :api_key)
+      params.require(:team_membership).permit(:player_id, :team_id, :active, :admin, :api_key, :external_id)
     end
 end

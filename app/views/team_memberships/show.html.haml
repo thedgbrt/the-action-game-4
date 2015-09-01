@@ -10,9 +10,14 @@
 %p
   %b Admin:
   = @team_membership.admin
+%p
+  %b API key:
+  = @team_membership.api_key
+%p
+  %b External ID:
+  = @team_membership.external_id
 
-= pp @team_membership.get_roles_from_api
-
-= link_to 'Edit', edit_team_membership_path(@team_membership)
-\|
-= link_to 'Back', team_memberships_path
+- response = @team_membership.get_roles_from_api
+- response['roles'].each do |role|
+  = link_to role['name'], "http://glassfrog.holacracy.org/roles/#{role['id']}"
+  %br

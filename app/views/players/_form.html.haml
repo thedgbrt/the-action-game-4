@@ -3,6 +3,7 @@
 
   .form-inputs
     = f.input :name
+    = f.input :sound_choice, collection: Player.sound_choices
     = f.input :role, collection: Player.roles.keys.map {|role| [role.titleize,role]}, label: 'TAG.com role'
     = f.input :email
     = f.input :fictional
