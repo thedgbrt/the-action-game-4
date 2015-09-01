@@ -6,6 +6,14 @@ class Role < ActiveRecord::Base
   has_many :role_assignments
   has_many :players, through: :role_assignments
 
+  def last_energized
+    last_action_started || updated_at
+  end
+
+  def last_action_started
+    aktions.map(&:timeslot).max
+  end
+
   def self.initialize_for(solo_team)
     return 'Roles already initialized' if solo_team.roles.first
     [

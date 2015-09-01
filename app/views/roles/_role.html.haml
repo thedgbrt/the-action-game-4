@@ -7,7 +7,7 @@
   %td= link_to role.team.short_safe, role.team if role.team
   %td= link_to role.parent.name, role.parent if role.parent
   %td= role.aktions.count
-  %td= role.updated_at
+  %td= role.last_energized
   %td= link_to 'Show', role
   %td= link_to 'Edit', edit_role_path(role)
   %td= link_to 'Destroy', role, :method => :delete, :data => { :confirm => 'Are you sure?' }

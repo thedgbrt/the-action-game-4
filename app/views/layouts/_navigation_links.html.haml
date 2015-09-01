@@ -8,7 +8,7 @@
         .light-red-text NEW
       %ul#hover4.f-dropdown.medium{"data-dropdown-content" => ""}
         - current_player.previous_actions.each do |a|
-          %li.dropdown_item= link_to "#{a.summary[:verb].titlecase} for #{a.summary[:team]}", new_aktion_path(previous_aktion_id: a.id)
+          %li.dropdown_item= link_to "#{a.summary[:verb] ? a.summary[:verb].titlecase : 'Missing Verb'} for #{a.summary[:team]}", new_aktion_path(previous_aktion_id: a.id)
     %li
       %a{"data-dropdown" => "hover2", "data-options" => "is_hover:true; hover_timeout:200", href: "#{team_path(current_team)}"}
         .yellow-text= current_team.name
