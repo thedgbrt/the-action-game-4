@@ -3,7 +3,7 @@
     %td.blue-text FILLING
   - else
     %td.green-text= link_to 'TAKE ON', new_role_assignment_path(role_id: role.id, player_id: current_player.id)
-  %td= link_to role.name, role
+  %td= link_to role.name, role, title: role.description
   %td= link_to role.team.short_safe, role.team if role.team
   %td= link_to role.parent.name, role.parent if role.parent
   %td= role.aktions.count

@@ -3,6 +3,8 @@ class Role < ActiveRecord::Base
   belongs_to :parent, class_name: 'Role'
   has_many :children, class_name: 'Role', foreign_key: 'parent_id'
   has_many :aktions
+  has_many :role_assignments
+  has_many :players, through: :role_assignments
 
   def self.initialize_for(solo_team)
     return 'Roles already initialized' if solo_team.roles.first

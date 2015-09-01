@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   end
   resources :role_assignments
   resources :project_memberships
-  resources :team_memberships
+  resources :team_memberships do
+    member { get :update_from_api }
+  end
   resources :locations, :verbs
   resources :players do
     resources :aktions

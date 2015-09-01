@@ -1,5 +1,5 @@
 class TeamMembershipsController < ApplicationController
-  before_action :set_team_membership, only: [:show, :edit, :update, :destroy]
+  before_action :set_team_membership, only: [:show, :edit, :update, :destroy, :update_from_api]
 
   def index
     @team_memberships = TeamMembership.all
@@ -39,6 +39,11 @@ class TeamMembershipsController < ApplicationController
         format.json { render json: @team_membership.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def update_from_api
+    @team_membership.update_tag_roles
+    redirect_to :back
   end
 
   def destroy

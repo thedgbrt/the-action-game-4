@@ -1,15 +1,5 @@
-%p
-  %b Player:
-  = @team_membership.player.name
-%p
-  %b Team:
-  = @team_membership.team.name
-%p
-  %b Active:
-  = @team_membership.active
-%p
-  %b Admin:
-  = @team_membership.admin
+%h4= "Membership of #{@team_membership.player.name} to #{@team_membership.team.name}"
+
 %p
   %b API key:
   = @team_membership.api_key
@@ -17,26 +7,26 @@
   %b External ID:
   = @team_membership.external_id
 
-- response = @team_membership.get_roles_from_api
-
 %hr
 
 .large-3.columns
-  %h4 My Circles
-  - @team_membership.my_circles.each do |circle|
-    = link_to circle[:name], "http://glassfrog.holacracy.org/circles/#{circle[:id]}"
+  %h4 My Roles
+  - @team_membership.roles_from_api.each do |role|
+    = link_to "#{role['name']} (#{role['id']})", "http://glassfrog.holacracy.org/roles/#{role['id']}"
     %br
 
   %hr
-
-  %h4 My Roles
-  - response['roles'].each do |role|
-    = link_to role['name'], "http://glassfrog.holacracy.org/roles/#{role['id']}"
+  %h4 My Circles
+  - @team_membership.circles_from_api.each do |circle|
+    = link_to circle[:name], "http://glassfrog.holacracy.org/circles/#{circle[:id]}"
     %br
 
 .large-9.columns
-  %h4 TAG Roles
+  %h4
+    TAG Roles
+    = link_to '(Update)', update_from_api_team_membership_path
 
-  = @team_membership.roles.each do |role|
-    = role.name
+  - @team_membership.roles.each do |role|
+    = link_to role.name, role, title: role.description
+    = link_to "(#{role.external_id})", edit_role_path(role) if role.external_id
     %br
