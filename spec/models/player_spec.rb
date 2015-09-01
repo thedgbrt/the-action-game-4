@@ -8,6 +8,12 @@ RSpec.describe Player, type: :model do
 
   it { should respond_to(:name) }
 
+  it '#persist_sound_choice should change the sound' do
+    expect(@player.sound_choice).to be nil
+    @player.persist_sound_choice('foo')
+    expect(@player.sound_choice).to eq('foo')
+  end
+
   it "#name should return a string" do
     expect(@player.name).to match 'Test Player'
   end

@@ -4,4 +4,10 @@ class VisitorsController < ApplicationController
   
   def help
   end
+
+  def sounds
+    sound = params[:sound_choice]
+    session[:sound_choice] = sound
+    current_player.persist_sound_choice(sound) if player_signed_in?
+  end
 end

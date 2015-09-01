@@ -1,8 +1,10 @@
-- if params[:sound_choice] == 'nature'
+- session[:sound_choice] || 'ticking'
+- if session[:sound_choice] == 'nature'
   %iframe.media{src: 'http://naturesoundsfor.me/rain-with-birds'}
-- elsif params[:sound_choice] == 'ticking'
-  %iframe.media{src: 'http://theactiongame.herokuapp.com/aclock/small.html'}
-- elsif params[:sound_choice] == 'music'
-  Until we find some radio to embed, go ahead and play your own music
-- else
+- elsif session[:sound_choice] == 'silence'
   You have selected silence
+- elsif session[:sound_choice] == 'music'
+  %h4 We have selected baroque music, per David Allan's suggestion in Getting Things Done.
+  %iframe{:allowfullscreen => "", :frameborder => "0", :height => "315", :src => "https://www.youtube.com/embed/jjnyeZLNb3E?autoplay=1", :width => "560"}
+- elsif session[:sound_choice] == 'ticking'
+  %iframe.media{src: 'http://theactiongame.herokuapp.com/aclock/small.html'}

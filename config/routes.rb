@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   resources :team_memberships
   resources :locations, :verbs
   resources :players do
-    member { get :set_sound }
     resources :aktions
   end
   resources :teams do
@@ -22,6 +21,7 @@ Rails.application.routes.draw do
 
   root to: 'visitors#index'
   get '/help' => 'visitors#help'
+  get '/sounds' => 'visitors#sounds'
   get '/auth/:provider/callback' => 'sessions#create'
   get '/signin' => 'sessions#new', :as => :signin
   get '/signout' => 'sessions#destroy', :as => :signout

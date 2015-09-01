@@ -1,6 +1,6 @@
 class PlayersController < ApplicationController
   before_action :authenticate_player!, except: [:index]
-  before_action :set_player, only: [:show, :edit, :update, :destroy, :set_sound]
+  before_action :set_player, only: [:show, :edit, :update, :destroy]
 
   def index
     @players = Player.all
@@ -31,11 +31,6 @@ class PlayersController < ApplicationController
       format.html { redirect_to players_url, notice: 'Player was successfully destroyed.' }
       format.json { head :no_content }
     end
-  end
-
-  def set_sound
-    @player.update_attributes(sound_choice: params[:sound_choice])
-    redirect_to :back
   end
 
   private

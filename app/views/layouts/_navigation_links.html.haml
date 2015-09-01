@@ -1,34 +1,33 @@
-- if team_selected?
-  - current_aktion = Aktion.current_aktion
-  - if current_aktion
-    %li.light-red-text= link_to "#{current_aktion.to_do}", edit_aktion_path(id: current_aktion.id)
-  %li
-    %a{"data-dropdown" => "hover4", "data-options" => "is_hover:true; hover_timeout:200", href: "#{new_team_aktion_path(team_id: current_team.id)}"}
-      .light-red-text NEW
-    %ul#hover4.f-dropdown.medium{"data-dropdown-content" => ""}
-      - current_player.previous_actions.each do |a|
-        %li.dropdown_item= link_to "#{a.summary[:verb].titlecase} for #{a.summary[:team]}", new_aktion_path(previous_aktion_id: a.id)
-  %li
-    %a{"data-dropdown" => "hover2", "data-options" => "is_hover:true; hover_timeout:200", href: "#{team_path(current_team)}"}
-      .yellow-text= current_team.name
-    %ul#hover2.f-dropdown.tiny{"data-dropdown-content" => ""}
-      - (current_player.teams - [current_team]).each do |other_team|
-        %li.dropdown_item= link_to "=> #{other_team.name}", activate_team_path(other_team)
-      %hr
-      %li.dropdown_item= link_to 'All Teams', teams_path
-      %li.dropdown_item= link_to "Edit #{current_team.name}", edit_team_path(current_team)
-      %li.dropdown_item= link_to 'Team Roles', team_roles_path(team_id: current_team.id)
-      %li.dropdown_item= link_to 'Team Projects', team_projects_path(team_id: current_team.id)
-- else
-  %li.yellow-text= link_to 'Choose Your Team', teams_path
-  %li= link_to 'All Teams', teams_path
 - if player_signed_in?
+  - if team_selected?
+    - current_aktion = Aktion.current_aktion
+    - if current_aktion
+      %li.light-red-text= link_to "#{current_aktion.to_do}", edit_aktion_path(id: current_aktion.id)
+    %li
+      %a{"data-dropdown" => "hover4", "data-options" => "is_hover:true; hover_timeout:200", href: "#{new_team_aktion_path(team_id: current_team.id)}"}
+        .light-red-text NEW
+      %ul#hover4.f-dropdown.medium{"data-dropdown-content" => ""}
+        - current_player.previous_actions.each do |a|
+          %li.dropdown_item= link_to "#{a.summary[:verb].titlecase} for #{a.summary[:team]}", new_aktion_path(previous_aktion_id: a.id)
+    %li
+      %a{"data-dropdown" => "hover2", "data-options" => "is_hover:true; hover_timeout:200", href: "#{team_path(current_team)}"}
+        .yellow-text= current_team.name
+      %ul#hover2.f-dropdown.tiny{"data-dropdown-content" => ""}
+        - (current_player.teams - [current_team]).each do |other_team|
+          %li.dropdown_item= link_to "=> #{other_team.name}", activate_team_path(other_team)
+        %hr
+        %li.dropdown_item= link_to 'All Teams', teams_path
+        %li.dropdown_item= link_to "Edit #{current_team.name}", edit_team_path(current_team)
+        %li.dropdown_item= link_to 'Team Roles', team_roles_path(team_id: current_team.id)
+        %li.dropdown_item= link_to 'Team Projects', team_projects_path(team_id: current_team.id)
+  - else
+    %li.yellow-text= link_to 'Choose Your Team', teams_path
   %li= link_to 'My Actions', player_aktions_path(player_id: current_player.id)
   %li= link_to "Today: #{current_player.todays_actions.count} Actions, #{current_player.todays_breaths} Breaths", player_aktions_path(player_id: current_player.id)
   %li
     %a{"data-dropdown" => "hover1", "data-options" => "is_hover:true; hover_timeout:200", href: "#{player_path(current_player)}"}
-      .green-text= current_player.first_name
-      / = image_tag(current_player.gravatar(42))
+      / .green-text= current_player.first_name
+      = image_tag(current_player.gravatar(42))
     %ul#hover1.f-dropdown.tiny{"data-dropdown-content" => ""}
       %li.text-right.dropdown_item= link_to "Sign out #{current_player.first_name}", signout_path
       %li.text-right.dropdown_item= link_to 'Profile', current_player
@@ -37,13 +36,20 @@
       %li.text-right.dropdown_item= link_to 'Roles', roles_path
       %li.text-right.dropdown_item= link_to 'Projects', projects_path
       %li.text-right.dropdown_item= link_to 'All Players', players_path
-  %li
-    %a{"data-dropdown" => "hover3", "data-options" => "is_hover:true; hover_timeout:200", href: "#{player_path(current_player)}"}
-      = current_player.sound_choice.try(:upcase)
-    %ul#hover3.f-dropdown.tiny{"data-dropdown-content" => ""}
-      - Player.sound_choices(current_player.sound_choice).each do |choice|
-        %li.text-right.dropdown_item= link_to choice.upcase, set_sound_player_path(current_player, sound_choice: choice)
-
 
 - else
+  %li
+    %a{"data-dropdown" => "hover3", "data-options" => "is_hover:true; hover_timeout:200", href: ""}
+      - session[:sound_choice] ||= 'ticking'
+      = session[:sound_choice].upcase
+    %ul#hover3.f-dropdown.tiny{"data-dropdown-content" => ""}
+      - Player.sound_choices(session[:sound_choice]).each do |choice|
+        %li.dropdown_item= link_to choice.upcase, sounds_path(sound_choice: choice)
   %li.green-text= link_to 'Sign in with Google', signin_path
+
+  / %li
+  /   %a{"data-dropdown" => "hover3", "data-options" => "is_hover:true; hover_timeout:200", href: ""}
+  /     = session[:sound_choice] ? current_player.sound_choice.try(:upcase) : 'SILENCE'
+  /   %ul#hover3.f-dropdown.tiny{"data-dropdown-content" => ""}
+  /     - Player.sound_choices(current_player.sound_choice).each do |choice|
+  /       %li.text-right.dropdown_item= link_to choice.upcase, set_sound_player_path(current_player, sound_choice: choice)

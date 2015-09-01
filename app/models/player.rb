@@ -37,9 +37,10 @@ class Player < ActiveRecord::Base
     aktions
   end
 
-  # start with the player's aktions, sorted by timeslot DESC
-  # filter out Aktions with duplicate summaries
-  # return latest 5
+  def persist_sound_choice(sound)
+    update_attributes(sound_choice: sound)
+  end
+
   def previous_actions
     previous_aktions_hash = aktions.order('timeslot DESC').first(10).group_by{ |a| a.summary }
     previous_aktions_hash.keys.map{ |key| previous_aktions_hash[key].first }.sort_by{ |a| a.timeslot}.reverse
