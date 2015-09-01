@@ -22,19 +22,20 @@
         %li.dropdown_item= link_to 'Team Projects', team_projects_path(team_id: current_team.id)
   - else
     %li.yellow-text= link_to 'Choose Your Team', teams_path
-  %li= link_to 'My Actions', player_aktions_path(player_id: current_player.id)
   %li= link_to "Today: #{current_player.todays_actions.count} Actions, #{current_player.todays_breaths} Breaths", player_aktions_path(player_id: current_player.id)
   %li
     %a{"data-dropdown" => "hover1", "data-options" => "is_hover:true; hover_timeout:200", href: "#{player_path(current_player)}"}
       / .green-text= current_player.first_name
       = image_tag(current_player.gravatar(42))
     %ul#hover1.f-dropdown.tiny{"data-dropdown-content" => ""}
-      %li.text-right.dropdown_item= link_to "Sign out #{current_player.first_name}", signout_path
-      %li.text-right.dropdown_item= link_to 'Profile', current_player
       %li.text-right.dropdown_item= link_to 'Settings', edit_player_path(current_player)
+      %li.text-right.dropdown_item= link_to 'Profile', current_player
+      %li.text-right.dropdown_item= link_to "Sign out #{current_player.first_name}", signout_path
       %hr
-      %li.text-right.dropdown_item= link_to 'Roles', roles_path
-      %li.text-right.dropdown_item= link_to 'Projects', projects_path
+      %li.text-right.dropdown_item= link_to 'My Actions', player_aktions_path(player_id: current_player.id)
+      %li.text-right.dropdown_item= link_to 'My Roles', roles_path
+      %li.text-right.dropdown_item= link_to 'My Projects', projects_path
+      %hr
       %li.text-right.dropdown_item= link_to 'All Players', players_path
 
 - else

@@ -1,4 +1,5 @@
-- session[:sound_choice] || 'ticking'
+%hr
+- session[:sound_choice] ||= current_player.sound_choice
 - if session[:sound_choice] == 'nature'
   %iframe.media{src: 'http://naturesoundsfor.me/rain-with-birds'}
 - elsif session[:sound_choice] == 'silence'
