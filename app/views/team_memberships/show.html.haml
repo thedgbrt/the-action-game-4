@@ -1,15 +1,17 @@
 %p
   %b Player:
-  = @team_membership.player_id
+  = @team_membership.player.name
 %p
   %b Team:
-  = @team_membership.team_id
+  = @team_membership.team.name
 %p
   %b Active:
   = @team_membership.active
 %p
   %b Admin:
   = @team_membership.admin
+
+= pp @team_membership.get_roles_from_api
 
 = link_to 'Edit', edit_team_membership_path(@team_membership)
 \|

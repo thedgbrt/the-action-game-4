@@ -20,13 +20,13 @@
         - if params[:action] == 'edit' && @aktion.status == 'attempting'
           .large-12 Sound preference?
           .large-12.columns.text-center.sound-option.button
-            = link_to 'TICKING', sound_path(sound_choice: 'ticking')
+            = link_to 'TICKING', sounds_path(sound_choice: 'ticking')
           .large-12.columns.text-center.sound-option.button
-            = link_to 'NATURE', sound_path(sound_choice: 'nature')
+            = link_to 'NATURE', sounds_path(sound_choice: 'nature')
           .large-12.columns.text-center.sound-option.button
-            = link_to 'MUSIC', sound_path(sound_choice: 'music')
+            = link_to 'MUSIC', sounds_path(sound_choice: 'music')
           .large-12.columns.text-center.sound-option.button
-            = link_to 'SILENCE', sound_path(sound_choice: 'silence')
+            = link_to 'SILENCE', sounds_path(sound_choice: 'silence')
 
       .large-3.medium-4.small-4.columns.aktion-quadrant.review-bg
         .large-12.medium-12.small-12.columns.review.bigger.text-center.aktion-quadrant-header REVIEW
