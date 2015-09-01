@@ -10,13 +10,13 @@
 %hr
 
 .large-3.columns
-  %h4 My Roles
+  %h4 API Roles
   - @team_membership.roles_from_api.each do |role|
     = link_to "#{role['name']} (#{role['id']})", "http://glassfrog.holacracy.org/roles/#{role['id']}"
     %br
 
   %hr
-  %h4 My Circles
+  %h4 API Circles
   - @team_membership.circles_from_api.each do |circle|
     = link_to circle[:name], "http://glassfrog.holacracy.org/circles/#{circle[:id]}"
     %br
