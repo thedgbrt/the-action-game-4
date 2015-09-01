@@ -1,7 +1,6 @@
 $(document).ready(function(){
     $('#aktions-table').DataTable({
         autoWidth: false,
-        ordering: false,
         searching: false,
         order: [0, 'desc'],
         pageLength: 25,
