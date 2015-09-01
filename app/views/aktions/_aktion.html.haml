@@ -1,6 +1,6 @@
 %tr
   %td= aktion.simple_time
-  %td= link_to aktion.status_full, edit_aktion_path(aktion, edit_finished: true)
+  %td= link_to aktion.status_full, edit_team_aktion_path(current_team, aktion, edit_finished: true)
   %td= link_to aktion.focus, aktion
   %td= link_to aktion.verb.name, aktion.verb if aktion.verb
   %td= link_to aktion.team.short_safe, aktion.team, title: aktion.project.try(:name)
