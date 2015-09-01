@@ -42,10 +42,8 @@ class TeamMembership < ActiveRecord::Base
     tag_role.name = api_role['name']
     tag_role.url = "http://glassfrog.holacracy.org/roles/#{external_id}"
     tag_role.description = create_description(api_role['links']['accountabilities'])
-    if tag_role.new_record?
-      tag_role.team_id = team.id
-      RoleAssignment.create!(role_id: tag_role.id, player_id: player.id)
-    end
+    tag_role.team_id = team.id
+    RoleAssignment.create!(role_id: tag_role.id, player_id: player.id)
     tag_role.save!
   end
 
