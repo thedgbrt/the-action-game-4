@@ -1,17 +1,12 @@
 %tr
   %td= aktion.simple_time
-  %td= aktion.status_full
+  %td= link_to aktion.status_full, edit_aktion_path(aktion, edit_finished: true)
   %td= link_to aktion.focus, aktion
   %td= link_to aktion.verb.name, aktion.verb if aktion.verb
-  %td= link_to aktion.role.name, aktion.role if aktion.role
-  %td= link_to aktion.project.name, aktion.project if aktion.project
+  %td= link_to aktion.team.short_safe, aktion.team, title: aktion.project.try(:name)
+  %td= link_to aktion.role.short_safe, aktion.role if aktion.role
   %td= aktion.intensity
   %td= aktion.flow
   %td= aktion.value
-  %td
-    = link_to 'Show', aktion
-    |
-    = link_to 'Edit', edit_aktion_path(aktion)
-    |
-    = link_to 'Destroy', aktion, :method => :delete, :data => { :confirm => 'Are you sure?' }
+  %td= link_to 'Destroy', aktion, :method => :delete, :data => { :confirm => 'Are you sure?' }
     
