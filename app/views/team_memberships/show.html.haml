@@ -28,5 +28,5 @@
 
   - @team_membership.roles.each do |role|
     = link_to role.name, role, title: role.description
-    = link_to "(#{role.external_id})", edit_role_path(role) if role.external_id
+    = link_to "(#{role.external_id ? role.external_id : 'no external id yet'})", edit_role_path(role)
     %br
