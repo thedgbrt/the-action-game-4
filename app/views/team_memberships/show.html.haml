@@ -1,4 +1,4 @@
-%h4= "Membership of #{@team_membership.player.name} to #{@team_membership.team.name}"
+%h4= "Membership #{@team_membership.player.name} => #{@team_membership.team.name}"
 
 %p
   %b API key:
@@ -24,7 +24,7 @@
 .large-9.columns
   %h4
     TAG Roles
-    = link_to '(Update)', update_from_api_team_membership_path
+    = link_to '(Update from API)', update_from_api_team_membership_path
 
   - @team_membership.roles.each do |role|
     = link_to role.name, role, title: role.description
