@@ -23,14 +23,14 @@
 
 .large-3.columns
   %h4 My Circles
-  - @team_membership.my_circles.each do |circle| rescue 'No Circles'
+  - @team_membership.my_circles.each do |circle|
     = link_to circle[:name], "http://glassfrog.holacracy.org/circles/#{circle[:id]}"
     %br
 
   %hr
 
   %h4 My Roles
-  - response['roles'].each do |role| rescue 'No Roles'
+  - response['roles'].each do |role|
     = link_to role['name'], "http://glassfrog.holacracy.org/roles/#{role['id']}"
     %br
 
