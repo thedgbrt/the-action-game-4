@@ -6,6 +6,6 @@
   You have selected silence
 - elsif session[:sound_choice] == 'music'
   %h4 We have selected baroque music, per David Allan's suggestion in Getting Things Done.
-  %iframe{:allowfullscreen => "", :frameborder => "0", :height => "315", :src => "https://www.youtube.com/embed/jjnyeZLNb3E?autoplay=1", :width => "560"}
+  %iframe{:allowfullscreen => "", :frameborder => "0", :height => "315", :src => "https://www.youtube.com/embed/jjnyeZLNb3E?start=#{rand_seconds(120)}&autoplay=1", :width => "560"}
 - elsif session[:sound_choice] == 'ticking'
   %iframe.media{src: 'http://theactiongame.herokuapp.com/aclock/small.html'}

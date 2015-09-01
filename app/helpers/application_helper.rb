@@ -1,9 +1,6 @@
 module ApplicationHelper
   
-  def rand_time(max)
-    minutes = rand(max)
-    h = minutes % 60
-    m = minutes - h * 60
-    "#{h}:{m}"
+  def rand_seconds(max_minutes)
+    rand(max_minutes * 60)
   end
 end
