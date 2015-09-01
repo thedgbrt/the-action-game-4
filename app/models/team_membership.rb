@@ -17,6 +17,8 @@ class TeamMembership < ActiveRecord::Base
   end
 
   def my_circles
-    api_response["linked"]['circles'].map{ |c| {id: c['id'], name: c['name']} }
+    linked = api_response["linked"]
+    return [] unless linked && linked != []
+    linked['circles'].map{ |c| {id: c['id'], name: c['name']} }
   end
 end
