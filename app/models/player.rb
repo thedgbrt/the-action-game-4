@@ -34,8 +34,8 @@ class Player < ActiveRecord::Base
   has_many :roles, through: :role_assignments
 
   def today
-    "Today: #{todays_actions.count} Actions" +
-    "#{todays_breaths} Breaths" +
+    "Today: #{todays_actions.count} Actions, " +
+    "#{todays_breaths} Breaths, " +
     "#{todays_pushups} Pushups"
   end
 
