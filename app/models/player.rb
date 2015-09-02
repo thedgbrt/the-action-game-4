@@ -52,8 +52,8 @@ class Player < ActiveRecord::Base
   end
 
   def previous_actions
-    previous_aktions_hash = Aktion.realtime_by(self).by_timeslot.first(10).group_by{ |a| a.summary }
-    previous_aktions_hash.keys.map{ |key| previous_aktions_hash[key].first }.sort_by{ |a| a.timeslot}.reverse
+    previous_aktions_hash = Aktion.realtime_by(self).by_timeslot.first(10).select{ |a| a.persisted? }.group_by{ |a| a.summary }
+    previous_aktions_hash.keys.map{ |key| previous_aktions_hash[key].first }.sort_by{ |a| a.timeslot }.reverse
   end
 
   def todays_actions
