@@ -37,6 +37,10 @@ class Role < ActiveRecord::Base
     parent_id ? "#{parent.name_with_parent}/#{name}" : name
   end
 
+  def name_with_short_parent
+    parent_id ? "#{parent.short_name_with_short_parent}/#{name}" : name
+  end
+
   def short_name_with_short_parent
     parent_id ? "#{parent.short_name_with_short_parent}/#{short}" : short
   end

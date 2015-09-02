@@ -37,6 +37,12 @@
       %li.text-right.dropdown_item= link_to 'My Projects', projects_path
       %hr
       %li.text-right.dropdown_item= link_to 'All Players', players_path
+      %hr
+      %li.text-right.dropdown_item= link_to '=> music'.upcase, sounds_path(sound_choice: 'music') unless session[:sound_choice] == 'music'
+      %li.text-right.dropdown_item= link_to '=> nature'.upcase, sounds_path(sound_choice: 'nature') unless session[:sound_choice] == 'nature'
+      %li.text-right.dropdown_item= link_to '=> silence'.upcase, sounds_path(sound_choice: 'silence') unless session[:sound_choice] == 'silence'
+      %li.text-right.dropdown_item= link_to '=> ticking'.upcase, sounds_path(sound_choice: 'ticking') unless session[:sound_choice] == 'ticking'
+      
 
 - else
   %li
