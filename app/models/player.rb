@@ -33,6 +33,12 @@ class Player < ActiveRecord::Base
   has_many :role_assignments
   has_many :roles, through: :role_assignments
 
+  def today
+    "Today: #{todays_actions.count} Actions" +
+    "#{todays_breaths} Breaths" +
+    "#{todays_pushups} Pushups"
+  end
+
   def actions
     aktions
   end
@@ -56,6 +62,10 @@ class Player < ActiveRecord::Base
 
   def todays_breaths
     todays_actions.map{ |a| a.breaths.to_i}.compact.sum
+  end
+
+  def todays_pushups
+    todays_actions.map{ |a| a.pushups.to_i}.compact.sum
   end
 
   def active_roles(team)
