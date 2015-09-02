@@ -1,0 +1,16 @@
+- if params[:status] == 'planned'
+  .large-12.focus.bigger.text-center.aktion-quadrant-header PLAN
+  .large-12.columns= f.input :planned_date, include_blank: true, autofocus: true
+  .large-12.columns= f.input :planned_sequence_number
+- else
+  .large-12.focus.bigger.text-center.aktion-quadrant-header FOCUS
+  - if params[:action] == 'edit' && @aktion.status == 'attempting'
+    .large-12 Sound preference?
+    .large-12.columns.text-center.sound-option.button
+      = link_to 'TICKING', sounds_path(sound_choice: 'ticking')
+    .large-12.columns.text-center.sound-option.button
+      = link_to 'NATURE', sounds_path(sound_choice: 'nature')
+    .large-12.columns.text-center.sound-option.button
+      = link_to 'MUSIC', sounds_path(sound_choice: 'music')
+    .large-12.columns.text-center.sound-option.button
+      = link_to 'SILENCE', sounds_path(sound_choice: 'silence')

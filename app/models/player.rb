@@ -37,6 +37,10 @@ class Player < ActiveRecord::Base
     aktions
   end
 
+  def planned_actions
+    aktions.select{ |a| a.status == 'planned'}
+  end
+
   def persist_sound_choice(sound)
     update_attributes(sound_choice: sound)
   end

@@ -1,4 +1,4 @@
-- if params[:edit_finished] || !@aktion.valid? || (params[:action] == 'new' && aktion.status == 'committing')
+- if params[:edit_finished] || !@aktion.valid? || params[:status] == 'planned' || (params[:action] == 'new' && aktion.status == 'committing')
   .large-12.columns= f.input :choice, as: :boolean, inline_label: Aktion.choice, autofocus: true
   .large-12.columns= f.input :focus, placeholder: 'Single focus?', label: false
   .large-10.columns= f.association :verb, prompt: 'Doing?', label: false, include_blank: true
@@ -9,8 +9,9 @@
   .large-2.columns#add-project= link_to 'add', new_project_path(team_id: current_team)
   .large-9.medium-9.columns= f.input :intensity, collection: Aktion.intensities, prompt: 'Intensity?', label: false, selected: 4
   .large-3.medium-3.columns.commit-button= f.button :submit, "GO"
-  .large-12.columns= f.input :timeslot, minute_step: 30, use_short_month: true, label: false, discard_year: true
-  .large-12.columns= f.input :time_zone, selected: Time.now, include_blank: true, label: false, prompt: 'Time Zone?'
+  - unless params[:status] == 'planned'
+    .large-12.columns= f.input :timeslot, minute_step: 30, use_short_month: true, label: false, discard_year: true
+    .large-12.columns= f.input :time_zone, selected: Time.now, include_blank: true, label: false, prompt: 'Time Zone?'
 - else
   .large-12.review-item
     %span.bold Choice: 

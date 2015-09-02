@@ -9,6 +9,8 @@
       %ul#hover4.f-dropdown.medium{"data-dropdown-content" => ""}
         - current_player.previous_actions.each do |a|
           %li.dropdown_item= link_to "#{a.summary[:verb] ? a.summary[:verb].titlecase : 'Missing Verb'} for #{a.summary[:team]}", new_aktion_path(previous_aktion_id: a.id)
+        %hr
+        %li.dropdown_item.light-red-text= link_to 'PLANNED', new_aktion_path(status: 'planned')
     %li
       %a{"data-dropdown" => "hover2", "data-options" => "is_hover:true; hover_timeout:200", href: "#{team_path(current_team)}"}
         .yellow-text= current_team.name
@@ -42,7 +44,6 @@
       %li.text-right.dropdown_item= link_to '=> nature'.upcase, sounds_path(sound_choice: 'nature') unless session[:sound_choice] == 'nature'
       %li.text-right.dropdown_item= link_to '=> silence'.upcase, sounds_path(sound_choice: 'silence') unless session[:sound_choice] == 'silence'
       %li.text-right.dropdown_item= link_to '=> ticking'.upcase, sounds_path(sound_choice: 'ticking') unless session[:sound_choice] == 'ticking'
-      
 
 - else
   %li

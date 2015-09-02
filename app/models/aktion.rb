@@ -17,7 +17,7 @@ class Aktion < ActiveRecord::Base
     end
   end
   serialize :properties, Hash, %w(choice pushups situps breaths water snack tidy stop restroom stretch games friends other music)
-  enum status: [:committing, :attempting, :reviewed, :finished]
+  enum status: [:committing, :attempting, :reviewed, :finished, :planned]
 
   belongs_to :player
   belongs_to :project
@@ -27,10 +27,12 @@ class Aktion < ActiveRecord::Base
   belongs_to :team
 
   validates :team_id, presence: true
-  validates :timeslot, presence: true, uniqueness: {scope: :player_id}
+  validates :timeslot, uniqueness: {scope: :player_id}
 #  validate :focus_or_verb#, :must_be_at_choice, 
 
-  default_scope { order('timeslot DESC') }
+  scope :by_timeslot, -> { order('timeslot DESC') }
+  scope :planned, -> { where(status: 4) }
+  scope :realtime, -> { where.not(status: 4) }
 
   def self.current_timeslot(t = nil)
     t ||= DateTime.now
@@ -139,8 +141,13 @@ class Aktion < ActiveRecord::Base
   private
 
     def self.status_options
-      # [[:committing, 0], [:attempting, 1], [:reviewed, 2], [:finished, 3]]
-      [:committing, :attempting, :reviewed, :finished]
+      [
+        ['Committing', :committing], 
+        ['Attempting', :attempting], 
+        ['Reviewed', :reviewed], 
+        ['Finished', :finished], 
+        ['Planned', :planned]
+      ]
     end
     
     # def must_be_at_choice

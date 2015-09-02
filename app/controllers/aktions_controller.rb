@@ -19,7 +19,12 @@ class AktionsController < ApplicationController
     @aktion.team_id = params[:team_id] || current_team.id
     @aktion.time_zone = @current_player.current_time_zone
     @aktion.timeslot = Aktion.current_timeslot
-    @aktion.status = :committing
+    if params[:status] == 'planned'
+      @aktion.status = :planned
+      @aktion.planned_date = DateTime.now.to_date
+    else
+      @aktion.status = :committing
+    end
     if params[:previous_aktion_id]
       @old = Aktion.find_by_id(params[:previous_aktion_id])
       @current_team = @old.team
@@ -85,7 +90,7 @@ class AktionsController < ApplicationController
       params.require(:aktion).permit(:timeslot, :focus, :player_id, :verb_id, :project_id, :flow, :flow_notes, :value,
         :value_notes, :visible_to, :status, :intensity, :how_it_went, :time_zone, :location_id, :role_id, :properties,
         :team_id, :water, :breaths, :pushups, :choice, :snack, :tidy, :stop, :restroom, :stretch, :games, :friends,
-        :other, :music)
+        :other, :music, :planned_date, :planned_sequence_number)
     end
 
     def aktion_form
