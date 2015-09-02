@@ -38,7 +38,7 @@ class Player < ActiveRecord::Base
   end
 
   def planned_actions
-    aktions.select{ |a| a.status == 'planned'}
+    Aktion.planned_by(self).select{ |a| a.persisted? }
   end
 
   def persist_sound_choice(sound)
@@ -46,12 +46,12 @@ class Player < ActiveRecord::Base
   end
 
   def previous_actions
-    previous_aktions_hash = aktions.order('timeslot DESC').first(10).group_by{ |a| a.summary }
+    previous_aktions_hash = Aktion.realtime_by(self).by_timeslot.first(10).group_by{ |a| a.summary }
     previous_aktions_hash.keys.map{ |key| previous_aktions_hash[key].first }.sort_by{ |a| a.timeslot}.reverse
   end
 
   def todays_actions
-    aktions.select{ |a| a.timeslot.to_date == DateTime.now.to_date }
+    Aktion.realtime_by(self).select{ |a| a.timeslot.to_date == DateTime.now.to_date }
   end
 
   def todays_breaths

@@ -7,7 +7,7 @@
   .large-2.columns#add-role= link_to 'add', new_role_path(team_id: current_team)
   .large-10.columns= f.association :project, collection: current_team.projects.sort_by{|p|p.name}, prompt: 'For what project?', label: false, include_blank: true
   .large-2.columns#add-project= link_to 'add', new_project_path(team_id: current_team)
-  .large-9.medium-9.columns= f.input :intensity, collection: Aktion.intensities, prompt: 'Intensity?', label: false, selected: 4
+  .large-9.medium-9.columns= f.input :intensity, collection: Aktion.intensities, include_blank: true, prompt: 'Intensity?', label: false
   .large-3.medium-3.columns.commit-button= f.button :submit, "GO"
   - unless params[:status] == 'planned'
     .large-12.columns= f.input :timeslot, minute_step: 30, use_short_month: true, label: false, discard_year: true

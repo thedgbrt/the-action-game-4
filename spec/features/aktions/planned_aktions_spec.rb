@@ -14,7 +14,7 @@ feature 'Aktion planning' do
     visit root_path
     signin
     p = Player.first
-    pp current_player
+
     t = FactoryGirl.create(:team)
     p.teams = [t]
     expect(p.teams.count).to eq(1)

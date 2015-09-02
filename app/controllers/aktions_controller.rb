@@ -17,9 +17,11 @@ class AktionsController < ApplicationController
   def new
     @aktion = @current_player.aktions.new
     @aktion.team_id = params[:team_id] || current_team.id
-    @aktion.time_zone = @current_player.current_time_zone
+    @aktion.intensity = 4
     @aktion.timeslot = Aktion.current_timeslot
+    @aktion.time_zone = @current_player.current_time_zone
     if params[:status] == 'planned'
+      @aktion.planned = true
       @aktion.status = :planned
       @aktion.planned_date = DateTime.now.to_date
     else
@@ -37,6 +39,8 @@ class AktionsController < ApplicationController
   end
 
   def edit
+    @aktion.team_id = current_team.id unless @aktion.team_id
+    @aktion.planned_date = DateTime.now.to_date if @aktion.planned && !@aktion.planned_date
   end
 
   def create
@@ -90,7 +94,7 @@ class AktionsController < ApplicationController
       params.require(:aktion).permit(:timeslot, :focus, :player_id, :verb_id, :project_id, :flow, :flow_notes, :value,
         :value_notes, :visible_to, :status, :intensity, :how_it_went, :time_zone, :location_id, :role_id, :properties,
         :team_id, :water, :breaths, :pushups, :choice, :snack, :tidy, :stop, :restroom, :stretch, :games, :friends,
-        :other, :music, :planned_date, :planned_sequence_number)
+        :other, :music, :planned_date, :planned_sequence_number, :planned)
     end
 
     def aktion_form

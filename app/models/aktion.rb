@@ -27,12 +27,16 @@ class Aktion < ActiveRecord::Base
   belongs_to :team
 
   validates :team_id, presence: true
-  validates :timeslot, uniqueness: {scope: :player_id}
+  # validates :timeslot, uniqueness: {scope: :player_id}
 #  validate :focus_or_verb#, :must_be_at_choice, 
 
   scope :by_timeslot, -> { order('timeslot DESC') }
-  scope :planned, -> { where(status: 4) }
-  scope :realtime, -> { where.not(status: 4) }
+  scope :planned_by, ->(player) { where(planned: true).where(player_id: player.id).order(:planned_sequence_number) }
+  scope :realtime_by, ->(player) { where.not(planned: true).where(player_id: player.id) }
+
+  def seq
+    planned_sequence_number ? planned_sequence_number.to_s + '. ' : ''
+  end
 
   def self.current_timeslot(t = nil)
     t ||= DateTime.now
@@ -100,9 +104,17 @@ class Aktion < ActiveRecord::Base
   end
   
   def summary
+    [
+      [summary_hash[:team], summary_hash[:role]].compact.join('/'),
+      summary_hash[:verb]
+    ].compact.join(': ')
+  end
+  
+  def summary_hash
     {
       verb: verb.try(:name),
-      team: team.try(:name)
+      role: role.try(:short_safe),
+      team: team.try(:short_safe)
     }
   end
 

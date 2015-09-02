@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20150902074132) do
     t.datetime "updated_at",                              null: false
     t.integer  "team_id"
     t.boolean  "completed",               default: false
+    t.boolean  "planned",                 default: false
     t.date     "planned_date"
     t.integer  "planned_sequence_number"
   end
