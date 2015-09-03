@@ -19,6 +19,6 @@
         - if a
           %span= link_to a.try(:summary_with_focus), edit_aktion_path(current_team, a, edit_finished: true)
         - else
-          %span.green-text= link_to 'CREATE...', new_aktion_path(timeslot: slot)
+          %span.green-text= link_to 'CREATE...', new_aktion_path(timeslot: slot.in_time_zone(current_player.current_time_zone))
 
 %hr
