@@ -7,10 +7,10 @@
   #role
     - old_collection = current_player.active_roles(@aktion.team || current_team).sort_by{ |r| r.short_team_role }
     .large-10.columns= f.association :role, collection: old_collection, label_method: :short_team_role, prompt: 'In which role?', label: false, include_blank: true
-    .large-2.columns#add-role= link_to '+role', new_role_path(team_id: current_team, and_fill: true), remote: true
+    .large-2.columns#add-role= link_to '+role', new_role_path(team_id: @aktion.team || current_team, and_fill: true), remote: true
   #project
     .large-10.columns= f.association :project, collection: (@aktion.team || current_team).projects.sort_by{|p|p.name}, label_method: :short_team_project, prompt: 'For what project?', label: false, include_blank: true
-    .large-2.columns#add-project= link_to '+proj', new_project_path(team_id: current_team, active: true, commitment: true), remote: true
+    .large-2.columns#add-project= link_to '+proj', new_project_path(team_id: @aktion.team || current_team, active: true, commitment: true), remote: true
   .large-9.medium-9.columns= f.input :intensity, collection: Aktion.intensities, include_blank: true, prompt: 'Intensity?', label: false
   .large-3.medium-3.columns.commit-button= f.button :submit, "GO"
   - unless params[:status] == 'planned'
