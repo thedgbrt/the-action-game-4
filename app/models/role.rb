@@ -16,8 +16,12 @@ class Role < ActiveRecord::Base
     else
       coll = Role.all
     end
-    sorted = coll.sort_by{ |r| r.name }.sort_by{ |r| r.team.short_safe }
-    sorted.map{ |r| "<option value='#{r.id.to_s}'>#{r.short_team_role}</option>" }.join("\n")
+    teams_hash = {}
+    coll.each do |r|
+      prev = teams_hash[r.team_id.to_s] || ''
+      teams_hash[r.team_id.to_s] = prev + "\n<option value='#{r.id.to_s}'>#{r.short_team_role}</option>"
+    end
+    teams_hash.to_json
   end
 
   def last_energized

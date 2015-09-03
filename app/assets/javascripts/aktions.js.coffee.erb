@@ -7,5 +7,6 @@ $(document).ready ->
     lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, 'All'] ]
     language: lengthMenu: 'Display _MENU_ Actions'
   $('#aktion_team_id').change ->
-    # new_value = $('#aktion_team_id').inner_html
-    $('#aktion_role_id').html("<%= Role.for_select %>")
+    val = $('#aktion_team_id').val()
+    temp = <%= Role.for_select %>
+    $('#aktion_role_id').html(temp[val])
