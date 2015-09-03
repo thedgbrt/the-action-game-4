@@ -2,7 +2,7 @@
   .large-12.columns= f.input :choice, as: :boolean, inline_label: Aktion.choice, autofocus: true
   .large-12.columns= f.input :focus, placeholder: 'Single focus?', label: false
   #verb
-    .large-10.columns= f.association :verb, prompt: 'Doing?', label: false, include_blank: true
+    .large-10.columns= f.association :verb, collection: Verb.order(:name), prompt: 'Doing?', label: false, include_blank: true
     .large-2.columns#add-verb= link_to 'add', new_verb_path, remote: true
   #role
     .large-10.columns= f.association :role, collection: current_player.active_roles(@aktion.team || current_team).sort_by{|r|r.name}, prompt: 'In which role?', label: false, include_blank: true
