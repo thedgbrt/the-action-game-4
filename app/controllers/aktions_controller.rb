@@ -9,6 +9,7 @@ class AktionsController < ApplicationController
     else
       @aktions = @current_player.aktions
     end
+    @todays_actions = @current_player.todays_actions
   end
 
   def show
