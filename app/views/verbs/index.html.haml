@@ -5,8 +5,7 @@
     %tr
       %th id
       %th Name
-      %th Intensity
-      %th Creator
+      %th Description
       %th Examples
       %th Level
       %th
@@ -17,9 +16,7 @@
       %tr
         %td= verb.id
         %td= link_to verb.name, verb
-        %td= link_to verb.description, edit_verb_path(verb)
-        %td= verb.intensity
-        %td= verb.creator.try(:name)
+        %td= verb.description if verb.description
         %td= verb.examples
         %td= verb.level
         %td= link_to 'Destroy', verb, :method => :delete, :data => { :confirm => 'Are you sure?' }

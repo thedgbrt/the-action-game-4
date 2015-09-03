@@ -18,14 +18,10 @@ class VerbsController < ApplicationController
   def create
     @verb = Verb.new(verb_params)
 
-    respond_to do |format|
-      if @verb.save
-        format.html { redirect_to @verb, notice: 'Verb was successfully created.' }
-        format.json { render :show, status: :created, location: @verb }
-      else
-        format.html { render :new }
-        format.json { render json: @verb.errors, status: :unprocessable_entity }
-      end
+    if @verb.save
+      render json: @verb
+    else
+      render json: @verb.errors, status: :unprocessable_entity
     end
   end
 
