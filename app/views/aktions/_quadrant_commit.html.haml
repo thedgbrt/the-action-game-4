@@ -5,7 +5,8 @@
     .large-10.columns= f.association :verb, collection: Verb.order(:name), prompt: 'Doing?', label: false, include_blank: true
     .large-2.columns#add-verb= link_to 'add', new_verb_path, remote: true
   #role
-    .large-10.columns= f.association :role, collection: current_player.active_roles(@aktion.team || current_team).sort_by{|r|r.name}, prompt: 'In which role?', label: false, include_blank: true
+    - old_collection = current_player.active_roles(@aktion.team || current_team).sort_by{ |r| r.short_team_role }
+    .large-10.columns= f.association :role, collection: old_collection, label_method: :short_team_role, prompt: 'In which role?', label: false, include_blank: true
     .large-2.columns#add-role= link_to 'add', new_role_path(team_id: current_team, and_fill: true), remote: true
   #project
     .large-10.columns= f.association :project, collection: (@aktion.team || current_team).projects.sort_by{|p|p.name}, prompt: 'For what project?', label: false, include_blank: true

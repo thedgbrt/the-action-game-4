@@ -6,6 +6,20 @@ class Role < ActiveRecord::Base
   has_many :role_assignments
   has_many :players, through: :role_assignments
 
+  def self.for_select(tm=nil, playa=nil)
+    if playa && tm
+      coll = playa.active_roles(tm)
+    elsif playa
+      coll = playa.roles
+    elsif tm
+      coll = tm.roles
+    else
+      coll = Role.all
+    end
+    sorted = coll.sort_by{ |r| r.name }.sort_by{ |r| r.team.short_safe }
+    sorted.map{ |r| "<option value='#{r.id.to_s}'>#{r.short_team_role}</option>" }.join("\n")
+  end
+
   def last_energized
     last_action_started || updated_at
   end
@@ -31,6 +45,10 @@ class Role < ActiveRecord::Base
   
   def team_role
     "#{team.name}: #{name}"
+  end
+
+  def short_team_role
+    "#{team.short_safe}: #{name}"
   end
 
   def name_with_parent
