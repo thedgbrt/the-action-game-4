@@ -8,5 +8,7 @@ $(document).ready ->
     language: lengthMenu: 'Display _MENU_ Actions'
   $('#aktion_team_id').change ->
     val = $('#aktion_team_id').val()
-    temp = <%= Role.for_select %>
-    $('#aktion_role_id').html(temp[val])
+    roles = <%= Role.for_select %>
+    $('#aktion_role_id').html(roles[val])
+    projects = <%= Project.for_select %>
+    $('#aktion_project_id').html(projects[val])

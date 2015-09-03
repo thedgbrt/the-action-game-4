@@ -6,18 +6,10 @@ class Role < ActiveRecord::Base
   has_many :role_assignments
   has_many :players, through: :role_assignments
 
-  def self.for_select(tm=nil, playa=nil)
-    if playa && tm
-      coll = playa.active_roles(tm)
-    elsif playa
-      coll = playa.roles
-    elsif tm
-      coll = tm.roles
-    else
-      coll = Role.all
-    end
+  def self.for_select(tm=nil)
+    roles = tm ? tm.roles : Role.all
     teams_hash = {}
-    coll.each do |r|
+    roles.each do |r|
       prev = teams_hash[r.team_id.to_s] || ''
       teams_hash[r.team_id.to_s] = prev + "\n<option value='#{r.id.to_s}'>#{r.short_team_role}</option>"
     end
