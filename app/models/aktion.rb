@@ -109,6 +109,10 @@ class Aktion < ActiveRecord::Base
       summary_hash[:verb]
     ].compact.join(': ')
   end
+
+  def summary_with_focus
+    summary + ' (' + focus + ')'
+  end
   
   def summary_hash
     {
