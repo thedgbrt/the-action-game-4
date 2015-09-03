@@ -60,6 +60,11 @@ class Player < ActiveRecord::Base
     Aktion.realtime_by(self).select{ |a| a.timeslot.to_date == DateTime.now.to_date }
   end
 
+  def self.todays_grid
+    midnight = DateTime.now.at_beginning_of_day
+    (0..47).map{ |ts| midnight + (ts*30).minutes }
+  end
+
   def todays_breaths
     todays_actions.map{ |a| a.breaths.to_i}.compact.sum
   end

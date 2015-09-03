@@ -6,6 +6,7 @@ $(document).ready ->
     pageLength: 25
     lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, 'All'] ]
     language: lengthMenu: 'Display _MENU_ Actions'
+
   $('#aktion_team_id').change ->
     val = $('#aktion_team_id').val()
     roles = <%= Role.for_select %>
