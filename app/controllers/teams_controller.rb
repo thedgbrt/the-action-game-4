@@ -55,7 +55,7 @@ class TeamsController < ApplicationController
   def activate
     @current_team = Team.find_by_id(params[:id])
     current_player.update_attributes(current_team_id: @current_team.id)
-    redirect_to back_or_home
+    redirect_to new_team_aktion_path(current_team)
   end
 
   def join

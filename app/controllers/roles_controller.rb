@@ -21,15 +21,25 @@ class RolesController < ApplicationController
     if @role.short.nil? || @role.short == ''
       @role.short = @role.name
     end
-    respond_to do |format|
-      if @role.save
-        format.html { redirect_to current_team, notice: 'Role was successfully created.' }
-        format.json { render :show, status: :created, location: @role }
-      else
-        format.html { render :new }
-        format.json { render json: @role.errors, status: :unprocessable_entity }
-      end
+
+    @role.team_id = params[:team_id] || current_team.id unless @role.team_id
+
+    if @role.save
+      RoleAssignment.create!(role_id: @role.id, player_id: current_player.id)
+      render json: @role
+    else
+      render json: @role.errors, status: :unprocessable_entity
     end
+
+    # respond_to do |format|
+    #   if @role.save
+    #     format.html { redirect_to current_team, notice: 'Role was successfully created.' }
+    #     format.json { render :show, status: :created, location: @role }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @role.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   def update

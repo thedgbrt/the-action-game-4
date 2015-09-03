@@ -5,11 +5,11 @@
     .large-10.columns= f.association :verb, prompt: 'Doing?', label: false, include_blank: true
     .large-2.columns#add-verb= link_to 'add', new_verb_path, remote: true
   #role
-    .large-10.columns= f.association :role, collection: current_player.active_roles(current_team).sort_by{|r|r.name}, prompt: 'In which role?', label: false, include_blank: true
-    .large-2.columns#add-role= link_to 'add', new_role_path(team_id: current_team), remote: true
+    .large-10.columns= f.association :role, collection: current_player.active_roles(@aktion.team || current_team).sort_by{|r|r.name}, prompt: 'In which role?', label: false, include_blank: true
+    .large-2.columns#add-role= link_to 'add', new_role_path(team_id: current_team, and_fill: true), remote: true
   #project
-    .large-10.columns= f.association :project, collection: current_team.projects.sort_by{|p|p.name}, prompt: 'For what project?', label: false, include_blank: true
-    .large-2.columns#add-project= link_to 'add', new_project_path(team_id: current_team), remote: true
+    .large-10.columns= f.association :project, collection: (@aktion.team || current_team).projects.sort_by{|p|p.name}, prompt: 'For what project?', label: false, include_blank: true
+    .large-2.columns#add-project= link_to 'add', new_project_path(team_id: current_team, active: true, commitment: true), remote: true
   .large-9.medium-9.columns= f.input :intensity, collection: Aktion.intensities, include_blank: true, prompt: 'Intensity?', label: false
   .large-3.medium-3.columns.commit-button= f.button :submit, "GO"
   - unless params[:status] == 'planned'

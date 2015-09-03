@@ -20,11 +20,14 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
+    @project.team_id = params[:team_id] || current_team.id unless @project.team_id
+    @project.active = params[:active] if @project.active.nil?
+    @project.commitment = params[:commitment] if @project.commitment.nil?
 
     if @project.save
-      render json: @verb
+      render json: @project
     else
-      render json: @verb.errors, status: :unprocessable_entity
+      render json: @project.errors, status: :unprocessable_entity
     end
     #
     # respond_to do |format|

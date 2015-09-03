@@ -1,6 +1,10 @@
 class RoleAssignmentsController < ApplicationController
   before_action :set_role_assignment, only: [:destroy]
 
+  def index
+    @role_assignments = RoleAssignment.all
+  end
+
   def new
     RoleAssignment.create!(role_id: params[:role_id], player_id: params[:player_id])
     redirect_to back_or_home

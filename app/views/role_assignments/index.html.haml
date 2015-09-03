@@ -15,8 +15,8 @@
   %tbody
     - @role_assignments.each do |role_assignment|
       %tr
-        %td= role_assignment.role_id
-        %td= role_assignment.player_id
+        %td= role_assignment.role.try(:name)
+        %td= role_assignment.player.try(:name)
         %td= role_assignment.active
         %td= role_assignment.primary
         %td= link_to 'Show', role_assignment
