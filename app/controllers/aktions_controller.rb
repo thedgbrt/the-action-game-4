@@ -19,7 +19,7 @@ class AktionsController < ApplicationController
     @aktion = @current_player.aktions.new
     @aktion.team_id = params[:team_id] || current_team.id
     @aktion.intensity = 4
-    @aktion.timeslot = Aktion.current_timeslot
+    @aktion.timeslot = params[:timeslot] || Aktion.current_timeslot
     @aktion.time_zone = @current_player.current_time_zone
     if params[:status] == 'planned'
       @aktion.planned = true
