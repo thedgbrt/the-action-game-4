@@ -9,6 +9,7 @@
     - else
       .large-4.medium-4.small-6.columns= f.association :creator, include_blank: true, selected: @current_player.try(:id)
     .large-4.medium-4.small-6.columns= f.input :description
+    .large-4.medium-4.small-6.columns= f.input :color
     .large-4.medium-4.small-6.columns= f.input :url
     .large-4.medium-4.small-6.columns= f.input :logo_url
     %hr

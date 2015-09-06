@@ -40,5 +40,13 @@ class Team < ActiveRecord::Base
       "Sorry, no roles API URL has been provided for this team."
     end
   end
+
+  def self.colors
+    ['#BDBDBD', '#F5D0A9', '#F4FA58', '#5882FA', '#D0A9F5', '#F7819F', '#81F7F3', '#BCF5A9']
+  end
   
+  def color(playa)
+    tm = TeamMembership.find_by(team_id: self.id, player_id: playa.id)
+    tm.try(:color)
+  end
 end

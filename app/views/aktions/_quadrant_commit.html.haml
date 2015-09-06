@@ -13,7 +13,7 @@
     .large-2.columns#add-project= link_to '+proj', new_project_path(team_id: @aktion.team || current_team, active: true, commitment: true), remote: true
   .large-9.medium-9.columns= f.input :intensity, collection: Aktion.intensities, include_blank: true, prompt: 'Intensity?', label: false
   .large-3.medium-3.columns.commit-button= f.button :submit, "GO"
-  .large-12= f.association :location
+  / .large-12= f.association :location
   - unless params[:status] == 'planned'
     .large-12.columns= f.input :timeslot, minute_step: 30, use_short_month: true, label: false, discard_year: true
     .large-12.columns= f.input :time_zone, selected: Time.zone.now, include_blank: true, label: false, prompt: 'Time Zone?'

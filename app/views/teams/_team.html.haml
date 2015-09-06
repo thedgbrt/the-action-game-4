@@ -6,7 +6,7 @@
       .green-text= link_to 'ACTIVATE', activate_team_path(team_id: team.id, id: team.id) 
     - else
       .blue-text= link_to 'JOIN', join_team_path(team)
-  %td= link_to team.name, team
+  %td{style: "background-color: #{team.color(current_player)}"}= link_to team.name, team
   %td= link_to team.short, team if team.short
   %td= team.players.map(&:first_name).join(', ')
   %td= link_to "#{team.roles.count} Roles", team_roles_path(team_id: team.id)

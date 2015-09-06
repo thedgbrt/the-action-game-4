@@ -15,8 +15,7 @@
     - part_of_days_slots.each do |slot|
       - a = Aktion.where(player_id: current_player.id, timeslot: slot).first
       - if a
-        - color = Aktion.color_codes[rand(5)]
-        .large-12.columns.action-cell{style: "background-color: #{color}"}
+        .large-12.columns.action-cell{style: "background-color: #{a.team.color(current_player)}"}
           %span.red-text= link_to Aktion.current_timeslot(slot).strftime('%H:%M'), a
           %span= link_to a.try(:summary_with_focus), edit_aktion_path(current_team, a, edit_finished: true)
       - else

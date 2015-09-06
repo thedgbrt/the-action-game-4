@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150902074132) do
+ActiveRecord::Schema.define(version: 20150906134125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,9 +38,9 @@ ActiveRecord::Schema.define(version: 20150902074132) do
     t.datetime "updated_at",                              null: false
     t.integer  "team_id"
     t.boolean  "completed",               default: false
-    t.boolean  "planned",                 default: false
     t.date     "planned_date"
     t.integer  "planned_sequence_number"
+    t.boolean  "planned",                 default: false
   end
 
   create_table "locations", force: :cascade do |t|
@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(version: 20150902074132) do
     t.datetime "updated_at",                  null: false
     t.string   "api_key"
     t.integer  "external_id"
+    t.string   "color"
   end
 
   create_table "teams", force: :cascade do |t|
