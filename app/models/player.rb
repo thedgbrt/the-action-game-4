@@ -57,7 +57,7 @@ class Player < ActiveRecord::Base
   end
 
   def todays_actions
-    Aktion.realtime_by(self).select{ |a| a.timeslot.to_date == DateTime.now.to_date }
+    Aktion.realtime_by(self).select{ |a| a.timeslot.in_time_zone(self.current_time_zone).to_date == DateTime.now.in_time_zone(self.current_time_zone).to_date }
   end
 
   def self.todays_grid
