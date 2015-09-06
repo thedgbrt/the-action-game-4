@@ -1,5 +1,8 @@
 / = react_component 'Aktions', { data: @aktions }
 
+%h3= Aktion.last.timeslot.zone
+%hr
+
 = render 'analyze', aktions: @todays_actions
 
 = render 'aktions', aktions: @aktions

@@ -57,11 +57,11 @@ class Player < ActiveRecord::Base
   end
 
   def todays_actions
-    Aktion.realtime_by(self).select{ |a| a.timeslot.in_time_zone(self.current_time_zone).to_date == DateTime.now.in_time_zone(self.current_time_zone).to_date }
+    Aktion.realtime_by(self).select{ |a| a.timeslot.in_time_zone(self.current_time_zone).to_date == Time.zone.now.in_time_zone(self.current_time_zone).to_date }
   end
 
   def self.todays_grid
-    midnight = DateTime.now.at_beginning_of_day
+    midnight = Time.zone.now.at_beginning_of_day
     (0..47).map{ |ts| midnight + (ts*30).minutes }
   end
 

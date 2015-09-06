@@ -39,7 +39,7 @@ class Aktion < ActiveRecord::Base
   end
 
   def self.current_timeslot(t = nil)
-    t ||= DateTime.now
+    t ||= Time.zone.now
     if t.min < 30
       t.at_beginning_of_hour
     else
@@ -81,7 +81,7 @@ class Aktion < ActiveRecord::Base
   end
 
   def action_time(timestamp)
-    timestamp ||= DateTime.now
+    timestamp ||= Time.zone.now
     timestamp.strftime('%b-%d %H:%M')    
   end
 

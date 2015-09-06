@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   helper_method :back_or_home
   helper_method :last_action
 
-  around_filter :user_time_zone, if: :current_user
+  around_filter :user_time_zone, if: :current_player
 
   private
     def last_action
@@ -59,8 +59,7 @@ class ApplicationController < ActionController::Base
     end
 
     def user_time_zone(&block)
-      tz = @current_player.try(:current_time_zone) || 'Pacific Time (US & Canada)'
-      Time.use_zone(tz, &block)
+      Time.use_zone(current_player.current_time_zone, &block)
     end
 
     def back_or_home

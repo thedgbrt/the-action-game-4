@@ -24,7 +24,7 @@ class AktionsController < ApplicationController
     if params[:status] == 'planned'
       @aktion.planned = true
       @aktion.status = :planned
-      @aktion.planned_date = DateTime.now.to_date
+      @aktion.planned_date = Time.zone.to_date
     else
       @aktion.status = :committing
     end
@@ -41,7 +41,7 @@ class AktionsController < ApplicationController
 
   def edit
     @aktion.team_id = current_team.id unless @aktion.team_id
-    @aktion.planned_date = DateTime.now.to_date if @aktion.planned && !@aktion.planned_date
+    @aktion.planned_date = Time.zone.to_date if @aktion.planned && !@aktion.planned_date
   end
 
   def create
