@@ -42,10 +42,10 @@ class Player < ActiveRecord::Base
   def actions
     aktions
   end
-
-  def planned_actions
-    Aktion.planned_by(self).select{ |a| a.persisted? }
-  end
+  #
+  # def planned_actions
+  #   Aktion.planned_by(self).select{ |a| a.persisted? }
+  # end
 
   def persist_sound_choice(sound)
     update_attributes(sound_choice: sound)

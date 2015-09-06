@@ -12,12 +12,12 @@ RSpec.describe Player, type: :model do
 
   it { should respond_to(:name) }
 
-  it '#planned_actions should work' do
-    (1..5).each{ FactoryGirl.create(:aktion, status: 'finished', player_id: @player.id, team_id: @team.id) }
-    expect(Aktion.planned_by(@player).count).to eq(0)
-    @pa = Aktion.create!(planned: true, status: 'planned', player_id: @player.id, team_id: @team.id)
-    expect(Aktion.planned_by(@player).count).to eq(1)
-  end
+  # it '#planned_actions should work' do
+  #   (1..5).each{ FactoryGirl.create(:aktion, status: 'finished', player_id: @player.id, team_id: @team.id) }
+  #   expect(Aktion.planned_by(@player).count).to eq(0)
+  #   @pa = Aktion.create!(planned: true, status: 'planned', player_id: @player.id, team_id: @team.id)
+  #   expect(Aktion.planned_by(@player).count).to eq(1)
+  # end
 
   it '#persist_sound_choice should change the sound' do
     expect(@player.sound_choice).to be nil

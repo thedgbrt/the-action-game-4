@@ -27,11 +27,11 @@ class Aktion < ActiveRecord::Base
   belongs_to :team
 
   validates :team_id, presence: true
-  # validates :timeslot, uniqueness: {scope: :player_id}
+  validates :timeslot, presence: true, uniqueness: {scope: :player_id}
 #  validate :focus_or_verb#, :must_be_at_choice, 
 
   scope :by_timeslot, -> { order('timeslot DESC') }
-  scope :planned_by, ->(player) { where(planned: true).where(player_id: player.id).order(:planned_sequence_number) }
+  # scope :planned_by, ->(player) { where(planned: true, status: 'planned', player_id: player.id).order(:planned_sequence_number) }
   scope :realtime_by, ->(player) { where.not(planned: true).where(player_id: player.id) }
 
   def seq

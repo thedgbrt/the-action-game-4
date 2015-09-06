@@ -9,7 +9,7 @@ class Project < ActiveRecord::Base
     teams_hash = {}
     projects.each do |r|
       prev = teams_hash[r.team_id.to_s] || ''
-      teams_hash[r.team_id.to_s] = prev + "\n<option value='#{r.id.to_s}'>#{r.short_team_project}</option>"
+      teams_hash[r.team_id.to_s] = prev + "\n<option value='#{r.id.to_s}'>#{r.name}</option>"
     end
     teams_hash.to_json
   end
