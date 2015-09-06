@@ -154,6 +154,17 @@ class Aktion < ActiveRecord::Base
     'Objectively, what did you work on?  What did you complete or accomplish?  Is this the right strategy for your project?  Is this project a good use of your time?'
   end
 
+  def self.color_codes
+    {
+      0 => 'gold',
+      1 => 'deepskyblue',
+      2 => 'darkorange',
+      3 => 'mediumseagreen',
+      4 => 'salmon',
+      5 => 'orchid'
+    }
+  end
+
   private
 
     def self.status_options

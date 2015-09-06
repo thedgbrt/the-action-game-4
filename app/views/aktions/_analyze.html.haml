@@ -8,17 +8,20 @@
 
 - parts_of_day = ['Night', 'Morning', 'Afternoon', 'Evening']
 
-%h4= "Today's Actions (in time zone #{current_player.current_time_zone})"
+%h4= "Today's Actions in your current time zone, #{current_player.current_time_zone}"
 - Player.todays_grid.in_groups_of(12).each_with_index do |part_of_days_slots, idx|
   .large-3.medium-6.small-12.columns
     %h5.large-12.text-center= parts_of_day[idx]
     - part_of_days_slots.each do |slot|
       - a = Aktion.where(player_id: current_player.id, timeslot: slot).first
-      .large-12.columns.action-cell
-        %span.red-text= link_to Aktion.current_timeslot(slot).strftime('%H:%M'), a
-        - if a
+      - if a
+        - color = Aktion.color_codes(rand(5))
+        .large-12.columns.action-cell{style: "background-color: #{color}"}
+          %span.red-text= link_to Aktion.current_timeslot(slot).strftime('%H:%M'), a
           %span= link_to a.try(:summary_with_focus), edit_aktion_path(current_team, a, edit_finished: true)
-        - else
+      - else
+        .large-12.columns.action-cell{style: 'background-color: white'}
+          %span.red-text= link_to Aktion.current_timeslot(slot).strftime('%H:%M'), a
           %span.green-text= link_to 'CREATE...', new_aktion_path(timeslot: slot.in_time_zone(current_player.current_time_zone))
 
 %hr
