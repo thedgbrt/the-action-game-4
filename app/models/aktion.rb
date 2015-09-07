@@ -34,6 +34,10 @@ class Aktion < ActiveRecord::Base
   # scope :planned_by, ->(player) { where(planned: true, status: 'planned', player_id: player.id).order(:planned_sequence_number) }
   scope :realtime_by, ->(player) { where.not(planned: true).where(player_id: player.id) }
 
+  def self.get(playa, slot)
+    Aktion.find_by(player_id: playa.id, timeslot: slot)
+  end
+
   def seq
     planned_sequence_number ? planned_sequence_number.to_s + '. ' : ''
   end
@@ -47,8 +51,8 @@ class Aktion < ActiveRecord::Base
     end
   end
 
-  def self.current_aktion
-    find_by(timeslot: Aktion.current_timeslot)
+  def self.current_aktion(playa)
+    find_by(player_id: playa.id, timeslot: Aktion.current_timeslot)
   end
 
   def break
@@ -128,10 +132,10 @@ class Aktion < ActiveRecord::Base
 
   def self.intensities
     [ ['1 - Quasi Action', 1],
-      ['2 - Split Focus', 2], 
-      ['3 - Maintenance', 3],
-      ['4 - Important', 4],
-      ['5 - Urgent', 5]]
+      ['2 - Missed Action', 2], 
+      ['3 - Followed Most Rules', 3],
+      ['4 - Followed All Rules', 4],
+      ['5 - Excelled at Rules & Spirit', 5]]
   end
 
   def self.focus_placeholder

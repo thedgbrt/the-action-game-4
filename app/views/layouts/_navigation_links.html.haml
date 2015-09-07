@@ -1,6 +1,6 @@
 - if player_signed_in?
   - if team_selected?
-    - current_aktion = Aktion.current_aktion
+    - current_aktion = Aktion.current_aktion(current_player)
     - if current_aktion
       %li.light-red-text= link_to "#{current_aktion.to_do}", edit_aktion_path(id: current_aktion.id)
     %li
