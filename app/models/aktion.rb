@@ -34,6 +34,21 @@ class Aktion < ActiveRecord::Base
   # scope :planned_by, ->(player) { where(planned: true, status: 'planned', player_id: player.id).order(:planned_sequence_number) }
   scope :realtime_by, ->(player) { where.not(planned: true).where(player_id: player.id) }
 
+  def color
+    team.color(player)
+  end
+
+  def auto_intensity
+    time_delta = (created_at - timeslot).abs/60
+    if time_delta > 30
+      1
+    elsif time_delta > 3 || Aktion.statuses[status] < 2
+      2
+    else
+      3
+    end
+  end
+
   def self.get(playa, slot)
     Aktion.find_by(player_id: playa.id, timeslot: slot)
   end
@@ -117,7 +132,11 @@ class Aktion < ActiveRecord::Base
   def summary_with_focus
     summary + ' (' + focus + ')'
   end
-  
+
+  def summary_with_time_and_focus
+    simple_time + ' ' + summary_with_focus
+  end
+
   def summary_hash
     {
       verb: verb.try(:name),
