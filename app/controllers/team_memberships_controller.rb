@@ -20,7 +20,7 @@ class TeamMembershipsController < ApplicationController
 
     respond_to do |format|
       if @team_membership.save
-        format.html { redirect_to @team_membership, notice: 'Team membership was successfully created.' }
+        format.html { redirect_to teams_path, notice: 'Team membership was successfully created.' }
         format.json { render :show, status: :created, location: @team_membership }
       else
         format.html { render :new }
@@ -32,7 +32,7 @@ class TeamMembershipsController < ApplicationController
   def update
     respond_to do |format|
       if @team_membership.update(team_membership_params)
-        format.html { redirect_to @team_membership, notice: 'Team membership was successfully updated.' }
+        format.html { redirect_to edit_team_membership_path(@team_membership), notice: 'Team membership was successfully updated.' }
         format.json { render :show, status: :ok, location: @team_membership }
       else
         format.html { render :edit }

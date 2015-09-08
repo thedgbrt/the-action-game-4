@@ -1,10 +1,17 @@
+%p
+  %h4
+    Team Membership:
+    = current_player.name
+    for
+    = @team_membership.team.name
+
 = simple_form_for(@team_membership) do |f|
   = f.error_notification
 
   .form-inputs
     .large-4.medium-4.small-6.columns= f.association :player
     .large-4.medium-4.small-6.columns= f.association :team
-    .large-4.medium-4.small-6.columns= f.input :color, collection: Team.colors
+    .large-4.medium-4.small-6.columns{style: "background-color: #{@team_membership.color}"}= f.input :color, collection: Team.colors
     .large-4.medium-4.small-6.columns= f.input :api_key
     .large-4.medium-4.small-6.columns= f.input :external_id, label: 'External ID'
     .large-4.medium-4.small-6.columns= f.input :admin
