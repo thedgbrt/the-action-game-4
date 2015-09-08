@@ -15,7 +15,7 @@
     - @team_memberships.each do |team_membership|
       %tr
         %td{style: "background-color: #{team_membership.color}"}= link_to team_membership.player.try(:name), team_membership.player
-        %td{style: "background-color: #{team.color}"}= link_to team_membership.team.try(:name), team_membership.team
+        %td{style: "background-color: #{team_membership.team.color}"}= link_to team_membership.team.try(:name), team_membership.team
         %td{style: "background-color: #{team_membership.color}"}= team_membership.active
         %td{style: "background-color: #{team_membership.color}"}= team_membership.admin
         %td= link_to 'Show', team_membership
