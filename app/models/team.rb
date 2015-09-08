@@ -61,6 +61,6 @@ class Team < ActiveRecord::Base
   
   def color(playa)
     tm = TeamMembership.find_by(team_id: self.id, player_id: playa.id)
-    tm.try(:color)
+    tm.try(:color) || default_color
   end
 end

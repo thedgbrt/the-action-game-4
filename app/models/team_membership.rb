@@ -4,6 +4,10 @@ class TeamMembership < ActiveRecord::Base
   
   validates_uniqueness_of :player_id, :scope => [:team_id], :message => "This membership is already active."
 
+  def get_color
+    color || team.default_color || '#DDDDDD'
+  end
+
   def roles
     player.active_roles(team).sort_by{ |r| r.name }
   end
