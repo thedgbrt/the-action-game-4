@@ -48,7 +48,7 @@ class Team < ActiveRecord::Base
   def self.colors
     [
       ['green', '#CCFFCC'],
-      ['red,' '#FFCCCC'],
+      ['red,', '#FFCCCC'],
       ['yellow', '#F4FA58'],
       ['blue', '#5882FA'],
       ['orange', '#F5D0A9'],
