@@ -1,4 +1,5 @@
-- if @aktion.status == 'reviewed'
+= params
+- if params.has_key?(:edit) || @aktion.status == 'reviewed'
   .large-12.medium-12.columns= f.input :intensity, collection: Aktion.intensities, include_blank: true, prompt: 'Intensity?', label: false
   .large-6.medium-12.columns= f.input :stop, as: :boolean, inline_label: 'stop', autofocus: true
   .large-6.medium-12.columns= f.input :restroom, as: :boolean, inline_label: 'restroom'

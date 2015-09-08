@@ -1,4 +1,4 @@
-- if params[:edit_finished] || !@aktion.valid? || params[:status] == 'planned' || (params[:action] == 'new' && aktion.status == 'committing')
+- if params.has_key?(:edit) || !@aktion.valid? || params[:status] == 'planned' || (params[:action] == 'new' && aktion.status == 'committing')
   .large-12.columns= f.input :choice, as: :boolean, inline_label: Aktion.choice, autofocus: true
   .large-12.columns= f.input :focus, placeholder: 'Single focus?', label: false
   #verb

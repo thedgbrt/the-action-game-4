@@ -5,7 +5,7 @@
   .large-7.medium-12.columns= f.input :planned_sequence_number, collection: (1..5), label:  false, prompt: 'Sequence #'
   .large-5.medium-12.columns.commit-button= f.button :submit, "PLAN"
   - current_player.planned_actions.each do |pa|
-    .large-12= link_to pa.seq + pa.summary, edit_aktion_path(pa, edit_finished: true)
+    .large-12= link_to pa.seq + pa.summary, edit_aktion_path(pa, edit: true)
 - else
   .large-12.focus.bigger.text-center.aktion-quadrant-header FOCUS
   - if params[:action] == 'edit' && @aktion.status == 'attempting'

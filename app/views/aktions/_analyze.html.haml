@@ -19,7 +19,7 @@ In your current time zone, #{current_player.current_time_zone}
       - if a
         .large-12.columns.action-cell{style: "background-color: #{a.team.color(current_player)}"}
           %span.red-text= link_to slot.strftime('%H:%M'), a
-          %span= link_to a.try(:summary_with_focus), edit_aktion_path(a, edit_finished: true)
+          %span= link_to a.try(:summary_with_focus), edit_aktion_path(a, edit: true)
       - else
         .large-12.columns.action-cell{style: 'background-color: white'}
           %span.red-text= link_to Aktion.current_timeslot(slot).strftime('%H:%M'), a

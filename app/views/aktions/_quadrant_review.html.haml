@@ -1,4 +1,4 @@
-- if  params[:edit_finished] || @aktion.status == 'attempting'
+- if params.has_key?(:edit) || @aktion.status == 'attempting'
   / = f.input :how_it_went, as: :hidden
   .large-4.medium-4.small-4.columns.bigger= 'FLOW'
   .large-8.medium-8.small-8.columns= f.input :flow, collection: Aktion.focus_options, label: false, autofocus: true
