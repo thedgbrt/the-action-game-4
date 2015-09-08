@@ -1,15 +1,18 @@
+= link_to 'Edit My Membership', edit_team_membership_path(@team.membership_for(current_player))
+%hr
+
 = simple_form_for(@team) do |f|
   = f.error_notification
 
   .form-inputs
     .large-4.medium-4.small-6.columns= f.input :name
-    .large-4.medium-4.small-6.columns= f.input :short
+    .large-2.medium-4.small-6.columns= f.input :short
+    .large-2.medium-4.small-6.columns= f.input :default_color, collection: Team.colors
     - if @team.creator_id
       .large-4.medium-4.small-6.columns= f.association :creator, include_blank: true
     - else
       .large-4.medium-4.small-6.columns= f.association :creator, include_blank: true, selected: @current_player.try(:id)
     .large-4.medium-4.small-6.columns= f.input :description
-    .large-4.medium-4.small-6.columns= f.input :color
     .large-4.medium-4.small-6.columns= f.input :url
     .large-4.medium-4.small-6.columns= f.input :logo_url
     %hr

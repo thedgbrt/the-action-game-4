@@ -37,6 +37,10 @@ class Aktion < ActiveRecord::Base
   def color
     team.color(player)
   end
+  #
+  # def self.color_options(colors)
+  #   colors.map {|color, code| "<option value='#{code}' style='background-color:#{code};'>#{color}</option>" }
+  # end
 
   def auto_intensity
     time_delta = (created_at - timeslot).abs/60

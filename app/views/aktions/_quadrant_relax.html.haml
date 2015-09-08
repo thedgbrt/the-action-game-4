@@ -15,6 +15,9 @@
   .large-6.medium-12.columns= f.input :breaths, as: :string, label: 'breaths'
   .large-6.medium-12.columns= f.input :other, as: :string, label: 'other'
 - elsif @aktion.status == 'finished'
+  .large-12.review-item
+    %span.bold Intensity: 
+    %span= aktion.intensity
   .large-6.columns.review-item= "#{Aktion.checkmark(@aktion.stop)} Stop"
   .large-6.columns.review-item= "#{Aktion.checkmark(@aktion.restroom)} Restroom"
   .large-6.columns.review-item= "#{Aktion.checkmark(@aktion.water)} Water"

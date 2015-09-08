@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150906134125) do
+ActiveRecord::Schema.define(version: 20150907233511) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,9 +126,10 @@ ActiveRecord::Schema.define(version: 20150906134125) do
     t.text     "description"
     t.string   "url"
     t.string   "logo_url"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.string   "short"
+    t.string   "default_color", default: "#FFFFFF"
   end
 
   create_table "users", force: :cascade do |t|

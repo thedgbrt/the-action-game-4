@@ -2,12 +2,14 @@
   = f.error_notification
 
   .form-inputs
-    = f.association :player
-    = f.association :team
-    = f.input :api_key
-    = f.input :external_id
-    = f.input :active
-    = f.input :admin
+    .large-4.medium-4.small-6.columns= f.association :player
+    .large-4.medium-4.small-6.columns= f.association :team
+    .large-4.medium-4.small-6.columns= f.input :color, collection: Team.colors
+    .large-4.medium-4.small-6.columns= f.input :api_key
+    .large-4.medium-4.small-6.columns= f.input :external_id, label: 'External ID'
+    .large-4.medium-4.small-6.columns= f.input :admin
+    .large-4.medium-4.small-6.columns= f.input :active
+    %hr
 
   .form-actions
     = f.button :submit
