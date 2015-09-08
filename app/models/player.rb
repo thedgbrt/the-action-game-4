@@ -33,6 +33,14 @@ class Player < ActiveRecord::Base
   has_many :role_assignments
   has_many :roles, through: :role_assignments
 
+  def my_teams(excluded=nil)
+    teams.sort_by{ |t| -actions_for_team(t).count } - [excluded]
+  end
+
+  def actions_for_team(tm)
+    Aktion.where(team_id: tm.id, player_id: id)
+  end
+
   def today
     "Today: #{todays_actions.count} Actions, " +
     "#{todays_breaths} Breaths, " +

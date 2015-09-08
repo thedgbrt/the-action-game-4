@@ -14,16 +14,15 @@
         / - current_player.planned_actions.each do |pa|
         /   %li.dropdown_item.light-red-text= link_to pa.seq + pa.summary, edit_aktion_path(pa, status: 'committing')
     %li
-      %a{"data-dropdown" => "hover2", "data-options" => "is_hover:true; hover_timeout:200", href: "#{team_path(current_team)}"}
-        .yellow-text= current_team.name
+      %a{"data-dropdown" => "hover2", "data-options" => "is_hover:true; hover_timeout:200", href: "#{teams_path}"}
+        = "All Teams"
       %ul#hover2.f-dropdown.tiny{"data-dropdown-content" => ""}
-        - (current_player.teams - [current_team]).each do |other_team|
-          %li.dropdown_item= link_to "=> #{other_team.name}", activate_team_path(other_team)
+        - current_player.my_teams.each do |team|
+          %li.dropdown_item= link_to "=> #{team.name}", activate_team_path(team), {style: "color: #{team.color(current_player)} !important;"}
         %hr
-        %li.dropdown_item= link_to 'All Teams', teams_path
-        %li.dropdown_item= link_to "Edit #{current_team.name}", edit_team_path(current_team)
-        %li.dropdown_item= link_to 'Team Roles', team_roles_path(team_id: current_team.id)
-        %li.dropdown_item= link_to 'Team Projects', team_projects_path(team_id: current_team.id)
+        / %li.dropdown_item= link_to "Edit #{current_team.name}", edit_team_path(current_team)
+        / %li.dropdown_item= link_to 'Team Roles', team_roles_path(team_id: current_team.id)
+        / %li.dropdown_item= link_to 'Team Projects', team_projects_path(team_id: current_team.id)
   - else
     %li.yellow-text= link_to 'Choose Your Team', teams_path
   %li
