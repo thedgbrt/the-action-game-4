@@ -18,7 +18,7 @@ class Player < ActiveRecord::Base
     end
   end
 
-  serialize :preferences, Hash, %w(current_team_id sound_choice)
+  serialize :preferences, Hash, %w(current_team_id sound_choice tick_volume warning_volume)
 
   enum role: [:user, :vip, :admin]
   after_initialize :set_default_role, :if => :new_record?
@@ -32,6 +32,17 @@ class Player < ActiveRecord::Base
   has_many :projects, through: :project_memberships
   has_many :role_assignments
   has_many :roles, through: :role_assignments
+
+  def in_action
+    a = Aktion.find_by(player_id: id, timeslot: Aktion.current_timeslot)
+    a.try(:id)
+  end
+
+  def self.time_data_hash
+    {
+      "data-current_action" => in_action ? 'true' : 'false'
+    }
+  end
 
   def my_teams(excluded=nil)
     teams.sort_by{ |t| -actions_for_team(t).count } - [excluded]
@@ -56,7 +67,8 @@ class Player < ActiveRecord::Base
   # end
 
   def persist_sound_choice(sound)
-    update_attributes(sound_choice: sound)
+    new_tick_volume = (sound == 'ticking' ? 30 : 0)
+    update_attributes(sound_choice: sound, tick_volume: new_tick_volume)
   end
 
   def previous_actions

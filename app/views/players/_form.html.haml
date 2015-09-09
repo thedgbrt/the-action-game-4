@@ -2,12 +2,15 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :name
-    = f.input :sound_choice, collection: Player.sound_choices
-    = f.input :role, collection: Player.roles.keys.map {|role| [role.titleize,role]}, label: 'TAG.com role'
-    = f.input :email
-    = f.input :fictional
-    = f.input :current_time_zone
+    .large-3.columns= f.input :name
+    .large-3.columns= f.input :sound_choice, collection: Player.sound_choices
+    .large-3.columns= f.input :tick_volume, collection: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    .large-3.columns= f.input :warning_volume, collection: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    .large-3.columns= f.input :role, collection: Player.roles.keys.map {|role| [role.titleize,role]}, label: 'TAG.com role'
+    .large-3.columns= f.input :email
+    .large-3.columns= f.input :fictional, as: :select
+    .large-3.columns= f.input :current_time_zone
+    %hr
 
   .form-actions
     = f.button :submit

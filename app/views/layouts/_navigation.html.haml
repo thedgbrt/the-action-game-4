@@ -1,8 +1,9 @@
 -# navigation styled for Zurb Foundation 5
 -# the syntax for data-topbar may need to change for Zurb Foundation 5
+- cp = current_player
 %nav.top-bar{"data-topbar" => true}
   %ul.title-area{"data-sound-choice" => "#{params[:sound_choice]}"}
-    %li#time
+    %li#time{"data-current_action" => cp ? (cp.in_action ? 'true' : 'false') : 'visitor', "data-tick_volume": cp.tick_volume, "data-warning_volume": cp.warning_volume}
     %li.toggle-topbar.menu-icon
       %a{:href => "#"}
         Menu
