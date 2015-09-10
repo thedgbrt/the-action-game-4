@@ -41718,59 +41718,38 @@ module.exports = warning;
 }).call(this);
 (function() {
   $(document).ready(function() {
-    var actionTime, padWithZero, playSounds, startTime, updateStatus;
+    var padWithZero, playSounds, startTime, to_1800, updateStatus;
     padWithZero = function(i) {
       if (i < 10) {
         i = '0' + i;
       }
       return i;
     };
-    actionTime = function() {
-      var ending, h, m, now;
-      now = new Date;
-      ending = new Date;
-      h = now.getHours();
-      m = now.getMinutes();
-      if (m < 25) {
-        ending.setHours(h);
-        ending.setMinutes(25);
-      } else if (m < 30) {
-        ending.setHours(h);
-        ending.setMinutes(30);
-      } else if (m < 55) {
-        ending.setHours(h);
-        ending.setMinutes(55);
-      } else {
-        ending.setHours(h + 1);
-        ending.setMinutes(0);
-      }
-      return ending;
-    };
-    updateStatus = function(m) {
+    updateStatus = function(seconds_up) {
       var current_action;
       current_action = document.getElementById('time').dataset.current_action;
-      if (m < 3 && !current_action) {
+      if (seconds_up < 3 * 60 && !current_action) {
         document.getElementById('time').classList.remove('focus', 'review', 'relax');
         document.getElementById('time').classList.add('commit');
         return 'commit';
-      } else if (m < 23 && !current_action) {
+      } else if (seconds_up < 23 * 60 && !current_action) {
         document.getElementById('time').classList.remove('commit', 'review', 'relax', 'focus');
         document.getElementById('time').classList.add('toolate');
         return 'toolate';
-      } else if (m < 23) {
+      } else if (seconds_up < 23 * 60) {
         document.getElementById('time').classList.remove('commit', 'review', 'relax');
         document.getElementById('time').classList.add('focus');
         return 'focus';
-      } else if (m < 25) {
+      } else if (seconds_up < 25 * 60) {
         document.getElementById('time').classList.remove('commit', 'focus', 'relax');
         document.getElementById('time').classList.add('review');
         return 'review';
-      } else if (m < 30) {
+      } else if (seconds_up < 30 * 60) {
         document.getElementById('time').classList.remove('commit', 'focus', 'review');
         document.getElementById('time').classList.add('relax');
         return 'relax';
       }
-      return 'toolate';
+      return 'something went wrong';
     };
     playSounds = function(status, m, s) {
       var bell, commit, tick, tick_volume, warning, warning_volume, whistle;
@@ -41798,28 +41777,28 @@ module.exports = warning;
         tick.play();
       }
     };
-    startTime = function() {
-      var adjusted_m, ending, m, now, s, status, t, time_delta;
+    to_1800 = function() {
+      var now, temp;
       now = new Date;
-      ending = actionTime();
-      time_delta = ending - now;
-      m = now.getMinutes();
-      if (m > 30) {
-        adjusted_m = m - 30;
+      temp = now.getMinutes() * 60 + now.getSeconds();
+      if (temp > 1800) {
+        return temp - 1800;
       } else {
-        adjusted_m = m;
+        return temp;
       }
-      status = updateStatus(adjusted_m);
-      if (ending.getMinutes() === 0) {
-        m = 59 - m;
-      } else {
-        m = ending.getMinutes() - m - 1;
-      }
-      s = 60 - now.getSeconds() - 1;
-      playSounds(status, m, s);
-      m = padWithZero(m);
-      s = padWithZero(s);
-      document.getElementById('time').innerHTML = m + ':' + s;
+    };
+    startTime = function() {
+      var actionSecDown, m_string, minDown, s_string, secDown, status, t, totalSecDown, totalSecUp;
+      totalSecUp = to_1800();
+      status = updateStatus(totalSecUp);
+      totalSecDown = 1800 - totalSecUp;
+      actionSecDown = totalSecDown - 300;
+      minDown = status === 'relax' ? Math.floor(totalSecDown / 60) : Math.floor(actionSecDown / 60);
+      secDown = totalSecDown % 60;
+      playSounds(status, minDown, secDown);
+      m_string = padWithZero(minDown);
+      s_string = padWithZero(secDown);
+      document.getElementById('time').innerHTML = m_string + ':' + s_string;
       return t = setTimeout((function() {
         startTime();
       }), 1000);
@@ -41906,7 +41885,18 @@ module.exports = warning;
 
 }).call(this);
 (function() {
-
+  $(document).ready(function() {
+    return $('#role-assignments-table').DataTable({
+      autoWidth: false,
+      searching: false,
+      order: [0, 'desc'],
+      pageLength: -1,
+      lengthMenu: [[10, 25, 50, -1], [10, 25, 50, 'All']],
+      language: {
+        lengthMenu: '_MENU_'
+      }
+    });
+  });
 
 }).call(this);
 (function() {

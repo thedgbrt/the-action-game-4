@@ -63,20 +63,18 @@ $(document).ready ->
     if temp > 1800 then temp - 1800 else temp
 
   startTime = ->
-    totalSecondsUp = to_1800()
-    status = updateStatus(totalSecondsUp)
+    totalSecUp = to_1800()
+    status = updateStatus(totalSecUp)
 
-    minutesUp = Math.floor(totalSecondsUp / 60)
-    secondsUp = totalSecondsUp % 60
-    minutesDown = 30 - minutesUp
-    secondsDown = 60 - secondsUp
+    totalSecDown = 1800 - totalSecUp
+    actionSecDown = totalSecDown - 300
+    minDown = if status == 'relax' then Math.floor(totalSecDown / 60) else Math.floor(actionSecDown / 60)
+    secDown = totalSecDown % 60
 
-    console.log 'totalSecondsUp', totalSecondsUp, 'minutesDown', minutesDown, 'secondsDown', secondsDown, 'status', status
+    playSounds(status, minDown, secDown)
 
-    playSounds(status, minutesDown, secondsDown)
-
-    m_string = padWithZero(minutesDown)
-    s_string = padWithZero(secondsDown)
+    m_string = padWithZero(minDown)
+    s_string = padWithZero(secDown)
     document.getElementById('time').innerHTML = m_string + ':' + s_string
     t = setTimeout((->
       startTime()
