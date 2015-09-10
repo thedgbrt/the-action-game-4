@@ -1,10 +1,12 @@
 - @role_assignments ||= []
 %h1 Listing Role Assignments
 
-%table
+%table#role-assignments-table.compact
   %thead
     %tr
-      %th Role
+      %th r.id
+      %th Role Name
+      %th Team
       %th Player
       %th Active
       %th Primary
@@ -15,14 +17,12 @@
   %tbody
     - @role_assignments.each do |role_assignment|
       %tr
-        %td= role_assignment.role.try(:name)
+        %td= role_assignment.role.id rescue 'n/a'
+        %td= link_to role_assignment.role.name, role_assignment.role rescue 'Role Missing'
+        %td= role_assignment.role.try(:team).try(:name)
         %td= role_assignment.player.try(:name)
         %td= role_assignment.active
         %td= role_assignment.primary
         %td= link_to 'Show', role_assignment
         %td= link_to 'Edit', edit_role_assignment_path(role_assignment)
         %td= link_to 'Destroy', role_assignment, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Role assignment', new_role_assignment_path
