@@ -9,7 +9,7 @@
     .large-10.columns= f.association :role, collection: old_collection, prompt: 'In which role?', label: false, include_blank: true
     .large-2.columns#add-role= link_to '+role', new_role_path(team_id: @aktion.team, and_fill: true), remote: true
   #project
-    .large-10.columns= f.association :project, collection: (@aktion.team).projects.sort_by{|p|p.name}, prompt: 'For what project?', label: false, include_blank: true
+    .large-10.columns= f.association :project, collection: current_player.projects.sort_by{|p|p.name}, prompt: 'For what project?', label: false, include_blank: true
     .large-2.columns#add-project= link_to '+proj', new_project_path(team_id: @aktion.team, active: true, commitment: true), remote: true
   .large-3.medium-3.columns.commit-button= f.button :submit, "GO"
   / .large-12= f.association :location
