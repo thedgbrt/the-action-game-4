@@ -43,8 +43,8 @@ $(document).ready ->
       return 'relax'
 
   playSounds = (status, m, s) ->
-    tick_volume = document.getElementById('time').dataset.tick_volume
-    warning_volume = document.getElementById('time').dataset.warning_volume
+    tick_volume = Number(document.getElementById('time').dataset.tick_volume) || 0
+    warning_volume = Number(document.getElementById('time').dataset.warning_volume) || 0
 
     commit = new Audio("<%= asset_path('commit.wav') %>")
     tick = new Audio("<%= asset_path('tick.wav') %>")
