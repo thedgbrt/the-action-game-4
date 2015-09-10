@@ -17,7 +17,7 @@ class AktionsController < ApplicationController
 
   def new
     @aktion = @current_player.aktions.new
-    @aktion.team_id = params[:team_id] || current_team.id
+    @aktion.team_id = params[:team_id]
     @aktion.intensity = 4
     @aktion.timeslot = params[:timeslot] || Aktion.current_timeslot
     @aktion.time_zone = @current_player.current_time_zone
@@ -30,7 +30,6 @@ class AktionsController < ApplicationController
     end
     if params[:previous_aktion_id]
       @old = Aktion.find_by_id(params[:previous_aktion_id])
-      @current_team = @old.team
       @aktion.team = @old.team
       @aktion.verb = @old.verb
       @aktion.role = @old.role
@@ -40,13 +39,11 @@ class AktionsController < ApplicationController
   end
 
   def edit
-    @aktion.team_id = current_team.id unless @aktion.team_id
     @aktion.planned_date = Time.zone.now.to_date if @aktion.planned && !@aktion.planned_date
   end
 
   def create
     @aktion = Aktion.new(aktion_params)
-    @aktion.team_id = current_team.id
     @aktion.status = :attempting
     respond_to do |format|
       if @aktion.save
@@ -99,6 +96,6 @@ class AktionsController < ApplicationController
     end
 
     def aktion_form
-      edit_team_aktion_path(@aktion, team_id: current_team.id)
+      edit_aktion_path(@aktion)
     end
 end

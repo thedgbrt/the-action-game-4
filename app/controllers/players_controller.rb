@@ -7,7 +7,6 @@ class PlayersController < ApplicationController
   end
 
   def show
-    @current_team ||= current_team
   end
 
   def edit

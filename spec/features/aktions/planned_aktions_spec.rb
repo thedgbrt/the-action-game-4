@@ -11,14 +11,14 @@ feature 'Aktion planning' do
   #   Then I see status 'planned'
   #   And I see timeslot
   scenario 'I can create a Planned Aktion' do
-    visit root_path
-    signin
-    p = Player.first
-
-    t = FactoryGirl.create(:team)
-    p.teams = [t]
-    expect(p.teams.count).to eq(1)
-    p.update_attributes(current_team_id: t.id)
+    # visit root_path
+    # signin
+    # p = Player.first
+    #
+    # t = FactoryGirl.create(:team)
+    # p.teams = [t]
+    # expect(p.teams.count).to eq(1)
+    # p.update_attributes(current_team_id: t.id)
   end
 
 

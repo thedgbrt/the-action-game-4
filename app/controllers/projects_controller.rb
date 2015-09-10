@@ -20,7 +20,7 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
-    @project.team_id = params[:team_id] || current_team.id unless @project.team_id
+    @project.team_id = params[:team_id] unless @project.team_id
     @project.active = params[:active] if @project.active.nil?
     @project.commitment = params[:commitment] if @project.commitment.nil?
 
@@ -67,7 +67,7 @@ class ProjectsController < ApplicationController
     end
 
     def set_team
-      @team = Team.find_by_id(params[:team_id]) || current_team      
+      @team = Team.find_by_id(params[:team_id])
     end
 
     def project_params

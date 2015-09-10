@@ -34,7 +34,6 @@ class TeamsController < ApplicationController
   def update
     respond_to do |format|
       if @team.update(team_params)
-        @current_team = @team
         format.html { redirect_to edit_team_path(@team), notice: 'Team was successfully updated.' }
         format.json { render :show, status: :ok, location: @team }
       else
@@ -53,15 +52,13 @@ class TeamsController < ApplicationController
   end
 
   def activate
-    @current_team = Team.find_by_id(params[:id])
-    current_player.update_attributes(current_team_id: @current_team.id)
-    redirect_to new_team_aktion_path(current_team)
+    current_player.update_attributes(current_team_id: params[:id])
+    redirect_to new_team_aktion_path(team_id: params[:id])
   end
 
   def join
     raise 'No current player' unless current_player
     msg = @team.add(current_player)
-    @current_team = @team
     current_player.update_attributes(current_team_id: @team.id)
     redirect_to back_or_home, msg
   end

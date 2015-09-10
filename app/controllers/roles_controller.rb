@@ -3,7 +3,7 @@ class RolesController < ApplicationController
   before_action :set_team, except: [:show, :edit, :update, :destroy]
 
   def index
-    @roles = params[:team_id] ? current_team.roles : current_player.roles
+    @roles = params[:team_id] ? Team.find_by_id(params[:team_id]).roles : current_player.roles
   end
 
   def show
@@ -22,7 +22,7 @@ class RolesController < ApplicationController
       @role.short = @role.name
     end
 
-    @role.team_id = params[:team_id] || current_team.id unless @role.team_id
+    @role.team_id = params[:team_id] unless @role.team_id
 
     if @role.save
       RoleAssignment.create!(role_id: @role.id, player_id: current_player.id)
@@ -30,22 +30,12 @@ class RolesController < ApplicationController
     else
       render json: @role.errors, status: :unprocessable_entity
     end
-
-    # respond_to do |format|
-    #   if @role.save
-    #     format.html { redirect_to current_team, notice: 'Role was successfully created.' }
-    #     format.json { render :show, status: :created, location: @role }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @role.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   def update
     respond_to do |format|
       if @role.update(role_params)
-        format.html { redirect_to current_team, notice: 'Role was successfully updated.' }
+        format.html { redirect_to roles_path, notice: 'Role was successfully updated.' }
         format.json { render :show, status: :ok, location: @role }
       else
         format.html { render :edit }
@@ -68,7 +58,7 @@ class RolesController < ApplicationController
     end
 
     def set_team
-      @team = Team.find_by_id(params[:team_id]) || current_team
+      @team = Team.find_by_id(params[:team_id])
     end
 
     def role_params

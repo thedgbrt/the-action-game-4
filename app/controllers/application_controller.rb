@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_player
   helper_method :player_signed_in?
-  helper_method :current_team
   helper_method :team_selected?
   helper_method :correct_player?
   helper_method :back_or_home
@@ -40,16 +39,6 @@ class ApplicationController < ActionController::Base
 
     def current_team
       @current_team ||= Team.find_by_id(current_player.current_team_id)
-    end
-
-    def team_selected?
-      return true if current_player && current_team
-    end
-
-    def select_team!
-      if !current_team
-        redirect_to teams_url, alert: 'Team required.  Please join or create one.'
-      end
     end
 
     def authenticate_player!
