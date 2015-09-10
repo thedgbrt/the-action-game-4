@@ -46,11 +46,11 @@ $(document).ready ->
     tick_volume = document.getElementById('time').dataset.tick_volume
     warning_volume = document.getElementById('time').dataset.warning_volume
 
-    commit = new Audio("<%= asset_path('commit.wav') %>")
-    tick = new Audio("<%= asset_path('tick.wav') %>")
-    warning = new Audio("<%= asset_path('warning.wav') %>")
-    bell = new Audio("<%= asset_path('bell.wav') %>")
-    whistle = new Audio("<%= asset_path('whistle.wav') %>")
+    commit = new Audio("url(<%= asset_path('commit.wav') %>)")
+    tick = new Audio("url(<%= asset_path('tick.wav') %>)")
+    warning = new Audio("url(<%= asset_path('warning.wav') %>)")
+    bell = new Audio("url(<%= asset_path('bell.wav') %>)")
+    whistle = new Audio("url(<%= asset_path('whistle.wav') %>)")
 
     tick.volume = tick_volume / 100
     commit.volume = tick_volume / 100
