@@ -41753,6 +41753,10 @@ module.exports = warning;
         document.getElementById('time').classList.remove('focus', 'review', 'relax');
         document.getElementById('time').classList.add('commit');
         return 'commit';
+      } else if (m < 23 && !current_action) {
+        document.getElementById('time').classList.remove('commit', 'review', 'relax', 'focus');
+        document.getElementById('time').classList.add('toolate');
+        return 'toolate';
       } else if (m < 23) {
         document.getElementById('time').classList.remove('commit', 'review', 'relax');
         document.getElementById('time').classList.add('focus');
@@ -41766,6 +41770,7 @@ module.exports = warning;
         document.getElementById('time').classList.add('relax');
         return 'relax';
       }
+      return 'toolate';
     };
     playSounds = function(status, m, s) {
       var bell, commit, tick, tick_volume, warning, warning_volume, whistle;
@@ -41794,14 +41799,17 @@ module.exports = warning;
       }
     };
     startTime = function() {
-      var ending, m, now, ref, s, status, t, time_delta;
+      var adjusted_m, ending, m, now, s, status, t, time_delta;
       now = new Date;
       ending = actionTime();
       time_delta = ending - now;
       m = now.getMinutes();
-      status = updateStatus((ref = m < 30) != null ? ref : {
-        m: m - 30
-      });
+      if (m > 30) {
+        adjusted_m = m - 30;
+      } else {
+        adjusted_m = m;
+      }
+      status = updateStatus(adjusted_m);
       if (ending.getMinutes() === 0) {
         m = 59 - m;
       } else {
