@@ -41753,6 +41753,10 @@ module.exports = warning;
         document.getElementById('time').classList.remove('focus', 'review', 'relax');
         document.getElementById('time').classList.add('commit');
         return 'commit';
+      } else if (m < 23 && !current_action) {
+        document.getElementById('time').classList.remove('commit', 'review', 'relax', 'focus');
+        document.getElementById('time').classList.add('toolate');
+        return 'toolate';
       } else if (m < 23) {
         document.getElementById('time').classList.remove('commit', 'review', 'relax');
         document.getElementById('time').classList.add('focus');
@@ -41766,12 +41770,12 @@ module.exports = warning;
         document.getElementById('time').classList.add('relax');
         return 'relax';
       }
+      return 'toolate';
     };
     playSounds = function(status, m, s) {
       var bell, commit, tick, tick_volume, warning, warning_volume, whistle;
       tick_volume = Number(document.getElementById('time').dataset.tick_volume) || 0;
       warning_volume = Number(document.getElementById('time').dataset.warning_volume) || 0;
-      console.log('tick/warning volumes are', tick_volume, warning_volume);
       commit = new Audio("/assets/commit-7a8fbb07856a8d4cad8824fd864e3abbf6f6a2dcbc075da2717f1ac1d89fcb25.wav");
       tick = new Audio("/assets/tick-422bb2b92072cf8ecb77fda83e70d27bdcb7fa8cee33415ef66985a8cc14dde2.wav");
       warning = new Audio("/assets/warning-3436c5b74df24045d5e2252b72e24e17d648e40497d2d5c812b749d0e0ed7860.wav");
@@ -41782,7 +41786,6 @@ module.exports = warning;
       warning.volume = warning_volume / 100;
       bell.volume = warning_volume / 100;
       whistle.volume = warning_volume / 100;
-      console.log('Playing sounds with', status, m, s);
       if (s === 0 && m === 2 && status !== 'relax') {
         warning.play();
       } else if (s === 0 && m === 0 && status !== 'relax') {
@@ -41796,24 +41799,22 @@ module.exports = warning;
       }
     };
     startTime = function() {
-      var ending, m, now, ref, s, status, t, time_delta;
+      var ending, m, m_left, m_string, now, s_left, s_string, status, t, time_delta;
       now = new Date;
       ending = actionTime();
       time_delta = ending - now;
       m = now.getMinutes();
-      status = updateStatus((ref = m < 30) != null ? ref : {
-        m: m - 30
-      });
       if (ending.getMinutes() === 0) {
-        m = 59 - m;
+        m_left = 59 - m;
       } else {
-        m = ending.getMinutes() - m - 1;
+        m_left = ending.getMinutes() - m - 1;
       }
-      s = 60 - now.getSeconds() - 1;
-      playSounds(status, m, s);
-      m = padWithZero(m);
-      s = padWithZero(s);
-      document.getElementById('time').innerHTML = m + ':' + s;
+      s_left = 60 - now.getSeconds() - 1;
+      status = updateStatus(m_left);
+      playSounds(status, m_left, s_left);
+      m_string = padWithZero(m_left);
+      s_string = padWithZero(s_left);
+      document.getElementById('time').innerHTML = m_string + ':' + s_string;
       return t = setTimeout((function() {
         startTime();
       }), 1000);

@@ -81,20 +81,19 @@ $(document).ready ->
     ending = actionTime()
     time_delta = ending - now
     m = now.getMinutes()
-    if m > 30
-      adjusted_m = m - 30
-    else
-      adjusted_m = m
-    status = updateStatus adjusted_m
+
     if ending.getMinutes() == 0
-      m = 59 - m
+      m_left = 59 - m
     else
-      m = ending.getMinutes() - m - 1
-    s = 60 - now.getSeconds() - 1
-    playSounds(status, m, s)
-    m = padWithZero(m)
-    s = padWithZero(s)
-    document.getElementById('time').innerHTML = m + ':' + s
+      m_left = ending.getMinutes() - m - 1
+    s_left = 60 - now.getSeconds() - 1
+
+    status = updateStatus m_left
+
+    playSounds(status, m_left, s_left)
+    m_string = padWithZero(m_left)
+    s_string = padWithZero(s_left)
+    document.getElementById('time').innerHTML = m_string + ':' + s_string
     t = setTimeout((->
       startTime()
       return

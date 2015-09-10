@@ -6,3 +6,10 @@
 = render 'analyze', aktions: @todays_actions
 
 = render 'aktions', aktions: @aktions
+
+%hr
+%h2= "#{@aktions.count} Detailed #{I18n.t 'Aktions'}"
+
+.detailed-actions-container
+  - @aktions.by_timeslot.each do |action|
+    = render 'detailed_action', action: action

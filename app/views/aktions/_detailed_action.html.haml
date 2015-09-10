@@ -1,0 +1,12 @@
+.large-4.medium-6.small-12.detailed-action.columns{style: "background-color: #{action.color}"}
+  %strong= link_to action.summary_with_time_and_focus, edit_aktion_path(action, edit: true)
+  .large-12.review-item
+    %span.bold Status:
+    %span= action.status_full
+  .large-12.review-item
+    %span.bold= "Flow #{action.flow_str}:"
+    %span= "#{action.flow_notes}"
+  .large-12.review-item
+    %span.bold= "Value #{action.value_str}:"
+    %span= "#{action.value_notes}"
+
