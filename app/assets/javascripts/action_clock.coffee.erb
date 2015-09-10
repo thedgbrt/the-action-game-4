@@ -79,16 +79,17 @@ $(document).ready ->
   startTime = ->
     now = new Date
     ending = actionTime()
-    time_delta = ending - now
-    m = now.getMinutes()
+    m_60 = now.getMinutes()
 
     if ending.getMinutes() == 0
-      m_left = 59 - m
+      m_left = 59 - m_60
+      m_30 = m_60 - 30
     else
-      m_left = ending.getMinutes() - m - 1
+      m_left = ending.getMinutes() - m_60 - 1
+      m_30 = m_60
     s_left = 60 - now.getSeconds() - 1
 
-    status = updateStatus m_left
+    status = updateStatus m_30
 
     playSounds(status, m_left, s_left)
     m_string = padWithZero(m_left)

@@ -41749,6 +41749,7 @@ module.exports = warning;
     updateStatus = function(m) {
       var current_action;
       current_action = document.getElementById('time').dataset.current_action;
+      console.log('m', m);
       if (m < 3 && !current_action) {
         document.getElementById('time').classList.remove('focus', 'review', 'relax');
         document.getElementById('time').classList.add('commit');
@@ -41770,6 +41771,7 @@ module.exports = warning;
         document.getElementById('time').classList.add('relax');
         return 'relax';
       }
+      return 'toolate';
     };
     playSounds = function(status, m, s) {
       var bell, commit, tick, tick_volume, warning, warning_volume, whistle;
@@ -41798,25 +41800,23 @@ module.exports = warning;
       }
     };
     startTime = function() {
-      var ending, m, now, s, status, t, time_delta;
+      var ending, m_30, m_60, m_left, m_string, now, s_left, s_string, status, t;
       now = new Date;
       ending = actionTime();
-      time_delta = ending - now;
-      m = now.getMinutes();
-      if (m > 30) {
-        m = m - 30;
-      }
-      status = updateStatus(m);
+      m_60 = now.getMinutes();
       if (ending.getMinutes() === 0) {
-        m = 59 - m;
+        m_left = 59 - m_60;
+        m_30 = m_60 - 30;
       } else {
-        m = ending.getMinutes() - m - 1;
+        m_left = ending.getMinutes() - m_60 - 1;
+        m_30 = m_60;
       }
-      s = 60 - now.getSeconds() - 1;
-      playSounds(status, m, s);
-      m = padWithZero(m);
-      s = padWithZero(s);
-      document.getElementById('time').innerHTML = m + ':' + s;
+      s_left = 60 - now.getSeconds() - 1;
+      status = updateStatus(m_30);
+      playSounds(status, m_left, s_left);
+      m_string = padWithZero(m_left);
+      s_string = padWithZero(s_left);
+      document.getElementById('time').innerHTML = m_string + ':' + s_string;
       return t = setTimeout((function() {
         startTime();
       }), 1000);
