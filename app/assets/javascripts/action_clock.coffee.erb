@@ -46,19 +46,11 @@ $(document).ready ->
     tick_volume = document.getElementById('time').dataset.tick_volume
     warning_volume = document.getElementById('time').dataset.warning_volume
 
-    <% if Rails.env.development? %>
-    commit = new Audio("/assets/commit.wav")
-    tick = new Audio("/assets/tick.wav")
-    warning = new Audio("/assets/warning.wav")
-    bell = new Audio("/assets/bell.wav")
-    whistle = new Audio("/assets/whistle.wav")
-    <% else %>
     commit = new Audio("/audios/commit.wav")
     tick = new Audio("/audios/tick.wav")
     warning = new Audio("/audios/warning.wav")
     bell = new Audio("/audios/bell.wav")
     whistle = new Audio("/audios/whistle.wav")
-    <% end %>
 
     tick.volume = commit.volume = tick_volume / 100
     warning.volume = bell.volume = whistle.volume = warning_volume / 100
