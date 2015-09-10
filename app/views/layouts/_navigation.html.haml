@@ -3,7 +3,7 @@
 - cp = current_player
 %nav.top-bar{"data-topbar" => true}
   %ul.title-area{"data-sound-choice" => "#{params[:sound_choice]}"}
-    %li#time{"data-current_action" => cp ? (cp.in_action ? 'true' : 'false') : 'visitor', "data-tick_volume": cp.tick_volume, "data-warning_volume": cp.warning_volume}
+    %li#time{"data-current_action" => cp ? (cp.in_action ? 'true' : 'false') : 'visitor', "data-tick_volume": cp.tick_volume || 30, "data-warning_volume": cp.warning_volume || 70}
     %li.toggle-topbar.menu-icon
       %a{:href => "#"}
         Menu
