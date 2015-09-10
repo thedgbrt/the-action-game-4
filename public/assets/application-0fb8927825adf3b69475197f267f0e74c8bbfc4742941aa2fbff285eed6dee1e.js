@@ -41753,6 +41753,10 @@ module.exports = warning;
         document.getElementById('time').classList.remove('focus', 'review', 'relax');
         document.getElementById('time').classList.add('commit');
         return 'commit';
+      } else if (m < 23 && !current_action) {
+        document.getElementById('time').classList.remove('commit', 'review', 'relax', 'focus');
+        document.getElementById('time').classList.add('toolate');
+        return 'toolate';
       } else if (m < 23) {
         document.getElementById('time').classList.remove('commit', 'review', 'relax');
         document.getElementById('time').classList.add('focus');
@@ -41769,16 +41773,18 @@ module.exports = warning;
     };
     playSounds = function(status, m, s) {
       var bell, commit, tick, tick_volume, warning, warning_volume, whistle;
-      tick_volume = document.getElementById('time').dataset.tick_volume;
-      warning_volume = document.getElementById('time').dataset.warning_volume;
+      tick_volume = Number(document.getElementById('time').dataset.tick_volume) || 0;
+      warning_volume = Number(document.getElementById('time').dataset.warning_volume) || 0;
       commit = new Audio("/assets/commit-7a8fbb07856a8d4cad8824fd864e3abbf6f6a2dcbc075da2717f1ac1d89fcb25.wav");
-      console.log('loaded commit', commit);
       tick = new Audio("/assets/tick-422bb2b92072cf8ecb77fda83e70d27bdcb7fa8cee33415ef66985a8cc14dde2.wav");
       warning = new Audio("/assets/warning-3436c5b74df24045d5e2252b72e24e17d648e40497d2d5c812b749d0e0ed7860.wav");
       bell = new Audio("/assets/bell-b0c60370bedcc27c1244a5de9670faebc2fbd11c9a512c3276768b0eed0f08c3.wav");
       whistle = new Audio("/assets/whistle-4c4ee0fa77246ebc8601fbfe23ad3d986997a3cc05b45724957a576fd1c5cb62.wav");
-      tick.volume = commit.volume = tick_volume / 100;
-      warning.volume = bell.volume = whistle.volume = warning_volume / 100;
+      commit.volume = tick_volume / 100;
+      tick.volume = tick_volume / 100;
+      warning.volume = warning_volume / 100;
+      bell.volume = warning_volume / 100;
+      whistle.volume = warning_volume / 100;
       if (s === 0 && m === 2 && status !== 'relax') {
         warning.play();
       } else if (s === 0 && m === 0 && status !== 'relax') {
@@ -41792,14 +41798,15 @@ module.exports = warning;
       }
     };
     startTime = function() {
-      var ending, m, now, ref, s, status, t, time_delta;
+      var ending, m, now, s, status, t, time_delta;
       now = new Date;
       ending = actionTime();
       time_delta = ending - now;
       m = now.getMinutes();
-      status = updateStatus((ref = m < 30) != null ? ref : {
-        m: m - 30
-      });
+      if (m > 30) {
+        m = m - 30;
+      }
+      status = updateStatus(m);
       if (ending.getMinutes() === 0) {
         m = 59 - m;
       } else {

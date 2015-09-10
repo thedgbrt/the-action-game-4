@@ -33,7 +33,7 @@ class Player < ActiveRecord::Base
   has_many :role_assignments
   has_many :roles, through: :role_assignments
 
-  def in_action
+  def current_action
     a = Aktion.find_by(player_id: id, timeslot: Aktion.current_timeslot)
     a.try(:id)
   end
