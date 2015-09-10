@@ -94,7 +94,7 @@ class Player < ActiveRecord::Base
   end
 
   def active_roles(team)
-    roles.to_set.intersection(team.roles.to_set)
+    roles.to_set.intersection(team.roles.to_set) rescue []
   end
 
   def has_role(role)
