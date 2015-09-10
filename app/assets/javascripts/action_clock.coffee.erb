@@ -47,6 +47,8 @@ $(document).ready ->
     warning_volume = document.getElementById('time').dataset.warning_volume
 
     commit = new Audio("<%= asset_path('commit.wav') %>")
+    console.log 'loaded commit', commit
+
     tick = new Audio("<%= asset_path('tick.wav') %>")
     warning = new Audio("<%= asset_path('warning.wav') %>")
     bell = new Audio("<%= asset_path('bell.wav') %>")
