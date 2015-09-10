@@ -46,16 +46,16 @@ $(document).ready ->
     tick_volume = document.getElementById('time').dataset.tick_volume
     warning_volume = document.getElementById('time').dataset.warning_volume
 
-    commit = new Audio("/audios/commit.wav")
-    tick = new Audio("/audios/tick.wav")
-    warning = new Audio("/audios/warning.wav")
-    bell = new Audio("/audios/bell.wav")
-    whistle = new Audio("/audios/whistle.wav")
+    commit = new Audio("<%= asset_path('commit.wav') %>")
+    tick = new Audio("<%= asset_path('tick.wav') %>")
+    warning = new Audio("<%= asset_path('warning.wav') %>")
+    bell = new Audio("<%= asset_path('bell.wav') %>")
+    whistle = new Audio("<%= asset_path('whistle.wav') %>")
 
     tick.volume = commit.volume = tick_volume / 100
     warning.volume = bell.volume = whistle.volume = warning_volume / 100
 
-    console.log 'Playing sounds with', status, m, s, tick_volume, warning_volume
+    # console.log 'Playing sounds with', status, m, s, tick_volume, warning_volume
     if s == 0 && m == 2 && status != 'relax'
       warning.play()
     else if s == 0 && m == 0 && status != 'relax'
