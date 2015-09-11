@@ -93,7 +93,8 @@ class Player < ActiveRecord::Base
     todays_actions.map{ |a| a.pushups.to_i}.compact.sum
   end
 
-  def active_roles(team)
+  def active_roles(team=nil)
+    return roles if team == nil
     roles.to_set.intersection(team.roles.to_set) rescue []
   end
 

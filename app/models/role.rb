@@ -10,7 +10,7 @@ class Role < ActiveRecord::Base
     roles = tm ? tm.roles : Role.all
     teams_hash = {}
     roles.each do |r|
-      prev = teams_hash[r.team_id.to_s] || ''
+      prev = teams_hash[r.team_id.to_s] || "<option value>In which role?</option>\n<option value></option>"
       teams_hash[r.team_id.to_s] = prev + "\n<option value='#{r.id.to_s}'>#{r.name}</option>"
     end
     teams_hash.to_json
