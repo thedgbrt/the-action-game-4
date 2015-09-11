@@ -92,7 +92,7 @@ class AktionsController < ApplicationController
       params.require(:aktion).permit(:timeslot, :focus, :player_id, :verb_id, :project_id, :flow, :flow_notes, :value,
         :value_notes, :visible_to, :status, :intensity, :how_it_went, :time_zone, :location_id, :role_id, :properties,
         :team_id, :water, :breaths, :pushups, :choice, :snack, :tidy, :stop, :restroom, :stretch, :games, :friends,
-        :other, :music, :planned_date, :planned_sequence_number, :planned)
+        :other, :music, :change, :planned_date, :planned_sequence_number, :planned)
     end
 
     def aktion_form

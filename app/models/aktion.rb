@@ -16,7 +16,7 @@ class Aktion < ActiveRecord::Base
       "
     end
   end
-  serialize :properties, Hash, %w(choice pushups situps breaths water snack tidy stop restroom stretch games friends other music)
+  serialize :properties, Hash, %w(choice pushups situps breaths water snack tidy stop restroom stretch games friends other music change)
   enum status: [:committing, :attempting, :reviewed, :finished, :planned]
 
   belongs_to :player
