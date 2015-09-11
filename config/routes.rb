@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :insights
   resources :aktions do
     collection { get :continue }
   end

@@ -1,0 +1,11 @@
+= simple_form_for(@insight) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :text
+    = f.input :category
+    = f.input :player_id
+    = f.input :aktion_id
+
+  .form-actions
+    = f.button :submit

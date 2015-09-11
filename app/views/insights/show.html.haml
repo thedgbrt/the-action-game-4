@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Text:
+  = @insight.text
+%p
+  %b Category:
+  = @insight.category
+%p
+  %b Player:
+  = @insight.player_id
+%p
+  %b Aktion:
+  = @insight.aktion_id
+
+= link_to 'Edit', edit_insight_path(@insight)
+\|
+= link_to 'Back', insights_path

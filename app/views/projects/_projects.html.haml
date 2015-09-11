@@ -1,8 +1,8 @@
 %h5
   Projects
-  if team
+  - if team
     = link_to "(New for #{team.name})", new_team_project_path(team)
-  else
+  - else
     = link_to "(New)", new_project_path
 
 %table#projects-table.compact
@@ -10,11 +10,11 @@
     %th
     %th Tm
     %th Name
-    %th Created
     %th Active
     %th Commitment
     %th Actions
-    %th Last Updated
+    %th Created
+    %th Updated
     %th Description
   %tbody
     = render projects

@@ -41767,7 +41767,7 @@ module.exports = warning;
       whistle.volume = warning_volume / 100;
       if (s === 0 && m === 2 && status !== 'relax') {
         warning.play();
-      } else if (s === 0 && m === 0 && status !== 'relax') {
+      } else if (s === 0 && m === 0) {
         bell.play();
       } else if (s === 30 && m === 0 && status === 'relax') {
         whistle.play();
@@ -41788,17 +41788,16 @@ module.exports = warning;
       }
     };
     startTime = function() {
-      var m_string, minutesDown, minutesUp, s_string, secondsDown, secondsUp, status, t, totalSecondsUp;
-      totalSecondsUp = to_1800();
-      status = updateStatus(totalSecondsUp);
-      minutesUp = Math.floor(totalSecondsUp / 60);
-      secondsUp = totalSecondsUp % 60;
-      minutesDown = 30 - minutesUp;
-      secondsDown = 60 - secondsUp;
-      console.log('totalSecondsUp', totalSecondsUp, 'minutesDown', minutesDown, 'secondsDown', secondsDown, 'status', status);
-      playSounds(status, minutesDown, secondsDown);
-      m_string = padWithZero(minutesDown);
-      s_string = padWithZero(secondsDown);
+      var actionSecDown, m_string, minDown, s_string, secDown, status, t, totalSecDown, totalSecUp;
+      totalSecUp = to_1800();
+      status = updateStatus(totalSecUp);
+      totalSecDown = 1800 - totalSecUp;
+      actionSecDown = totalSecDown - 300;
+      minDown = status === 'relax' ? Math.floor(totalSecDown / 60) : Math.floor(actionSecDown / 60);
+      secDown = totalSecDown % 60;
+      playSounds(status, minDown, secDown);
+      m_string = padWithZero(minDown);
+      s_string = padWithZero(secDown);
       document.getElementById('time').innerHTML = m_string + ':' + s_string;
       return t = setTimeout((function() {
         startTime();
@@ -41823,22 +41822,24 @@ module.exports = warning;
     return $('#aktion_team_id').change(function() {
       var projects, roles, val;
       val = $('#aktion_team_id').val();
+      console.log('val', val);
       roles = {
-        "54": "\n\u003coption value='25'\u003eFearless Leader\u003c/option\u003e\n\u003coption value='26'\u003eDirector of Finance\u003c/option\u003e\n\u003coption value='28'\u003eLifelong Student\u003c/option\u003e\n\u003coption value='29'\u003eCourt Jester\u003c/option\u003e\n\u003coption value='27'\u003eExecutive Assistant\u003c/option\u003e\n\u003coption value='31'\u003eFamily Guy\u003c/option\u003e\n\u003coption value='66'\u003ePrecocious Reader\u003c/option\u003e",
-        "": "\n\u003coption value='32'\u003eLove Bug\u003c/option\u003e",
-        "55": "\n\u003coption value='36'\u003eGlassFrog\u003c/option\u003e\n\u003coption value='38'\u003eService Delivery\u003c/option\u003e\n\u003coption value='47'\u003eH1 Partner\u003c/option\u003e\n\u003coption value='57'\u003ePartner Transitions\u003c/option\u003e\n\u003coption value='58'\u003eProductivity Champion\u003c/option\u003e\n\u003coption value='52'\u003eBilling Admin\u003c/option\u003e\n\u003coption value='53'\u003eCommunity Connector\u003c/option\u003e\n\u003coption value='37'\u003eCustomer Support\u003c/option\u003e\n\u003coption value='40'\u003eFeature Developer\u003c/option\u003e\n\u003coption value='39'\u003eHygean Setup\u003c/option\u003e\n\u003coption value='55'\u003ePartner Convener\u003c/option\u003e\n\u003coption value='56'\u003ePartner Prospector\u003c/option\u003e\n\u003coption value='59'\u003eProductivity Coach\u003c/option\u003e\n\u003coption value='60'\u003eSecretary\u003c/option\u003e\n\u003coption value='61'\u003eTechnical Screener\u003c/option\u003e\n\u003coption value='62'\u003eTester\u003c/option\u003e\n\u003coption value='63'\u003eTranslator\u003c/option\u003e\n\u003coption value='64'\u003eVideo Creator\u003c/option\u003e\n\u003coption value='65'\u003eWriter\u003c/option\u003e",
-        "56": "\n\u003coption value='41'\u003eTechnology\u003c/option\u003e\n\u003coption value='30'\u003eDeveloper\u003c/option\u003e\n\u003coption value='42'\u003eResearch \u0026 Development\u003c/option\u003e\n\u003coption value='35'\u003eCoach\u003c/option\u003e\n\u003coption value='43'\u003eMarketing\u003c/option\u003e\n\u003coption value='44'\u003eDesigner\u003c/option\u003e\n\u003coption value='45'\u003eProduct Manager\u003c/option\u003e\n\u003coption value='46'\u003eTester\u003c/option\u003e\n\u003coption value='54'\u003eInternal Tool Developer\u003c/option\u003e\n\u003coption value='70'\u003eAthlete\u003c/option\u003e",
-        "58": "\n\u003coption value='48'\u003eRomantic Partner\u003c/option\u003e",
-        "60": "\n\u003coption value='49'\u003eTeal Leader\u003c/option\u003e",
-        "59": "\n\u003coption value='51'\u003eClubhouse Lead Link\u003c/option\u003e",
-        "61": "\n\u003coption value='67'\u003eAccountability Writer\u003c/option\u003e\n\u003coption value='68'\u003eAccountability Reader\u003c/option\u003e\n\u003coption value='69'\u003ePhysical Health Guide\u003c/option\u003e\n\u003coption value='71'\u003eTBG Operations Manager\u003c/option\u003e\n\u003coption value='72'\u003eWork-Mindscape Housecleaning\u003c/option\u003e"
+        "54": "\u003coption value\u003eIn which role?\u003c/option\u003e\n\u003coption value\u003e\u003c/option\u003e\n\u003coption value='25'\u003eFearless Leader\u003c/option\u003e\n\u003coption value='26'\u003eDirector of Finance\u003c/option\u003e\n\u003coption value='28'\u003eLifelong Student\u003c/option\u003e\n\u003coption value='29'\u003eCourt Jester\u003c/option\u003e\n\u003coption value='27'\u003eExecutive Assistant\u003c/option\u003e\n\u003coption value='31'\u003eFamily Guy\u003c/option\u003e\n\u003coption value='66'\u003ePrecocious Reader\u003c/option\u003e\n\u003coption value='75'\u003eCOO/Planner\u003c/option\u003e\n\u003coption value='76'\u003eFriend\u003c/option\u003e",
+        "": "\u003coption value\u003eIn which role?\u003c/option\u003e\n\u003coption value\u003e\u003c/option\u003e\n\u003coption value='32'\u003eLove Bug\u003c/option\u003e",
+        "55": "\u003coption value\u003eIn which role?\u003c/option\u003e\n\u003coption value\u003e\u003c/option\u003e\n\u003coption value='36'\u003eGlassFrog\u003c/option\u003e\n\u003coption value='38'\u003eService Delivery\u003c/option\u003e\n\u003coption value='47'\u003eH1 Partner\u003c/option\u003e\n\u003coption value='57'\u003ePartner Transitions\u003c/option\u003e\n\u003coption value='58'\u003eProductivity Champion\u003c/option\u003e\n\u003coption value='52'\u003eBilling Admin\u003c/option\u003e\n\u003coption value='53'\u003eCommunity Connector\u003c/option\u003e\n\u003coption value='37'\u003eCustomer Support\u003c/option\u003e\n\u003coption value='40'\u003eFeature Developer\u003c/option\u003e\n\u003coption value='39'\u003eHygean Setup\u003c/option\u003e\n\u003coption value='55'\u003ePartner Convener\u003c/option\u003e\n\u003coption value='56'\u003ePartner Prospector\u003c/option\u003e\n\u003coption value='59'\u003eProductivity Coach\u003c/option\u003e\n\u003coption value='60'\u003eSecretary\u003c/option\u003e\n\u003coption value='61'\u003eTechnical Screener\u003c/option\u003e\n\u003coption value='62'\u003eTester\u003c/option\u003e\n\u003coption value='63'\u003eTranslator\u003c/option\u003e\n\u003coption value='64'\u003eVideo Creator\u003c/option\u003e\n\u003coption value='65'\u003eWriter\u003c/option\u003e\n\u003coption value='54'\u003eInternal Tool Developer\u003c/option\u003e",
+        "56": "\u003coption value\u003eIn which role?\u003c/option\u003e\n\u003coption value\u003e\u003c/option\u003e\n\u003coption value='41'\u003eTechnology\u003c/option\u003e\n\u003coption value='30'\u003eDeveloper\u003c/option\u003e\n\u003coption value='42'\u003eResearch \u0026 Development\u003c/option\u003e\n\u003coption value='35'\u003eCoach\u003c/option\u003e\n\u003coption value='43'\u003eMarketing\u003c/option\u003e\n\u003coption value='44'\u003eDesigner\u003c/option\u003e\n\u003coption value='45'\u003eProduct Manager\u003c/option\u003e\n\u003coption value='46'\u003eTester\u003c/option\u003e\n\u003coption value='70'\u003eAthlete\u003c/option\u003e",
+        "58": "\u003coption value\u003eIn which role?\u003c/option\u003e\n\u003coption value\u003e\u003c/option\u003e\n\u003coption value='48'\u003eRomantic Partner\u003c/option\u003e\n\u003coption value='73'\u003eRomantic Partner\u003c/option\u003e\n\u003coption value='74'\u003e\u003c/option\u003e\n\u003coption value='77'\u003eLifelong Student\u003c/option\u003e",
+        "60": "\u003coption value\u003eIn which role?\u003c/option\u003e\n\u003coption value\u003e\u003c/option\u003e\n\u003coption value='49'\u003eTeal Leader\u003c/option\u003e",
+        "59": "\u003coption value\u003eIn which role?\u003c/option\u003e\n\u003coption value\u003e\u003c/option\u003e\n\u003coption value='51'\u003eClubhouse Lead Link\u003c/option\u003e",
+        "61": "\u003coption value\u003eIn which role?\u003c/option\u003e\n\u003coption value\u003e\u003c/option\u003e\n\u003coption value='67'\u003eAccountability Writer\u003c/option\u003e\n\u003coption value='68'\u003eAccountability Reader\u003c/option\u003e\n\u003coption value='69'\u003ePhysical Health Guide\u003c/option\u003e\n\u003coption value='71'\u003eTBG Operations Manager\u003c/option\u003e\n\u003coption value='72'\u003eWork-Mindscape Housecleaning\u003c/option\u003e"
       };
+      console.log('roles', roles);
       $('#aktion_role_id').html(roles[val]);
       projects = {
-        "56": "\n\u003coption value='24'\u003eTAG.com is ready for clients\u003c/option\u003e\n\u003coption value='35'\u003ePlanned Actions deployed\u003c/option\u003e\n\u003coption value='41'\u003eJS verb/role/project add\u003c/option\u003e\n\u003coption value='39'\u003eJS team switch\u003c/option\u003e\n\u003coption value='47'\u003eHealthy and Fit Body\u003c/option\u003e",
         "55": "\n\u003coption value='25'\u003eI am familiar with React.js\u003c/option\u003e\n\u003coption value='33'\u003eAPI v3 documentation updated\u003c/option\u003e\n\u003coption value='26'\u003eReinventing Organizations read\u003c/option\u003e\n\u003coption value='34'\u003eBadges App\u003c/option\u003e\n\u003coption value='44'\u003eMaintenance\u003c/option\u003e\n\u003coption value='45'\u003eGF CS videos complete\u003c/option\u003e\n\u003coption value='46'\u003eI am having fun\u003c/option\u003e\n\u003coption value='49'\u003eMeetings\u003c/option\u003e",
-        "54": "\n\u003coption value='27'\u003eReinventing Education: I am living towards my purpose\u003c/option\u003e\n\u003coption value='28'\u003eI am learning and growing\u003c/option\u003e\n\u003coption value='23'\u003eI am playing TAG fully\u003c/option\u003e\n\u003coption value='22'\u003eRecurring/Maintenance\u003c/option\u003e\n\u003coption value='31'\u003eI am fit and healthy\u003c/option\u003e\n\u003coption value='29'\u003eI am debt-free and have $10K in the bank\u003c/option\u003e\n\u003coption value='42'\u003eOld Surehand finished\u003c/option\u003e\n\u003coption value='43'\u003eI remember good times\u003c/option\u003e",
-        "58": "\n\u003coption value='37'\u003eDeane's life is awesome\u003c/option\u003e\n\u003coption value='38'\u003eGreat communications\u003c/option\u003e",
+        "54": "\n\u003coption value='27'\u003eReinventing Education: I am living towards my purpose\u003c/option\u003e\n\u003coption value='28'\u003eI am learning and growing\u003c/option\u003e\n\u003coption value='23'\u003eI am playing TAG fully\u003c/option\u003e\n\u003coption value='22'\u003eRecurring/Maintenance\u003c/option\u003e\n\u003coption value='31'\u003eI am fit and healthy\u003c/option\u003e\n\u003coption value='29'\u003eI am debt-free and have $10K in the bank\u003c/option\u003e\n\u003coption value='42'\u003eOld Surehand finished\u003c/option\u003e\n\u003coption value='43'\u003eI remember good times\u003c/option\u003e\n\u003coption value='53'\u003eFun Had\u003c/option\u003e\n\u003coption value='58'\u003eI feel connected to my friends\u003c/option\u003e",
+        "56": "\n\u003coption value='35'\u003ePlanned Actions deployed\u003c/option\u003e\n\u003coption value='41'\u003eJS verb/role/project add\u003c/option\u003e\n\u003coption value='39'\u003eJS team switch\u003c/option\u003e\n\u003coption value='47'\u003eHealthy and Fit Body\u003c/option\u003e\n\u003coption value='24'\u003eTAG.com is ready for use by Mihai \u0026 friends\u003c/option\u003e\n\u003coption value='50'\u003eTAG.com is ready for strangers\u003c/option\u003e\n\u003coption value='51'\u003eTAG.com is ready for clients\u003c/option\u003e",
+        "58": "\n\u003coption value='37'\u003eDeane's life is awesome\u003c/option\u003e\n\u003coption value='38'\u003eGreat communications\u003c/option\u003e\n\u003coption value='52'\u003eContinuing Education\u003c/option\u003e\n\u003coption value='54'\u003eContinuing Education\u003c/option\u003e\n\u003coption value='55'\u003eGraduate Education\u003c/option\u003e\n\u003coption value='56'\u003eGraduate Education\u003c/option\u003e\n\u003coption value='57'\u003eGraduate Education\u003c/option\u003e\n\u003coption value='59'\u003eLifelong Student\u003c/option\u003e\n\u003coption value='60'\u003eLifelong Student\u003c/option\u003e\n\u003coption value='61'\u003eLifelong Student\u003c/option\u003e\n\u003coption value='62'\u003eLifelong Student\u003c/option\u003e\n\u003coption value='63'\u003eLifelong Student\u003c/option\u003e\n\u003coption value='65'\u003eMaintenance\u003c/option\u003e\n\u003coption value='64'\u003eQuality Time Spent\u003c/option\u003e",
         "59": "\n\u003coption value='48'\u003eClubHouse Transitioned\u003c/option\u003e"
       };
       return $('#aktion_project_id').html(projects[val]);
@@ -41848,6 +41849,34 @@ module.exports = warning;
 }).call(this);
 (function() {
 
+
+}).call(this);
+(function() {
+  $(document).ready(function() {
+    return $('#add-insight').on('click', function() {
+      var input_insight;
+      input_insight = prompt('Please enter your insight', 'e = mc^2');
+      return $.ajax({
+        type: "POST",
+        url: "/insights",
+        data: {
+          insight: {
+            text: input_insight,
+            aktion_id: 66,
+            player_id: 666
+          }
+        },
+        success: function(data) {
+          $('#insights').append(input_insight + "<br>");
+          return false;
+        },
+        error: function(data) {
+          alert('Unable to add your insight');
+          return false;
+        }
+      });
+    });
+  });
 
 }).call(this);
 (function() {
@@ -41872,7 +41901,6 @@ module.exports = warning;
           }
         },
         success: function(data) {
-          console.log('data', data);
           $('#aktion_project_id').html("<option value='" + data.id + " '>" + input_project + "</option>");
           return false;
         },
@@ -42013,7 +42041,8 @@ $(function() {
         orderClasses: true,
         columnDefs: [
             { targets: 'nosort', orderable: false}
-        ]
+        ],
+        stripeClasses: [ 'white-bg', 'review-bg' ]
     });
 
 });

@@ -6,7 +6,6 @@ $(document).ready ->
       url: "/projects",
       data: { project: { name: input_project } },
       success:(data) ->
-        console.log 'data', data
         $('#aktion_project_id').html("<option value='" + data.id + " '>" + input_project + "</option>")
         return false
       error:(data) ->

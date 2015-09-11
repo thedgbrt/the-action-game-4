@@ -29,9 +29,13 @@ class Player < ActiveRecord::Base
   has_many :team_memberships
   has_many :teams, through: :team_memberships
   has_many :project_memberships
-  has_many :projects, through: :project_memberships
+  # has_many :projects, through: :project_memberships
   has_many :role_assignments
   has_many :roles, through: :role_assignments
+
+  def projects
+    teams.map{ |t| t.projects }.flatten
+  end
 
   def current_action
     a = Aktion.find_by(player_id: id, timeslot: Aktion.current_timeslot)

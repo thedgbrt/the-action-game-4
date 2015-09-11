@@ -38,7 +38,8 @@ $(function() {
         orderClasses: true,
         columnDefs: [
             { targets: 'nosort', orderable: false}
-        ]
+        ],
+        stripeClasses: [ 'white-bg', 'review-bg' ]
     });
 
 });
