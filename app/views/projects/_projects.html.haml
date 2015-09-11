@@ -1,6 +1,9 @@
 %h5
   Projects
-  = link_to "(New for #{team.name})", new_team_project_path(team)
+  if team
+    = link_to "(New for #{team.name})", new_team_project_path(team)
+  else
+    = link_to "(New)", new_project_path
 
 %table#projects-table.compact
   %thead

@@ -1,5 +1,5 @@
 %h4
   Projects
-  = link_to "(new for #{team.name})", new_team_project_path(team)
+  = link_to "(new)", new_project_path
 
-= render 'projects', projects: @projects, team: team
+= render 'projects', projects: @projects, team: nil
