@@ -86,14 +86,6 @@
   clear: both;
 }
 
-.xrow {
-  display: -webkit-box;   /* OLD: Safari,  iOS, Android browser, older WebKit browsers.  */
-  display: -moz-box;      /* OLD: Firefox (buggy) */
-  display: -ms-flexbox;   /* MID: IE 10 */
-  display: -webkit-flex;  /* NEW, Chrome 21?28, Safari 6.1+ */
-  display: flex;
-}
-
 .bold {
   font-weight: bold;    
   input {
