@@ -40,22 +40,27 @@
 }
 
 /* line 40, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
+.white-bg {
+  background-color: white;
+}
+
+/* line 44, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
 .commit-bg {
   background-color: #ffcccc;
 }
 
-/* line 45, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
+/* line 49, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
 .commit-button input {
   font-weight: bold;
   padding: 10px;
   font-size: 130%;
 }
 
-/* line 52, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
+/* line 56, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
 .focus-bg {
   background-color: #ccffcc;
 }
-/* line 54, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
+/* line 58, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
 .focus-bg .button {
   background-color: green;
   color: white;
@@ -63,27 +68,27 @@
   font-size: 130%;
   font-weight: bold;
 }
-/* line 56, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
+/* line 60, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
 .focus-bg .button a {
   color: white;
 }
 
-/* line 66, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
+/* line 70, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
 .review-bg {
   background-color: #ffffcc;
 }
-/* line 68, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
+/* line 72, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
 .review-bg input {
   padding: 10px;
   font-size: 130%;
   font-weight: bold;
 }
 
-/* line 75, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
+/* line 79, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
 .relax-bg {
   background-color: #ccccff;
 }
-/* line 77, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
+/* line 81, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
 .relax-bg input {
   font-weight: bold;
   margin: 0px;
@@ -91,13 +96,13 @@
   font-size: 130%;
 }
 
-/* line 85, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
+/* line 89, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
 .media {
   width: 100%;
   height: 600px;
 }
 
-/* line 90, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
+/* line 94, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
 .sound-option {
   background-color: #ccc;
   padding: 10px;
@@ -106,45 +111,60 @@
   text-align: center;
 }
 
-/* line 98, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
+/* line 102, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
 .quadrants-container {
+  display: -webkit-box;
+  /* OLD: Safari,  iOS, Android browser, older WebKit browsers.  */
+  display: -moz-box;
+  /* OLD: Firefox (buggy) */
+  display: -ms-flexbox;
+  /* MID: IE 10 */
+  display: -webkit-flex;
+  /* NEW, Chrome 21?28, Safari 6.1+ */
   display: flex;
 }
 
-/* line 102, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
+/* line 110, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
 .aktion-quadrant-header {
   padding-top: 10px;
   padding-bottom: 10px;
   margin: 15px 0px;
 }
 
-/* line 108, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
+/* line 116, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
 .bigger {
   font-weight: bold;
   font-size: 140%;
 }
 
-/* line 113, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
+/* line 121, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
 .bigger130 {
   font-size: 110%;
 }
 
-/* line 120, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
+/* line 128, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
 .review-item {
   margin-bottom: 5px;
 }
 
-/* line 124, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
+/* line 132, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
 .action-cell {
   font-size: 90%;
   margin-bottom: 3px;
   height: 3em;
 }
 
-/* line 131, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
+/* line 139, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
 .mini-menu-action {
   padding: 2px 6px;
   margin: 0px;
+}
+
+/* line 144, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/aktions.scss */
+.detailed-action {
+  height: 250px;
+  overflow-y: scroll;
+  border: 5px solid white;
 }
 /* line 364, /Users/mihai/.rvm/gems/ruby-2.2.3@new-tag/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
 meta.foundation-version {
@@ -10027,6 +10047,10 @@ section {
   padding: 5px;
   margin: 0px;
 }
+/* line 5, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/role_assignments.scss */
+#role-assignments-table_length {
+  width: 60px;
+}
 /* line 1, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/scaffolds.scss */
 body {
   background-color: #fff;
@@ -10210,14 +10234,22 @@ div.field, div.actions {
 
 /* line 90, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/application.css.scss */
 .xrow {
+  display: -webkit-box;
+  /* OLD: Safari,  iOS, Android browser, older WebKit browsers.  */
+  display: -moz-box;
+  /* OLD: Firefox (buggy) */
+  display: -ms-flexbox;
+  /* MID: IE 10 */
+  display: -webkit-flex;
+  /* NEW, Chrome 21?28, Safari 6.1+ */
   display: flex;
 }
 
-/* line 94, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/application.css.scss */
+/* line 98, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/application.css.scss */
 .bold {
   font-weight: bold;
 }
-/* line 96, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/application.css.scss */
+/* line 100, /Users/mihai/coding/pp/new-tag/app/assets/stylesheets/application.css.scss */
 .bold input {
   font-weight: bold;
 }

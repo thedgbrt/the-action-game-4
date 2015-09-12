@@ -7,9 +7,10 @@
   = @player.current_time_zone
 %hr
 
-- @player.teams.each do |team|
-  %h4= team.name
-  = render '/roles/roles', roles: team.roles, team: team
-  .clear-both
-  = render '/projects/projects', projects: team.projects, team: team
-  %hr
+- if @player.teams
+  - @player.teams.each do |team|
+    %h4= team.name
+    = render '/roles/roles', roles: team.roles, team: team
+    .clear-both
+    = render '/projects/projects', projects: team.projects, team: team
+    %hr

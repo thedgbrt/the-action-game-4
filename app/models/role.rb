@@ -6,6 +6,8 @@ class Role < ActiveRecord::Base
   has_many :role_assignments
   has_many :players, through: :role_assignments
 
+  validates :team_id, presence: true
+
   def self.for_select(tm=nil)
     roles = tm ? tm.roles : Role.all
     teams_hash = {}

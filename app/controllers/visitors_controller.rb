@@ -9,5 +9,6 @@ class VisitorsController < ApplicationController
     sound = params[:sound_choice]
     session[:sound_choice] = sound
     current_player.persist_sound_choice(sound) if player_signed_in?
+    redirect_to :back
   end
 end

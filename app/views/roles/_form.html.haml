@@ -1,4 +1,4 @@
-= simple_form_for [current_team, @role] do |f|
+= simple_form_for @role do |f|
   = f.error_notification
 
   .form-inputs
@@ -6,8 +6,9 @@
       .large-4.medium-4.small-4.columns= f.input :name
       .large-4.medium-4.small-4.columns= f.input :short
       .large-4.medium-4.small-4.columns= f.input :external_id
-      .large-6.medium-6.small-6.columns= f.association :team, collection: current_player.teams, selected: current_team.id, label: false, prompt: 'Team'
-      .large-6.medium-6.small-6.columns= f.association :parent, collection: current_team.roles - [@role] - @role.children, label: false, prompt: 'Parent Role?'
+      .large-6.medium-6.small-6.columns= f.association :team, collection: current_player.teams, include_blank: true, selected: @team.try(:id), label: false, prompt: 'Team'
+      - potential_parents = @team ? current_player.active_roles(@team) - [@role] - @role.children : current_player.roles
+      .large-6.medium-6.small-6.columns= f.association :parent, collection: potential_parents, label: false, prompt: 'Parent Role?'
     .large-6.medium-12.columns
       .large-12= f.input :description
       .large-12= f.input :url

@@ -1,6 +1,9 @@
 %h5
   Roles
-  = link_to "(New for #{current_team.name})", new_team_role_path(current_team) if current_team
+  - if team
+    = link_to "(New for #{team.name})", new_team_role_path(team)
+  - else
+    = link_to "(New)", new_role_path
 
 %table#roles-table.compact
   %thead
@@ -15,4 +18,4 @@
       %th
 
   %tbody
-    = render roles, team: current_team
+    = render roles, team: team
