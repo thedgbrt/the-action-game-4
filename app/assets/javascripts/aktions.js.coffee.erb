@@ -9,9 +9,7 @@ $(document).ready ->
 
   $('#aktion_team_id').change ->
     val = $('#aktion_team_id').val()
-    console.log 'val', val
     roles = <%= Role.for_select %>
-    console.log 'roles', roles
     $('#aktion_role_id').html(roles[val])
     projects = <%= Project.for_select %>
     $('#aktion_project_id').html(projects[val])

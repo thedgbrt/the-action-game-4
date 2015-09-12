@@ -12,7 +12,7 @@
   %body
     %header
       = render 'layouts/navigation'
-      = render 'aktions/todays_bar' if player_signed_in?
+      .hidden-for-small-only= render 'aktions/todays_bar' if player_signed_in?
     %main{:role => "main"}
       = render 'layouts/messages'
       = yield

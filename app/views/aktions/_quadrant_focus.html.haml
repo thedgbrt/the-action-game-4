@@ -9,7 +9,7 @@
 - else
   .large-12.focus.bigger.text-center.aktion-quadrant-header FOCUS
   .large-12#insights
-  .large-12.columns.text-right#add-insight= link_to '+insight', new_insight_path(player_id: current_player.id, aktion_id: @aktion.id), remote: true
+  .large-12.columns.text-right#add-insight{"data-aktion_id" => "#{@aktion.id}", "data-player_id" => "#{current_player.id}"}= link_to '+insight', new_insight_path(player_id: current_player.id, aktion_id: @aktion.id), remote: true
   - if params[:action] == 'edit' && @aktion.status == 'attempting'
     .large-12 Sound preference?
     .large-12.columns.text-center.sound-option.button

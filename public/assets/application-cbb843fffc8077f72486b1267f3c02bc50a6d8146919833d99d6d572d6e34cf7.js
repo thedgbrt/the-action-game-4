@@ -41767,7 +41767,7 @@ module.exports = warning;
       whistle.volume = warning_volume / 100;
       if (s === 0 && m === 2 && status !== 'relax') {
         warning.play();
-      } else if (s === 0 && m === 0) {
+      } else if ((s === 5 || s === 25) && m === 0) {
         bell.play();
       } else if (s === 30 && m === 0 && status === 'relax') {
         whistle.play();
@@ -41854,16 +41854,19 @@ module.exports = warning;
 (function() {
   $(document).ready(function() {
     return $('#add-insight').on('click', function() {
-      var input_insight;
+      var aktion_id, input_insight, player_id;
       input_insight = prompt('Please enter your insight', 'e = mc^2');
+      aktion_id = $('#add-insight').data('aktion_id');
+      player_id = $('#add-insight').data('player_id');
+      console.log('aktion_id', aktion_id);
       return $.ajax({
         type: "POST",
         url: "/insights",
         data: {
           insight: {
             text: input_insight,
-            aktion_id: 66,
-            player_id: 666
+            aktion_id: aktion_id,
+            player_id: player_id
           }
         },
         success: function(data) {
