@@ -4,12 +4,13 @@ class AktionsController < ApplicationController
   # before_action :select_team!
 
   def index
+    @player = Player.find_by_id(params[:player_id]) || current_player
     if params[:role_id]
-      @aktions = @current_player.aktions.select{ |a| a.role_id == params[:role_id].to_i}
+      @aktions = @player.aktions.select{ |a| a.role_id == params[:role_id].to_i}
     else
-      @aktions = @current_player.aktions
+      @aktions = @player.aktions
     end
-    @todays_actions = @current_player.todays_actions
+    @todays_actions = @player.todays_actions(@date)
   end
 
   def show

@@ -57,7 +57,8 @@ class Player < ActiveRecord::Base
   end
 
   def today
-    "Today: #{todays_actions.count} Actions, " +
+    "Today: " +
+    "#{todays_actions.count} Actions, " +
     "#{todays_breaths} Breaths, " +
     "#{todays_pushups} Pushups"
   end
@@ -80,7 +81,7 @@ class Player < ActiveRecord::Base
     previous_aktions_hash.keys.map{ |key| previous_aktions_hash[key].first }
   end
 
-  def todays_actions
+  def todays_actions(date = nil)
     Aktion.realtime_by(self).select{ |a| a.timeslot.in_time_zone(self.current_time_zone).to_date == Time.zone.now.in_time_zone(self.current_time_zone).to_date }
   end
 

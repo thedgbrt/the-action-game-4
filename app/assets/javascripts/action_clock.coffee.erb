@@ -45,11 +45,11 @@ $(document).ready ->
     bell.volume = warning_volume / 100
     whistle.volume = warning_volume / 100
 
-    if s == 0 && m == 2 && status != 'relax'
+    if m == 2 && s == 0 && status == 'focus'
       warning.play()
-    else if (m == 5 || m == 25) && s == 0
+    else if m == 0 && s == 1
       bell.play()
-    else if s == 30 && m == 0 && status == 'relax'
+    else if m == 0 && s == 30 && status == 'relax'
       whistle.play()
     else if status == 'commit'
       commit.play()
@@ -65,6 +65,7 @@ $(document).ready ->
   startTime = ->
     totalSecUp = to_1800()
     status = updateStatus(totalSecUp)
+    console.log 'totalSecUp', totalSecUp, 'status', status
 
     totalSecDown = 1800 - totalSecUp
     actionSecDown = totalSecDown - 300
