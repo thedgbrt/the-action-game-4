@@ -1,10 +1,11 @@
 %h1= "Listing #{I18n.t :Players}"
 
-%table
+%table#players-table.compact
   %thead
     %tr
       %th
       %th Name
+      %th Actions
       %th Email
       %th
       %th
@@ -15,6 +16,7 @@
       %tr
         %td= image_tag player.gravatar
         %td= link_to player.name, player
+        %td= link_to player.aktions.count, player_aktions_path(player)
         %td= player.email
         %td= link_to 'Show', player
         %td= link_to 'Edit', edit_player_path(player)

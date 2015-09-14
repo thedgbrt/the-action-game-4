@@ -81,12 +81,13 @@ class Player < ActiveRecord::Base
     previous_aktions_hash.keys.map{ |key| previous_aktions_hash[key].first }
   end
 
-  def todays_actions(date = nil)
+  def todays_actions(date=nil)
     Aktion.realtime_by(self).select{ |a| a.timeslot.in_time_zone(self.current_time_zone).to_date == Time.zone.now.in_time_zone(self.current_time_zone).to_date }
   end
 
-  def self.todays_grid
-    midnight = Time.zone.now.at_beginning_of_day
+  def self.todays_grid(date=nil)
+    date ||= Time.zone.now.to_date
+    midnight = date.at_beginning_of_day
     (0..47).map{ |ts| midnight + (ts*30).minutes }
   end
 
