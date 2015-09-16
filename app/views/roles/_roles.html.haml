@@ -5,17 +5,18 @@
   - else
     = link_to "(New)", new_role_path
 
-%table#roles-table.compact
-  %thead
-    %tr
-      %th
-      %th Name
-      %th Tm
-      %th Actions
-      %th Last Energized
-      %th
-      %th
-      %th
+.large-8.medium-12.small-12.columns
+  %table#roles-table.compact
+    %thead
+      %tr
+        %th
+        %th Tm
+        %th Name
+        %th Actions
+        %th Last Energized
+        %th
+        %th
+        %th
 
-  %tbody
-    = render roles, team: team
+    %tbody
+      = render roles, team: team

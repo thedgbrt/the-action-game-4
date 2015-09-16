@@ -35,6 +35,10 @@ class Player < ActiveRecord::Base
   has_many :roles, through: :role_assignments
   belongs_to :first_team
 
+  def committed_to_project(proj)
+    true
+  end
+
   def current_action
     a = Aktion.find_by(player_id: id, timeslot: Aktion.current_timeslot)
     a.try(:id)
@@ -104,6 +108,10 @@ class Player < ActiveRecord::Base
 
   def has_role(role)
     roles.include?(role)
+  end
+
+  def committed_to(project)
+    projects.include?(project)
   end
 
   def admin?

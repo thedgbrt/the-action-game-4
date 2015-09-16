@@ -1,5 +1,9 @@
 %tr.stripe
-  %td= link_to 'Edit', edit_project_path(project)
+  - if current_player.committed_to(project)
+    %td.blue-text COMMITTED
+  - else
+    %td.green-text= link_to 'TAKE ON', new_project_membership_path(project_id: project.id, player_id: current_player.id), remote: true
+  / %td= link_to 'Edit', edit_project_path(project)
   %td= link_to project.team.short_safe, project.team if project.team
   %td= link_to project.name, project
   %td= project.active

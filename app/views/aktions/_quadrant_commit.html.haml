@@ -11,7 +11,7 @@
     .large-12.columns= f.association :role, collection: old_collection, prompt: 'In which role?', label_method: label_method, label: false, include_blank: true
   #project
     .large-12.columns.text-right#add-project{"data-team_id" => @aktion.team.try(:id), "active" => true, "commitment" => true}= link_to '+project', new_project_path, remote: true
-    .large-12.columns= f.association :project, collection: current_player.projects.sort_by{|p|p.name}, prompt: 'For what project?', label: false, include_blank: true
+    .large-12.columns= f.association :project, collection: current_player.projects.sort_by{|p|p.name}, prompt: "For what #{@aktion.team ? @aktion.team.short_safe + ' ' : ''}project?", label: false, include_blank: true
   .large-3.medium-3.columns.commit-button= f.button :submit, "GO"
   / .large-12= f.association :location
   - unless params[:status] == 'planned'

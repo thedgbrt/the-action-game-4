@@ -5,16 +5,17 @@
   - else
     = link_to "(New)", new_project_path
 
-%table#projects-table.compact
-  %thead
-    %th
-    %th Tm
-    %th Name
-    %th Active
-    %th Commitment
-    %th Actions
-    %th Created
-    %th Updated
-    %th Description
-  %tbody
-    = render projects
+.large-8.medium-12.small-12.columns
+  %table#projects-table.compact
+    %thead
+      %th
+      %th Tm
+      %th Name
+      %th Active
+      %th Commitment
+      %th Actions
+      %th Created
+      %th Updated
+      %th Description
+    %tbody
+      = render projects
