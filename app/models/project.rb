@@ -14,12 +14,16 @@ class Project < ActiveRecord::Base
     teams_hash.to_json
   end
 
-  def self.initialize_for(solo_team)
+  def self.initialize_for(solo_team, playa)
     return 'Already initialized' if solo_team.projects.first
-    [
-      solo_team.projects.create!(name: 'Recurring/Maintenance', commitment: true),
-      solo_team.projects.create!(name: 'I know how to use TheActionGame.com', commitment: false)      
-    ]
+    p1 = Project.create!(team_id: solo_team.id, name: 'Recurring/Maintenance', commitment: true)
+    pp p1
+    p2 = Project.create!(team_id: solo_team.id, name: 'I know how to use TheActionGame.com', commitment: false)
+    pp p2
+    pp 'playa.projects before', playa.projects
+    playa.projects << p1
+    playa.projects << p2
+    pp 'playa.projects', playa.projects
   end
   
   def team_project

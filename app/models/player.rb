@@ -29,13 +29,9 @@ class Player < ActiveRecord::Base
   has_many :team_memberships
   has_many :teams, through: :team_memberships
   has_many :project_memberships
-  # has_many :projects, through: :project_memberships
+  has_many :projects, through: :project_memberships
   has_many :role_assignments
   has_many :roles, through: :role_assignments
-
-  def projects
-    teams.map{ |t| t.projects }.flatten
-  end
 
   def current_action
     a = Aktion.find_by(player_id: id, timeslot: Aktion.current_timeslot)
@@ -113,7 +109,7 @@ class Player < ActiveRecord::Base
   end
 
   def first_name
-    name.split(' ').first
+    name.split(' ').first rescue ''
   end
 
   def gravatar(size = 24)
@@ -127,7 +123,7 @@ class Player < ActiveRecord::Base
     [
       team,
       Role.initialize_for(team),
-      Project.initialize_for(team)
+      Project.initialize_for(team, self)
     ]
   end
 
@@ -153,6 +149,7 @@ class Player < ActiveRecord::Base
         user.name = auth['info']['name'] || ""
         user.email = auth['info']['email'] || ""
       end
+      user.init
     end
   end
 end

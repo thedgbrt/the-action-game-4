@@ -6,8 +6,9 @@ RSpec.describe Project, type: :model do
   it '#initialize_for(player) should add projects and link them' do
     expect(Project.count).to eq(0)
     expect(@player.projects.count).to eq(0)
+    team = FactoryGirl.create(:team)
 
-    Project.initialize_for(@player)
+    Project.initialize_for(team, @player)
 
     expect(Project.count).to eq(2)
     expect(@player.projects.count).to eq(2)

@@ -17,10 +17,10 @@ class Team < ActiveRecord::Base
     tm ? {notice: 'Successfully added you to this team'} : {alert: 'Unable to add you to this team'}
   end
 
-  def self.initialize_for(player)
-    return 'First team already exists' if player.teams.first
-    return 'Player not yet saved' if player.new_record?
-    player.teams.create!(name: player.name.to_s + ' Enterprises')
+  def self.initialize_for(playa)
+    return 'First team already exists' if playa.teams.first
+    return 'Player not yet saved' if playa.new_record?
+    t = playa.teams.create!(name: playa.first_name.to_s + ' Enterprises')
   end
 
   def remove(playa)
@@ -29,8 +29,9 @@ class Team < ActiveRecord::Base
     tm.destroy ? {notice: 'Successfully removed you from this team'} : {alert: 'Unable to remove you from this team'}
   end
 
-  def self.last_active_or_create(user)
-    user.teams.last || Team.create(creator_id: user.id, name: user.name.split(' ').first.to_s + ' Corporation')
+  #TODO: use (maybe move over to player.rb) or get rid of
+  def self.last_active(playa)
+    Team.find_by_id(playa.current_team_id) || playa.teams.last || Team.initialize_for(playa)
   end
 
   def roles_api_url(api_key, player_id)
@@ -45,20 +46,6 @@ class Team < ActiveRecord::Base
     TeamMembership.find_by(team_id: id, player_id: playa.id)
   end
 
-  def self.colors
-    [
-      ['green', '#CCFFCC'],
-      ['red,', '#FFCCCC'],
-      ['yellow', '#F4FA58'],
-      ['blue', '#5882FA'],
-      ['orange', '#F5D0A9'],
-      ['purple', '#D0A9F5'],
-      ['salmon', '#F7819F'],
-      ['cyan', '#81F7F3'],
-      ['grey', '#BDBDBD']
-    ]
-  end
-  
   def color(playa)
     tm = TeamMembership.find_by(team_id: self.id, player_id: playa.id)
     tm.try(:color) || default_color

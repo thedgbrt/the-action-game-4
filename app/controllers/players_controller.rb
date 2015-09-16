@@ -40,6 +40,6 @@ class PlayersController < ApplicationController
 
     def player_params
       params.require(:player).permit(:name, :role, :email, :current_time_zone, :email, :fictional,
-        :current_team_id, :sound_choice, :tick_volume, :warning_volume)
+        :current_team_id, :sound_choice, :tick_volume, :warning_volume, :first_team_id)
     end
 end

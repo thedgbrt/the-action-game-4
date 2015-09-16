@@ -11,7 +11,7 @@
   .form-inputs
     .large-4.medium-4.small-6.columns= f.association :player
     .large-4.medium-4.small-6.columns= f.association :team
-    .large-4.medium-4.small-6.columns{style: "background-color: #{@team_membership.color}"}= f.input :color, collection: Team.colors
+    .large-4.medium-4.small-6.columns{style: "background-color: #{@team_membership.color}"}= f.input :color, collection: COLORS
     .large-4.medium-4.small-6.columns= f.input :api_key
     .large-4.medium-4.small-6.columns= f.input :external_id, label: 'External ID'
     .large-4.medium-4.small-6.columns= f.input :admin
