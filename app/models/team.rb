@@ -18,9 +18,12 @@ class Team < ActiveRecord::Base
   end
 
   def self.initialize_for(playa)
-    return 'First team already exists' if playa.teams.first
+    return playa.teams.first if playa.teams.first
     return 'Player not yet saved' if playa.new_record?
     t = playa.teams.create!(name: playa.first_name.to_s + ' Enterprises')
+    playa.update_attributes(first_team_id: t.id)
+    t.update_attributes(creator_id: playa.id)
+    t
   end
 
   def remove(playa)

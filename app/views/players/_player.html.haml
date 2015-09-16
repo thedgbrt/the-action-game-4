@@ -1,0 +1,11 @@
+%tr
+  %td= image_tag player.gravatar
+  %td= link_to player.name, player
+  %td= link_to player.aktions.count, player_aktions_path(player)
+  %td= link_to player.teams.count, teams_path
+  %td= link_to player.roles.count, roles_path
+  %td= link_to player.projects.count, projects_path
+  %td= player.email
+  %td= link_to 'Show', player
+  %td= link_to 'Edit', edit_player_path(player)
+  %td= link_to 'Destroy', player, :method => :delete, :data => { :confirm => 'Are you sure?' }

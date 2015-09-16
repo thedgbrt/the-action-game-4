@@ -4,8 +4,6 @@ RSpec.describe Player, type: :model do
 
   before(:each) {
     @player = FactoryGirl.create(:player)
-    @team = FactoryGirl.create(:team)
-    FactoryGirl.create(:team_membership, player_id: @player.id, team_id: @team.id)
   }
 
   subject { @player }
@@ -34,21 +32,21 @@ RSpec.describe Player, type: :model do
     expect(@player.admin?).to be true
   end
 
-  it '#init should build 1 team with membership, 1 role and 2 projects' do
-    player = Player.new
+  it '#init should build 1 team with membership, 5 roles and 2 projects' do
+    @player = Player.new
 
-    expect(player.teams.count).to eq(0)
-    expect(player.roles.count).to eq(0)
-    expect(player.projects.count).to eq(0)
+    expect(@player.teams.count).to eq(0)
+    expect(@player.roles.count).to eq(0)
+    expect(@player.projects.count).to eq(0)
 
-    player.save!
-    results = player.init
+    @player.save!
+    results = @player.init
 
-    expect(player.teams.count).to eq(1)
+    expect(@player.teams.count).to eq(1)
     team = results[0]
 
-    expect(team.projects.count).to eq(2)
-    expect(team.roles.count).to eq(5)
+    expect(@player.projects.count).to eq(2)
+    expect(@player.roles.count).to eq(5)
   end
 
 end

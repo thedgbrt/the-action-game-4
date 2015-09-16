@@ -17,13 +17,9 @@ class Project < ActiveRecord::Base
   def self.initialize_for(solo_team, playa)
     return 'Already initialized' if solo_team.projects.first
     p1 = Project.create!(team_id: solo_team.id, name: 'Recurring/Maintenance', commitment: true)
-    pp p1
     p2 = Project.create!(team_id: solo_team.id, name: 'I know how to use TheActionGame.com', commitment: false)
-    pp p2
-    pp 'playa.projects before', playa.projects
     playa.projects << p1
     playa.projects << p2
-    pp 'playa.projects', playa.projects
   end
   
   def team_project

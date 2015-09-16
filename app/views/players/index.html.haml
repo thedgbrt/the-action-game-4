@@ -6,18 +6,13 @@
       %th
       %th Name
       %th Actions
+      %th Teams
+      %th Roles
+      %th Projects
       %th Email
       %th
       %th
       %th
 
   %tbody
-    - @players.each do |player|
-      %tr
-        %td= image_tag player.gravatar
-        %td= link_to player.name, player
-        %td= link_to player.aktions.count, player_aktions_path(player)
-        %td= player.email
-        %td= link_to 'Show', player
-        %td= link_to 'Edit', edit_player_path(player)
-        %td= link_to 'Destroy', player, :method => :delete, :data => { :confirm => 'Are you sure?' }
+    = render @players

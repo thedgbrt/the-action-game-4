@@ -22,6 +22,7 @@ class Player < ActiveRecord::Base
 
   enum role: [:user, :vip, :admin]
   after_initialize :set_default_role, :if => :new_record?
+  after_save :init
 
   has_many :aktions  
   has_many :teams_created, foreign_key: :creator_id
@@ -32,6 +33,7 @@ class Player < ActiveRecord::Base
   has_many :projects, through: :project_memberships
   has_many :role_assignments
   has_many :roles, through: :role_assignments
+  belongs_to :first_team
 
   def current_action
     a = Aktion.find_by(player_id: id, timeslot: Aktion.current_timeslot)
@@ -119,12 +121,8 @@ class Player < ActiveRecord::Base
 
   def init
     team = Team.initialize_for(self)
-    return team if team.is_a? String
-    [
-      team,
-      Role.initialize_for(team),
-      Project.initialize_for(team, self)
-    ]
+    Role.initialize_for(team, self)
+    Project.initialize_for(team, self)
   end
 
   def set_default_role
@@ -142,14 +140,13 @@ class Player < ActiveRecord::Base
   end
 
   def self.create_with_omniauth(auth)
-    create! do |user|
-      user.provider = auth['provider']
-      user.uid = auth['uid']
+    create! do |player|
+      player.provider = auth['provider']
+      player.uid = auth['uid']
       if auth['info']
-        user.name = auth['info']['name'] || ""
-        user.email = auth['info']['email'] || ""
+        player.name = auth['info']['name'] || ""
+        player.email = auth['info']['email'] || ""
       end
-      user.init
     end
   end
 end
