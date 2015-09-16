@@ -1,4 +1,4 @@
-%h2= "#{aktions.count} #{I18n.t 'Aktions'}"
+%h2= "#{aktions.try(:count) || 0} #{I18n.t 'Aktions'}"
 
 %table#aktions-table.compact
   %thead
@@ -14,4 +14,7 @@
       %th Value
       %th
   %tbody
-    = render aktions
+    - if aktions
+      = render aktions
+    - else
+      = "No Actions"

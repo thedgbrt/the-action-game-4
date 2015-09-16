@@ -4,8 +4,9 @@
 = render 'aktions', aktions: @aktions
 
 %hr
-%h2= "#{@aktions.count} Detailed #{I18n.t 'Aktions'}"
+%h2= "#{@aktions.try(:count) || 0} Detailed #{I18n.t 'Aktions'}"
 
-.detailed-actions-container
-  - @aktions.by_timeslot.each do |action|
-    = render 'detailed_action', action: action
+- if @aktions
+  .detailed-actions-container
+    - @aktions.each do |action|
+      = render 'detailed_action', action: action

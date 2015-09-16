@@ -6,9 +6,9 @@ class AktionsController < ApplicationController
   def index
     @player = Player.find_by_id(params[:player_id]) || current_player
     if params[:role_id]
-      @aktions = @player.aktions.select{ |a| a.role_id == params[:role_id].to_i}
+      @aktions = @player.aktions.select{ |a| a.role_id == params[:role_id].to_i}.try(:by_timeslot)
     else
-      @aktions = @player.aktions
+      @aktions = @player.aktions.try(:by_timeslot)
     end
     @todays_actions = @player.todays_actions(@date)
   end
