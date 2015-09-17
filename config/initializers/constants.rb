@@ -13,3 +13,5 @@ COLORS = [
   ['cyan', '#81F7F3'],
   ['grey', '#BDBDBD']
 ]
+
+CHOICE = 'I freely, consciously choose to play'

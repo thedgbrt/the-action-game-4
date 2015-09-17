@@ -16,7 +16,6 @@ Rails.application.routes.draw do
     member { get :join, :leave, :activate }
     resources :projects
     resources :roles
-    resources :aktions, path: 'actions'
   end
 
   resources :roles

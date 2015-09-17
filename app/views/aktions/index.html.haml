@@ -1,6 +1,12 @@
 / = react_component 'Aktions', { data: @aktions }
 
-= render 'analyze', aktions: @todays_actions
+%ul
+  %li LIST
+  %li DAILY
+  %li WEEKLY
+  %li MONTHLY
+
+= render 'daily', aktions: @todays_actions
 = render 'aktions', aktions: @aktions
 
 %hr

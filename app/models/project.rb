@@ -4,14 +4,8 @@ class Project < ActiveRecord::Base
   has_many :children, class_name: 'Project', foreign_key: 'parent_id'
   has_many :aktions
 
-  def self.for_select(tm=nil)
-    projects = tm ? tm.projects : Project.all
-    teams_hash = {}
-    projects.each do |r|
-      prev = teams_hash[r.team_id.to_s] || ''
-      teams_hash[r.team_id.to_s] = prev + "\n<option value='#{r.id.to_s}'>#{r.name}</option>"
-    end
-    teams_hash.to_json
+  def self.search(tm, playa)
+    tm.projects.select{ |p| playa.committed_to(p) }
   end
 
   def self.initialize_for(solo_team, playa)

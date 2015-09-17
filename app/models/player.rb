@@ -35,7 +35,7 @@ class Player < ActiveRecord::Base
   has_many :roles, through: :role_assignments
   belongs_to :first_team
 
-  def committed_to_project(proj)
+  def committed_to(proj)
     true
   end
 
@@ -92,6 +92,20 @@ class Player < ActiveRecord::Base
     midnight = date.at_beginning_of_day
     (0..47).map{ |ts| midnight + (ts*30).minutes }
   end
+
+  def self.weekly_grid(date=nil)
+    date ||= Time.zone.now.to_date
+    start = date.at_beginning_of_week.to_date
+    (0..6).map{ |d| start + d.days }
+  end
+
+  def self.monthly_grid(date=nil)
+    date ||= Time.zone.now.to_date
+    start = date.at_beginning_of_month.to_date
+    x = Time.days_in_month(Time.zone.now.month)
+    (0..x).map{ |d| start + d.days }
+  end
+
 
   def todays_breaths
     todays_actions.map{ |a| a.breaths.to_i}.compact.sum

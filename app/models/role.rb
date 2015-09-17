@@ -8,16 +8,6 @@ class Role < ActiveRecord::Base
 
   validates :team_id, presence: true
 
-  def self.for_select(tm=nil)
-    roles = tm ? tm.roles : Role.all
-    teams_hash = {}
-    roles.each do |r|
-      prev = teams_hash[r.team_id.to_s] || "<option value>In which role?</option>\n<option value></option>"
-      teams_hash[r.team_id.to_s] = prev + "\n<option value='#{r.id.to_s}'>#{r.name}</option>"
-    end
-    teams_hash.to_json
-  end
-
   def last_energized
     last_action_started || updated_at
   end

@@ -53,7 +53,7 @@ class TeamsController < ApplicationController
 
   def activate
     current_player.update_attributes(current_team_id: params[:id])
-    redirect_to new_team_aktion_path(team_id: params[:id])
+    redirect_to new_aktion_path(team_id: params[:id])
   end
 
   def join

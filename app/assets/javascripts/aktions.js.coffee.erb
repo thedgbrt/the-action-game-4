@@ -9,7 +9,5 @@ $(document).ready ->
 
   $('#aktion_team_id').change ->
     val = $('#aktion_team_id').val()
-    roles = <%= Role.for_select %>
-    $('#aktion_role_id').html(roles[val])
-    projects = <%= Project.for_select %>
-    $('#aktion_project_id').html(projects[val])
+    old_params = window.location.search
+    window.location.search = '?team_id=' + val

@@ -149,10 +149,6 @@ class Aktion < ActiveRecord::Base
     }
   end
 
-  def self.choice
-    'I freely choose to play'
-  end
-
   def self.intensities
     [ ['1 - Quasi Action', 1],
       ['2 - Missed Action', 2], 
