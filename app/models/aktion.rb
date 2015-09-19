@@ -42,14 +42,14 @@ class Aktion < ActiveRecord::Base
   #   colors.map {|color, code| "<option value='#{code}' style='background-color:#{code};'>#{color}</option>" }
   # end
 
-  def auto_intensity
+  def score
     time_delta = (created_at - timeslot).abs/60
     if time_delta > 30
       1
     elsif time_delta > 3 || Aktion.statuses[status] < 2
-      2
-    else
       3
+    else
+      6
     end
   end
 

@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   root to: 'visitors#index'
   get '/help' => 'visitors#help'
   get '/sounds' => 'visitors#sounds'
+  get '/scores' => 'visitors#scores'
   get '/auth/:provider/callback' => 'sessions#create'
   get '/signin' => 'sessions#new', :as => :signin
   get '/signout' => 'sessions#destroy', :as => :signout

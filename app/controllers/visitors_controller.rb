@@ -1,8 +1,11 @@
 class VisitorsController < ApplicationController
   def index
   end
-  
+
   def help
+  end
+
+  def scores
   end
 
   def sounds

@@ -92,3 +92,13 @@
     font-weight: bold;    
   }
 }
+
+#scores {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.score-quadrant {
+  background-color: cyan;
+  border: 1px solid black;
+}

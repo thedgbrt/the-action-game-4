@@ -9,6 +9,6 @@
   %td= team.players.map(&:first_name).join(', ')
   %td= link_to "#{team.roles.count} Roles", team_roles_path(team_id: team.id)
   %td= link_to "#{team.projects.count} Projects", team_projects_path(team_id: team.id)
-  %td= link_to "#{team.aktions.count} Actions", team_aktions_path(team_id: team.id)
+  %td= link_to "#{team.aktions.count} Actions", aktions_path(team_id: team.id)
   %td= link_to 'Edit', edit_team_path(team)
   %td= link_to 'Destroy', team, :method => :delete, :data => { :confirm => 'Are you sure?' }
