@@ -3,4 +3,4 @@
     %tr
       %td.mini-menu-action= link_to current_player.today, player_aktions_path(player_id: current_player.id, date: @date)
       - current_player.todays_actions(@date).sort_by{|a|a.timeslot}.each do |a|
-        %td.mini-menu-action{style: "background-color: #{a.color}"}= link_to (a.intensity || 0), edit_aktion_path(a, edit: true), title: a.summary_with_time_and_focus
+        %td.mini-menu-action{style: "background-color: #{a.color}"}= link_to (a.plus_score || 1), edit_aktion_path(a, edit: true), title: a.summary_with_time_and_focus

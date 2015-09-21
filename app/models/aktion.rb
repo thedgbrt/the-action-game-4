@@ -46,11 +46,15 @@ class Aktion < ActiveRecord::Base
     time_delta = (created_at - timeslot).abs/60
     if time_delta > 30
       1
-    elsif time_delta > 3 || Aktion.statuses[status] < 2
+    elsif time_delta > 3
       3
     else
-      6
+      [0, 1, 3, 6, 8, 10][intensity.to_i]
     end
+  end
+
+  def plus_score
+    '+' + score.to_s
   end
 
   def self.get(playa, slot)

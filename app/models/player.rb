@@ -60,9 +60,9 @@ class Player < ActiveRecord::Base
 
   def today
     "Today: " +
-    "#{todays_actions.count} Actions, " +
-    "#{todays_breaths} Breaths, " +
-    "#{todays_pushups} Pushups"
+    "#{todays_actions.map{|a|a.score}.sum} Action Points " # +
+ #    "#{todays_breaths} Breaths, " +
+ #    "#{todays_pushups} Pushups"
   end
 
   def actions
