@@ -4,27 +4,33 @@
 
   .form-inputs
     .large-1.medium-1.small-12.columns.bigger.text-right TEAM
-    .large-3.medium-3.small-12.columns.text-left= f.association :team, collection: @current_player.teams, label: false, include_blank: true
+    .large-3.medium-3.small-12.columns.text-left= f.association :team, collection: current_player.teams, label: false, include_blank: true
     .large-1.medium-2.small-12.columns.bigger.text-right STATUS
     .large-3.medium-2.small-12.columns.text-left= f.input :status, collection: Aktion.status_options, label: false
     - unless params[:action] == 'show'
       .large-4.medium-4.small-4.columns.text-center.bold= f.button :submit, @aktion.to_do
     %hr
     .quadrants-container
-      .large-3.medium-4.small-12.block.aktion-quadrant.commit-bg
-        .large-12.medium-12.small-12.columns.commit.bigger.text-center.aktion-quadrant-header COMMIT
+      #commit-bg.large-3.medium-4.small-12.block.aktion-quadrant.commit-bg{'data-commit_length' => "#{current_player.commit_length}"}
+        .large-12.medium-12.small-12.columns.commit.bigger.text-center.aktion-quadrant-header= "COMMIT (#{current_player.commit_length})"
         = render 'quadrant_commit', aktion: @aktion, f: f
-
       .large-3.medium-2.small-12.block.aktion-quadrant.focus-bg
+        .large-12.focus.bigger.text-center.aktion-quadrant-header= "FOCUS (#{23 - current_player.commit_length.to_i || 3})"
         = render 'quadrant_focus', aktion: @aktion, f: f
-
-      .large-3.medium-4.small-12.block.aktion-quadrant.review-bg
-        .large-12.medium-12.small-12.columns.review.bigger.text-center.aktion-quadrant-header REVIEW
-        = render 'quadrant_review', aktion: @aktion, f: f
-
-      .large-3.medium-2.small-12.block.aktion-quadrant.relax-bg
-        .relax.bigger.text-center.aktion-quadrant-header RELAX
-        = render 'quadrant_relax', aktion: @aktion, f: f
+      - if current_player.review_before_relax == 'true'
+        .large-3.medium-4.small-12.block.aktion-quadrant.review-bg
+          .large-12.medium-12.small-12.columns.review.bigger.text-center.aktion-quadrant-header REVIEW (2)
+          = render 'quadrant_review', aktion: @aktion, f: f
+        .large-3.medium-2.small-12.block.aktion-quadrant.relax-bg
+          .relax.bigger.text-center.aktion-quadrant-header RELAX (5)
+          = render 'quadrant_relax', aktion: @aktion, f: f
+      - else
+        .large-3.medium-2.small-12.block.aktion-quadrant.relax-bg
+          .relax.bigger.text-center.aktion-quadrant-header RELAX (5)
+          = render 'quadrant_relax', aktion: @aktion, f: f
+        .large-3.medium-4.small-12.block.aktion-quadrant.review-bg
+          .large-12.medium-12.small-12.columns.review.bigger.text-center.aktion-quadrant-header REVIEW (2)
+          = render 'quadrant_review', aktion: @aktion, f: f
 
     .large-6.small-6= f.association :location, as: :hidden
     .large-12.medium-12.small-12= f.association :player, include_blank: true, as: :hidden

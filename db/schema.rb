@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150916184315) do
+ActiveRecord::Schema.define(version: 20150921220750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 20150916184315) do
     t.date     "planned_date"
     t.integer  "planned_sequence_number"
     t.boolean  "planned",                 default: false
+    t.datetime "started_at"
+    t.datetime "stopped_at"
   end
 
   create_table "insights", force: :cascade do |t|

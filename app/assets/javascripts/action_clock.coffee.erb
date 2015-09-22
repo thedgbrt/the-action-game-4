@@ -1,4 +1,8 @@
 $(document).ready ->
+  order = { commit: 3, focus: 23, relax: 5, review: 2}
+  commit_length = document.getElementById('commit-bg').dataset.current_action
+
+  
   padWithZero = (i) ->
     if i < 10
       i = '0' + i
@@ -7,7 +11,7 @@ $(document).ready ->
   updateStatus = (seconds_up) ->
     current_action = document.getElementById('time').dataset.current_action
 
-    if seconds_up < 3*60 && !current_action
+    if seconds_up < commit_length*60 && !current_action
       document.getElementById('time').classList.remove 'focus', 'review', 'relax'
       document.getElementById('time').classList.add 'commit'
       return 'commit'
@@ -46,10 +50,13 @@ $(document).ready ->
     whistle.volume = warning_volume / 100
 
     if m == 2 && s == 0 && status == 'focus'
+      console.log 'Playing Warning', m, s
       warning.play()
     else if m == 0 && s == 1
+      console.log 'Playing Bell', m, s
       bell.play()
     else if m == 0 && s == 30 && status == 'relax'
+      console.log 'Playing Whistle', m, s
       whistle.play()
     else if status == 'commit'
       commit.play()
@@ -76,7 +83,7 @@ $(document).ready ->
 
     m_string = padWithZero(minDown)
     s_string = padWithZero(secDown)
-    document.getElementById('time').innerHTML = m_string + ':' + s_string
+    document.getElementById('time').innerHTML = status + ' ' + m_string + ':' + s_string
     t = setTimeout((->
       startTime()
       return

@@ -16,7 +16,9 @@ class Aktion < ActiveRecord::Base
       "
     end
   end
-  serialize :properties, Hash, %w(choice pushups situps breaths water snack tidy stop restroom stretch games friends other music change)
+  serialize :properties, Hash, %w(choice pushups situps wallsits breaths water snack tidy stop
+    restroom stretch games friends other music change interruptions deflected distractions recovered
+    declared_focus)
   enum status: [:committing, :attempting, :reviewed, :finished, :planned]
 
   belongs_to :player
@@ -25,6 +27,7 @@ class Aktion < ActiveRecord::Base
   belongs_to :role
   belongs_to :location
   belongs_to :team
+  has_many :insights
 
   validates :team_id, presence: true
   validates :timeslot, presence: true, uniqueness: {scope: :player_id}
@@ -33,6 +36,11 @@ class Aktion < ActiveRecord::Base
   scope :by_timeslot, -> { order('timeslot DESC') }
   # scope :planned_by, ->(player) { where(planned: true, status: 'planned', player_id: player.id).order(:planned_sequence_number) }
   scope :realtime_by, ->(player) { where.not(planned: true).where(player_id: player.id) }
+
+  def break_activities_recorded
+    stop || restroom || water || snack || stretch || tidy || games || friends || music || change ||
+      pushups || situps || breaths
+  end
 
   def color
     team.color(player)
@@ -46,11 +54,15 @@ class Aktion < ActiveRecord::Base
     time_delta = (created_at - timeslot).abs/60
     if time_delta > 30
       1
-    elsif time_delta > 3
+    elsif time_delta > 3 || choice != '1' || obstacles > 0
       3
     else
       [0, 1, 3, 6, 8, 10][intensity.to_i]
     end
+  end
+
+  def obstacles
+    interruptions.to_i + distractions.to_i rescue 0
   end
 
   def plus_score
@@ -151,14 +163,6 @@ class Aktion < ActiveRecord::Base
       role: role.try(:short_safe),
       team: team.try(:short_safe)
     }
-  end
-
-  def self.intensities
-    [ ['1 - Quasi Action', 1],
-      ['2 - Missed Action', 2], 
-      ['3 - Followed Most Rules', 3],
-      ['4 - Followed All Rules', 4],
-      ['5 - Excelled at Rules & Spirit', 5]]
   end
 
   def self.focus_placeholder

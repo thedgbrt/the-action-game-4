@@ -51,6 +51,7 @@ class AktionsController < ApplicationController
     @aktion.status = :attempting
     respond_to do |format|
       if @aktion.save
+        raise
         format.html { redirect_to aktion_form }
         format.json { render :show, status: :created, location: @aktion }
       else
@@ -93,10 +94,12 @@ class AktionsController < ApplicationController
     end
 
     def aktion_params
-      params.require(:aktion).permit(:timeslot, :focus, :player_id, :verb_id, :project_id, :flow, :flow_notes, :value,
-        :value_notes, :visible_to, :status, :intensity, :how_it_went, :time_zone, :location_id, :role_id, :properties,
-        :team_id, :water, :breaths, :pushups, :choice, :snack, :tidy, :stop, :restroom, :stretch, :games, :friends,
-        :other, :music, :change, :planned_date, :planned_sequence_number, :planned)
+      params.require(:aktion).permit(:timeslot, :focus, :player_id, :verb_id, :project_id, :flow, 
+        :flow_notes, :value, :value_notes, :visible_to, :status, :intensity, :how_it_went, :music,
+        :time_zone, :location_id, :role_id, :properties, :team_id, :water, :breaths, :pushups,
+        :wallsits, :choice, :snack, :tidy, :stop, :restroom, :stretch, :games, :friends, :other,
+        :change, :planned_date, :planned_sequence_number, :planned, :interruptions, :deflected,
+        :distractions, :recovered, :started_at, :stopped_at, :declared_focus)
     end
 
     def aktion_form

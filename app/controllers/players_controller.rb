@@ -10,6 +10,10 @@ class PlayersController < ApplicationController
   end
 
   def edit
+    @player.warning_volume ||= 70
+    @player.tick_volume ||= 10
+    @player.review_before_relax ||= true
+    @player.commit_length ||= 3
   end
 
   def update
@@ -40,6 +44,7 @@ class PlayersController < ApplicationController
 
     def player_params
       params.require(:player).permit(:name, :role, :email, :current_time_zone, :email, :fictional,
-        :current_team_id, :sound_choice, :tick_volume, :warning_volume, :first_team_id)
+        :current_team_id, :sound_choice, :tick_volume, :warning_volume, :first_team_id, 
+        :review_before_relax, :commit_length)
     end
 end

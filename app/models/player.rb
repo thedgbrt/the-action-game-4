@@ -18,7 +18,8 @@ class Player < ActiveRecord::Base
     end
   end
 
-  serialize :preferences, Hash, %w(current_team_id sound_choice tick_volume warning_volume)
+  serialize :preferences, Hash, %w(current_team_id sound_choice tick_volume warning_volume
+    review_before_relax commit_length)
 
   enum role: [:user, :vip, :admin]
   after_initialize :set_default_role, :if => :new_record?
