@@ -1,7 +1,5 @@
-- if params.has_key?(:edit) || @aktion.status == 'reviewed'
-  .large-8.medium-8.columns= f.input :intensity, collection: INTENSITIES, include_blank: true, prompt: 'Intensity?', label: false
-  .large-3.medium-3.columns= f.button :submit, "FINISH"
-  .clear-both
+- if params.has_key?(:edit) || @aktion.status == 'stopped'
+  .large-6.medium-12.columns= f.input :intensity, collection: INTENSITIES, include_blank: true, prompt: 'How did it go?', label: false
   .large-6.medium-12.columns= f.input :stop, as: :boolean, inline_label: 'stop', autofocus: true
   .large-6.medium-12.columns= f.input :restroom, as: :boolean, inline_label: 'restroom'
   .large-6.medium-12.columns= f.input :water, as: :boolean, inline_label: 'water'

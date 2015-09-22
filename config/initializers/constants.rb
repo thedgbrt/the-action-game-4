@@ -17,9 +17,16 @@ COLORS = [
 CHOICE = 'I freely, consciously choose to play'
 
 INTENSITIES = [
-  ['Quasi - ', 1],
   ['Attempted - Broke Key Rule', 2], 
   ['Loose - Barely Acceptable', 3],
   ['Solid - Solid', 4],
   ['Exceptional - Great Spirit', 5]
+]
+
+STATUS_OPTIONS = [
+  ['Committing', :committing], 
+  ['Attempting', :attempting], 
+  ['Stopped', :stopped],
+  ['Reviewed', :reviewed], 
+  ['Finished', :finished], 
 ]

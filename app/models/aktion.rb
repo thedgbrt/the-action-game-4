@@ -19,7 +19,7 @@ class Aktion < ActiveRecord::Base
   serialize :properties, Hash, %w(choice pushups situps wallsits breaths water snack tidy stop
     restroom stretch games friends other music change interruptions deflected distractions recovered
     declared_focus)
-  enum status: [:committing, :attempting, :reviewed, :finished, :planned]
+  enum status: [:committing, :attempting, :stopped, :reviewed]
 
   belongs_to :player
   belongs_to :project
@@ -54,7 +54,7 @@ class Aktion < ActiveRecord::Base
     time_delta = (created_at - timeslot).abs/60
     if time_delta > 30
       1
-    elsif time_delta > 3 || choice != '1' || obstacles > 0
+    elsif time_delta > 5 || choice != '1' || obstacles > 0
       3
     else
       [0, 1, 3, 6, 8, 10][intensity.to_i]
@@ -185,18 +185,6 @@ class Aktion < ActiveRecord::Base
     'Objectively, what did you work on?  What did you complete or accomplish?  Is this the right strategy for your project?  Is this project a good use of your time?'
   end
 
-  private
-
-    def self.status_options
-      [
-        ['Committing', :committing], 
-        ['Attempting', :attempting], 
-        ['Reviewed', :reviewed], 
-        ['Finished', :finished], 
-        ['Planned', :planned]
-      ]
-    end
-    
     # def must_be_at_choice
     #   if choice == 0
     #     status = 0

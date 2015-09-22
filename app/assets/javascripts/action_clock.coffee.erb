@@ -1,9 +1,27 @@
 $(document).ready ->
-  order = { commit: 3, focus: 23, relax: 5, review: 2}
   commit_length = document.getElementById('time').dataset.commit_length
   review_before_relax = document.getElementById('time').dataset.review_before_relax
-  console.log 'commit_length', commit_length, 'review_before_relax', review_before_relax
-  
+  tick_volume = Number(document.getElementById('time').dataset.tick_volume) || 0
+  warning_volume = Number(document.getElementById('time').dataset.warning_volume) || 0
+
+  commit = new Audio("<%= asset_path('commit.wav') %>")
+  tick = new Audio("<%= asset_path('tick.wav') %>")
+  warning = new Audio("<%= asset_path('warning.wav') %>")
+  bell = new Audio("<%= asset_path('bell.wav') %>")
+  whistle = new Audio("<%= asset_path('whistle.wav') %>")
+
+  commit.volume = tick_volume / 100
+  tick.volume = tick_volume / 100
+  warning.volume = warning_volume / 100
+  bell.volume = warning_volume / 100
+  whistle.volume = warning_volume / 100
+
+  sounds = {0: bell, 22.5: warning, 23: bell, 29.5: whistle, 30: bell}
+  if review_before_relax
+    statuses = [['commit', commit_length], ['focus', 23 - commit_length], ['relax', 5], ['review', 2]]
+  else
+    statuses = [['commit', commit_length], ['focus', 23 - commit_length], ['review', 2], ['relax', 5]]
+
   padWithZero = (i) ->
     if i < 10
       i = '0' + i
@@ -34,36 +52,15 @@ $(document).ready ->
       return 'relax'
     return 'something went wrong'
 
-  playSounds = (status, m, s) ->
-    tick_volume = Number(document.getElementById('time').dataset.tick_volume) || 0
-    warning_volume = Number(document.getElementById('time').dataset.warning_volume) || 0
-
-    commit = new Audio("<%= asset_path('commit.wav') %>")
-    tick = new Audio("<%= asset_path('tick.wav') %>")
-    warning = new Audio("<%= asset_path('warning.wav') %>")
-    bell = new Audio("<%= asset_path('bell.wav') %>")
-    whistle = new Audio("<%= asset_path('whistle.wav') %>")
-
-    commit.volume = tick_volume / 100
-    tick.volume = tick_volume / 100
-    warning.volume = warning_volume / 100
-    bell.volume = warning_volume / 100
-    whistle.volume = warning_volume / 100
-
-    if m == 2 && s == 0 && status == 'focus'
-      console.log 'Playing Warning', m, s
-      warning.play()
-    else if m == 0 && s == 1
-      console.log 'Playing Bell', m, s
-      bell.play()
-    else if m == 0 && s == 30 && status == 'relax'
-      console.log 'Playing Whistle', m, s
-      whistle.play()
+  playSound = (totalSecUp, status) ->
+    special_sound = sounds[totalSecUp / 60]
+    if special_sound
+      console.log 'Playing', special_sound, 'at', totalSecUp
+      special_sound.play()
     else if status == 'commit'
       commit.play()
-    else if status != 'relax'
+    else if status == 'focus'
       tick.play()
-    return
 
   to_1800 = ->
     now = new Date
@@ -72,15 +69,13 @@ $(document).ready ->
 
   startTime = ->
     totalSecUp = to_1800()
+    playSound(totalSecUp)
     status = updateStatus(totalSecUp)
-    # console.log 'totalSecUp', totalSecUp, 'status', status
 
     totalSecDown = 1800 - totalSecUp
     actionSecDown = totalSecDown - 300
     minDown = if status == 'relax' then Math.floor(totalSecDown / 60) else Math.floor(actionSecDown / 60)
     secDown = totalSecDown % 60
-
-    playSounds(status, minDown, secDown)
 
     m_string = padWithZero(minDown)
     s_string = padWithZero(secDown)
