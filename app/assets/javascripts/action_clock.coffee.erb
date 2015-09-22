@@ -52,15 +52,17 @@ $(document).ready ->
       return 'relax'
     return 'something went wrong'
 
-  playSound = (totalSecUp, status) ->
+  playSpecialSound = (totalSecUp, status) ->
     special_sound = sounds[totalSecUp / 60]
+    console.log status
     if special_sound
       console.log 'Playing', special_sound, 'at', totalSecUp
       special_sound.play()
-    else if status == 'commit'
-      commit.play()
-    else if status == 'focus'
+    if status == 'commit'
       tick.play()
+    if status == 'focus'
+      commit.play()
+    
 
   to_1800 = ->
     now = new Date
@@ -69,8 +71,8 @@ $(document).ready ->
 
   startTime = ->
     totalSecUp = to_1800()
-    playSound(totalSecUp)
     status = updateStatus(totalSecUp)
+    playSpecialSound(totalSecUp, status)
 
     totalSecDown = 1800 - totalSecUp
     actionSecDown = totalSecDown - 300
