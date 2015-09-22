@@ -4,7 +4,7 @@
 = link_to '➜', aktions_path(date: @date + 1.day)
 
 %hr
-- Player.todays_grid(@date).in_groups_of(12).each_with_index do |part_of_days_slots, idx|
+- Player.todays_grid(@player.current_time_zone, @date).in_groups_of(12).each_with_index do |part_of_days_slots, idx|
   .large-3.medium-6.small-12.columns
     %h5.large-12.text-center= PARTS_OF_DAY[idx]
     - part_of_days_slots.each do |slot|

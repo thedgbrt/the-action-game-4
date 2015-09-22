@@ -1,7 +1,8 @@
 $(document).ready ->
   order = { commit: 3, focus: 23, relax: 5, review: 2}
-  commit_length = document.getElementById('commit-bg').dataset.current_action
-
+  commit_length = document.getElementById('time').dataset.commit_length
+  review_before_relax = document.getElementById('time').dataset.review_before_relax
+  console.log 'commit_length', commit_length, 'review_before_relax', review_before_relax
   
   padWithZero = (i) ->
     if i < 10

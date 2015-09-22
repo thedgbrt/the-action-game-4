@@ -4,9 +4,9 @@
 %nav.top-bar{"data-topbar" => true}
   %ul.title-area{"data-sound-choice" => "#{params[:sound_choice]}"}
     - if cp
-      %li#time{"data-current_action" => cp.current_action, "data-tick_volume": cp.tick_volume || 30, "data-warning_volume": cp.warning_volume || 70 }
+      %li#time{'data-current_action' => cp.current_action, 'data-tick_volume': cp.tick_volume || 30, 'data-warning_volume': cp.warning_volume || 70, 'data-commit_length' => cp.try(:commit_length), 'data-review_before_relax' => cp.review_before_relax, 'data-current_player' => cp.id}
     - else
-      %li#time{"data-current_action" => 'toolate', "data-tick_volume": params[:sound_choice] == 'ticking' ? 30 : 0 || 30, "data-warning_volume": 70 }
+      %li#time{'data-current_action' => 'toolate', 'data-tick_volume': params[:sound_choice] == 'ticking' ? 30 : 0, 'data-warning_volume': 70, 'data-commit_length' => 3, 'data-review_before_relax' => true, 'data-current_player' => nil }
     %li.toggle-topbar.menu-icon
       %a{:href => "#"}
         Menu

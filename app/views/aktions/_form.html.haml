@@ -11,8 +11,8 @@
       .large-4.medium-4.small-4.columns.text-center.bold= f.button :submit, @aktion.to_do
     %hr
     .quadrants-container
-      #commit-bg.large-3.medium-4.small-12.block.aktion-quadrant.commit-bg{'data-commit_length' => "#{current_player.commit_length}"}
-        .large-12.medium-12.small-12.columns.commit.bigger.text-center.aktion-quadrant-header= "COMMIT (#{current_player.commit_length})"
+      #commit-bg.large-3.medium-4.small-12.block.aktion-quadrant.commit-bg
+        .large-12.medium-12.small-12.columns.commit.bigger.text-center.aktion-quadrant-header= "COMMIT (#{current_player.commit_length || 3})"
         = render 'quadrant_commit', aktion: @aktion, f: f
       .large-3.medium-2.small-12.block.aktion-quadrant.focus-bg
         .large-12.focus.bigger.text-center.aktion-quadrant-header= "FOCUS (#{23 - current_player.commit_length.to_i || 3})"
