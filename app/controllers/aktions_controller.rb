@@ -51,7 +51,6 @@ class AktionsController < ApplicationController
     @aktion.status = :attempting
     respond_to do |format|
       if @aktion.save
-        raise
         format.html { redirect_to aktion_form }
         format.json { render :show, status: :created, location: @aktion }
       else
