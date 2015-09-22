@@ -41718,7 +41718,32 @@ module.exports = warning;
 }).call(this);
 (function() {
   $(document).ready(function() {
-    var padWithZero, playSounds, startTime, to_1800, updateStatus;
+    var bell, commit, commit_length, padWithZero, playSound, review_before_relax, sounds, startTime, statuses, tick, tick_volume, to_1800, updateStatus, warning, warning_volume, whistle;
+    commit_length = document.getElementById('time').dataset.commit_length;
+    review_before_relax = document.getElementById('time').dataset.review_before_relax;
+    tick_volume = Number(document.getElementById('time').dataset.tick_volume) || 0;
+    warning_volume = Number(document.getElementById('time').dataset.warning_volume) || 0;
+    commit = new Audio("/assets/commit-7a8fbb07856a8d4cad8824fd864e3abbf6f6a2dcbc075da2717f1ac1d89fcb25.wav");
+    tick = new Audio("/assets/tick-422bb2b92072cf8ecb77fda83e70d27bdcb7fa8cee33415ef66985a8cc14dde2.wav");
+    warning = new Audio("/assets/warning-3436c5b74df24045d5e2252b72e24e17d648e40497d2d5c812b749d0e0ed7860.wav");
+    bell = new Audio("/assets/bell-b0c60370bedcc27c1244a5de9670faebc2fbd11c9a512c3276768b0eed0f08c3.wav");
+    whistle = new Audio("/assets/whistle-4c4ee0fa77246ebc8601fbfe23ad3d986997a3cc05b45724957a576fd1c5cb62.wav");
+    commit.volume = tick_volume / 100;
+    tick.volume = tick_volume / 100;
+    warning.volume = warning_volume / 100;
+    bell.volume = warning_volume / 100;
+    whistle.volume = warning_volume / 100;
+    sounds = {
+      0: bell,
+      22.5: warning,
+      23: bell,
+      29.5: whistle
+    };
+    if (review_before_relax) {
+      statuses = [['commit', commit_length], ['focus', 23 - commit_length], ['relax', 5], ['review', 2]];
+    } else {
+      statuses = [['commit', commit_length], ['focus', 23 - commit_length], ['review', 2], ['relax', 5]];
+    }
     padWithZero = function(i) {
       if (i < 10) {
         i = '0' + i;
@@ -41728,7 +41753,7 @@ module.exports = warning;
     updateStatus = function(seconds_up) {
       var current_action;
       current_action = document.getElementById('time').dataset.current_action;
-      if (seconds_up < 3 * 60 && !current_action) {
+      if (seconds_up < commit_length * 60 && !current_action) {
         document.getElementById('time').classList.remove('focus', 'review', 'relax');
         document.getElementById('time').classList.add('commit');
         return 'commit';
@@ -41751,30 +41776,16 @@ module.exports = warning;
       }
       return 'something went wrong';
     };
-    playSounds = function(status, m, s) {
-      var bell, commit, tick, tick_volume, warning, warning_volume, whistle;
-      tick_volume = Number(document.getElementById('time').dataset.tick_volume) || 0;
-      warning_volume = Number(document.getElementById('time').dataset.warning_volume) || 0;
-      commit = new Audio("/assets/commit-7a8fbb07856a8d4cad8824fd864e3abbf6f6a2dcbc075da2717f1ac1d89fcb25.wav");
-      tick = new Audio("/assets/tick-422bb2b92072cf8ecb77fda83e70d27bdcb7fa8cee33415ef66985a8cc14dde2.wav");
-      warning = new Audio("/assets/warning-3436c5b74df24045d5e2252b72e24e17d648e40497d2d5c812b749d0e0ed7860.wav");
-      bell = new Audio("/assets/bell-b0c60370bedcc27c1244a5de9670faebc2fbd11c9a512c3276768b0eed0f08c3.wav");
-      whistle = new Audio("/assets/whistle-4c4ee0fa77246ebc8601fbfe23ad3d986997a3cc05b45724957a576fd1c5cb62.wav");
-      commit.volume = tick_volume / 100;
-      tick.volume = tick_volume / 100;
-      warning.volume = warning_volume / 100;
-      bell.volume = warning_volume / 100;
-      whistle.volume = warning_volume / 100;
-      if (m === 2 && s === 0 && status === 'focus') {
-        warning.play();
-      } else if (m === 0 && s === 1) {
-        bell.play();
-      } else if (m === 0 && s === 30 && status === 'relax') {
-        whistle.play();
+    playSound = function(totalSecUp, status) {
+      var special_sound;
+      special_sound = sounds[totalSecUp / 60];
+      if (special_sound) {
+        console.log('Playing', special_sound, 'at', totalSecUp);
+        return special_sound.play();
       } else if (status === 'commit') {
-        commit.play();
-      } else if (status !== 'relax') {
-        tick.play();
+        return commit.play();
+      } else if (status === 'focus') {
+        return tick.play();
       }
     };
     to_1800 = function() {
@@ -41790,15 +41801,15 @@ module.exports = warning;
     startTime = function() {
       var actionSecDown, m_string, minDown, s_string, secDown, status, t, totalSecDown, totalSecUp;
       totalSecUp = to_1800();
+      playSound(totalSecUp);
       status = updateStatus(totalSecUp);
       totalSecDown = 1800 - totalSecUp;
       actionSecDown = totalSecDown - 300;
       minDown = status === 'relax' ? Math.floor(totalSecDown / 60) : Math.floor(actionSecDown / 60);
       secDown = totalSecDown % 60;
-      playSounds(status, minDown, secDown);
       m_string = padWithZero(minDown);
       s_string = padWithZero(secDown);
-      document.getElementById('time').innerHTML = m_string + ':' + s_string;
+      document.getElementById('time').innerHTML = status + ' ' + m_string + ':' + s_string;
       return t = setTimeout((function() {
         startTime();
       }), 1000);
@@ -41822,8 +41833,7 @@ module.exports = warning;
     return $('#aktion_team_id').change(function() {
       var old_params, val;
       val = $('#aktion_team_id').val();
-      old_params = window.location.search;
-      return window.location.search = '?team_id=' + val;
+      return old_params = window.location.search;
     });
   });
 

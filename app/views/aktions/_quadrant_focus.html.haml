@@ -1,21 +1,25 @@
-/ - if @aktion.planned == true || params[:status] == 'planned'
-/   .large-12.focus.bigger.text-center.aktion-quadrant-header PLAN
-/   .large-12.columns= f.input :planned, inline_label: 'Planned Action for'
-/   .large-12.columns= f.input :planned_date, include_blank: true, use_short_month: true, label: false
-/   .large-7.medium-12.columns= f.input :planned_sequence_number, collection: (1..5), label:  false, prompt: 'Sequence #'
-/   .large-5.medium-12.columns.commit-button= f.button :submit, "PLAN"
-/   - current_player.planned_actions.each do |pa|
-/     .large-12= link_to pa.seq + pa.summary, edit_aktion_path(pa, edit: true)
-/ - else
 - if @aktion.status == 'attempting'
-  .large-3.columns.text-center= link_to 'TICKING', sounds_path(sound_choice: 'ticking')
-  .large-3.columns.text-center= link_to 'NATURE', sounds_path(sound_choice: 'nature')
-  .large-3.columns.text-center= link_to 'MUSIC', sounds_path(sound_choice: 'music')
-  .large-3.columns.text-center= link_to 'SILENCE', sounds_path(sound_choice: 'silence')
-  %hr
-  INSIGHTS
-  .large-12.columns.text-right#add-insight{"data-aktion_id" => "#{@aktion.id}", "data-player_id" => "#{current_player.id}"}= link_to '+new_insight', new_insight_path(player_id: current_player.id, aktion_id: @aktion.id), remote: true
-  .large-12#insights
-    - @aktion.insights.each do |insight|
-      = insight.text
-      %br
+  %h5.text-center
+    =link_to 'Ticking', sounds_path(sound_choice: 'ticking')
+    \|
+    =link_to 'Nature', sounds_path(sound_choice: 'nature')
+    \|
+    =link_to 'Music', sounds_path(sound_choice: 'music')
+    \|
+    =link_to 'Silence', sounds_path(sound_choice: 'silence')
+  - if @aktion.insights != []
+    %h5.text-center
+      Insights
+      %span#add-insight{"data-aktion_id" => "#{@aktion.id}", "data-player_id" => "#{current_player.id}"}= link_to '(Add)', new_insight_path(player_id: current_player.id, aktion_id: @aktion.id), remote: true
+    #insights
+      - @aktion.insights.each do |insight|
+        = insight.text
+        %br  
+  - else
+    %h5.text-center
+      %span#add-insight{"data-aktion_id" => "#{@aktion.id}", "data-player_id" => "#{current_player.id}"}= link_to 'Add Insight', new_insight_path(player_id: current_player.id, aktion_id: @aktion.id), remote: true
+    #insights
+  %h5.text-center Add Interruption | Recovered
+  %h5.text-center Add Distraction | Recovered
+  - unless params[:action] == 'show'
+    .large-4.medium-4.small-4.columns.text-center.bold= f.button :submit, 'STOP AT THE BELL'

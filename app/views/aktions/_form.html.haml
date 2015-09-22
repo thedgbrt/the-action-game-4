@@ -7,8 +7,6 @@
     .large-3.medium-3.small-12.columns.text-left= f.association :team, collection: current_player.teams, label: false, include_blank: true
     .large-1.medium-2.small-12.columns.bigger.text-right STATUS
     .large-3.medium-2.small-12.columns.text-left= f.input :status, collection: STATUS_OPTIONS, label: false
-    - unless params[:action] == 'show'
-      .large-4.medium-4.small-4.columns.text-center.bold= f.button :submit, @aktion.to_do
     %hr
     .quadrants-container
       #commit-bg.large-3.medium-4.small-12.block.aktion-quadrant.commit-bg
