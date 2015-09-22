@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resources :projects
 
   root to: 'visitors#index'
+  get '/welcome' => 'visitors#welcome'
   get '/help' => 'visitors#help'
   get '/sounds' => 'visitors#sounds'
   get '/scores' => 'visitors#scores'

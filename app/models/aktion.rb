@@ -174,7 +174,7 @@ class Aktion < ActiveRecord::Base
       ['+3 (Amazing)', 3],
       ['+2 (Good)', 2],
       ['+1 (Decent)', 1],
-      [' 0 (Neutral)', 0],
+      [' 0 (Average)', 0],
       ['-1 (Questionable)', -1],
       ['-2 (Poor)', -2],
       ['-3 (Terrible)', -3]

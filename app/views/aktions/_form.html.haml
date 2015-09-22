@@ -15,7 +15,7 @@
       .large-3.medium-2.small-12.block.aktion-quadrant.focus-bg
         .large-12.focus.bigger.text-center.aktion-quadrant-header= "FOCUS (#{23 - current_player.commit_length.to_i || 3})"
         = render 'quadrant_focus', aktion: @aktion, f: f
-      - if current_player.review_before_relax == 'true'
+      - if current_player.review_first
         .large-3.medium-4.small-12.block.aktion-quadrant.review-bg
           .large-12.medium-12.small-12.columns.review.bigger.text-center.aktion-quadrant-header REVIEW (2)
           = render 'quadrant_review', aktion: @aktion, f: f

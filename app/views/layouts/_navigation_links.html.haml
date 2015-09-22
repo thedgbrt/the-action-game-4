@@ -4,7 +4,7 @@
     %li.light-red-text= link_to "#{current_aktion.to_do}", edit_aktion_path(id: current_aktion.id)
   %li
     %a{"data-dropdown" => "hover4", "data-options" => "is_hover:true; hover_timeout:200", href: "#{new_aktion_path}"}
-      .light-red-text NEW
+      .light-red-text START ACTION
     %ul#hover4.f-dropdown.medium{"data-dropdown-content" => ""}
       - current_player.my_teams.each do |team|
         %li.dropdown_item= link_to "=> #{team.name}", activate_team_path(team), {style: "color: #{team.color(current_player)}"}
@@ -17,7 +17,7 @@
       /   %li.dropdown_item.light-red-text= link_to pa.seq + pa.summary, edit_aktion_path(pa, status: 'committing')
   %li
     %a{"data-dropdown" => "hover2", "data-options" => "is_hover:true; hover_timeout:200", href: "#{teams_path}"}
-      = 'TEAMS'
+      = 'MY TEAMS'
     %ul#hover2.f-dropdown.tiny{"data-dropdown-content" => ""}
       - current_player.my_teams.each do |team|
         %li.dropdown_item= link_to team.name, team, {style: "color: #{team.color(current_player)}"}
@@ -40,7 +40,6 @@
       %li.text-right.dropdown_item= link_to '=> nature'.upcase, sounds_path(sound_choice: 'nature')
       %li.text-right.dropdown_item= link_to '=> silence'.upcase, sounds_path(sound_choice: 'silence')
       %li.text-right.dropdown_item= link_to '=> ticking'.upcase, sounds_path(sound_choice: 'ticking')
-
 - else
   %li
     %a{"data-dropdown" => "hover3", "data-options" => "is_hover:true; hover_timeout:200", href: ""}
@@ -50,3 +49,4 @@
       - Player.sound_choices.each do |choice|
         %li.dropdown_item= link_to choice.upcase, sounds_path(sound_choice: choice)
   %li.green-text= link_to 'Sign in with Google', signin_path
+%li= link_to 'HELP', 'https://playfullyproductive.zendesk.com/hc/en-us'

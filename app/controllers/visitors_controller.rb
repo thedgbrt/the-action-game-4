@@ -14,4 +14,7 @@ class VisitorsController < ApplicationController
     current_player.persist_sound_choice(sound) if player_signed_in?
     redirect_to :back
   end
+
+  def welcome
+  end
 end

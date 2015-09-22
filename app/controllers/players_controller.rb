@@ -12,7 +12,7 @@ class PlayersController < ApplicationController
   def edit
     @player.warning_volume ||= 70
     @player.tick_volume ||= 10
-    @player.review_before_relax ||= true
+    @player.review_first
     @player.commit_length ||= 3
   end
 

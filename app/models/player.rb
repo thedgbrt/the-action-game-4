@@ -153,6 +153,10 @@ class Player < ActiveRecord::Base
     Project.initialize_for(team, self)
   end
 
+  def review_first
+    true  #TODO: implement option
+  end
+
   def set_default_role
     if Player.count == 0
       self.role ||= :admin

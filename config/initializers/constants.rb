@@ -30,3 +30,5 @@ STATUS_OPTIONS = [
   ['Reviewed', :reviewed], 
   ['Finished', :finished], 
 ]
+
+INTENSITY_PROMPT = 'What is the quality of your Action?'

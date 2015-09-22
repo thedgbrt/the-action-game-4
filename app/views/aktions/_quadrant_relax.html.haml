@@ -1,4 +1,8 @@
 - if params.has_key?(:edit) || @aktion.status == 'stopped'
+  - if !current_player.review_first
+    .large-12.medium-12.columns= f.input :intensity, collection: INTENSITIES, include_blank: true, prompt: INTENSITY_PROMPT, label: false
+    .large-6.medium-6.small-6.text-center.columns= f.button :submit, "COUNT IT"
+    .large-6.medium-6.small-6.text-center.columns= f.button :submit, "MISSED IT"
   .large-6.medium-12.columns= f.input :stop, as: :boolean, inline_label: 'enjoyed break', autofocus: true
   .large-6.medium-12.columns= f.input :restroom, as: :boolean, inline_label: 'restroom'
   .large-6.medium-12.columns= f.input :water, as: :boolean, inline_label: 'water'

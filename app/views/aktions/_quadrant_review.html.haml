@@ -5,9 +5,10 @@
   .large-4.medium-4.small-4.columns.bigger= 'VALUE'
   .large-8.medium-8.small-8.columns= f.input :value, collection: Aktion.focus_options, label: false
   .large-12.columns= f.input :value_notes, label: false, input_html: {rows: 5}, placeholder: Aktion.value_placeholder
-  .large-12.medium-12.columns= f.input :intensity, collection: INTENSITIES, include_blank: true, prompt: 'How did it go?', label: false
-  .large-6.medium-6.small-6.text-center.columns= f.button :submit, "COUNT IT"
-  .large-6.medium-6.small-6.text-center.columns= f.button :submit, "MISSED IT"
+  - if current_player.review_first
+    .large-12.medium-12.columns= f.input :intensity, collection: INTENSITIES, include_blank: true, prompt: INTENSITY_PROMPT, label: false
+    .large-6.medium-6.small-6.text-center.columns= f.button :submit, "COUNT IT"
+    .large-6.medium-6.small-6.text-center.columns= f.button :submit, "MISSED IT"
 - elsif @aktion.status == 'reviewed' || @aktion.status == 'finished'
   .large-12.review-item
     %span.bold Status:
