@@ -10,7 +10,9 @@ class SessionsController < ApplicationController
                       :uid => auth['uid'].to_s).first || Player.create_with_omniauth(auth)
     reset_session
     session[:player_id] = player.id
-    redirect_to player, :notice => 'Signed in!'
+    player.update_attributes(current_team_id: player.teams.first.id, sound_choice: 'ticking',
+      tick_volume: 30, warning_volume: 70, review_before_relax: true, commit_length: 3)
+    redirect_to edit_player_path(player), :notice => 'Signed in!'
   end
 
   def destroy

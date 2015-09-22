@@ -19,7 +19,7 @@ CHOICE = 'I freely, consciously choose to play'
 INTENSITIES = [
   ['Attempted - Broke Key Rule', 2], 
   ['Loose - Barely Acceptable', 3],
-  ['Solid - Solid', 4],
+  ['Solid - Followed All Rules', 4],
   ['Exceptional - Great Spirit', 5]
 ]
 

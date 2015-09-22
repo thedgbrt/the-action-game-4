@@ -1,6 +1,5 @@
 - if params.has_key?(:edit) || @aktion.status == 'stopped'
-  .large-6.medium-12.columns= f.input :intensity, collection: INTENSITIES, include_blank: true, prompt: 'How did it go?', label: false
-  .large-6.medium-12.columns= f.input :stop, as: :boolean, inline_label: 'stop', autofocus: true
+  .large-6.medium-12.columns= f.input :stop, as: :boolean, inline_label: 'enjoyed break', autofocus: true
   .large-6.medium-12.columns= f.input :restroom, as: :boolean, inline_label: 'restroom'
   .large-6.medium-12.columns= f.input :water, as: :boolean, inline_label: 'water'
   .large-6.medium-12.columns= f.input :snack, as: :boolean, inline_label: 'snack'

@@ -22,7 +22,7 @@ class Team < ActiveRecord::Base
     return 'Player not yet saved' if playa.new_record?
     t = playa.teams.create!(name: playa.first_name.to_s + ' Enterprises')
     playa.update_attributes(first_team_id: t.id)
-    t.update_attributes(creator_id: playa.id)
+    t.update_attributes(creator_id: playa.id, default_color: '#CCFFCC', short: playa.initials)
     t
   end
 

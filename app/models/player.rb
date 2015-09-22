@@ -88,6 +88,11 @@ class Player < ActiveRecord::Base
     Aktion.realtime_by(self).select{ |a| a.timeslot.in_time_zone(self.current_time_zone).to_date == Time.zone.now.in_time_zone(self.current_time_zone).to_date }
   end
 
+  def initials
+    name.split(' ').map{|w| w[0].upcase}.join
+    
+  end
+
   def self.todays_grid(tz, date=nil)
     date ||= Time.zone.now.in_time_zone(tz).to_date
     midnight = date.at_beginning_of_day
