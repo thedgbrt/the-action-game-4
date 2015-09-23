@@ -4,7 +4,7 @@ PARTS_OF_DAY = ['Night', 'Morning', 'Afternoon', 'Evening']
 
 COLORS = [
   ['green', '#CCFFCC'],
-  ['red,', '#FFCCCC'],
+  ['red', '#FFCCCC'],
   ['yellow', '#F4FA58'],
   ['blue', '#5882FA'],
   ['orange', '#F5D0A9'],

@@ -80,13 +80,21 @@ class Player < ActiveRecord::Base
     update_attributes(sound_choice: sound, tick_volume: new_tick_volume)
   end
 
-  def previous_actions
-    previous_aktions_hash = Aktion.realtime_by(self).by_timeslot.first(10).group_by{ |a| a.summary }
-    previous_aktions_hash.keys.map{ |key| previous_aktions_hash[key].first }
+  # get a list of all my actions
+  # 
+  
+
+
+  def frequent_actions_with_counts
+    hash = aktions.by_timeslot.group_by{ |a| a.summary_hash }
+    results = {}
+    hash.each{ |k, v| results[v.first] = v.count }
+    results.sort_by{ |r| -r[1] }
+    # recents.sort_by{ |a| [a.team.try(:short) || 'None', a.role.try(:name) || 'None', a.verb.try(:name) || 'None'] }
   end
 
   def todays_actions(date=nil)
-    Aktion.realtime_by(self).select{ |a| a.timeslot.in_time_zone(self.current_time_zone).to_date == Time.zone.now.in_time_zone(self.current_time_zone).to_date }
+    aktions.select{ |a| a.persisted? && a.timeslot.in_time_zone(self.current_time_zone).to_date == Time.zone.now.in_time_zone(self.current_time_zone).to_date }
   end
 
   def initials

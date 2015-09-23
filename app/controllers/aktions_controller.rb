@@ -3,6 +3,9 @@ class AktionsController < ApplicationController
   before_action :authenticate_player!
   # before_action :select_team!
 
+  def start
+  end
+
   def index
     @player = Player.find_by_id(params[:player_id]) || current_player
     if params[:role_id]

@@ -1,5 +1,5 @@
 - if params.has_key?(:edit) || @aktion.status == 'stopped'
-  - if !current_player.review_first
+  - if current_player.review_first
     .large-12.medium-12.columns= f.input :intensity, collection: INTENSITIES, include_blank: true, prompt: INTENSITY_PROMPT, label: false
     .large-6.medium-6.small-6.text-center.columns= f.button :submit, "COUNT IT"
     .large-6.medium-6.small-6.text-center.columns= f.button :submit, "MISSED IT"

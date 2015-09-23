@@ -147,3 +147,15 @@
 .underline {
   text-decoration: underline;
 }
+
+.starter-aktion {
+  button, button:hover {
+    width: 100%;
+    height: 85px;
+    color: black;
+    border: 1px solid black;
+    margin: 5px 0px;
+    padding: 5px;
+    background-color: inherit;
+  }
+}

@@ -1,7 +1,7 @@
 %tr{id: "team-#{team.id}"}
   %td
     - if @current_player.teams.include?(team)
-      .green-text= link_to 'ACTIVATE', activate_team_path(team_id: team.id, id: team.id) 
+      .green-text= link_to 'LEAVE', leave_team_path(team)
     - else
       .blue-text= link_to 'JOIN', join_team_path(team)
   %td{style: "background-color: #{team.color(current_player)}"}= link_to team.name, team

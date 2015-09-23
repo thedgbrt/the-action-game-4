@@ -34,8 +34,6 @@ class Aktion < ActiveRecord::Base
 #  validate :focus_or_verb#, :must_be_at_choice, 
 
   scope :by_timeslot, -> { order('timeslot DESC') }
-  # scope :planned_by, ->(player) { where(planned: true, status: 'planned', player_id: player.id).order(:planned_sequence_number) }
-  scope :realtime_by, ->(player) { where.not(planned: true).where(player_id: player.id) }
 
   def break_activities_recorded
     stop || restroom || water || snack || stretch || tidy || games || friends || music || change ||
@@ -45,12 +43,9 @@ class Aktion < ActiveRecord::Base
   def color
     team.color(player)
   end
-  #
-  # def self.color_options(colors)
-  #   colors.map {|color, code| "<option value='#{code}' style='background-color:#{code};'>#{color}</option>" }
-  # end
 
   def score
+    return 0 if new_record?
     time_delta = (created_at - timeslot).abs/60
     if time_delta > 30
       1
@@ -137,10 +132,6 @@ class Aktion < ActiveRecord::Base
     timeslot.strftime('%b-%d %l:%m %p')
   end
   
-  def summary_to_share
-    player.first_name.to_s + ' (' + [verb.try(:name), focus].join(', ') + ')'
-  end
-
   def self.checkmark(int)
     int == '1' ? '✔︎' : '✘'
   end
@@ -153,7 +144,15 @@ class Aktion < ActiveRecord::Base
       status.capitalize
     end
   end
-  
+
+  def summary_hash
+    {
+      verb: verb.try(:name),
+      role: role.try(:short_safe),
+      team: team.try(:short_safe)
+    }
+  end
+
   def summary
     [
       [summary_hash[:team], summary_hash[:role]].compact.join('/'),
@@ -165,16 +164,12 @@ class Aktion < ActiveRecord::Base
     summary + ' (' + focus + ')'
   end
 
-  def summary_with_time_and_focus
-    simple_time + ' ' + summary_with_focus
+  def summary_to_share
+    player.first_name.to_s + ' (' + [verb.try(:name), focus].join(', ') + ')'
   end
 
-  def summary_hash
-    {
-      verb: verb.try(:name),
-      role: role.try(:short_safe),
-      team: team.try(:short_safe)
-    }
+  def summary_with_time_and_focus
+    simple_time + ' ' + summary_with_focus
   end
 
   def self.focus_placeholder

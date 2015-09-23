@@ -1,7 +1,7 @@
-# Feature: Start Action
-#   As a player
-#   I want to have a start action dashboard
-#   So that I can very quickly start one of my "usual" actions
+# Feature: Planning
+#   As a user
+#   I want to plan future Actions
+#   So that I can get to important but non-urgent work and organize my day/week
 
 feature 'Aktion planning' do
   # Scenario: Create a planned Aktion

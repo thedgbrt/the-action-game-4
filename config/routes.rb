@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :insights
   resources :aktions do
-    collection { get :continue }
+    collection { get :continue, :start }
   end
   resources :role_assignments
   resources :project_memberships

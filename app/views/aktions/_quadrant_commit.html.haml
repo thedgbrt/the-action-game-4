@@ -41,7 +41,7 @@
   - if aktion.project
     .large-12.review-item
       %span.bold Project: 
-      %span.underline= aktion.project.try(:name)
+      %span.underline= link_to aktion.project.name, aktion.project
   .large-12.review-item
     %span.bold Choice: 
     %span.underline= aktion.choice == '1' ? 'Affirmed' : 'Unspecified'

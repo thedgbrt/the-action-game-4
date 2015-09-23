@@ -3,14 +3,14 @@
   - if current_aktion
     %li.light-red-text= link_to "#{current_aktion.to_do}", edit_aktion_path(id: current_aktion.id)
   %li
-    %a{"data-dropdown" => "hover4", "data-options" => "is_hover:true; hover_timeout:200", href: "#{new_aktion_path}"}
+    %a{"data-dropdown" => "hover4", "data-options" => "is_hover:true; hover_timeout:200", href: "#{starting_path}"}
       .light-red-text START ACTION
     %ul#hover4.f-dropdown.medium{"data-dropdown-content" => ""}
       - current_player.my_teams.each do |team|
         %li.dropdown_item= link_to "=> #{team.name}", activate_team_path(team), {style: "color: #{team.color(current_player)}"}
       %hr
-      - current_player.previous_actions.each do |a|
-        %li.dropdown_item= link_to a.summary, new_aktion_path(previous_aktion_id: a.id)
+      - current_player.frequent_actions_with_counts.first(10).each do |a, count|
+        %li.dropdown_item= link_to "#{a.summary} (#{count})", new_aktion_path(previous_aktion_id: a.id), {style: "color: #{a.color}"}
       / %hr
       / %li.dropdown_item.light-red-text= link_to 'PLANNED', new_aktion_path(status: 'planned')
       / - current_player.planned_actions.each do |pa|
