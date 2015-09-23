@@ -1,3 +1,4 @@
 class Insight < ActiveRecord::Base
-  belongs_to :action
+  belongs_to :aktion
+  belongs_to :player
 end

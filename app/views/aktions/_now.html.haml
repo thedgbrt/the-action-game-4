@@ -1,0 +1,7 @@
+.clear-both
+%table{style: "border: 0px; padding: 0px; margin: 0px"}
+  %tbody
+    %tr
+      %td.mini-menu-action Currently Playing:
+      - Aktion.current.sort_by{ |a| a.player.name }.each do |a|
+        %td.mini-menu-action= link_to a.player.name, a.player, title: a.summary_with_time_and_focus

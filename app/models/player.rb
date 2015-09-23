@@ -35,6 +35,7 @@ class Player < ActiveRecord::Base
   has_many :role_assignments
   has_many :roles, through: :role_assignments
   belongs_to :first_team
+  has_many :insights
 
   def committed_to(proj)
     true

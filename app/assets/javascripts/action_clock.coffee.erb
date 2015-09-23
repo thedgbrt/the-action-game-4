@@ -54,7 +54,6 @@ $(document).ready ->
 
   playSpecialSound = (totalSecUp, status) ->
     special_sound = sounds[totalSecUp / 60]
-    console.log status
     if special_sound
       console.log 'Playing', special_sound, 'at', totalSecUp
       special_sound.play()

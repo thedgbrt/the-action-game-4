@@ -7,6 +7,7 @@
     =link_to 'Music', sounds_path(sound_choice: 'music')
     \|
     =link_to 'Silence', sounds_path(sound_choice: 'silence')
+  %hr
   - if @aktion.insights != []
     %h5.text-center
       Insights
@@ -14,11 +15,13 @@
     #insights
       - @aktion.insights.each do |insight|
         = insight.text
-        %br  
+        %br
   - else
     %h5.text-center
       %span#add-insight{"data-aktion_id" => "#{@aktion.id}", "data-player_id" => "#{current_player.id}"}= link_to 'Add Insight', new_insight_path(player_id: current_player.id, aktion_id: @aktion.id), remote: true
     #insights
+  %hr
+  / %h5 Obstacles
   / %h5.text-center Add Interruption | Recovered
   / %h5.text-center Add Distraction | Recovered
   - unless params[:action] == 'show'

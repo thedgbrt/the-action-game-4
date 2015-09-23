@@ -1,5 +1,5 @@
 - if player_signed_in?
-  - current_aktion = Aktion.current_aktion(current_player)
+  - current_aktion = Aktion.current(current_player)
   - if current_aktion
     %li.light-red-text= link_to "#{current_aktion.to_do}", edit_aktion_path(id: current_aktion.id)
   %li
@@ -17,7 +17,7 @@
       /   %li.dropdown_item.light-red-text= link_to pa.seq + pa.summary, edit_aktion_path(pa, status: 'committing')
   %li
     %a{"data-dropdown" => "hover2", "data-options" => "is_hover:true; hover_timeout:200", href: "#{teams_path}"}
-      = 'MY TEAMS'
+      = 'VIEW TEAMS'
     %ul#hover2.f-dropdown.tiny{"data-dropdown-content" => ""}
       - current_player.my_teams.each do |team|
         %li.dropdown_item= link_to team.name, team, {style: "color: #{team.color(current_player)}"}
@@ -33,6 +33,7 @@
       %li.text-right.dropdown_item= link_to 'My Actions', player_aktions_path(player_id: current_player.id)
       %li.text-right.dropdown_item= link_to 'My Roles', roles_path
       %li.text-right.dropdown_item= link_to 'My Projects', projects_path
+      %li.text-right.dropdown_item= link_to 'My Insights', insights_path
       %hr
       %li.text-right.dropdown_item= link_to 'All Players', players_path
       %hr

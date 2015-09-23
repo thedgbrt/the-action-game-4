@@ -1,11 +1,10 @@
-%h1 Listing insights
+%h1 My Insights
 
 %table
   %thead
     %tr
       %th Text
       %th Category
-      %th Player
       %th Aktion
       %th
       %th
@@ -16,8 +15,7 @@
       %tr
         %td= insight.text
         %td= insight.category
-        %td= insight.player_id
-        %td= insight.aktion_id
+        %td= link_to insight.aktion.try(:simple_time), edit_aktion_path(insight.aktion)
         %td= link_to 'Show', insight
         %td= link_to 'Edit', edit_insight_path(insight)
         %td= link_to 'Destroy', insight, :method => :delete, :data => { :confirm => 'Are you sure?' }

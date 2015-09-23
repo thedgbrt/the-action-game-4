@@ -1,28 +1,21 @@
 class InsightsController < ApplicationController
+  before_action :authenticate_player!
   before_action :set_insight, only: [:show, :edit, :update, :destroy]
 
-  # GET /insights
-  # GET /insights.json
   def index
-    @insights = Insight.all
+    @insights = current_player.insights
   end
 
-  # GET /insights/1
-  # GET /insights/1.json
   def show
   end
 
-  # GET /insights/new
   def new
     @insight = Insight.new
   end
 
-  # GET /insights/1/edit
   def edit
   end
 
-  # POST /insights
-  # POST /insights.json
   def create
     @insight = Insight.new(insight_params)
 
@@ -37,8 +30,6 @@ class InsightsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /insights/1
-  # PATCH/PUT /insights/1.json
   def update
     respond_to do |format|
       if @insight.update(insight_params)
@@ -51,8 +42,6 @@ class InsightsController < ApplicationController
     end
   end
 
-  # DELETE /insights/1
-  # DELETE /insights/1.json
   def destroy
     @insight.destroy
     respond_to do |format|
@@ -62,12 +51,10 @@ class InsightsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_insight
       @insight = Insight.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def insight_params
       params.require(:insight).permit(:text, :category, :player_id, :aktion_id)
     end

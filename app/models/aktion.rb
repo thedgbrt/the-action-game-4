@@ -86,8 +86,12 @@ class Aktion < ActiveRecord::Base
     end
   end
 
-  def self.current_aktion(playa)
-    find_by(player_id: playa.id, timeslot: Aktion.current_timeslot)
+  def self.current(playa=nil)
+    if playa
+      find_by(player_id: playa.id, timeslot: Aktion.current_timeslot)
+    else
+      where(timeslot: Aktion.current_timeslot)
+    end
   end
 
   def break
