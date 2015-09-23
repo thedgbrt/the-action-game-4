@@ -128,9 +128,13 @@ class Aktion < ActiveRecord::Base
     timestamp.strftime('%b-%d %H:%M')    
   end
 
-  def simple_time
-    return '0:00' if !timeslot
-    timeslot.strftime('%b-%d %H:%M')
+  def simple_time(time = nil)
+    return '0:00' if !time
+    time.strftime('%b-%d %l:%m %p')
+  end
+  
+  def summary_to_share
+    player.first_name.to_s + ' (' + [verb.try(:name), focus].join(', ') + ')'
   end
 
   def self.checkmark(int)
