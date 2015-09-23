@@ -90,6 +90,7 @@ class Player < ActiveRecord::Base
     results = {}
     hash.each{ |k, v| results[v.first] = v.count }
     results.sort_by{ |r| -r[1] }
+    @frequent_actions_with_counts ||= results
     # recents.sort_by{ |a| [a.team.try(:short) || 'None', a.role.try(:name) || 'None', a.verb.try(:name) || 'None'] }
   end
 

@@ -3,7 +3,7 @@
 - current_player.frequent_actions_with_counts.first(24).each do |a, count|
   .large-3.medium-4.small-6.columns
     .large-12.medium-12.small-12.starter-aktion
-      %a{:href => new_aktion_path(previous_aktion_id: a.id)}
+      %a{:href => new_aktion_path(previous_aktion_id: a.id, timeslot: params[:timeslot])}
         %button{'style' => "background-color: #{a.color}"}
           %span.bold= a.team.try(:short)
           \-
