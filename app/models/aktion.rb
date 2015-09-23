@@ -86,6 +86,10 @@ class Aktion < ActiveRecord::Base
     end
   end
 
+  def self.current_simple_time
+    Aktion.current_timeslot.strftime('%b-%d %l:%m %p')
+  end
+
   def self.current(playa=nil)
     if playa
       find_by(player_id: playa.id, timeslot: Aktion.current_timeslot)
@@ -128,9 +132,9 @@ class Aktion < ActiveRecord::Base
     timestamp.strftime('%b-%d %H:%M')    
   end
 
-  def simple_time(time = nil)
-    return '0:00' if !time
-    time.strftime('%b-%d %l:%m %p')
+  def simple_time
+    return '0:00' if !timeslot
+    timeslot.strftime('%b-%d %l:%m %p')
   end
   
   def summary_to_share
