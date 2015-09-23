@@ -1,8 +1,8 @@
 - if params.has_key?(:edit) || @aktion.status == 'stopped'
-  - if current_player.review_first
-    .large-12.medium-12.columns= f.input :intensity, collection: INTENSITIES, include_blank: true, prompt: INTENSITY_PROMPT, label: false
-    .large-6.medium-6.small-6.text-center.columns= f.button :submit, "COUNT IT"
-    .large-6.medium-6.small-6.text-center.columns= f.button :submit, "MISSED IT"
+  .large-12.medium-12.columns= f.input :intensity, collection: INTENSITIES, include_blank: true, prompt: INTENSITY_PROMPT, label: false
+  .large-6.medium-6.small-6.text-center.columns= f.button :submit, "COUNT IT"
+  .large-6.medium-6.small-6.text-center.columns= f.button :submit, "MISSED IT"
+  %hr
   .large-6.medium-12.columns= f.input :stop, as: :boolean, inline_label: 'enjoyed break', autofocus: true
   .large-6.medium-12.columns= f.input :restroom, as: :boolean, inline_label: 'restroom'
   .large-6.medium-12.columns= f.input :water, as: :boolean, inline_label: 'water'
@@ -15,8 +15,9 @@
   .large-6.medium-12.columns= f.input :change, as: :boolean, inline_label: 'change'
   .large-6.medium-12.columns= f.input :pushups, as: :string, label: 'push-ups'
   .large-6.medium-12.columns= f.input :situps, as: :string, label: 'sit-ups'
+  .large-6.medium-12.columns= f.input :wallsits, as: :string, label: 'wall sits'
   .large-6.medium-12.columns= f.input :breaths, as: :string, label: 'breaths'
-  .large-6.medium-12.columns= f.input :other, as: :string, label: 'other'
+  .large-12.medium-12.columns= f.input :other, as: :string, label: 'other'
 - else
   %h5= 'BREAK ACTIVITIES' if @aktion.break_activities_recorded
   .large-6.columns.review-item= "#{Aktion.checkmark(@aktion.stop)} Stop" if @aktion.stop
@@ -32,4 +33,5 @@
   .large-6.columns.review-item= "#{@aktion.pushups} Push-ups" if @aktion.pushups && @aktion.pushups != ''
   .large-6.columns.review-item= "#{@aktion.situps} Sit-ups" if @aktion.situps && @aktion.situps != ''
   .large-6.columns.review-item= "#{@aktion.breaths} Breaths" if @aktion.breaths && @aktion.breaths != ''
+  .large-6.columns.review-item= "#{@aktion.breaths} Wall Sits" if @aktion.wallsits && @aktion.wallsits != ''
   .large-12.columns.review-item= @aktion.other if @aktion.other

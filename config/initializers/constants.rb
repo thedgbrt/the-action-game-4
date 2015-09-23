@@ -31,6 +31,6 @@ STATUS_OPTIONS = [
   ['Finished', :finished], 
 ]
 
-INTENSITY_PROMPT = 'What is the quality of your Action?'
+INTENSITY_PROMPT = 'What was this Action\'s quality?'
 DEFAULT_WARNING_VOLUME = 70
 DEFAULT_TICKING_VOLUME = 30
