@@ -8,6 +8,10 @@ class Team < ActiveRecord::Base
 
   default_scope { order(:updated_at) }
 
+  def team_and_name
+    'Team: ' + name
+  end
+
   def short_safe
     short || name
   end

@@ -1,9 +1,10 @@
 - if params.has_key?(:edit) || !@aktion.valid? || params[:status] == 'planned' || (params[:action] == 'new' && aktion.status == 'committing')
   = @started_at = params[:started_at]
   / .large-12.columns= f.input :started_at, as: :string, include_blank: true, use_short_month: true, discard_year: true, selected: Time.zone.now
-  .large-12.columns= f.input :choice, as: :boolean, inline_label: CHOICE, autofocus: true
-  .large-12.columns= f.input :focus, placeholder: 'Single focus?', label: false
-  .large-12.medium-12.commit-button.text-center= f.button :submit, 'COMMIT'
+  .large-12.columns= f.association :team, collection: current_player.teams, label: false, label_method: :team_and_name
+  .large-12.columns= f.input :focus, placeholder: 'Single focus?', label: false, autofocus: true
+  .large-12.medium-7.columns.choice= f.input :choice, as: :boolean, label: CHOICE
+  .large-12.medium-5.columns.commit-button= f.button :submit, 'COMMIT'
   #verb
     .large-12.columns.text-right#add-verb= link_to '+verb', new_verb_path, remote: true
     .large-12.columns= f.association :verb, collection: Verb.order(:name), prompt: 'Doing what?', label: false, include_blank: true
@@ -20,9 +21,8 @@
     - prompt = "For what #{@aktion.team ? @aktion.team.short_safe + ' ' : ''}project?"
     .large-12.columns= f.association :project, collection: @projects, prompt: prompt, label_method: label_method, label: false, include_blank: true
   %hr
-  - unless params[:status] == 'planned'
-    .large-12.columns= f.input :timeslot, minute_step: 30, use_short_month: true, label: false, discard_year: true, ampm: true
-    .large-12.columns= f.input :time_zone, selected: Time.zone.now, include_blank: true, label: false, prompt: 'Time Zone?'
+  .large-12.columns#timeslot= f.input :timeslot, minute_step: 30, use_short_month: true, label: false, discard_year: true, ampm: true
+  .large-12.columns= f.input :time_zone, selected: Time.zone.now, include_blank: true, label: false, prompt: 'Time Zone?'
 - else
   - if aktion.verb
     %h4

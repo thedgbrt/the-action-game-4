@@ -14,7 +14,7 @@ COLORS = [
   ['grey', '#BDBDBD']
 ]
 
-CHOICE = 'I freely, consciously choose to play'
+CHOICE = 'I freely choose to play TAG.com'
 
 INTENSITIES = [
   ['Attempted - Broke Key Rule', 2], 

@@ -45,11 +45,20 @@
   background-color: #ffcccc;
 }
 
+.choice {
+  padding: 0px;
+  label {
+    margin-bottom: 10px;
+  }
+}
+
 .commit-button {
   input {
     font-weight: bold;
     padding: 10px;
-    font-size: 130%;    
+    margin: 0px;
+    font-size: 130%;
+    background-color: red;
   }
 }
 
@@ -102,6 +111,13 @@
 .quadrants-container {
   display: flex;
   flex-wrap: wrap;
+  label {
+    display: inline-block;
+    input {
+      margin-right: 5px;
+      margin-bottom: 0px;
+    }
+  }
 }
 
 .aktion-quadrant-header {
@@ -157,5 +173,16 @@
     margin: 5px 0px;
     padding: 5px;
     background-color: inherit;
+  }
+}
+
+label#aktion_choice {
+  background-color: yellow;
+  padding-left: 5px;
+}
+
+#timeslot {
+  select {
+    padding: 0px 15px 0px 0px;
   }
 }

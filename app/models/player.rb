@@ -27,7 +27,6 @@ class Player < ActiveRecord::Base
 
   has_many :aktions  
   has_many :teams_created, foreign_key: :creator_id
-
   has_many :team_memberships
   has_many :teams, through: :team_memberships
   has_many :project_memberships
@@ -70,20 +69,11 @@ class Player < ActiveRecord::Base
   def actions
     aktions
   end
-  #
-  # def planned_actions
-  #   Aktion.planned_by(self).select{ |a| a.persisted? }
-  # end
 
   def persist_sound_choice(sound)
     new_tick_volume = (sound == 'ticking' ? 30 : 0)
     update_attributes(sound_choice: sound, tick_volume: new_tick_volume)
   end
-
-  # get a list of all my actions
-  # 
-  
-
 
   def frequent_actions_with_counts
     hash = aktions.by_timeslot.group_by{ |a| a.summary_hash }
@@ -99,8 +89,8 @@ class Player < ActiveRecord::Base
   end
 
   def initials
+    return nil if !name
     name.split(' ').map{|w| w[0].upcase}.join
-    
   end
 
   def self.todays_grid(tz, date=nil)
@@ -121,7 +111,6 @@ class Player < ActiveRecord::Base
     x = Time.days_in_month(Time.zone.now.month)
     (0..x).map{ |d| start + d.days }
   end
-
 
   def todays_breaths
     todays_actions.map{ |a| a.breaths.to_i}.compact.sum
