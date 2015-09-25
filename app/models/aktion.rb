@@ -31,7 +31,6 @@ class Aktion < ActiveRecord::Base
 
   validates :team_id, presence: true
   validates :timeslot, presence: true, uniqueness: {scope: :player_id}
-#  validate :focus_or_verb#, :must_be_at_choice, 
 
   scope :by_timeslot, -> { order('timeslot DESC') }
 
@@ -66,10 +65,6 @@ class Aktion < ActiveRecord::Base
 
   def self.get(playa, slot)
     Aktion.find_by(player_id: playa.id, timeslot: slot)
-  end
-
-  def seq
-    planned_sequence_number ? planned_sequence_number.to_s + '. ' : ''
   end
 
   def self.current_timeslot(t = nil)
@@ -191,19 +186,4 @@ class Aktion < ActiveRecord::Base
   def self.value_placeholder
     'Objectively, what did you work on?  What did you complete or accomplish?  Is this the right strategy for your project?  Is this project a good use of your time?'
   end
-
-    # def must_be_at_choice
-    #   if choice == 0
-    #     status = 0
-    #     errors.add(:choice, "You must freely choose, otherwise you're slaving away instead of being Playfully Productive!")
-    #   end
-    # end
-    #
-    # def focus_or_verb
-    #   if !focus || focus == '' || !verb || verb == ''
-    #     status = :committing
-    #     errors.add(:focus, "You must include either a focus or a verb to describe this Action.")
-    #     errors.add(:verb, "You must include either a focus or a verb to describe this Action.")
-    #   end
-    # end
 end

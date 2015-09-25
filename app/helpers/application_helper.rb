@@ -8,7 +8,7 @@ module ApplicationHelper
     if current_player.teams.count > 1
       start_aktions_path
     else
-      new_aktion_path
+      new_aktion_path(team_id: current_player.teams.first)
     end
   end
 end

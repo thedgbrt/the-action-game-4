@@ -1,0 +1,14 @@
+%h3
+  Choose one of your Frequent Actions
+  = "for #{team}" if team
+
+- actions.each do |a, count|
+  .large-3.medium-4.small-6.columns
+    .large-12.medium-12.small-12.starter-aktion
+      %a{:href => new_aktion_path(previous_aktion_id: a.id, timeslot: params[:timeslot])}
+        %button{'style' => "background-color: #{a.color}"}
+          %span.bold= a.team.try(:short)
+          \-
+          %span= a.role.try(:name)
+          .space-10-y
+          %span= a.verb.try(:name)

@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'rspec/core'
 require 'spork'
+require 'capybara/poltergeist'
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
 
@@ -8,6 +9,12 @@ Spork.prefork do
   # Loading more in this block will cause your tests to run faster. However,
   # if you change any configuration or code from libraries loaded here, you'll
   # need to restart spork for it take effect.
+
+  Capybara.register_driver :poltergeist do |app|
+    Capybara::Poltergeist::Driver.new(app)
+  end
+  Capybara.javascript_driver = :poltergeist
+
 
 end
 

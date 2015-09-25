@@ -11,10 +11,6 @@
       %hr
       - current_player.frequent_actions_with_counts.first(10).each do |a, count|
         %li.dropdown_item= link_to "#{a.summary} (#{count})", new_aktion_path(previous_aktion_id: a.id), {style: "color: #{a.color}"}
-      / %hr
-      / %li.dropdown_item.light-red-text= link_to 'PLANNED', new_aktion_path(status: 'planned')
-      / - current_player.planned_actions.each do |pa|
-      /   %li.dropdown_item.light-red-text= link_to pa.seq + pa.summary, edit_aktion_path(pa, status: 'committing')
   %li
     %a{"data-dropdown" => "hover2", "data-options" => "is_hover:true; hover_timeout:200", href: "#{teams_path}"}
       = 'VIEW TEAMS'

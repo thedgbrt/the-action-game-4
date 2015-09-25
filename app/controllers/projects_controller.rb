@@ -10,7 +10,7 @@ class ProjectsController < ApplicationController
   end
 
   def new
-    @project = @team.projects.new
+    @project = Project.new
     @project.active = true
     @project.commitment = true
   end

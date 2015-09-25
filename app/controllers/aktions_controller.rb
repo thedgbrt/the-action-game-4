@@ -1,7 +1,6 @@
 class AktionsController < ApplicationController
   before_action :set_aktion, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_player!
-  # before_action :select_team!
 
   def start
   end
@@ -20,9 +19,6 @@ class AktionsController < ApplicationController
   end
 
   def new
-    if !params[:team_id] && current_player.teams.count == 1
-      params[:team_id] = current_player.teams.first.id
-    end
     @aktion = @current_player.aktions.new
     @aktion.team_id = params[:team_id]
     @aktion.intensity = 4

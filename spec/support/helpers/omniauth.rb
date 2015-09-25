@@ -7,7 +7,7 @@ module Omniauth
         'uid' => '123545',
         'info' => {
           'name' => 'Example User',
-          'email' => 'example.user@holacracyone.com'
+          'email' => 'example.user@playfullyproductive.com'
         },
         'credentials' => {
           'token' => 'mock_token',
