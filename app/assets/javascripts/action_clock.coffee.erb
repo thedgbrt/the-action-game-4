@@ -4,7 +4,7 @@ $(document).ready ->
   tick_volume = Number(document.getElementById('time').dataset.tick_volume) || 0
   warning_volume = Number(document.getElementById('time').dataset.warning_volume) || 0
 
-  skip_audio = true #typeof Audio !== 'undefined' && Audio !== null
+  skip_audio = false #typeof Audio !== 'undefined' && Audio !== null
 
   unless skip_audio
     commit = new Audio("<%= asset_path('commit.wav') %>")
