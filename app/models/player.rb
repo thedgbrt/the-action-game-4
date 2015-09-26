@@ -18,7 +18,7 @@ class Player < ActiveRecord::Base
     end
   end
 
-  serialize :preferences, Hash, %w(current_team_id sound_choice tick_volume warning_volume
+  serialize :preferences, Hash, %w(current_team_id sound_choice ticking_volume warning_volume
     review_before_relax commit_length)
 
   enum role: [:user, :vip, :admin]
@@ -71,8 +71,8 @@ class Player < ActiveRecord::Base
   end
 
   def persist_sound_choice(sound)
-    new_tick_volume = (sound == 'ticking' ? 30 : 0)
-    update_attributes(sound_choice: sound, tick_volume: new_tick_volume)
+    new_ticking_volume = (sound == 'ticking' ? 30 : 0)
+    update_attributes(sound_choice: sound, ticking_volume: new_ticking_volume)
   end
 
   def frequent_actions_with_counts

@@ -33,17 +33,13 @@
       %hr
       %li.text-right.dropdown_item= link_to 'All Players', players_path
       %hr
-      %li.text-right.dropdown_item= link_to "#{session[:sound_choice] == 'music' ? '' : '=> '}music".upcase, sounds_path(sound_choice: 'music')
-      %li.text-right.dropdown_item= link_to "#{session[:sound_choice] == 'nature' ? '' : '=> '}nature".upcase, sounds_path(sound_choice: 'nature')
-      %li.text-right.dropdown_item= link_to "#{session[:sound_choice] == 'silence' ? '' : '=> '}silence".upcase, sounds_path(sound_choice: 'silence')
-      %li.text-right.dropdown_item= link_to "#{session[:sound_choice] == 'ticking' ? '' : '=> '}ticking".upcase, sounds_path(sound_choice: 'ticking')
+      = render 'layouts/sound_dropdown_items'
 - else
   %li
     %a{"data-dropdown" => "hover3", "data-options" => "is_hover:true; hover_timeout:200", href: ""}
       - session[:sound_choice] ||= 'ticking'
       = session[:sound_choice].upcase
     %ul#hover3.f-dropdown.tiny{"data-dropdown-content" => ""}
-      - Player.sound_choices.each do |choice|
-        %li.dropdown_item= link_to choice.upcase, sounds_path(sound_choice: choice)
+      = render 'layouts/sound_dropdown_items'
   %li.green-text= link_to 'Sign in with Google', signin_path
 %li= link_to 'HELP', 'https://playfullyproductive.zendesk.com/hc/en-us'

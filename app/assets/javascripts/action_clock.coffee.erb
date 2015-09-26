@@ -1,8 +1,10 @@
 $(document).ready ->
+  current_player = document.getElementById('time').dataset.current_player
+  current_action = document.getElementById('time').dataset.current_action
   commit_length = document.getElementById('time').dataset.commit_length
   review_before_relax = document.getElementById('time').dataset.review_before_relax
-  tick_volume = Number(document.getElementById('time').dataset.tick_volume) || 0
-  warning_volume = Number(document.getElementById('time').dataset.warning_volume) || 0
+  ticking_volume = Number(document.getElementById('time').dataset.ticking_volume) || <%= DEFAULT_TICKING_VOLUME %>
+  warning_volume = Number(document.getElementById('time').dataset.warning_volume) || <%= DEFAULT_WARNING_VOLUME %>
 
   commit = new Audio("<%= asset_path('commit.wav') %>")
   tick = new Audio("<%= asset_path('tick.wav') %>")
@@ -10,8 +12,8 @@ $(document).ready ->
   bell = new Audio("<%= asset_path('bell.wav') %>")
   whistle = new Audio("<%= asset_path('whistle.wav') %>")
 
-  commit.volume = tick_volume / 100
-  tick.volume = tick_volume / 100
+  commit.volume = ticking_volume / 100
+  tick.volume = ticking_volume / 100
   warning.volume = warning_volume / 100
   bell.volume = warning_volume / 100
   whistle.volume = warning_volume / 100
@@ -28,8 +30,6 @@ $(document).ready ->
     i
 
   updateStatus = (seconds_up) ->
-    current_action = document.getElementById('time').dataset.current_action
-
     if seconds_up < commit_length*60 && !current_action
       document.getElementById('time').classList.remove 'focus', 'review', 'relax'
       document.getElementById('time').classList.add 'commit'
@@ -52,7 +52,7 @@ $(document).ready ->
       return 'relax'
     return 'something went wrong'
 
-  playSpecialSound = (totalSecUp, status) ->
+  playSound = (totalSecUp, status) ->
     special_sound = sounds[totalSecUp / 60]
     if special_sound
       special_sound.play()
@@ -70,7 +70,7 @@ $(document).ready ->
   startTime = ->
     totalSecUp = to_1800()
     status = updateStatus(totalSecUp)
-    playSpecialSound(totalSecUp, status)
+    playSound(totalSecUp, status)
 
     totalSecDown = 1800 - totalSecUp
     actionSecDown = totalSecDown - 300

@@ -1,0 +1,4 @@
+%li.dropdown_item= link_to "#{session[:sound_choice] == 'music' ? '' : '=> '}music".upcase, sounds_path(sound_choice: 'music')
+%li.dropdown_item= link_to "#{session[:sound_choice] == 'nature' ? '' : '=> '}nature".upcase, sounds_path(sound_choice: 'nature')
+%li.dropdown_item= link_to "#{session[:sound_choice] == 'silence' ? '' : '=> '}silence".upcase, sounds_path(sound_choice: 'silence')
+%li.dropdown_item= link_to "#{session[:sound_choice] == 'ticking' ? '' : '=> '}ticking".upcase, sounds_path(sound_choice: 'ticking')
