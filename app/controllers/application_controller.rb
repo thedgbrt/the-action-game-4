@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
     end
 
     def back_or_home
-      request[:http_referer] || player_path(current_player) || root_path
+      request[:http_referer] || player_signed_in? ? player_path(current_player) : root_path
     end
 
     def set_date
