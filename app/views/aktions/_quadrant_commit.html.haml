@@ -1,4 +1,4 @@
-- if params.has_key?(:edit) || !@aktion.valid? || params[:status] == 'planned' || (params[:action] == 'new' && aktion.status == 'committing')
+- if params.has_key?(:edit) || !@aktion.valid? || @aktion.status == 'stopped' || (params[:action] == 'new' && aktion.status == 'committing')
   = @started_at = params[:started_at]
   / .large-12.columns= f.input :started_at, as: :string, include_blank: true, use_short_month: true, discard_year: true, selected: Time.zone.now
   .large-12.columns= f.association :team, collection: current_player.teams, label: false, label_method: :team_and_name
