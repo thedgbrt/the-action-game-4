@@ -1,7 +1,7 @@
 - if player_signed_in?
   - current_aktion = Aktion.current(current_player)
   - if current_aktion
-    %li.light-red-text= link_to "#{current_aktion.to_do}", edit_aktion_path(id: current_aktion.id)
+    %li.light-red-text= link_to "CURRENT", edit_aktion_path(id: current_aktion.id)
   %li
     %a{"data-dropdown" => "hover4", "data-options" => "is_hover:true; hover_timeout:200", href: "#{starting_path}"}
       .light-red-text START ACTION

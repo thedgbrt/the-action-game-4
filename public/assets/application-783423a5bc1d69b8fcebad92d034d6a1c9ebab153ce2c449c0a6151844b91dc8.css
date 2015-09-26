@@ -48,19 +48,29 @@
 .commit-bg {
   background-color: #ffcccc;
 }
-
-/* line 49, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
-.commit-button input {
+/* line 47, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+.commit-bg .commit-button input {
   font-weight: bold;
   padding: 10px;
+  margin: 0px;
   font-size: 130%;
+  background-color: red;
 }
 
-/* line 56, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+/* line 57, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+.choice {
+  padding: 0px;
+}
+/* line 59, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+.choice label {
+  margin-bottom: 10px;
+}
+
+/* line 64, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
 .focus-bg {
   background-color: #ccffcc;
 }
-/* line 58, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+/* line 66, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
 .focus-bg .button {
   background-color: green;
   color: white;
@@ -68,41 +78,74 @@
   font-size: 130%;
   font-weight: bold;
 }
-/* line 60, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+/* line 68, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
 .focus-bg .button a {
   color: white;
 }
 
-/* line 70, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+/* line 78, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
 .review-bg {
   background-color: #ffffcc;
 }
-/* line 72, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+/* line 80, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
 .review-bg input {
   padding: 10px;
   font-size: 130%;
   font-weight: bold;
 }
 
-/* line 79, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+/* line 87, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
 .relax-bg {
   background-color: #ccccff;
 }
-/* line 81, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+/* line 89, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
 .relax-bg input {
   font-weight: bold;
   margin: 0px;
   padding: 10px;
   font-size: 130%;
 }
+/* line 95, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+.relax-bg .break-action {
+  margin: 4px 0px !important;
+}
+/* line 98, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+.relax-bg .countable.break-action {
+  display: table-cell;
+}
+/* line 100, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+.relax-bg .countable.break-action input {
+  display: inline;
+  margin-bottom: 0px;
+  height: 1.2rem;
+  padding: 2px;
+  width: 2em;
+  font-weight: normal;
+  font-size: 100%;
+}
+/* line 109, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+.relax-bg .countable.break-action label {
+  display: inline;
+  margin-right: 5px;
+}
+/* line 114, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+.relax-bg .number-label {
+  background-color: yellow;
+  padding-left: 1em;
+}
+/* line 119, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+.relax-bg .relax-button input {
+  background-color: blue;
+  margin: 0px;
+}
 
-/* line 89, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+/* line 126, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
 .media {
   width: 100%;
   height: 600px;
 }
 
-/* line 94, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+/* line 131, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
 .sound-option {
   background-color: #ccc;
   padding: 10px;
@@ -111,58 +154,89 @@
   text-align: center;
 }
 
-/* line 102, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+/* line 139, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
 .quadrants-container {
   display: flex;
   flex-wrap: wrap;
 }
+/* line 142, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+.quadrants-container label {
+  display: inline-block;
+}
+/* line 144, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+.quadrants-container label input {
+  margin-right: 5px;
+  margin-bottom: 0px;
+}
 
-/* line 107, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+/* line 151, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
 .aktion-quadrant-header {
   padding-top: 10px;
   padding-bottom: 10px;
   margin: 15px 0px;
 }
 
-/* line 113, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+/* line 157, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
 .bigger {
   font-weight: bold;
   font-size: 140%;
 }
 
-/* line 118, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+/* line 162, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
 .bigger130 {
   font-size: 110%;
 }
 
-/* line 125, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+/* line 169, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
 .review-item {
   margin-bottom: 5px;
 }
 
-/* line 129, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+/* line 173, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
 .action-cell {
   font-size: 90%;
   margin-bottom: 3px;
   height: 3em;
 }
 
-/* line 136, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+/* line 180, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
 .mini-menu-action {
   padding: 2px 6px;
   margin: 0px;
 }
 
-/* line 141, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+/* line 185, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
 .detailed-action {
   height: 250px;
   overflow-y: scroll;
   border: 5px solid white;
 }
 
-/* line 147, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+/* line 191, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
 .underline {
   text-decoration: underline;
+}
+
+/* line 196, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+.starter-aktion button, .starter-aktion button:hover {
+  width: 100%;
+  height: 85px;
+  color: black;
+  border: 1px solid black;
+  margin: 5px 0px;
+  padding: 5px;
+  background-color: inherit;
+}
+
+/* line 207, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+label#aktion_choice {
+  background-color: yellow;
+  padding-left: 5px;
+}
+
+/* line 213, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/aktions.scss */
+#timeslot select {
+  padding: 0px 15px 0px 0px;
 }
 /* line 364, /Users/mihai/.rvm/gems/ruby-2.2.3@new-tag/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
 meta.foundation-version {
@@ -10250,6 +10324,11 @@ div.field, div.actions {
 .score-quadrant {
   background-color: cyan;
   border: 1px solid black;
+}
+
+/* line 108, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
+.space-10-y {
+  height: 10px;
 }
 /*
  * Table styles

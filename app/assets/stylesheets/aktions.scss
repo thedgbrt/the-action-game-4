@@ -43,22 +43,21 @@
 
 .commit-bg {
   background-color: #ffcccc;
+  .commit-button {
+    input {
+      font-weight: bold;
+      padding: 10px;
+      margin: 0px;
+      font-size: 130%;
+      background-color: red;
+    }
+  }
 }
 
 .choice {
   padding: 0px;
   label {
     margin-bottom: 10px;
-  }
-}
-
-.commit-button {
-  input {
-    font-weight: bold;
-    padding: 10px;
-    margin: 0px;
-    font-size: 130%;
-    background-color: red;
   }
 }
 
@@ -115,6 +114,12 @@
   .number-label {
     background-color: yellow;
     padding-left: 1em;
+  }
+  .relax-button {
+    input {
+      background-color: blue;
+      margin: 0px;      
+    }
   }
 }
 
