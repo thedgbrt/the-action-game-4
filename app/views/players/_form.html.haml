@@ -12,8 +12,8 @@
       .large-4.medium-6.small-12.columns
         = f.input :role, collection: Player.roles.keys.map {|role| [role.titleize,role]}, label: 'TAG.com role'
         = f.input :fictional
-    / / .large-4.medium-6.small-12.columns= f.input :review_before_relax, as: :select, collection: [['REVIEW before RELAX', true], ['RELAX before REVIEW', false]], label: 'End of Action Order', selected: @player.review_before_relax || false
-    / .large-4.medium-6.small-12.columns= f.input :commit_length, collection: [['1 minute', 1], ['2 minutes', 2], ['3 minutes', 3], ['4 minutes', 4], ['5 minutes', 5]], label: 'COMMIT length'
+      .large-4.medium-6.small-12.columns= f.input :review_before_relax, as: :select, collection: [['REVIEW before RELAX', true], ['RELAX before REVIEW', false]], label: 'End of Action Order', selected: @player.review_before_relax || false
+      .large-4.medium-6.small-12.columns= f.input :commit_length, collection: [['1 minute', 1], ['2 minutes', 2], ['3 minutes', 3], ['4 minutes', 4], ['5 minutes', 5]], label: 'COMMIT length'
     %hr
 
   .form-actions

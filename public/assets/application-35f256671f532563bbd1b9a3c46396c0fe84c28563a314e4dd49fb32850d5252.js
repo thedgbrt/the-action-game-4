@@ -41718,21 +41718,29 @@ module.exports = warning;
 }).call(this);
 (function() {
   $(document).ready(function() {
-    var bell, commit, commit_length, padWithZero, playSpecialSound, review_before_relax, sounds, startTime, statuses, tick, tick_volume, to_1800, updateStatus, warning, warning_volume, whistle;
+    var bell, commit, commit_length, current_action, current_player, padWithZero, playSound, review_before_relax, sounds, startTime, statuses, tick, ticking_volume, to_1800, updateStatus, warning, warning_volume, whistle;
+    current_player = document.getElementById('time').dataset.current_player;
+    current_action = document.getElementById('time').dataset.current_action;
     commit_length = document.getElementById('time').dataset.commit_length;
     review_before_relax = document.getElementById('time').dataset.review_before_relax;
-    tick_volume = Number(document.getElementById('time').dataset.tick_volume) || 0;
-    warning_volume = Number(document.getElementById('time').dataset.warning_volume) || 0;
+    ticking_volume = Number(document.getElementById('time').dataset.ticking_volume);
+    if (typeof ticking_volume === 'undefined') {
+      ticking_volume = 30;
+    }
+    warning_volume = Number(document.getElementById('time').dataset.warning_volume) || 70;
+    if (typeof warning_volume === 'undefined') {
+      warning_volume = 70;
+    }
     commit = new Audio("/assets/commit-7a8fbb07856a8d4cad8824fd864e3abbf6f6a2dcbc075da2717f1ac1d89fcb25.wav");
     tick = new Audio("/assets/tick-422bb2b92072cf8ecb77fda83e70d27bdcb7fa8cee33415ef66985a8cc14dde2.wav");
     warning = new Audio("/assets/warning-3436c5b74df24045d5e2252b72e24e17d648e40497d2d5c812b749d0e0ed7860.wav");
     bell = new Audio("/assets/bell-b0c60370bedcc27c1244a5de9670faebc2fbd11c9a512c3276768b0eed0f08c3.wav");
     whistle = new Audio("/assets/whistle-4c4ee0fa77246ebc8601fbfe23ad3d986997a3cc05b45724957a576fd1c5cb62.wav");
-    commit.volume = tick_volume / 100;
-    tick.volume = tick_volume / 100;
+    commit.volume = ticking_volume / 100;
+    tick.volume = ticking_volume / 100;
     warning.volume = warning_volume / 100;
     bell.volume = warning_volume / 100;
-    whistle.volume = warning_volume / 100;
+    whistle.volume = .2;
     sounds = {
       0: bell,
       22.5: warning,
@@ -41751,8 +41759,6 @@ module.exports = warning;
       return i;
     };
     updateStatus = function(seconds_up) {
-      var current_action;
-      current_action = document.getElementById('time').dataset.current_action;
       if (seconds_up < commit_length * 60 && !current_action) {
         document.getElementById('time').classList.remove('focus', 'review', 'relax');
         document.getElementById('time').classList.add('commit');
@@ -41776,12 +41782,10 @@ module.exports = warning;
       }
       return 'something went wrong';
     };
-    playSpecialSound = function(totalSecUp, status) {
+    playSound = function(totalSecUp, status) {
       var special_sound;
       special_sound = sounds[totalSecUp / 60];
-      console.log(status);
       if (special_sound) {
-        console.log('Playing', special_sound, 'at', totalSecUp);
         special_sound.play();
       }
       if (status === 'commit') {
@@ -41805,7 +41809,7 @@ module.exports = warning;
       var actionSecDown, m_string, minDown, s_string, secDown, status, t, totalSecDown, totalSecUp;
       totalSecUp = to_1800();
       status = updateStatus(totalSecUp);
-      playSpecialSound(totalSecUp, status);
+      playSound(totalSecUp, status);
       totalSecDown = 1800 - totalSecUp;
       actionSecDown = totalSecDown - 300;
       minDown = status === 'relax' ? Math.floor(totalSecDown / 60) : Math.floor(actionSecDown / 60);

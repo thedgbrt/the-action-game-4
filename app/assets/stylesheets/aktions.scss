@@ -93,6 +93,29 @@
     padding: 10px;
     font-size: 130%;
   }
+  .break-action {
+    margin: 4px 0px !important;
+  }
+  .countable.break-action {
+    display: table-cell;
+    input {
+      display: inline;
+      margin-bottom: 0px;
+      height: 1.2rem;
+      padding: 2px;
+      width: 2em;
+      font-weight: normal;
+      font-size: 100%;
+    }
+    label {
+      display: inline;
+      margin-right: 5px;
+    }
+  }
+  .number-label {
+    background-color: yellow;
+    padding-left: 1em;
+  }
 }
 
 .media {
