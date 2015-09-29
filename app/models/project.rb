@@ -3,6 +3,9 @@ class Project < ActiveRecord::Base
   belongs_to :parent, class_name: 'Project'
   has_many :children, class_name: 'Project', foreign_key: 'parent_id'
   has_many :aktions
+  has_many :project_memberships
+  has_many :players, through: :project_memberships
+  belongs_to :creator, class_name: 'Project'
 
   def self.search(tm, playa)
     tm.projects.select{ |p| playa.committed_to(p) }

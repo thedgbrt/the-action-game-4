@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'rspec/core'
 require 'spork'
-require 'capybara/poltergeist'
+require 'capybara'
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
 
@@ -10,10 +10,7 @@ Spork.prefork do
   # if you change any configuration or code from libraries loaded here, you'll
   # need to restart spork for it take effect.
 
-  Capybara.register_driver :poltergeist do |app|
-    Capybara::Poltergeist::Driver.new(app)
-  end
-  Capybara.javascript_driver = :poltergeist
+  Capybara.javascript_driver = :selenium
 
 
 end

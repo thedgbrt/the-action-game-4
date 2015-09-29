@@ -51,11 +51,6 @@ class TeamsController < ApplicationController
     end
   end
 
-  def activate
-    current_player.update_attributes(current_team_id: params[:id])
-    redirect_to new_aktion_path(team_id: params[:id])
-  end
-
   def join
     raise 'No current player' unless current_player
     msg = @team.add(current_player)

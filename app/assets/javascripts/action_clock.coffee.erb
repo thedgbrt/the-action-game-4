@@ -1,5 +1,5 @@
 $(document).ready ->
-  current_player = document.getElementById('time').dataset.current_player
+  current_player_id = document.getElementById('time').dataset.current_player_id
   current_action = document.getElementById('time').dataset.current_action
   commit_length = document.getElementById('time').dataset.commit_length
   review_before_relax = document.getElementById('time').dataset.review_before_relax
@@ -10,11 +10,20 @@ $(document).ready ->
   if typeof warning_volume == 'undefined'
     warning_volume = <%= DEFAULT_WARNING_VOLUME %>
 
-  commit = new Audio("<%= asset_path('commit.wav') %>")
-  tick = new Audio("<%= asset_path('tick.wav') %>")
-  warning = new Audio("<%= asset_path('warning.wav') %>")
-  bell = new Audio("<%= asset_path('bell.wav') %>")
-  whistle = new Audio("<%= asset_path('whistle.wav') %>")
+  loadAudio = (path) ->
+    try
+      return new Audio(path)
+    catch
+      return {
+        load: ->
+        play: ->
+      }
+
+  commit = loadAudio("<%= asset_path('commit.wav') %>")
+  tick = loadAudio("<%= asset_path('tick.wav') %>")
+  warning = loadAudio("<%= asset_path('warning.wav') %>")
+  bell = loadAudio("<%= asset_path('bell.wav') %>")
+  whistle = loadAudio("<%= asset_path('whistle.wav') %>")
 
   commit.volume = ticking_volume / 100
   tick.volume = ticking_volume / 100
@@ -23,6 +32,7 @@ $(document).ready ->
   whistle.volume = .2
 
   sounds = {0: bell, 22.5: warning, 23: bell, 29.5: whistle}
+
   if review_before_relax
     statuses = [['commit', commit_length], ['focus', 23 - commit_length], ['relax', 5], ['review', 2]]
   else

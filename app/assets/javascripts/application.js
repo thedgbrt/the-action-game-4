@@ -34,7 +34,7 @@ $(function() {
     $('#projects-table').DataTable({
         paging: false,
         searching: false,
-        order: [1, 'asc'],
+        order: [6, 'desc'],
         orderClasses: true,
         columnDefs: [
             { targets: 'nosort', orderable: false}

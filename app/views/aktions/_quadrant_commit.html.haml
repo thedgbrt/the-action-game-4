@@ -14,7 +14,8 @@
     - prompt = "In which #{@aktion.team ? @aktion.team.short_safe + ' ' : ''}role?"
     .large-12.columns= f.association :role, collection: old_collection, prompt: prompt, label_method: label_method, label: false, include_blank: true
   #project
-    .large-12.columns.text-right#add-project{"data-team_id" => @aktion.team.try(:id), "active" => true, "commitment" => true}= link_to '+project', new_project_path, remote: true
+    - title = "Quickly add an active project for #{@aktion.team.try(:name)}, commit to it and select it for this Action"
+    .large-12.columns.text-right{"data-team_id" => @aktion.team.try(:id), "active" => true, "commitment" => true}= link_to '+project', new_project_path, id: 'add-project', remote: true, title: title
     - @projects = @aktion.team ? Project.search(@aktion.team, current_player).sort_by(&:name) : current_player.projects.sort_by{ |p| [p.team.short_safe, p.name] }
     - label_method = @aktion.team ? :name : :short_team_project
     - prompt = "For what #{@aktion.team ? @aktion.team.short_safe + ' ' : ''}project?"

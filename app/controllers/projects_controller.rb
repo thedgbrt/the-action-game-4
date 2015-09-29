@@ -26,6 +26,9 @@ class ProjectsController < ApplicationController
 
     if @project.save
       render json: @project
+      if @project.creator_id
+        ProjectMembership.create!(project_id: @project.id, player_id: @project.creator_id, active: true)
+      end
     else
       render json: @project.errors, status: :unprocessable_entity
     end
@@ -72,6 +75,6 @@ class ProjectsController < ApplicationController
 
     def project_params
       params.require(:project).permit(:name, :team_id, :active, :commitment, :visible_to, :ancestry,
-        :description, :parent_id)
+        :description, :parent_id, :creator_id)
     end
 end

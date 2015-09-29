@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resources :aktions
   end
   resources :teams do
-    member { get :join, :leave, :activate }
+    member { get :join, :leave }
     resources :projects
     resources :roles
   end

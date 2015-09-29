@@ -6,3 +6,6 @@
       - current_player.todays_actions(@date).sort_by{|a|a.timeslot}.each do |a|
         - now = a.timeslot == Aktion.current_timeslot.in_time_zone(current_player.current_time_zone)  # TODO: get this working
         %td.mini-menu-action{style: "background-color: #{a.color}; #{now ? 'border: 1px solid red;' : ''}"}= link_to (a.plus_score || 1), edit_aktion_path(a, edit: true), title: a.summary_with_time_and_focus
+      %td.mini-menu-action= "#{current_player.projects.count} Projects"
+      - team = Team.find_by_id(params[:team_id])
+      %td.mini-menu-action= "#{team.try(:name)} - #{team.try(:projects).try(:count)} Projects"
