@@ -6,13 +6,23 @@ class AktionsController < ApplicationController
   end
 
   def index
+    @date = Date.strptime(params[:date]) if params[:date]
+    @week = Date.strptime(params[:week]).at_beginning_of_week if params[:week]
+    @month = Date.strptime(params[:month]).at_beginning_of_month if params[:month]
     @player = Player.find_by_id(params[:player_id]) || current_player
+
     if params[:role_id]
       @aktions = @player.aktions.select{ |a| a.role_id == params[:role_id].to_i}.try(:by_timeslot)
     else
       @aktions = @player.aktions.try(:by_timeslot)
     end
-    @todays_actions = @player.todays_actions(@date)
+    if @date
+      @actions = @player.actions_in_date_range(@date, @date)
+    elsif @week
+      @actions = @player.actions_in_date_range(@week, @week.at_end_of_week)
+    elsif @month
+      @actions = @player.actions_in_date_range(@month, @month.at_end_of_month)
+    end
   end
 
   def show

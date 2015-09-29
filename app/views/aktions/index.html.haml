@@ -52,11 +52,11 @@
 %br
 
 - if params[:date]
-  = render 'daily', aktions: @todays_actions
+  = render 'daily', aktions: @actions
 - elsif params[:week]
-  = render 'weekly', aktions: @todays_actions
+  = render 'weekly', aktions: @actions
 - elsif params[:month]
-  = render 'monthly', aktions: @todays_actions
+  = render 'monthly', aktions: @actions
 
 %hr
 %h4= "#{@aktions.try(:count) || 0} #{I18n.t 'Aktions'}"

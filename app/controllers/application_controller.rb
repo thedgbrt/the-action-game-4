@@ -57,6 +57,6 @@ class ApplicationController < ActionController::Base
     end
 
     def set_date
-      @date = params[:date] ? Date.strptime(params[:date]) : Time.zone.now.to_date
+      @date ||= params[:date] ? Date.strptime(params[:date]) : Time.zone.now.to_date
     end
 end

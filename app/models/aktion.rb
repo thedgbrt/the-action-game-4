@@ -34,6 +34,14 @@ class Aktion < ActiveRecord::Base
 
   scope :by_timeslot, -> { order('timeslot DESC') }
 
+  def in_date_range(starting_on, ending_on)
+    if starting_on == ending_on
+      timeslot.to_date == starting_on
+    else
+      timeslot.to_date >= starting_on && timeslot.to_date <= ending_on
+    end
+  end
+
   def break_activities_recorded
     stop || restroom || water || snack || stretch || tidy || games || friends || music || change ||
       pushups || situps || breaths

@@ -100,6 +100,10 @@ class Player < ActiveRecord::Base
     aktions.select{ |a| a.persisted? && a.timeslot.in_time_zone(self.current_time_zone).to_date == Time.zone.now.in_time_zone(self.current_time_zone).to_date }
   end
 
+  def actions_in_date_range(starting_on, ending_on)
+    aktions.select{ |a| a.persisted? && a.in_date_range(starting_on, ending_on) }
+  end
+
   def initials
     return nil if !name
     name.split(' ').map{|w| w[0].upcase}.join
