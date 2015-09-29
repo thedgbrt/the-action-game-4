@@ -51,7 +51,8 @@ class Aktion < ActiveRecord::Base
     elsif time_delta > 5 || choice != '1' || obstacles > 0
       3
     else
-      [0, 1, 3, 6, 8, 10][intensity.to_i]
+      reported = [0, 1, 3, 6, 8, 10][intensity.to_i]
+      [reported, 6].max
     end
   end
 

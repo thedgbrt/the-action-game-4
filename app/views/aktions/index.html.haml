@@ -1,16 +1,69 @@
 / = react_component 'Aktions', { data: @aktions }
+%h4= "#{@player.name}'s #{@aktions.count} Actions"
+= link_to 'ALL', aktions_path
+\-
+= link_to 'TODAY', aktions_path(date: Time.zone.now.to_date)
+\-
+= link_to 'THIS WEEK', aktions_path(week: Time.zone.now.at_beginning_of_week)
+\-
+= link_to 'THIS MONTH', aktions_path(month: Time.zone.now.at_beginning_of_month)
+.clear-both
+%hr
 
-/ %ul
-/   %li LIST
-/   %li DAILY
-/   %li WEEKLY
-/   %li MONTHLY
-/
-= render 'daily', aktions: @todays_actions
+.large-3.columns
+  %h5 By Team
+  - by_team_hash = @aktions.group_by{ |a| a.team_id }
+  - teams = Team.find(by_team_hash.keys)
+  - teams.sort_by{ |t| current_player.actions_for_team(t).count }.reverse.each do |team|
+    = current_player.actions_for_team(team).count
+    = team.name
+    %br
+.large-3.columns
+  %h5 By Role
+  - by_role_hash = @aktions.group_by{ |a| a.role_id }
+  - role_ids = by_role_hash.keys.compact
+  - top_ten_role_ids = role_ids.sort_by{ |role_id| current_player.actions_for_role(role_id).count }.reverse.first(10)
+  - top_ten_role_ids.each do |role_id|
+    - role = Role.find_by_id(role_id)
+    = current_player.actions_for_role(role_id).count rescue 'N/A'
+    = link_to role.short_team_role, role rescue 'Role Missing'
+    %br
+.large-3.columns
+  %h5 By Project
+  - by_project_hash = @aktions.group_by{ |a| a.project_id }
+  - project_ids = by_project_hash.keys.compact
+  - top_ten_project_ids = project_ids.sort_by{ |project_id| current_player.actions_for_project(project_id).count }.reverse.first(10)
+  - top_ten_project_ids.each do |project_id|
+    - project = Project.find_by_id(project_id)
+    = current_player.actions_for_project(project_id).count rescue 'N/A'
+    = link_to project.short_team_project, project rescue 'Project Missing'
+    %br
+.large-3.columns
+  %h5 By Verb
+  - by_verb_hash = @aktions.group_by{ |a| a.verb_id }
+  - verb_ids = by_verb_hash.keys.compact
+  - top_ten_verb_ids = verb_ids.sort_by{ |verb_id| current_player.actions_for_verb(verb_id).count }.reverse.first(10)
+  - top_ten_verb_ids.each do |verb_id|
+    - verb = Verb.find_by_id(verb_id)
+    = current_player.actions_for_verb(verb_id).count rescue 'N/A'
+    = link_to verb.name, verb rescue 'Verb Missing'
+    %br
+%br
+%br
+
+- if params[:date]
+  = render 'daily', aktions: @todays_actions
+- elsif params[:week]
+  = render 'weekly', aktions: @todays_actions
+- elsif params[:month]
+  = render 'monthly', aktions: @todays_actions
+
+%hr
+%h4= "#{@aktions.try(:count) || 0} #{I18n.t 'Aktions'}"
 = render 'aktions', aktions: @aktions
 
 %hr
-%h2= "#{@aktions.try(:count) || 0} Detailed #{I18n.t 'Aktions'}"
+%h4= "#{@aktions.try(:count) || 0} Detailed #{I18n.t 'Aktions'}"
 
 - if @aktions
   .detailed-actions-container

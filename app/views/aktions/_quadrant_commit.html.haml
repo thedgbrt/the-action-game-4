@@ -2,8 +2,8 @@
   = @started_at = params[:started_at]
   .large-12.columns= f.association :team, collection: current_player.teams, label: false, label_method: :team_and_name
   .large-12.columns= f.input :focus, placeholder: 'Single focus?', label: false, autofocus: @aktion.status == 'committing'
-  .large-12.medium-7.columns.choice= f.input :choice, as: :boolean, label: CHOICE
-  .large-12.medium-5.columns.commit-button= f.button :submit, 'COMMIT'
+  .large-12.medium-7.columns.choice.text-center= f.input :choice, as: :boolean, label: CHOICE
+  .large-12.medium-5.columns.commit-button.text-center= f.button :submit, 'COMMIT'
   #verb
     .large-12.columns.text-right#add-verb= link_to '+verb', new_verb_path, remote: true
     .large-12.columns= f.association :verb, collection: Verb.order(:name), prompt: 'Doing what?', label: false, include_blank: true

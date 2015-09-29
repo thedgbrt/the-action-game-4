@@ -59,6 +59,18 @@ class Player < ActiveRecord::Base
     Aktion.where(team_id: tm.id, player_id: id)
   end
 
+  def actions_for_role(roll_id)
+    Aktion.where(role_id: roll_id, player_id: id)
+  end
+
+  def actions_for_project(proj_id)
+    Aktion.where(project_id: proj_id, player_id: id)
+  end
+
+  def actions_for_verb(vb_id)
+    Aktion.where(verb_id: vb_id, player_id: id)
+  end
+
   def today
     "Today: " +
     "#{todays_actions.map{|a|a.score}.sum} Action Points " # +
