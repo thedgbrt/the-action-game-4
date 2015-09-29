@@ -2,6 +2,7 @@
 %table{style: "border: 0px; padding: 0px; margin: 0px"}
   %tbody
     %tr
+      - @date = Time.zone.now.in_time_zone(current_player.current_time_zone).to_date
       %td.mini-menu-action= link_to current_player.today, player_aktions_path(player_id: current_player.id, date: @date)
       - current_player.todays_actions(@date).sort_by{|a|a.timeslot}.each do |a|
         - now = a.timeslot == Aktion.current_timeslot.in_time_zone(current_player.current_time_zone)  # TODO: get this working

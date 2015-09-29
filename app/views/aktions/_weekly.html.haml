@@ -1,7 +1,7 @@
 %hr
 %h4
   = link_to '<<<', aktions_path(date: @date - 1.day)
-  ="WEEKLY #{@date.strftime('%a, %b-%d')} #{Time.zone.now.in_time_zone(@player.current_time_zone).strftime('%Z')}"
+  ="Week of #{@date.strftime('%a, %b-%d')} #{Time.zone.now.in_time_zone(@player.current_time_zone).strftime('%Z')}"
   = link_to '>>>', aktions_path(date: @date + 1.day)
 - action_by_part_of_day = Player.todays_grid(@player.current_time_zone, @date).in_groups_of(12)
 - action_by_part_of_day.each_with_index do |part_of_days_slots, idx|

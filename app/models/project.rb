@@ -24,6 +24,6 @@ class Project < ActiveRecord::Base
   end
 
   def short_team_project
-    "#{team_id? ? team.short_safe : 'N/A'}: #{name}"    
+    "#{team_id? ? team.short_safe : 'N/A'}/#{name}"
   end
 end

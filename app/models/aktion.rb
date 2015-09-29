@@ -34,6 +34,10 @@ class Aktion < ActiveRecord::Base
 
   scope :by_timeslot, -> { order('timeslot DESC') }
 
+  def self.count_by(actions, resource_name)
+    
+  end
+
   def in_date_range(starting_on, ending_on)
     if starting_on == ending_on
       timeslot.to_date == starting_on

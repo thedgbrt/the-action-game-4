@@ -7,15 +7,10 @@ class AktionsController < ApplicationController
 
   def index
     @date = Date.strptime(params[:date]) if params[:date]
-    @week = Date.strptime(params[:week]).at_beginning_of_week if params[:week]
-    @month = Date.strptime(params[:month]).at_beginning_of_month if params[:month]
+    @week = Date.strptime(params[:week]) if params[:week]
+    @month = Date.strptime(params[:month]) if params[:month]
     @player = Player.find_by_id(params[:player_id]) || current_player
 
-    if params[:role_id]
-      @aktions = @player.aktions.select{ |a| a.role_id == params[:role_id].to_i}.try(:by_timeslot)
-    else
-      @aktions = @player.aktions.try(:by_timeslot)
-    end
     if @date
       @actions = @player.actions_in_date_range(@date, @date)
     elsif @week

@@ -37,7 +37,7 @@ class Role < ActiveRecord::Base
   end
 
   def short_team_role
-    "#{team.short_safe}: #{name}"
+    "#{team.short_safe}/#{name}"
   end
 
   def name_with_parent
