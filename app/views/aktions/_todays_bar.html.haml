@@ -2,7 +2,9 @@
 .today-item.medium-12.block
   .header.text-center= link_to 'TODAY', player_aktions_path(player_id: current_player.id, date: day)
   .today-summary= "#{current_player.todays_actions(day).count} Actions"
-  .today-summary= "#{current_player.todays_actions(day).count} Actions"  
+  .today-summary= "+#{current_player.todays_actions.map{|a|a.score}.sum} Points"
+  .today-summary= "#{current_player.todays_breaths} Breaths"
+  .today-summary= "#{current_player.todays_pushups} Push-Ups"
   - actions_by_part_of_day = Player.todays_grid(current_player.current_time_zone, @date).in_groups_of(12)
   - actions_by_part_of_day.each_with_index do |part_of_days_slots, idx|
     - if current_player.actions_before_6am(@date).count > 0
