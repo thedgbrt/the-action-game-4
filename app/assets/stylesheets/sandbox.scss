@@ -1,0 +1,28 @@
+.container {
+  display: -webkit-flex;
+  display: flex;
+  background-color: red;
+}
+.initial {
+  -webkit-flex: initial;
+          flex: initial;
+  width: 200px;
+  min-width: 100px;
+  background-color: yellow;
+}
+.none {
+  -webkit-flex: none;
+          flex: none;
+  width: 200px;
+  background-color: blue;
+}
+.flex1 {
+  -webkit-flex: 1;
+  flex: 1;
+  background-color: red;
+}
+.flex2 {
+  -webkit-flex: 2;
+  flex: 2;
+  background-color: orange;
+}

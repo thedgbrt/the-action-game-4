@@ -100,6 +100,13 @@ class Player < ActiveRecord::Base
     aktions.select{ |a| a.persisted? && a.timeslot.in_time_zone(self.current_time_zone).to_date == Time.zone.now.in_time_zone(self.current_time_zone).to_date }
   end
 
+  def actions_before_6am(date=nil)
+    date ||= Time.zone.now.in_time_zone(current_time_zone).to_date
+    starting = date.at_beginning_of_day
+    ending ||= starting + 6.hours
+    aktions.select{ |a| a.persisted? && a.timeslot >= starting && a.timeslot <= ending }
+  end
+
   def actions_in_date_range(starting_on, ending_on)
     aktions.select{ |a| a.persisted? && a.in_date_range(starting_on, ending_on) }
   end

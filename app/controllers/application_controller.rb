@@ -11,7 +11,6 @@ class ApplicationController < ActionController::Base
   helper_method :back_or_home
   helper_method :last_action
 
-  before_action :set_date
   around_filter :user_time_zone, if: :current_player
 
   private
@@ -56,7 +55,4 @@ class ApplicationController < ActionController::Base
       request[:http_referer] || player_signed_in? ? player_path(current_player) : root_path
     end
 
-    def set_date
-      @date ||= params[:date] ? Date.strptime(params[:date]) : Time.zone.now.to_date
-    end
 end

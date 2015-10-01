@@ -1,0 +1,16 @@
+- commit = 3
+- focus = 20
+- review = 2
+- relax = 5
+- commit_width = 100*commit/30
+- focus_width = 100*focus/30
+- review_width = 100*review/30
+- relax_width = 100*relax/30
+#progress-bar-container.gray-bg
+  .large-12#progress-bar
+    .text-center.commit-bg.progbar-item{"style" => "width: #{commit_width}%"}= "COMMIT"
+    .text-center.focus-bg.progbar-item{"style" => "width: #{focus_width}%"}= "FOCUS"
+    .text-center.review-bg.progbar-item{"style" => "width: #{review_width}%"}= "REV"
+    .text-center.relax-bg.progbar-item{"style" => "width: #{relax_width}%"}= "RELAX"
+  .large-12#arrow-path
+    #arrow ⬆︎

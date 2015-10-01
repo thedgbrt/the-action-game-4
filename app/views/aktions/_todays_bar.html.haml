@@ -1,9 +1,18 @@
-.clear-both
-%table{style: "border: 0px; padding: 0px; margin: 0px"}
-  %tbody
-    %tr
-      - @date = Time.zone.now.in_time_zone(current_player.current_time_zone).to_date
-      %td.mini-menu-action= link_to current_player.today, player_aktions_path(player_id: current_player.id, date: @date)
-      - current_player.todays_actions(@date).sort_by{|a|a.timeslot}.each do |a|
-        - now = a.timeslot == Aktion.current_timeslot.in_time_zone(current_player.current_time_zone)  # TODO: get this working
-        %td.mini-menu-action{style: "background-color: #{a.color}; #{now ? 'border: 1px solid red;' : ''}"}= link_to (a.plus_score || 1), edit_aktion_path(a, edit: true), title: a.summary_with_time_and_focus
+- day = Time.zone.now.in_time_zone(current_player.current_time_zone).to_date
+.today-item.medium-12.block
+  .header.text-center= link_to 'TODAY', player_aktions_path(player_id: current_player.id, date: day)
+  .today-summary= "#{current_player.todays_actions(day).count} Actions"
+  .today-summary= "#{current_player.todays_actions(day).count} Actions"  
+  - actions_by_part_of_day = Player.todays_grid(current_player.current_time_zone, @date).in_groups_of(12)
+  - actions_by_part_of_day.each_with_index do |part_of_days_slots, idx|
+    - if current_player.actions_before_6am(@date).count > 0
+      .clear-both
+      .hslots
+        - part_of_days_slots.each do |slot|
+          .hslot= render 'aktions/hslot', slot: slot
+    - else
+      - unless idx == 0
+        .clear-both
+        .hslots
+          - part_of_days_slots.each do |slot|
+            .hslot= render 'aktions/hslot', slot: slot

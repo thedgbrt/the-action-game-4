@@ -77,6 +77,7 @@ class Aktion < ActiveRecord::Base
   end
 
   def self.get(playa, slot)
+    return nil if playa.nil?
     Aktion.find_by(player_id: playa.id, timeslot: slot)
   end
 
@@ -178,25 +179,5 @@ class Aktion < ActiveRecord::Base
 
   def summary_with_time_and_focus
     simple_time + ' ' + summary_with_focus
-  end
-
-  def self.focus_placeholder
-    'Subjectively, how did you feel? Was your body comfortable? Were you able to stay focused the whole time?'
-  end
-
-  def self.focus_options
-    [
-      ['+3 (Amazing)', 3],
-      ['+2 (Good)', 2],
-      ['+1 (Decent)', 1],
-      [' 0 (Average)', 0],
-      ['-1 (Questionable)', -1],
-      ['-2 (Poor)', -2],
-      ['-3 (Terrible)', -3]
-    ]
-  end
-
-  def self.value_placeholder
-    'Objectively, what did you work on?  What did you complete or accomplish?  Is this the right strategy for your project?  Is this project a good use of your time?'
   end
 end

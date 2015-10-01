@@ -31,6 +31,28 @@ STATUS_OPTIONS = [
   ['Finished', :finished], 
 ]
 
+INTEGRITY_SCORES = {
+  1 => 'Quasi',
+  3 => 'Attempted',
+  6 => 'Loose',
+  8 => 'Solid',
+  10 => 'Exceptional'
+}
+
+FLOW_VALUE_OPTIONS = [
+  ['+3 (Amazing)', 3],
+  ['+2 (Good)', 2],
+  ['+1 (Decent)', 1],
+  [' 0 (Average)', 0],
+  ['-1 (Questionable)', -1],
+  ['-2 (Poor)', -2],
+  ['-3 (Terrible)', -3]
+]
+
+FLOW_PLACEHOLDER = 'Subjectively, how did you feel? Was your body comfortable? Were you able to stay focused the whole time?'
+VALUE_PLACEHOLDER = 'Objectively, what did you work on?  What did you complete or accomplish?  Is this the right strategy for your project?  Is this project a good use of your time?'
+
 INTENSITY_PROMPT = 'Action Integrity?'
+
 DEFAULT_WARNING_VOLUME = 70
 DEFAULT_TICKING_VOLUME = 30

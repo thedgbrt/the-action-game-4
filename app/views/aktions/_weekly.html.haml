@@ -1,26 +1,26 @@
 %hr
 %h4
-  = link_to '<<<', aktions_path(date: @date - 1.day)
-  ="Week of #{@date.strftime('%a, %b-%d')} #{Time.zone.now.in_time_zone(@player.current_time_zone).strftime('%Z')}"
-  = link_to '>>>', aktions_path(date: @date + 1.day)
-- action_by_part_of_day = Player.todays_grid(@player.current_time_zone, @date).in_groups_of(12)
-- action_by_part_of_day.each_with_index do |part_of_days_slots, idx|
-  - if idx == 0
-    // Skip midnight to 6am for now.  TODO: add it back, but only if time now < 6am or Actions exist
-  - else
-    .large-4.medium-4.small-12.columns
-      %h5.large-12.text-center= PARTS_OF_DAY[idx]
-      - part_of_days_slots.each do |slot|
-        - a = Aktion.get(@player, slot)
-        - now = slot == Aktion.current_timeslot.in_time_zone(@player.current_time_zone)
-        - if a
-          .large-12.columns.action-cell{style: "background-color: #{a.team.color(@player)}; #{now ? 'border: 1px solid red;' : ''}"}
-            %span.red-text= link_to slot.strftime('%H:%M'), a
-            %span= link_to a.try(:summary_with_focus), edit_aktion_path(a, edit: true)
-        - else
-          .large-12.columns.action-cell{style: "background-color: white; #{now ? 'border: 1px solid red;' : ''}"}
-            %span.red-text= link_to Aktion.current_timeslot(slot).strftime('%H:%M'), a
-            %span.green-text
-              = link_to 'CREATE...', start_aktions_path(timeslot: slot.in_time_zone(@player.current_time_zone))
+  = link_to '<<<', aktions_path(week: @week - 1.week)
+  ="Week of #{@week.strftime('%a, %b-%d')}"
+  = link_to '>>>', aktions_path(week: @week + 1.week)
+/ - actions_by_part_of_day = Player.todays_grid(@player.current_time_zone, @date).in_groups_of(12)
+/ - actions_by_part_of_day.each_with_index do |part_of_days_slots, idx|
+/   - if idx == 0
+/     // Skip midnight to 6am for now.  TODO: add it back, but only if time now < 6am or Actions exist
+/   - else
+/     .large-4.medium-4.small-12.columns
+/       %h5.large-12.text-center= PARTS_OF_DAY[idx]
+/       - part_of_days_slots.each do |slot|
+/         - a = Aktion.get(@player, slot)
+/         - now = slot == Aktion.current_timeslot.in_time_zone(@player.current_time_zone)
+/         - if a
+/           .large-12.columns.action-cell{style: "background-color: #{a.team.color(@player)}; #{now ? 'border: 1px solid red;' : ''}"}
+/             %span.red-text= link_to slot.strftime('%H:%M'), a
+/             %span= link_to a.try(:summary_with_focus), edit_aktion_path(a, edit: true)
+/         - else
+/           .large-12.columns.action-cell{style: "background-color: white; #{now ? 'border: 1px solid red;' : ''}"}
+/             %span.red-text= link_to Aktion.current_timeslot(slot).strftime('%H:%M'), a
+/             %span.green-text
+/               = link_to 'CREATE...', start_aktions_path(timeslot: slot.in_time_zone(@player.current_time_zone))
 
 %hr

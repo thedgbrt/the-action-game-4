@@ -1,29 +1,28 @@
-%br
 = simple_form_for(@aktion) do |f|
   = f.error_notification
 
   .form-inputs
     = f.input :status, as: :hidden, collection: STATUS_OPTIONS, label: false
     .quadrants-container
-      #commit-bg.large-3.medium-4.small-12.block.aktion-quadrant.commit-bg
-        .large-12.medium-12.small-12.columns.commit.bigger.text-center.aktion-quadrant-header= "COMMIT (#{current_player.commit_length || 3}m)"
+      #commit-bg.large-3.medium-6.small-12.block.aktion-quadrant.commit-bg
+        .large-12.medium-12.small-12.columns.commit.bigger.text-center.aktion-quadrant-header COMMIT
         = render 'quadrant_commit', aktion: @aktion, f: f
-      .large-3.medium-2.small-12.block.aktion-quadrant.focus-bg
-        .large-12.focus.bigger.text-center.aktion-quadrant-header= "FOCUS (#{23 - current_player.commit_length.to_i || 3}m)"
+      .large-3.medium-6.small-12.block.aktion-quadrant.focus-bg
+        .large-12.focus.bigger.text-center.aktion-quadrant-header FOCUS
         = render 'quadrant_focus', aktion: @aktion, f: f
       - if current_player.review_first
-        .large-3.medium-4.small-12.block.aktion-quadrant.review-bg
-          .large-12.medium-12.small-12.columns.review.bigger.text-center.aktion-quadrant-header REVIEW (2m)
+        .large-3.medium-6.small-12.block.aktion-quadrant.review-bg
+          .large-12.medium-12.small-12.columns.review.bigger.text-center.aktion-quadrant-header REFLECT
           = render 'quadrant_review', aktion: @aktion, f: f
-        .large-3.medium-2.small-12.block.aktion-quadrant.relax-bg
-          .relax.bigger.text-center.aktion-quadrant-header RELAX (5m)
+        .large-3.medium-6.small-12.block.aktion-quadrant.relax-bg
+          .relax.bigger.text-center.aktion-quadrant-header RELAX
           = render 'quadrant_relax', aktion: @aktion, f: f
       - else
-        .large-3.medium-2.small-12.block.aktion-quadrant.relax-bg
-          .relax.bigger.text-center.aktion-quadrant-header RELAX (5m)
+        .large-3.medium-6.small-12.block.aktion-quadrant.relax-bg
+          .relax.bigger.text-center.aktion-quadrant-header RELAX
           = render 'quadrant_relax', aktion: @aktion, f: f
-        .large-3.medium-4.small-12.block.aktion-quadrant.review-bg
-          .large-12.medium-12.small-12.columns.review.bigger.text-center.aktion-quadrant-header REVIEW (2m)
+        .large-3.medium-6.small-12.block.aktion-quadrant.review-bg
+          .large-12.medium-12.small-12.columns.review.bigger.text-center.aktion-quadrant-header REFLECT
           = render 'quadrant_review', aktion: @aktion, f: f
 
     .large-6.small-6= f.association :location, as: :hidden

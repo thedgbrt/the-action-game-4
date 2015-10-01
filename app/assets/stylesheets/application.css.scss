@@ -96,6 +96,7 @@
 
 #scores {
   display: flex;
+  display: -webkit-flex;
   flex-wrap: wrap;
 }
 
@@ -106,4 +107,62 @@
 
 .space-10-y {
   height: 10px;
+}
+
+#progress-bar {
+  display: table;
+  width: 100%;
+  height: 2em;
+  .progbar-item {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
+
+#arrow-path {
+  background-color: #eee;
+  #arrow {
+    background-color: #eee;
+  }
+}
+
+.white-bg {
+  background-color: white;
+}
+
+.gray-bg {
+  background-color: #eee;
+}
+
+main {
+  padding: 0;
+  display: flex;
+  display: -webkit-flex;
+  width: 100%;
+}
+
+#sidebar {
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  margin: 0px;
+  padding: 0px;
+  width: 100px;
+}
+
+.today-item {
+  flex: 1;
+  -webkit-flex: 1;
+  margin: 2px;
+}
+
+#content {
+  flex: 1;
+  -webkit-flex: 1;
+  margin: 0px;
+  padding: 0px;
+  form {
+    background-color: red !important;
+    margin-top: 0px;
+  }
 }

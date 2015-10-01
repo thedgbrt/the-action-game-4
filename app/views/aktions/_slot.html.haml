@@ -1,0 +1,11 @@
+- a = Aktion.get(@player, slot)
+- now = slot == Aktion.current_timeslot.in_time_zone(@player.current_time_zone)
+- if a
+  .large-12.columns.action-cell{style: "background-color: #{a.team.color(@player)}; #{now ? 'border: 1px solid red;' : ''}"}
+    %span.red-text= link_to slot.strftime('%H:%M'), a
+    %span= link_to a.try(:summary_with_focus), edit_aktion_path(a, edit: true)
+- else
+  .large-12.columns.action-cell{style: "background-color: white; #{now ? 'border: 1px solid red;' : ''}"}
+    %span.red-text= link_to Aktion.current_timeslot(slot).strftime('%H:%M'), a
+    %span.green-text
+      = link_to 'CREATE...', start_aktions_path(timeslot: slot.in_time_zone(@player.current_time_zone))
