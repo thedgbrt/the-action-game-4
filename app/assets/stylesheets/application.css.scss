@@ -162,7 +162,17 @@ main {
   margin: 0px;
   padding: 0px;
   form {
-    background-color: red !important;
     margin-top: 0px;
   }
+}
+
+.time-boundary {
+  font-size: 70%;
+  text-align: left;
+  clear: both;
+  width: 100%;
+  float: left;
+  margin-top: 2px;
+  border-top: 1px solid #ccc;
+  padding-top: 2px;
 }

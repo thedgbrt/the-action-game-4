@@ -8,13 +8,17 @@
   - actions_by_part_of_day = Player.todays_grid(current_player.current_time_zone, @date).in_groups_of(12)
   - actions_by_part_of_day.each_with_index do |part_of_days_slots, idx|
     - if current_player.actions_before_6am(@date).count > 0
-      .clear-both
-      .hslots
+      .time-boundary
+        = PARTS_OF_DAY[idx]
+        .clear-both
         - part_of_days_slots.each do |slot|
-          .hslot= render 'aktions/hslot', slot: slot
+          - a = Aktion.get(current_player, slot)
+          .hslot= render 'aktions/hslot', slot: slot, a: a if a
     - else
       - unless idx == 0
-        .clear-both
-        .hslots
+        .time-boundary
+          = PARTS_OF_DAY[idx]
+          .clear-both
           - part_of_days_slots.each do |slot|
-            .hslot= render 'aktions/hslot', slot: slot
+            - a = Aktion.get(current_player, slot)
+            .hslot= render 'aktions/hslot', slot: slot, a: a if a

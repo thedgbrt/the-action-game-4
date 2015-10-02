@@ -1,6 +1,6 @@
 # Be sure to restart your server when you modify this file.
 
-PARTS_OF_DAY = ['Night', 'Morning', 'Afternoon', 'Evening']
+PARTS_OF_DAY = ['Night (12-6am)', 'Morning (6am-noon)', 'Afternoon (12-6pm)', 'Evening(6pm-12am)']
 
 COLORS = [
   ['green', '#CCFFCC'],
