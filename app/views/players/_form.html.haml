@@ -1,3 +1,5 @@
+= "@player.show_insights is #{@player.show_insights}"
+= "@player.show_sidebars is #{@player.show_sidebars}"
 = simple_form_for(@player) do |f|
   = f.error_notification
 
@@ -14,6 +16,9 @@
         = f.input :fictional
       .large-4.medium-6.small-12.columns= f.input :review_before_relax, as: :select, collection: [['REVIEW before RELAX', true], ['RELAX before REVIEW', false]], label: 'End of Action Order', selected: @player.review_before_relax || false
       .large-4.medium-6.small-12.columns= f.input :commit_length, collection: [['1 minute', 1], ['2 minutes', 2], ['3 minutes', 3], ['4 minutes', 4], ['5 minutes', 5]], label: 'COMMIT length'
+    .large-4.medium-6.small-12.columns
+      = f.input :show_insights, as: :boolean
+      = f.input :show_sidebars, as: :boolean
     %hr
 
   .form-actions

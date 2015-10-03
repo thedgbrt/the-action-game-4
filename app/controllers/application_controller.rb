@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   helper_method :team_selected?
   helper_method :correct_player?
   helper_method :back_or_home
+  helper_method :back_or_fallback
   helper_method :last_action
 
   around_filter :user_time_zone, if: :current_player
@@ -55,4 +56,7 @@ class ApplicationController < ActionController::Base
       request[:http_referer] || player_signed_in? ? player_path(current_player) : root_path
     end
 
+    def back_or(fallback)
+      request[:http_referer] || fallback
+    end
 end

@@ -15,7 +15,7 @@
       = render 'layouts/navigation'
       .debug-filler &nbsp;
     %main{:role => "main"}
-      - if player_signed_in?
+      - if sidebars?
         #sidebar.large-1.medium-2.hide-for-small.group= render 'aktions/todays_bar'
         #content.large-10.medium-8.small-12.group
           = render 'layouts/progress_bar'
