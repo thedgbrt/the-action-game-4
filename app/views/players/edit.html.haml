@@ -1,4 +1,7 @@
-%h1 Editing player
+- if @player = current_player
+  %h2 Account Settings
+- else
+  %h2 Editing Player Account
 
 = render 'form'
 

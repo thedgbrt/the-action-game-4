@@ -1,6 +1,8 @@
 - day = Time.zone.now.in_time_zone(current_player.current_time_zone).to_date
 .medium-12.block
-  .header.text-center= link_to 'TODAY', player_aktions_path(player_id: current_player.id, date: day)
+  .header.text-center.today-title
+    = link_to 'TODAY', player_aktions_path(player_id: current_player.id, date: day)
+    = link_to image_tag('settings.png', height: 16, width: 16), edit_player_path(current_player)
   .today-summary.text-center= "#{current_player.todays_actions(day).count} Actions"
   .today-summary.text-center= "+#{current_player.todays_actions.map{|a|a.score}.sum} Points"
   .today-summary.text-center= "#{current_player.todays_breaths} Breaths"
