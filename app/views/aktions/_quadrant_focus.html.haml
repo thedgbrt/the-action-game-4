@@ -1,7 +1,7 @@
 - if @aktion.status != 'committing'
   .large-12.medium-12.columns
     .focus-label Declared focus:
-    .box.text-center= @aktion.declared_focus      .large-4.medium-6.small-12.columns
+    .box.text-center= @aktion.declared_focus
   - if @aktion.status == 'attempting'
     %h5.text-center
       =link_to 'Ticking', sounds_path(sound_choice: 'ticking')
