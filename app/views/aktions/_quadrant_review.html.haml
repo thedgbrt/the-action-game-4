@@ -13,12 +13,12 @@
   /   .large-6.medium-6.small-6.text-center.columns= f.button :submit, "COUNT IT"
   /   .large-6.medium-6.small-6.text-center.columns= f.button :submit, "MISSED IT"
 - elsif @aktion.status == 'reviewed' || @aktion.status == 'finished'
-  .large-12.review-item
+  .large-12.columns.review-item
     %span.bold Status:
     %span= aktion.status_full
-  .large-12.review-item
+  .large-12.columns.review-item
     %span.bold= "Flow #{aktion.flow_str}:"
     %span= "#{aktion.flow_notes}"
-  .large-12.review-item
+  .large-12.columns.review-item
     %span.bold= "Value #{aktion.value_str}:"
     %span= "#{aktion.value_notes}"

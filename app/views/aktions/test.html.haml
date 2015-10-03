@@ -1,0 +1,12 @@
+%table
+  %thead
+    %tr
+      %th Timeslot
+      %th Created at
+      %th Started on time?
+  %tbody
+    - @actions.each do |action|
+      %tr
+        %td= action.simple_time
+        %td= action.created_at
+        %td= action.rubric_started_on_time

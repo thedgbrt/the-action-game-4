@@ -27,7 +27,7 @@
   .large-12.columns
     .large-12.review-item
       %span.bold Time Slot:
-      %span.underline= aktion.simple_time rescue 'no time'
+      %span.underline= @aktion.simple_time
     - if aktion.role
       .large-12.review-item
         %span.bold Role: 

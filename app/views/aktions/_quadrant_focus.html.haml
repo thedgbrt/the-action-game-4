@@ -3,30 +3,63 @@
     .focus-label Declared focus:
     .box.text-center= @aktion.declared_focus
   - if @aktion.status == 'attempting'
-    %h5.text-center
-      =link_to 'Ticking', sounds_path(sound_choice: 'ticking')
-      \|
-      =link_to 'Nature', sounds_path(sound_choice: 'nature')
-      \|
-      =link_to 'Music', sounds_path(sound_choice: 'music')
-      \|
-      =link_to 'Silence', sounds_path(sound_choice: 'silence')
-    %hr
-    - if @aktion.insights != []
-      %h5.text-center
-        Insights
-        %span#add-insight{"data-aktion_id" => "#{@aktion.id}", "data-player_id" => "#{current_player.id}"}= link_to '(Add)', new_insight_path(player_id: current_player.id, aktion_id: @aktion.id), remote: true
-      #insights
-        - @aktion.insights.each do |insight|
-          = insight.text
-          %br
-    - else
-      %h5.text-center
-        %span#add-insight{"data-aktion_id" => "#{@aktion.id}", "data-player_id" => "#{current_player.id}"}= link_to 'Add Insight', new_insight_path(player_id: current_player.id, aktion_id: @aktion.id), remote: true
-      #insights
-    %hr
+    - if insights?
+      - if @aktion.insights != []
+        %h5.text-center
+          Insights
+          %span#add-insight{"data-aktion_id" => "#{@aktion.id}", "data-player_id" => "#{current_player.id}"}= link_to '(Add)', new_insight_path(player_id: current_player.id, aktion_id: @aktion.id), remote: true
+        #insights
+          - @aktion.insights.each do |insight|
+            = insight.text
+            %br
+      - else
+        %h5.text-center
+          %span#add-insight{"data-aktion_id" => "#{@aktion.id}", "data-player_id" => "#{current_player.id}"}= link_to 'Add Insight', new_insight_path(player_id: current_player.id, aktion_id: @aktion.id), remote: true
+        #insights
+      %hr
     / %h5 Obstacles
     / %h5.text-center Add Interruption | Recovered
     / %h5.text-center Add Distraction | Recovered
     - unless params[:action] == 'show'
       .text-center.bold= f.button :submit, 'STOP AT THE BELL'
+  - if @aktion.status == 'reviewed'
+    .large-12.columns= "Integrity Score: +#{@aktion.score}"
+    #scores-table.large-12
+      .row
+        .score.cell +1
+        .cell
+          .checklist-item= "✔︎ Declared a focus at some point"
+      .row
+        .score.cell +3
+        .cell
+          .checklist-item= "✘ Committed on time" if !@aktion.rubric_started_on_time
+          .checklist-item= "✘ Stopped at the bell" if !@aktion.rubric_stopped_at_the_bell
+          .checklist-item= "✘ Kept the same focus" if !@aktion.rubric_kept_the_same_focus
+          .checklist-item= "✘ Reflected on flow/value" if !@aktion.rubric_reflected_on_flow_value
+          .checklist-item= "✘ Recovered from all interruptions" if !@aktion.rubric_if_interrupted_recovered
+      .row
+        .cell
+        .cell
+      .row
+        .cell
+        .cell
+      .row
+        .score.cell +6
+        .cell
+          .checklist-item= "✔︎ Committed on time" if @aktion.rubric_started_on_time
+          .checklist-item= "✔︎ Stopped at the bell" if @aktion.rubric_stopped_at_the_bell
+          .checklist-item= "✔︎ Kept the same focus" if @aktion.rubric_kept_the_same_focus
+          .checklist-item= "✔︎ Reflected on flow/value" if @aktion.rubric_reflected_on_flow_value
+          .checklist-item= "✔︎ Recovered from all interruptions" if @aktion.rubric_if_interrupted_recovered
+      .row
+        .score.cell +8
+        .cell
+          .checklist-item= f.input :focus, as: :boolean, label: 'Took a full, 4+ minute break'
+          .checklist-item= f.input :focus, as: :boolean, label: 'Flow/Value: #s and text'
+          .checklist-item= f.input :focus, as: :boolean, label: 'Recovered from sole interruption'
+      .row
+        .score.cell +10
+        .cell
+          .checklist-item= f.input :focus, as: :boolean, label: 'Took a full, awesome break'
+          .checklist-item= f.input :focus, as: :boolean, label: 'Kept tightly defined focus'
+          .checklist-item= f.input :focus, as: :boolean, label: 'Was never interrupted'

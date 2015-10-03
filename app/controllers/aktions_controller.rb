@@ -20,6 +20,10 @@ class AktionsController < ApplicationController
     end
   end
 
+  def test
+    @actions = Aktion.last(30)
+  end
+
   def show
   end
 

@@ -60,7 +60,7 @@ class Aktion < ActiveRecord::Base
     time_delta = (created_at - timeslot).abs/60
     if time_delta > 30
       1
-    elsif time_delta > 5 || choice != '1' || obstacles > 0
+    elsif rubric_started_on_time && rubric_stopped_at_the_bell && rubric_kept_the_same_focus && rubric_reflected_on_flow_value && rubric_if_interrupted_recovered
       3
     else
       reported = [0, 1, 3, 6, 8, 10][intensity.to_i]
@@ -133,12 +133,12 @@ class Aktion < ActiveRecord::Base
 
   def action_time(timestamp)
     timestamp ||= Time.zone.now
-    timestamp.strftime('%b-%d %H:%M')    
+    timestamp.strftime('%b-%-d %H:%M')    
   end
 
   def simple_time
     return '0:00' if !timeslot
-    timeslot.strftime('%b-%d %l:%m %p')
+    timeslot.strftime('%b-%-d %l:%M %p')
   end
   
   def self.checkmark(int)
@@ -180,4 +180,25 @@ class Aktion < ActiveRecord::Base
   def summary_with_time_and_focus
     simple_time + ' ' + summary_with_focus
   end
+  
+  def rubric_started_on_time
+    created_at < timeslot + 5.minutes
+  end
+  
+  def rubric_stopped_at_the_bell
+    stop == '1' || status == :stopped || status == :reviewed
+  end
+  
+  def rubric_kept_the_same_focus
+    focus == declared_focus
+  end
+  
+  def rubric_reflected_on_flow_value
+    flow && value
+  end
+
+  def rubric_if_interrupted_recovered
+    true
+  end
+          
 end

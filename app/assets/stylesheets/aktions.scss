@@ -70,6 +70,7 @@
     }
     color: white;
     padding: 10px;
+    margin-top: 20px;
     font-size: 130%;
     font-weight: bold;
   }
@@ -239,6 +240,7 @@ label#aktion_choice {
   padding: 8px;
   border: 1px solid black;
   color: red;
+  margin-bottom: 10px;
 }
 
 .focus-label {
@@ -249,4 +251,28 @@ label#aktion_choice {
 .focus-input {
   display: inline;
   padding: 1px;
+}
+
+#scores-table {
+  display: table;
+  .row {
+    display: table-row;
+    .cell {
+      display: table-cell;
+      border-bottom: 1px solid black;
+    }
+  }
+  .score {
+    padding-right: 5px;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .checklist-item {
+    display: block;
+  }
+}
+
+.boundary {
+  float: left;
+  width: 100%;
 }
