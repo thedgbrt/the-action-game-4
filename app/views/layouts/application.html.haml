@@ -13,15 +13,19 @@
   %body
     %header
       = render 'layouts/navigation'
-      = render 'layouts/progress_bar'
-      = render 'layouts/messages'
-      = render 'layouts/sandbox'
+      .debug-filler &nbsp;
     %main{:role => "main"}
       - if player_signed_in?
         #sidebar.large-1.medium-2.hide-for-small.group= render 'aktions/todays_bar'
-        #content.large-11.medium-10.small-12.group= yield
+        #content.large-11.medium-10.small-12.group
+          = render 'layouts/progress_bar'
+          = render 'layouts/messages'
+          = yield
       - else
-        = yield
+        #content.large-12.medium-12.small-12.group
+          = render 'layouts/progress_bar'
+          = render 'layouts/messages'
+          = yield
     %footer
       = render '/visitors/sounds' unless params[:controller] == 'visitors' && params[:action] == 'sounds'
 

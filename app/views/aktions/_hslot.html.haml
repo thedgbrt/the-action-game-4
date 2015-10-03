@@ -1,2 +1,3 @@
 - now = slot == Aktion.current_timeslot.in_time_zone(current_player.current_time_zone)
-%div{"style" => "border: 1px solid #{a.try(:color)}"}= link_to a.plus_score, edit_aktion_path(a, edit: true) if a
+- color = a.try(:color) || 'black'
+%div{"style" => "border: 1px solid #{color}"}= link_to a.plus_score, edit_aktion_path(a, edit: true) if a

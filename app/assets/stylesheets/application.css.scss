@@ -69,11 +69,9 @@
 }
 
 #time {
+  float: right;
   padding: 0px 10px;
-  height: 40px;
-  display: table-cell;
   vertical-align: middle;
-  height: 45px;
   font-size: 200%;
   text-transform: uppercase;
 }
@@ -142,18 +140,38 @@ main {
 }
 
 #sidebar {
+  background: #333333 !important;
+  color: white;
+  a {
+    color: white;
+  }
+  a:visited {
+    color: #eeeeee;
+  }
+  a:hover {
+    color: yellow;
+  }
+  a:active {
+    color: red;
+  }
   display: flex;
   display: -webkit-flex;
   flex-direction: column;
   margin: 0px;
   padding: 0px;
   width: 100px;
-}
-
-.today-item {
-  flex: 1;
-  -webkit-flex: 1;
-  margin: 2px;
+  .today-summary {
+    background: #666666;
+    text-align: center;
+    width: 90px;
+    float: left;
+    margin: 1px 5px;
+  }
+  .today-item {
+    flex: 1;
+    -webkit-flex: 1;
+    margin: 2px;
+  }
 }
 
 #content {
@@ -175,4 +193,19 @@ main {
   margin-top: 2px;
   border-top: 1px solid #ccc;
   padding-top: 2px;
+}
+
+.title-area {
+  line-height: 100%;
+  width: 100px;
+  color: white;
+  li {
+    a   {
+      color: white;
+    }
+  }
+}
+
+.debug-filler {
+  background: #333333;
 }
