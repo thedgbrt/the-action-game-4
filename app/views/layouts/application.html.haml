@@ -17,15 +17,17 @@
     %main{:role => "main"}
       - if player_signed_in?
         #sidebar.large-1.medium-2.hide-for-small.group= render 'aktions/todays_bar'
-        #content.large-11.medium-10.small-12.group
+        #content.large-10.medium-8.small-12.group
           = render 'layouts/progress_bar'
           = render 'layouts/messages'
           = yield
+        #right-sidebar.large-1.medium-2.hide-for-small.group
       - else
         #content.large-12.medium-12.small-12.group
           = render 'layouts/progress_bar'
           = render 'layouts/messages'
           = yield
+          .right-sidebar PRIVET
     %footer
       = render '/visitors/sounds' unless params[:controller] == 'visitors' && params[:action] == 'sounds'
 

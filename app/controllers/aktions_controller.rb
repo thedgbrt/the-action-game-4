@@ -53,6 +53,7 @@ class AktionsController < ApplicationController
   def create
     @aktion = Aktion.new(aktion_params)
     @aktion.status = :attempting
+    @aktion.declared_focus = @aktion.focus
     respond_to do |format|
       if @aktion.save
         format.html { redirect_to aktion_form }

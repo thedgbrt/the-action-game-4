@@ -1,4 +1,7 @@
 - if params.has_key?(:edit) || @aktion.status == 'stopped'
+  .large-12.columns
+    .focus-label Actual Focus:
+    .focus-input= f.input :focus, label: false
   .large-4.medium-4.small-4.columns.bigger= 'FLOW'
   .large-8.medium-8.small-8.columns= f.input :flow, collection: FLOW_VALUE_OPTIONS, label: false, autofocus: true
   .large-12.columns= f.input :flow_notes, label: false, input_html: {rows: 5}, placeholder: FLOW_PLACEHOLDER

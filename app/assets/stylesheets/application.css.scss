@@ -99,8 +99,14 @@
 }
 
 .score-quadrant {
-  background-color: cyan;
+  background-color: white;
+  margin: 5px;
   border: 1px solid black;
+  ul {
+      list-style-type: none;
+      padding: 0px;
+      margin: 0px;
+  }
 }
 
 .space-10-y {
@@ -133,7 +139,8 @@
 }
 
 main {
-  padding: 0;
+  margin: 0px;
+  padding: 0px;
   display: flex;
   display: -webkit-flex;
   width: 100%;
@@ -177,8 +184,7 @@ main {
 #content {
   flex: 1;
   -webkit-flex: 1;
-  margin: 0px;
-  padding: 0px;
+  margin: 5px;
   form {
     margin-top: 0px;
   }
@@ -208,4 +214,23 @@ main {
 
 .debug-filler {
   background: #333333;
+}
+
+footer {
+  background: #333333;
+  color: white;
+  a, a:visited {
+    color: white;
+  }
+}
+
+#right-sidebar {
+  float: right;
+  width: 20px;
+  min-height: 400px;
+  background: #333333;
+  color: white;
+  a, a:visited {
+    color: white;
+  } 
 }

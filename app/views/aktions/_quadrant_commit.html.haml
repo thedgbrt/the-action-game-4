@@ -24,24 +24,18 @@
   .large-12.columns#timeslot= f.input :timeslot, minute_step: 30, use_short_month: true, label: false, discard_year: true, ampm: true
   .large-12.columns= f.input :time_zone, selected: Time.zone.now, include_blank: true, label: false, prompt: 'Time Zone?'
 - else
-  - if aktion.verb
-    %h4
-      %span You are 
-      %span.underline= aktion.verb.try(:name)
-  %h4
-    %span.bold Focus:
-    %span.underline= aktion.focus
-  .large-12.review-item
-    %span.bold Time Slot:
-    %span.underline= aktion.simple_time rescue 'no time'
-  - if aktion.role
+  .large-12.columns
     .large-12.review-item
-      %span.bold Role: 
-      %span.underline= link_to aktion.role.name, aktion.role
-  - if aktion.project
+      %span.bold Time Slot:
+      %span.underline= aktion.simple_time rescue 'no time'
+    - if aktion.role
+      .large-12.review-item
+        %span.bold Role: 
+        %span.underline= link_to aktion.role.name, aktion.role
+    - if aktion.project
+      .large-12.review-item
+        %span.bold Project: 
+        %span.underline= link_to aktion.project.name, aktion.project
     .large-12.review-item
-      %span.bold Project: 
-      %span.underline= link_to aktion.project.name, aktion.project
-  .large-12.review-item
-    %span.bold Choice: 
-    %span.underline= aktion.choice == '1' ? 'Affirmed' : 'Unspecified'
+      %span.bold Choice: 
+      %span.underline= aktion.choice == '1' ? 'Affirmed' : 'Unspecified'
