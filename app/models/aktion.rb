@@ -18,7 +18,7 @@ class Aktion < ActiveRecord::Base
   end
   serialize :properties, Hash, %w(choice pushups situps wallsits breaths water snack tidy stop
     restroom stretch games friends other music change interruptions deflected distractions recovered
-    declared_focus)
+    declared_focus awesome_break tight_focus)
   enum status: [:committing, :attempting, :stopped, :reviewed]
 
   belongs_to :player
@@ -28,6 +28,7 @@ class Aktion < ActiveRecord::Base
   belongs_to :location
   belongs_to :team
   has_many :insights
+  has_many :interruptions
 
   validates :team_id, presence: true
   validates :timeslot, presence: true, uniqueness: {scope: :player_id}
@@ -58,16 +59,20 @@ class Aktion < ActiveRecord::Base
   def max_score
     time_delta = (created_at - timeslot).abs/60
     return 1 if time_delta > 30
-    return 3 if rubric_started_on_time
-    return 3 if rubric_stopped_at_the_bell
-    return 3 if rubric_kept_the_same_focus
-    return 3 if rubric_reflected_on_flow_value
-    return 3 if rubric_recovered_from_all_interruptions
+    return 3 unless rubric_started_on_time
+    return 3 unless rubric_stopped_at_the_bell
+    return 3 unless rubric_kept_the_same_focus
+    return 3 unless rubric_reflected_on_flow_value
+    return 3 unless rubric_recovered_interruptions
+    10
+  end
+
+  def self_reported_score
+    [0, 1, 3, 6, 8, 10][intensity ? intensity.to_i : 2]
   end
 
   def score
-    reported = [0, 1, 3, 6, 8, 10][intensity ? intensity.to_i : 2]
-    [reported, max_score].min
+    [self_reported_score, max_score].min
   end
 
   def obstacles
@@ -200,11 +205,17 @@ class Aktion < ActiveRecord::Base
   end
   
   def rubric_reflected_on_flow_value
-    flow && value
+    if !flow || !value
+      false 
+    elsif !flow_notes || flow_notes == '' || !value_notes || value_notes == ''
+      'numbers'
+    elsif flow_notes && flow_notes.length > MIN_NOTES_LENGTH && value_notes && value_notes.length > MIN_NOTES_LENGTH 
+      'detailed'
+    end
   end
 
-  def rubric_recovered_from_all_interruptions
-    true
+  def rubric_recovered_interruptions
+    1
   end
           
 end

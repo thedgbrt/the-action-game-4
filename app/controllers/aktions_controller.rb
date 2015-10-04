@@ -109,7 +109,7 @@ class AktionsController < ApplicationController
         :time_zone, :location_id, :role_id, :properties, :team_id, :water, :breaths, :pushups,
         :wallsits, :choice, :snack, :tidy, :stop, :restroom, :stretch, :games, :friends, :other,
         :change, :planned_date, :planned_sequence_number, :planned, :interruptions, :deflected,
-        :distractions, :recovered, :started_at, :stopped_at, :declared_focus)
+        :distractions, :recovered, :started_at, :stopped_at, :declared_focus, :awesome_break, :tight_focus)
     end
 
     def aktion_form

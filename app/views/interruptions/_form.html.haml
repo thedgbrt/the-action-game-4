@@ -1,0 +1,10 @@
+= simple_form_for(@interruption) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :internal, as: :select, prompt: 'Internal? ', label: false, :wrapper_html => { class: 'inline-form' }
+    = f.input :recovered, as: :select, prompt: 'Recovered? ', label: false, :wrapper_html => { class: 'inline-form' }
+    = f.input :details, label: false, placeholder: 'Optional details', :wrapper_html => { class: 'inline-form' }
+
+  .form-actions
+    = f.button :submit

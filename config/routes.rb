@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :interruptions
   resources :insights
   resources :aktions do
     collection { get :continue, :start, :test }

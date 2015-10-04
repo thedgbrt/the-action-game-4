@@ -1,0 +1,27 @@
+%h1 Listing interruptions
+
+%table
+  %thead
+    %tr
+      %th Type
+      %th Recovered
+      %th Aktion
+      %th Details
+      %th
+      %th
+      %th
+
+  %tbody
+    - @interruptions.each do |interruption|
+      %tr
+        %td= interruption.type
+        %td= interruption.recovered
+        %td= interruption.aktion_id
+        %td= interruption.details
+        %td= link_to 'Show', interruption
+        %td= link_to 'Edit', edit_interruption_path(interruption)
+        %td= link_to 'Destroy', interruption, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Interruption', new_interruption_path

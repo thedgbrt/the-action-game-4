@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Type:
+  = @interruption.type
+%p
+  %b Recovered:
+  = @interruption.recovered
+%p
+  %b Aktion:
+  = @interruption.aktion_id
+%p
+  %b Details:
+  = @interruption.details
+
+= link_to 'Edit', edit_interruption_path(@interruption)
+\|
+= link_to 'Back', interruptions_path
