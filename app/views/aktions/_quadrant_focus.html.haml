@@ -17,7 +17,6 @@
           %span#add-insight{"data-aktion_id" => "#{@aktion.id}", "data-player_id" => "#{current_player.id}"}= link_to 'Add Insight', new_insight_path(player_id: current_player.id, aktion_id: @aktion.id), remote: true
         #insights
       %hr
-      - if @aktion.interruptions
     / %h5 Interruptions
     / %h5.text-center Add Interruption | Recovered
     / %h5.text-center Add Distraction | Recovered
