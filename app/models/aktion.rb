@@ -55,17 +55,19 @@ class Aktion < ActiveRecord::Base
     team.color(player)
   end
 
-  def score
-    return 0 if new_record?
+  def max_score
     time_delta = (created_at - timeslot).abs/60
-    if time_delta > 30
-      1
-    elsif rubric_started_on_time && rubric_stopped_at_the_bell && rubric_kept_the_same_focus && rubric_reflected_on_flow_value && rubric_if_interrupted_recovered
-      3
-    else
-      reported = [0, 1, 3, 6, 8, 10][intensity.to_i]
-      [reported, 6].max
-    end
+    return 1 if time_delta > 30
+    return 3 if rubric_started_on_time
+    return 3 if rubric_stopped_at_the_bell
+    return 3 if rubric_kept_the_same_focus
+    return 3 if rubric_reflected_on_flow_value
+    return 3 if rubric_recovered_from_all_interruptions
+  end
+
+  def score
+    reported = [0, 1, 3, 6, 8, 10][intensity ? intensity.to_i : 2]
+    [reported, max_score].min
   end
 
   def obstacles
@@ -173,6 +175,10 @@ class Aktion < ActiveRecord::Base
     summary + ' (' + focus + ')'
   end
 
+  def time_summary_with_focus
+    simple_time + ' ' + summary_with_focus
+  end
+
   def summary_to_share
     player.first_name.to_s + ' (' + [verb.try(:name), focus].join(', ') + ')'
   end
@@ -197,7 +203,7 @@ class Aktion < ActiveRecord::Base
     flow && value
   end
 
-  def rubric_if_interrupted_recovered
+  def rubric_recovered_from_all_interruptions
     true
   end
           

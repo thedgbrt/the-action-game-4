@@ -23,7 +23,7 @@
     - unless params[:action] == 'show'
       .text-center.bold= f.button :submit, 'STOP AT THE BELL'
   - if @aktion.status == 'reviewed'
-    .large-12.columns= "Integrity Score: +#{@aktion.score}"
+    %h5.large-12.columns= "Integrity Score: +#{@aktion.score}"
     #scores-table.large-12
       .row
         .score.cell +1
@@ -36,7 +36,7 @@
           .checklist-item= "✘ Stopped at the bell" if !@aktion.rubric_stopped_at_the_bell
           .checklist-item= "✘ Kept the same focus" if !@aktion.rubric_kept_the_same_focus
           .checklist-item= "✘ Reflected on flow/value" if !@aktion.rubric_reflected_on_flow_value
-          .checklist-item= "✘ Recovered from all interruptions" if !@aktion.rubric_if_interrupted_recovered
+          .checklist-item= "✘ Recovered from all interruptions" if !@aktion.rubric_recovered_from_all_interruptions
       .row
         .cell
         .cell
@@ -50,7 +50,7 @@
           .checklist-item= "✔︎ Stopped at the bell" if @aktion.rubric_stopped_at_the_bell
           .checklist-item= "✔︎ Kept the same focus" if @aktion.rubric_kept_the_same_focus
           .checklist-item= "✔︎ Reflected on flow/value" if @aktion.rubric_reflected_on_flow_value
-          .checklist-item= "✔︎ Recovered from all interruptions" if @aktion.rubric_if_interrupted_recovered
+          .checklist-item= "✔︎ Recovered from all interruptions" if @aktion.rubric_recovered_from_all_interruptions
       .row
         .score.cell +8
         .cell

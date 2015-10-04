@@ -10,18 +10,17 @@
   - actions_by_part_of_day = Player.todays_grid(current_player.current_time_zone, @date).in_groups_of(12)
   - actions_by_part_of_day.each_with_index do |part_of_days_slots, idx|
     - if current_player.actions_before_6am(@date).count > 0
-      .time-boundary
-        .boundary.text-center image_tag('settings.png', height: 16, width: 16)
+      .sidebar-container
         .clear-both
         - part_of_days_slots.each do |slot|
           - a = Aktion.get(current_player, slot)
-          .hslot= render 'aktions/hslot', slot: slot, a: a if a
+          .hslot= render 'aktions/hslot', slot: slot, a: a
     - else
       - unless idx == 0
-        .time-boundary
-          .boundary
-            = link_to image_tag('settings.png', height: 16, width: 16), edit_player_path(current_player)
+        .sidebar-container
           .clear-both
           - part_of_days_slots.each do |slot|
             - a = Aktion.get(current_player, slot)
-            .hslot= render 'aktions/hslot', slot: slot, a: a if a
+            .hslot= render 'aktions/hslot', slot: slot, a: a
+  .sidebar-container
+  .sidebar-container

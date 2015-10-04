@@ -168,7 +168,7 @@ main {
   padding: 0px;
   width: 100px;
   .today-summary {
-    font-size: 70%;
+    font-size: 80%;
     background: #666666;
     text-align: center;
     width: 90px;
@@ -189,17 +189,6 @@ main {
   form {
     margin-top: 0px;
   }
-}
-
-.time-boundary {
-  font-size: 70%;
-  text-align: left;
-  clear: both;
-  width: 100%;
-  float: left;
-  margin-top: 2px;
-  border-top: 1px solid #ccc;
-  padding-top: 2px;
 }
 
 .title-area {
@@ -234,6 +223,24 @@ footer {
   a, a:visited {
     color: white;
   } 
+}
+
+.sidebar-container {
+  font-size: 80%;
+  text-align: left;
+  clear: both;
+  width: 100%;
+  float: left;
+  margin-top: 5px;
+  .empty-hslot {
+    color: #333333;
+    a, a:visited {
+      color: #666666 !important;
+    }
+    a:active {
+      color: red;
+    }
+  }
 }
 
 .today-title {
