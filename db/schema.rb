@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 20151005142252) do
     t.integer  "challenge_id"
     t.boolean  "active",       default: true
     t.string   "comments"
+    t.datetime "starting"
+    t.datetime "ending"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
   end
@@ -57,8 +59,6 @@ ActiveRecord::Schema.define(version: 20151005142252) do
   create_table "challenges", force: :cascade do |t|
     t.boolean  "daily"
     t.boolean  "weekly"
-    t.datetime "starting"
-    t.datetime "ending"
     t.integer  "item_type"
     t.integer  "operation_type"
     t.integer  "greater_than"

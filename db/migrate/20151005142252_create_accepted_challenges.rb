@@ -5,6 +5,8 @@ class CreateAcceptedChallenges < ActiveRecord::Migration
       t.integer :challenge_id
       t.boolean :active, default: true
       t.string :comments
+      t.datetime :starting
+      t.datetime :ending
 
       t.timestamps null: false
     end

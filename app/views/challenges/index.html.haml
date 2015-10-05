@@ -3,11 +3,12 @@
 %table
   %thead
     %tr
+      %th
+      %th id
       %th Description
-      %th Item
-      %th Operation
-      %th Greater than
-      %th Less than
+      %th Accepted By
+      %td Available
+      %td Creator
       %th
       %th
       %th
@@ -15,11 +16,14 @@
   %tbody
     - @challenges.each do |challenge|
       %tr
+        - ac = challenge.accepted_by(current_player)
+        - if ac.first
+          %td.blue-text= link_to 'ACTIVE', ac.first
+        - else
+          %td.green-text= link_to 'ACCEPT', new_accepted_challenge_path(challenge_id: challenge.id, player_id: current_player.id, active: true), remote: true
+        %td= challenge.id
         %td= challenge.description
-        %td= challenge.item
-        %td= challenge.op
-        %td= challenge.greater_than
-        %td= challenge.less_than
+        %td= challenge.accepted_challenges.map{ |ac| ac.player.first_name }.join(', ') rescue 'Error'
         %td= challenge.available
         %td= challenge.creator.try(:name)
         %td= link_to 'Show', challenge

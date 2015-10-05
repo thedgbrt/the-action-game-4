@@ -2,10 +2,11 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :player_id
-    = f.input :challenge_id
+    .large-3.medium-3.small-6= f.association :player
+    .large-6.medium-3.small-6= f.association :challenge, label_method: :description
+    .large-3.medium-3.small-6= f.input :comments
     = f.input :active
-    = f.input :comments
+    %hr
 
   .form-actions
     = f.button :submit

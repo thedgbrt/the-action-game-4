@@ -3,8 +3,6 @@ class CreateChallenges < ActiveRecord::Migration
     create_table :challenges do |t|
       t.boolean :daily
       t.boolean :weekly
-      t.datetime :starting
-      t.datetime :ending
       t.integer :item_type
       t.integer :operation_type
       t.integer :greater_than

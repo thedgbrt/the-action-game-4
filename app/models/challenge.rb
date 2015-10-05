@@ -16,6 +16,8 @@ class Challenge < ActiveRecord::Base
   has_many :accepted_challenges
   has_many :players, through: :accepted_challenges
   belongs_to :creator, class_name: 'Player'
+  
+  scope :all_daily, -> { where(daily: true) } 
 
   def item
     Challenge::TYPES[item_type][0] rescue 'Missing Item Type'
@@ -38,11 +40,7 @@ class Challenge < ActiveRecord::Base
     end
   end
 
-  def self.types
-    
-  end
-  
-  def self.operations
-    
+  def accepted_by(playa)
+    AcceptedChallenge.where(player_id: playa.id, challenge_id: id)
   end
 end
