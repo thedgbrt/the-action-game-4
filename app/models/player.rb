@@ -208,4 +208,8 @@ class Player < ActiveRecord::Base
       end
     end
   end
+
+  def active_challenges(item=0)
+    accepted_challenges.select{ |ac| ac.active && ac.challenge.item_type == 0 }
+  end
 end

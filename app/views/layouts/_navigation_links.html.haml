@@ -26,6 +26,7 @@
       %li.text-right.dropdown_item= link_to 'Profile', current_player
       %li.text-right.dropdown_item= link_to "Sign out #{current_player.first_name}", signout_path
       %hr
+      %li.text-right.dropdown_item= link_to 'My Challenges', accepted_challenges_path(player_id: current_player.id)
       %li.text-right.dropdown_item= link_to 'My Actions', player_aktions_path(player_id: current_player.id)
       %li.text-right.dropdown_item= link_to 'My Roles', roles_path
       %li.text-right.dropdown_item= link_to 'My Projects', projects_path

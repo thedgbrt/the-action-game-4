@@ -1,16 +1,16 @@
 class Challenge < ActiveRecord::Base
   TYPES = [
     ['Actions', 0],
-    ['Action Scores', 1],
+    ['Action Acores', 1],
     ['Push-ups', 2],
-    ['Breaths', 3],
-    ['Attempted Actions', 4],
-    ['Successful Actions', 5]
+    ['Conscious Breaths', 3],
+    ['Actions Attempted', 4],
+    ['Actions Completed', 5]
   ]
 
   OPERATIONS = [
-    ['Sum', 0],
-    ['Average', 1]
+    ['Total', 0]
+    # ['Average', 1]
   ]
 
   has_many :accepted_challenges
@@ -20,11 +20,11 @@ class Challenge < ActiveRecord::Base
   scope :all_daily, -> { where(daily: true) } 
 
   def item
-    Challenge::TYPES[item_type][0] rescue 'Missing Item Type'
+    Challenge::TYPES.to_h.invert[item_type] rescue 'Missing Item Type'
   end
 
   def op
-    Challenge::OPERATIONS[operation_type][0] rescue 'Missing Op Type'
+    Challenge::OPERATIONS.to_h.invert[operation_type] rescue 'Missing Op Type'
   end
 
   def description
@@ -32,7 +32,7 @@ class Challenge < ActiveRecord::Base
     if greater_than && less_than
       output += ' between ' + less_than.to_s + ' and ' + greater_than.to_s
     elsif greater_than
-      output += ' greater than ' + greater_than.to_s
+      'At least ' + greater_than.to_s + ' ' + item
     elsif less_than
       output += ' less than ' + less_than.to_s
     else

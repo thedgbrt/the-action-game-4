@@ -1,26 +1,28 @@
-%h1 Listing accepted_challenges
+%h1 My Accepted Challenges
 
 %table
   %thead
     %tr
-      %th Player
       %th Challenge
       %th Active
       %th Comments
+      - if current_player.admin?
+        %th Who
       %th
       %th
       %th
 
   %tbody
-    - @accepted_challenges.each do |accepted_challenge|
+    - @accepted_challenges.each do |ac|
       %tr
-        %td= accepted_challenge.player_id
-        %td= accepted_challenge.challenge_id
-        %td= accepted_challenge.active
-        %td= accepted_challenge.comments
-        %td= link_to 'Show', accepted_challenge
-        %td= link_to 'Edit', edit_accepted_challenge_path(accepted_challenge)
-        %td= link_to 'Destroy', accepted_challenge, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td= ac.description rescue 'Challenge Missing'
+        %td= ac.active rescue 'Missing'
+        %td= ac.comments rescue 'Missing'
+        - if current_player.admin?
+          %td= ac.player.first_name rescue 'Missing Name'
+        %td= link_to 'Show', ac
+        %td= link_to 'Edit', edit_accepted_challenge_path(ac)
+        %td= link_to 'Destroy', ac, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 

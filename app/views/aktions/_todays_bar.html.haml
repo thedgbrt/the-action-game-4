@@ -1,12 +1,19 @@
 - day = Time.zone.now.in_time_zone(current_player.current_time_zone).to_date
 .medium-12.block
   .header.text-center.today-title
-    = link_to 'TODAY', player_aktions_path(player_id: current_player.id, date: day)
-    = link_to image_tag('settings.png', height: 16, width: 16), edit_player_path(current_player)
-  .today-summary.text-center= "#{current_player.todays_actions(day).count} Actions"
+    %span.yellow-text= link_to 'TODAY', player_aktions_path(player_id: current_player.id, date: day)
+    %span= link_to image_tag('settings.png', height: 16, width: 16), edit_player_path(current_player)
+  #actions-challenge.today-summary.text-center
+    - if current_player.active_challenges(0).count > 0
+      %span.yellow-text= link_to current_player.todays_actions(day).count, accepted_challenges_path, title: 'See your related challenges'
+    - else
+      %span= current_player.todays_actions(day).count
+    %span Actions
   .today-summary.text-center= "+#{current_player.todays_actions.map{|a|a.score}.sum} Points"
   .today-summary.text-center= "#{current_player.todays_breaths} Breaths"
   .today-summary.text-center= "#{current_player.todays_pushups} Push-Ups"
+  / - current_player.challenges.each do |c|
+  /   .today-summary.text-center= c.try(:description)
   - actions_by_part_of_day = Player.todays_grid(current_player.current_time_zone, @date).in_groups_of(12)
   - actions_by_part_of_day.each_with_index do |part_of_days_slots, idx|
     - if current_player.actions_before_6am(@date).count > 0
