@@ -10,7 +10,7 @@ class AcceptedChallengesController < ApplicationController
 
   def new
     AcceptedChallenge.create!(challenge_id: params[:challenge_id], player_id: params[:player_id], active: params[:active])
-    redirect_to :back, notice: 'Accepted challenge was successfully created.'
+    redirect_to :back, notice: 'You have accepted this challenge.'
   end
 
   def edit

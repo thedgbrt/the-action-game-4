@@ -31,7 +31,7 @@ $(document).ready ->
   bell.volume = warning_volume / 100
   whistle.volume = .2
 
-  sounds = {0: bell, 22.5: warning, 23: bell, 29.5: whistle}
+  sounds = {0: bell, 22.5: warning, 23: bell, 29.5: whistle, 30: bell}
 
   if review_before_relax
     statuses = [['commit', commit_length], ['focus', 23 - commit_length], ['relax', 5], ['review', 2]]

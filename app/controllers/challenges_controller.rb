@@ -55,6 +55,7 @@ class ChallengesController < ApplicationController
     end
 
     def challenge_params
-      params.require(:challenge).permit(:daily, :weekly, :item_type, :operation_type, :greater_than, :less_than, :available, :creator_id)
+      params.require(:challenge).permit(:daily, :weekly, :item_type, :operation_type, :greater_than, :less_than,
+          :available, :creator_id, :comments)
     end
 end
