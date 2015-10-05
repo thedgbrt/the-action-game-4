@@ -52,7 +52,7 @@ FLOW_VALUE_OPTIONS = [
 FLOW_PLACEHOLDER = 'Subjectively, how did you feel? Was your body comfortable? Were you able to stay focused the whole time?'
 VALUE_PLACEHOLDER = 'Objectively, what did you work on?  What did you complete or accomplish?  Is this the right strategy for your project?  Is this project a good use of your time?'
 
-INTENSITY_PROMPT = 'Action Integrity Score?'
+INTENSITY_PROMPT = 'Self-Reported Integrity Score?'
 
 DEFAULT_WARNING_VOLUME = 70
 DEFAULT_TICKING_VOLUME = 30

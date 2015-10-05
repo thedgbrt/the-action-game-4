@@ -3,6 +3,18 @@
     .focus-label Declared focus:
     .box.text-center= @aktion.declared_focus
   - if @aktion.status == 'attempting'
+    .large-12.columns
+      %h5 Interruptions
+    #interruptions.large-12.columns
+      %span#unrecovered_count= @aktion.unrecovered_interruptions rescue 0
+      %span Unrecovered
+      .internal-external= link_to "+internal", new_interruption_path(internal: true, recovered: false, aktion_id: @aktion.id)
+      .internal-external= link_to "+external", new_interruption_path(internal: false, recovered: false, aktion_id: @aktion.id)
+    #recovered.large-12.columns
+      %span#recovered_count= @aktion.recovered_interruptions rescue 0
+      %span Recovered
+      .internal-external= link_to "+internal", new_interruption_path(internal: true, recovered: true, aktion_id: @aktion.id)
+      .internal-external= link_to "+external", new_interruption_path(internal: false, recovered: true, aktion_id: @aktion.id)
     - if insights?
       - if @aktion.insights != []
         %h5.text-center
@@ -17,47 +29,48 @@
           %span#add-insight{"data-aktion_id" => "#{@aktion.id}", "data-player_id" => "#{current_player.id}"}= link_to 'Add Insight', new_insight_path(player_id: current_player.id, aktion_id: @aktion.id), remote: true
         #insights
       %hr
-    / %h5 Interruptions
-    / %h5.text-center Add Interruption | Recovered
-    / %h5.text-center Add Distraction | Recovered
     - unless params[:action] == 'show'
       .text-center.bold= f.button :submit, 'STOP AT THE BELL'
   - if @aktion.status == 'reviewed'
-    .self-reported.text-center= "Self-Reported: +#{@aktion.self_reported_score}"
-    %h5.large-12.columns= "Action Integrity Score: +#{@aktion.score}"
-    #scores-table.large-12
-      - if @aktion.score < 4
-        .row
-          .score.cell +3
-          .cell
-            .checklist-item= "✘ Committed on time" if !@aktion.rubric_started_on_time
-            .checklist-item= "✘ Stopped at the bell" if !@aktion.rubric_stopped_at_the_bell
-            .checklist-item= "✘ Kept the same focus" if !@aktion.rubric_kept_the_same_focus
-            .checklist-item= "✘ Reflected on flow/value" if !@aktion.rubric_reflected_on_flow_value
-            .checklist-item= "✘ Recovered from all interruptions" if !@aktion.rubric_recovered_interruptions
-        .row
-          .cell
-          .cell
-        .row
-          .cell
-          .cell
-      .row
-        .score.cell +6
-        .cell
-          .checklist-item= "✔︎ Committed on time" if @aktion.rubric_started_on_time
-          .checklist-item= "✔︎ Stopped at the bell" if @aktion.rubric_stopped_at_the_bell
-          .checklist-item= "✔︎ Kept the same focus" if @aktion.rubric_kept_the_same_focus
-          .checklist-item= "✔︎ Reflected on flow/value" if @aktion.rubric_reflected_on_flow_value && @aktion.rubric_reflected_on_flow_value == 'numbers'
-          .checklist-item= "✔︎ Recovered from all interruptions" if @aktion.rubric_recovered_interruptions && @aktion.rubric_recovered_interruptions > 1
-      .row
-        .score.cell +8
-        .cell
-          .checklist-item= "✔︎ Took a full, 4+ minute break" if @aktion.rubric_started_on_time
-          .checklist-item= "✔︎ Reflected on flow/value with details" if @aktion.rubric_reflected_on_flow_value && @aktion.rubric_reflected_on_flow_value == 'detailed'
-          .checklist-item= "✔︎ Recovered from sole interruption" if @aktion.rubric_recovered_interruptions && @aktion.rubric_recovered_interruptions == 1
-      .row
-        .score.cell +10
-        .cell
-          .checklist-item= f.input :awesome_break, as: :boolean, label: 'Took a full, awesome break'
-          .checklist-item= f.input :tight_focus, as: :boolean, label: 'Kept tightly defined focus'
-          .checklist-item= "✔︎ Was never interrupted" if @aktion.rubric_recovered_interruptions && @aktion.rubric_recovered_interruptions == 0
+    / .self-reported.text-center= "Self-Reported: +#{@aktion.self_reported_score}"
+    - if simple_rubric? || full_rubric?
+      .large-12.columns.text-left= "Self-Reported Integrity Score: +#{@aktion.self_reported_score}"
+      .integrity-title.large-12.columns= "Rubric-Based Maximum Score: +#{@aktion.score}"
+      #scores-table.large-12
+        - if @aktion.max_score == 3 || full_rubric?
+          .row
+            .score.cell +3
+            .cell
+              .checklist-item= "✘ Did not commit on time" if !@aktion.rubric_started_on_time
+              .checklist-item= "✘ Did not stop at the bell" if !@aktion.rubric_stopped_at_the_bell
+              .checklist-item= "✘ Changed focus" if !@aktion.rubric_kept_the_same_focus
+              .checklist-item= "✘ Did not reflect on flow/value" if !@aktion.rubric_reflected_on_flow_value
+              .checklist-item= "✘ Had 1+ unrecovered interruptions" if @aktion.unrecovered_interruptions > 0
+        - if @aktion.max_score == 6 || full_rubric?
+          .row
+            .score.cell +6
+            .cell
+              .checklist-item= "✔︎ Committed on time" if @aktion.rubric_started_on_time
+              .checklist-item= "✔︎ Stopped at the bell" if @aktion.rubric_stopped_at_the_bell
+              .checklist-item= "✔︎ Kept the same focus" if @aktion.rubric_kept_the_same_focus
+              .checklist-item= "✔︎ Reflected on flow/value" if @aktion.rubric_reflected_on_flow_value && @aktion.rubric_reflected_on_flow_value == 'numbers'
+              .checklist-item= "✔︎ Recovered from all interruptions" if @aktion.recovered_interruptions && @aktion.recovered_interruptions > 1
+        - if @aktion.max_score == 8 || full_rubric?
+          .row
+            .score.cell +8
+            .cell
+              .checklist-item= "✔︎ Avoided multi-tasking" if @aktion
+              .checklist-item= "✔︎ Stopped within 2 minutes of bell" if @aktion
+              .checklist-item= "✔︎ Took a full, 4+ minute break" if @aktion.rubric_started_on_time
+              .checklist-item= "✔︎ Reflected on flow/value with details" if @aktion.rubric_reflected_on_flow_value && @aktion.rubric_reflected_on_flow_value == 'detailed'
+              .checklist-item= "✔︎ Recovered from sole interruption" if @aktion.recovered_interruptions && @aktion.recovered_interruptions == 1
+        - if @aktion.max_score == 10 || full_rubric?
+          .row
+            .score.cell +10
+            .cell
+              .checklist-item= f.input :awesome_break, as: :boolean, label: 'Took a full, awesome break'
+              .checklist-item= f.input :tight_focus, as: :boolean, label: 'Kept tightly defined focus'
+              .checklist-item= "✔︎ Was never interrupted" if @aktion.recovered_interruptions && @aktion.recovered_interruptions == 0
+      .large-12.columns.rubric-footer
+        = link_to 'Go to settings', edit_player_path(current_player)
+        to show/hide rubric 

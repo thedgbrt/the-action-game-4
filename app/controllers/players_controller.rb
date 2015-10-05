@@ -45,6 +45,6 @@ class PlayersController < ApplicationController
     def player_params
       params.require(:player).permit(:name, :role, :email, :current_time_zone, :email, :fictional,
         :current_team_id, :sound_choice, :ticking_volume, :warning_volume, :first_team_id, 
-        :review_before_relax, :commit_length, :show_insights, :show_sidebars)
+        :review_before_relax, :commit_length, :show_insights, :show_sidebars, :show_rubric)
     end
 end

@@ -253,11 +253,18 @@ footer {
 
 .inline-form {
   float: left;
-  input {
-    padding: 2px;
+  margin-right: 5px;
+  select {
+    background: yellow;
+    margin: 0px 5px 0px 0px;
+    padding: 0px;
   }
-  .button {
-    padding: 2px;
+  input {
+    padding: 0px;
+  }
+  .inline-button {
+    background-color: green;    
     margin-bottom: 0px;
+    background-color: green;
   }
 }

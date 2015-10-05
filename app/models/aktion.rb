@@ -17,7 +17,7 @@ class Aktion < ActiveRecord::Base
     end
   end
   serialize :properties, Hash, %w(choice pushups situps wallsits breaths water snack tidy stop
-    restroom stretch games friends other music change interruptions deflected distractions recovered
+    restroom stretch games friends other music change deflected distractions recovered
     declared_focus awesome_break tight_focus)
   enum status: [:committing, :attempting, :stopped, :reviewed]
 
@@ -64,6 +64,7 @@ class Aktion < ActiveRecord::Base
     return 3 unless rubric_kept_the_same_focus
     return 3 unless rubric_reflected_on_flow_value
     return 3 unless rubric_recovered_interruptions
+    return 6 if rubric_reflected_on_flow_value == 'numbers'
     10
   end
 
@@ -214,8 +215,14 @@ class Aktion < ActiveRecord::Base
     end
   end
 
-  def rubric_recovered_interruptions
-    1
+  def recovered_interruptions
+    return nil if !interruptions
+    interruptions.select{ |i| i.recovered }.count rescue 0
   end
-          
+
+  def unrecovered_interruptions
+    return nil if !interruptions
+    interruptions.reject{ |i| i.recovered }.count rescue 0
+  end
+     
 end

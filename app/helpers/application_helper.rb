@@ -21,4 +21,12 @@ module ApplicationHelper
     return true if current_player && current_player.show_insights == '1'
     false
   end
+  
+  def simple_rubric?
+    current_player && current_player.show_rubric == '1'
+  end
+  
+  def full_rubric?
+    current_player && current_player.show_rubric == '2'
+  end
 end

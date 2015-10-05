@@ -17,6 +17,8 @@
     .large-4.medium-6.small-12.columns
       = f.input :show_insights, as: :boolean
       = f.input :show_sidebars, as: :boolean
+    .large-4.medium-6.small-12.columns
+      = f.input :show_rubric, collection: [['None', 0], ['Simple', 1], ['Full', 2]]
     %hr
 
   .form-actions

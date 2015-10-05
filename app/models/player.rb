@@ -19,7 +19,7 @@ class Player < ActiveRecord::Base
   end
 
   serialize :preferences, Hash, %w(current_team_id sound_choice ticking_volume warning_volume
-    review_before_relax commit_length show_insights show_sidebars)
+    review_before_relax commit_length show_insights show_sidebars show_rubric)
 
   enum role: [:user, :vip, :admin]
   after_initialize :set_default_role, :if => :new_record?
@@ -173,6 +173,9 @@ class Player < ActiveRecord::Base
     team = Team.initialize_for(self)
     Role.initialize_for(team, self)
     Project.initialize_for(team, self)
+    show_sidebars = '1'
+    show_insights = '0'
+    show_rubric = 1
   end
 
   def review_first

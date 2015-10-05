@@ -1,7 +1,11 @@
 - now = slot == Aktion.current_timeslot.in_time_zone(current_player.current_time_zone)
 - color = a.try(:color) || '#333333'
 %div{"style" => "border: 1px solid #{color}"}
-  - if a
+  - if now && a
+    = link_to 'NOW', edit_aktion_path(a, edit: true), title: a.time_summary_with_focus
+  - elsif now
+    .empty-hslot= link_to 'NOW', start_aktions_path(timeslot: slot.in_time_zone(current_player.current_time_zone)), title: "Add #{slot.strftime('%b-%-d %l:%m %p')} Action"
+  - elsif a
     = link_to a.plus_score, edit_aktion_path(a, edit: true), title: a.time_summary_with_focus
   - else
     .empty-hslot= link_to '+', start_aktions_path(timeslot: slot.in_time_zone(current_player.current_time_zone)), title: "Add #{slot.strftime('%b-%-d %l:%m %p')} Action"
