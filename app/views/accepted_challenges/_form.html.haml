@@ -1,0 +1,11 @@
+= simple_form_for(@accepted_challenge) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :player_id
+    = f.input :challenge_id
+    = f.input :active
+    = f.input :comments
+
+  .form-actions
+    = f.button :submit

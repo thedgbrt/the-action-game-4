@@ -1,0 +1,17 @@
+= simple_form_for(@challenge) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :daily
+    = f.input :weekly
+    = f.input :starting
+    = f.input :ending
+    = f.input :item_type
+    = f.input :operation_type
+    = f.input :greater_than
+    = f.input :less_than
+    = f.input :available
+    = f.association :creator
+
+  .form-actions
+    = f.button :submit

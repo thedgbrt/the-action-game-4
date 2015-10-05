@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Player:
+  = @accepted_challenge.player_id
+%p
+  %b Challenge:
+  = @accepted_challenge.challenge_id
+%p
+  %b Active:
+  = @accepted_challenge.active
+%p
+  %b Comments:
+  = @accepted_challenge.comments
+
+= link_to 'Edit', edit_accepted_challenge_path(@accepted_challenge)
+\|
+= link_to 'Back', accepted_challenges_path

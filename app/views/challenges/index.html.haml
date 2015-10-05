@@ -1,0 +1,39 @@
+%h1 Listing challenges
+
+%table
+  %thead
+    %tr
+      %th Daily
+      %th Weekly
+      %th Starting
+      %th Ending
+      %th Item type
+      %th Operation type
+      %th Greater than
+      %th Less than
+      %th Available
+      %th Creator
+      %th
+      %th
+      %th
+
+  %tbody
+    - @challenges.each do |challenge|
+      %tr
+        %td= challenge.daily
+        %td= challenge.weekly
+        %td= challenge.starting
+        %td= challenge.ending
+        %td= challenge.item_type
+        %td= challenge.operation_type
+        %td= challenge.greater_than
+        %td= challenge.less_than
+        %td= challenge.available
+        %td= challenge.creator.try(:name)
+        %td= link_to 'Show', challenge
+        %td= link_to 'Edit', edit_challenge_path(challenge)
+        %td= link_to 'Destroy', challenge, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Challenge', new_challenge_path

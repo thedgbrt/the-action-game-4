@@ -1,0 +1,27 @@
+%h1 Listing accepted_challenges
+
+%table
+  %thead
+    %tr
+      %th Player
+      %th Challenge
+      %th Active
+      %th Comments
+      %th
+      %th
+      %th
+
+  %tbody
+    - @accepted_challenges.each do |accepted_challenge|
+      %tr
+        %td= accepted_challenge.player_id
+        %td= accepted_challenge.challenge_id
+        %td= accepted_challenge.active
+        %td= accepted_challenge.comments
+        %td= link_to 'Show', accepted_challenge
+        %td= link_to 'Edit', edit_accepted_challenge_path(accepted_challenge)
+        %td= link_to 'Destroy', accepted_challenge, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Accepted challenge', new_accepted_challenge_path

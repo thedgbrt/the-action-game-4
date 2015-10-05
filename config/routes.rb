@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :accepted_challenges
+  resources :challenges
   resources :interruptions
   resources :insights
   resources :aktions do

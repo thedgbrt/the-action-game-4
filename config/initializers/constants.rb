@@ -57,3 +57,15 @@ INTENSITY_PROMPT = 'Self-Reported Integrity Score?'
 DEFAULT_WARNING_VOLUME = 70
 DEFAULT_TICKING_VOLUME = 30
 MIN_NOTES_LENGTH = 10
+
+CHALLENGE_TYPES = [
+  ['Actions', 0],
+  ['Action Scores', 1],
+  ['Push-ups', 2],
+  ['Breaths', 3]
+]
+
+CHALLENGE_OPERATIONS = [
+  ['Sum', 0],
+  ['Average', 1]
+]
