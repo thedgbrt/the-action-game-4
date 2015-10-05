@@ -63,7 +63,9 @@ class Aktion < ActiveRecord::Base
     return 3 unless rubric_stopped_at_the_bell
     return 3 unless rubric_kept_the_same_focus
     return 3 unless rubric_reflected_on_flow_value
-    return 3 unless rubric_recovered_interruptions
+    return 3 if unrecovered_interruptions > 0
+    return 6 if recovered_interruptions > 1
+    return 8 if recovered_interruptions > 0
     return 6 if rubric_reflected_on_flow_value == 'numbers'
     10
   end
