@@ -3,16 +3,11 @@
 %table
   %thead
     %tr
-      %th Daily
-      %th Weekly
-      %th Starting
-      %th Ending
-      %th Item type
-      %th Operation type
+      %th Description
+      %th Item
+      %th Operation
       %th Greater than
       %th Less than
-      %th Available
-      %th Creator
       %th
       %th
       %th
@@ -20,12 +15,9 @@
   %tbody
     - @challenges.each do |challenge|
       %tr
-        %td= challenge.daily
-        %td= challenge.weekly
-        %td= challenge.starting
-        %td= challenge.ending
-        %td= challenge.item_type
-        %td= challenge.operation_type
+        %td= challenge.description
+        %td= challenge.item
+        %td= challenge.op
         %td= challenge.greater_than
         %td= challenge.less_than
         %td= challenge.available
