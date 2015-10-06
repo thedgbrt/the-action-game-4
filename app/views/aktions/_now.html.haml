@@ -1,7 +1,10 @@
-.clear-both
-%table{style: "border: 0px; padding: 0px; margin: 0px"}
-  %tbody
-    %tr
-      %td.mini-menu-action= "Playing at #{Aktion.current_simple_time}:"
-      - Aktion.current.sort_by{ |a| a.player.try(:name) }.each do |a|
-        %td.mini-menu-action= link_to a.summary_to_share, a.player
+- slot = Aktion.current_timeslot
+.medium-12.block
+  .header.text-center.today-title
+    %span.yellow-text= link_to 'NOW', '#'
+  .today-summary.text-center
+    = "#{Aktion.current.count} playing"
+  .text-center
+    - Aktion.current.each do |a|
+      - t = a.player.first_name + ': ' + a.focus + ' (' + a.verb.name + ' for ' + a.team.name + ', project: ' + a.project.name + ')'
+      = link_to (image_tag a.player.gravatar), a.player, title: t

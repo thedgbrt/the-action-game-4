@@ -16,7 +16,10 @@
       .debug-filler &nbsp;
     %main{:role => "main"}
       - if sidebars?
-        #sidebar.large-1.medium-2.hide-for-small.group= render 'aktions/todays_bar'
+        #sidebar.large-1.medium-2.hide-for-small.group
+          - if Aktion.current && Aktion.current != []
+            #now= render 'aktions/now'
+          = render 'aktions/todays_bar'
         #content.large-10.medium-8.small-12.group
           = render 'layouts/progress_bar'
           = render 'layouts/messages'
@@ -31,6 +34,3 @@
     %footer
       = render '/visitors/sounds' unless params[:controller] == 'visitors' && params[:action] == 'sounds'
 
-
-
-      / .hidden-for-small-only= render 'aktions/now' if Aktion.current && Aktion.current != []
