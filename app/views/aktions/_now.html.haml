@@ -1,15 +1,14 @@
-- current_actions = Aktion.current
+- current_actions = Aktion.current.sort_by{ |a| a.player.first_name }
 - if current_actions
   .medium-12.block
     .header.text-center.today-title
       %span.yellow-text= link_to 'NOW', '#'
     .today-summary.text-center
       = "#{current_actions.count} playing"
-    .today-summary
-      - current_actions.each do |a|
-        - title = a.player.first_name.to_s + ': ' + a.focus.to_s
-        - title += ' (' + a.verb.try(:name).to_s + ' for ' + a.team.try(:name).to_s
-        - title += ', project: ' + a.project.try(:name).to_s + ')'
-        %span= link_to (image_tag a.player.gravatar), a.player, title: title
-        %span= a.player.first_name
-        .clear-both
+    - current_actions.each do |a|
+      - title = a.player.first_name.to_s + ': ' + a.focus.to_s
+      - title += ' (' + a.verb.try(:name).to_s + ' for ' + a.team.try(:name).to_s
+      - title += ', project: ' + a.project.try(:name).to_s + ')'
+      .sidebar-player.today-summary
+        .img= link_to (image_tag a.player.gravatar), a.player, title: title
+        .etc= "#{a.player.first_name} (#{a.player.todays_actions.count}, +#{a.player.todays_actions.map{|a|a.score}.sum})"

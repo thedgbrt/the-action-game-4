@@ -10540,56 +10540,55 @@ main {
 #sidebar .today-summary {
   font-size: 80%;
   background: #666666;
-  text-align: center;
   width: 90px;
   float: left;
   margin: 1px 5px;
 }
-/* line 176, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
+/* line 175, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
 #sidebar .today-item {
   flex: 1;
   -webkit-flex: 1;
   margin: 2px;
 }
 
-/* line 183, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
+/* line 182, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
 #content {
   flex: 1;
   -webkit-flex: 1;
   margin: 5px;
 }
-/* line 187, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
+/* line 186, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
 #content form {
   margin-top: 0px;
 }
 
-/* line 192, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
+/* line 191, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
 .title-area {
   line-height: 100%;
   width: 100px;
   color: white;
 }
-/* line 197, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
+/* line 196, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
 .title-area li a {
   color: white;
 }
 
-/* line 203, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
+/* line 202, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
 .debug-filler {
   background: #333333;
 }
 
-/* line 207, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
+/* line 206, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
 footer {
   background: #333333;
   color: white;
 }
-/* line 210, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
+/* line 209, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
 footer a, footer a:visited {
   color: white;
 }
 
-/* line 215, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
+/* line 214, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
 #right-sidebar {
   float: right;
   width: 20px;
@@ -10597,12 +10596,12 @@ footer a, footer a:visited {
   background: #333333;
   color: white;
 }
-/* line 221, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
+/* line 220, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
 #right-sidebar a, #right-sidebar a:visited {
   color: white;
 }
 
-/* line 226, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
+/* line 225, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
 .sidebar-container {
   font-size: 80%;
   text-align: left;
@@ -10611,49 +10610,76 @@ footer a, footer a:visited {
   float: left;
   margin-top: 5px;
 }
-/* line 233, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
+/* line 232, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
 .sidebar-container .empty-hslot {
   color: #333333;
 }
-/* line 235, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
+/* line 234, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
 .sidebar-container .empty-hslot a, .sidebar-container .empty-hslot a:visited {
   color: #666666 !important;
 }
-/* line 238, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
+/* line 237, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
 .sidebar-container .empty-hslot a:active {
   color: red;
 }
 
-/* line 244, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
+/* line 243, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
 .today-title {
   margin-bottom: 5px;
 }
 
-/* line 248, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
+/* line 247, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
 .self-reported {
   margin-bottom: 5px;
 }
 
-/* line 252, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
+/* line 251, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
 .inline-form {
   float: left;
   margin-right: 5px;
 }
-/* line 255, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
+/* line 254, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
 .inline-form select {
   background: yellow;
   margin: 0px 5px 0px 0px;
   padding: 0px;
 }
-/* line 260, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
+/* line 259, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
 .inline-form input {
   padding: 0px;
 }
-/* line 263, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
+/* line 262, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
 .inline-form .inline-button {
   background-color: green;
   margin-bottom: 0px;
   background-color: green;
+}
+
+/* line 270, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
+#welcome a, #welcome a:visited {
+  text-decoration: underline;
+}
+
+/* line 275, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
+#now {
+  margin-bottom: 10px;
+}
+
+/* line 279, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
+.sidebar-player {
+  display: table-row;
+}
+/* line 281, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
+.sidebar-player .img {
+  display: table-cell;
+  padding: 0px;
+  font-size: 80%;
+}
+/* line 286, /Users/mihai/coding/pp/the-action-game/app/assets/stylesheets/application.css.scss */
+.sidebar-player .etc {
+  display: table-cell;
+  padding: 0px;
+  font-size: 80%;
 }
 /*
  * Table styles
