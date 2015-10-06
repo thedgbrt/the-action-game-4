@@ -1,6 +1,6 @@
 - day = Time.zone.now.in_time_zone(current_player.current_time_zone).to_date
 .medium-12.block
-  .header.text-center.today-title
+  .header.text-center
     %span.yellow-text= link_to 'TODAY', player_aktions_path(player_id: current_player.id, date: day)
     %span= link_to image_tag('settings.png', height: 16, width: 16), edit_player_path(current_player)
   .today-summary.text-center
@@ -22,13 +22,14 @@
     - else
       %span= current_player.todays_pushups
     %span Push-Ups
-  / - current_player.challenges.each do |c|
-  /   .today-summary.text-center= c.try(:description)
+
+.top-10
+.medium-12.block
+  .text-center.yellow-text MY DAY
   - actions_by_part_of_day = Player.todays_grid(current_player.current_time_zone, @date).in_groups_of(12)
   - actions_by_part_of_day.each_with_index do |part_of_days_slots, idx|
     - if current_player.actions_before_6am(@date).count > 0
       .sidebar-container
-        .clear-both
         - part_of_days_slots.each do |slot|
           - a = Aktion.get(current_player, slot)
           .hslot= render 'aktions/hslot', slot: slot, a: a

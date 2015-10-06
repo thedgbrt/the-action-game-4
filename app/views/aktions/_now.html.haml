@@ -1,10 +1,9 @@
 - current_actions = Aktion.current.sort_by{ |a| a.player.first_name }
 - if current_actions
   .medium-12.block
-    .header.text-center.today-title
-      %span.yellow-text= link_to 'NOW', '#'
-    .today-summary.text-center
-      = "#{current_actions.count} playing"
+    .text-center.yellow-text PLAYING NOW
+    / .today-summary.text-center
+    /   = "#{current_actions.count} playing"
     - current_actions.each do |a|
       - title = a.player.first_name.to_s + ': ' + a.focus.to_s
       - title += ' (' + a.verb.try(:name).to_s + ' for ' + a.team.try(:name).to_s

@@ -18,7 +18,7 @@ class Aktion < ActiveRecord::Base
   end
   serialize :properties, Hash, %w(choice pushups situps wallsits breaths water snack tidy stop
     restroom stretch games friends other music change deflected distractions recovered
-    declared_focus awesome_break tight_focus)
+    declared_focus awesome_break tight_focus dancing soccer)
   enum status: [:committing, :attempting, :stopped, :reviewed]
 
   belongs_to :player

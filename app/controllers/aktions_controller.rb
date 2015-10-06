@@ -70,6 +70,10 @@ class AktionsController < ApplicationController
   end
 
   def update
+    # If it's < 5 min into Action, allow player to change focus
+    if [0, 1, 2, 3, 4, 30, 31, 32, 33, 34].include?(Time.now.min)
+      @aktion.declared_focus = @aktion.focus
+    end
     respond_to do |format|
       if @aktion.update(aktion_params)
         if params[:commit] == 'STOP AT THE BELL'
