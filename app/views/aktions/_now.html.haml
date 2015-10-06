@@ -1,10 +1,13 @@
-- slot = Aktion.current_timeslot
-.medium-12.block
-  .header.text-center.today-title
-    %span.yellow-text= link_to 'NOW', '#'
-  .today-summary.text-center
-    = "#{Aktion.current.count} playing"
-  .text-center
-    - Aktion.current.each do |a|
-      - t = a.player.first_name + ': ' + a.focus + ' (' + a.verb.name + ' for ' + a.team.name + ', project: ' + a.project.name + ')'
-      = link_to (image_tag a.player.gravatar), a.player, title: t
+- current_actions = Aktion.current
+- if current_actions
+  .medium-12.block
+    .header.text-center.today-title
+      %span.yellow-text= link_to 'NOW', '#'
+    .today-summary.text-center
+      = "#{current_actions.count} playing"
+    .text-center
+      - current_actions.each do |a|
+        - title = a.player.first_name + ': ' + a.focus
+        - title += ' (' + a.verb.try(:name) + ' for ' + a.team.try(:name)
+        - title += ', project: ' + a.project.try(:name) + ')'
+        = link_to (image_tag a.player.gravatar), a.player, title: title

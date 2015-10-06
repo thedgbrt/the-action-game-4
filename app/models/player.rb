@@ -163,6 +163,8 @@ class Player < ActiveRecord::Base
   end
 
   def first_name
+    puts 'running...'
+    return '' if !name
     name.split(' ').first rescue ''
   end
 

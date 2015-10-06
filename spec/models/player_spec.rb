@@ -27,6 +27,12 @@ RSpec.describe Player, type: :model do
     expect(@player.name).to match 'Test Player'
   end
 
+  it "#first_name should return even for a player with blank name" do
+    pending
+    @player.update_attributes(name: '')
+    expect(@player.first_name).to match ''
+  end
+
   it '#admin? should return true for admins' do
     @player.role = :admin
     expect(@player.admin?).to be true
