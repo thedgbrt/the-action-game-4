@@ -24,7 +24,8 @@ Rails.application.routes.draw do
   resources :roles
   resources :projects
 
-  root to: 'visitors#index'
+  root to: 'visitors#welcome'
+  get '/contact' => 'visitors#contact'
   get '/welcome' => 'visitors#welcome'
   get '/help' => 'visitors#help'
   get '/sounds' => 'visitors#sounds'

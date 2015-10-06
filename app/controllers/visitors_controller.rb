@@ -1,4 +1,7 @@
 class VisitorsController < ApplicationController
+  def contact
+  end
+
   def index
   end
 
