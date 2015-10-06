@@ -4,8 +4,8 @@ class Challenge < ActiveRecord::Base
     ['Action Acores', 1],
     ['Push-ups', 2],
     ['Conscious Breaths', 3],
-    ['Actions Attempted', 4],
-    ['Actions Completed', 5]
+    ['Attempted Actions', 4],
+    ['Completed Actions', 5]
   ]
 
   OPERATIONS = [

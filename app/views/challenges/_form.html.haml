@@ -5,7 +5,7 @@
     .large-3.medium-3.small-6.columns= f.input :greater_than, label: 'At least'
     .large-3.medium-3.small-6.columns= f.input :operation_type, collection: Challenge::OPERATIONS, selected: 0
     .large-3.medium-3.small-6.columns= f.input :item_type, collection: Challenge::TYPES, selected: 0
-    .large-3.medium-3.small-6.columns= f.association :creator
+    .large-3.medium-3.small-6.columns= f.association :creator, collection: Player.order(:name)
     / .large-3.medium-3.small-6.columns= f.input :less_than
     .large-9.medium-9.small-12.columns= f.input :comments
     .large-3.medium-3.small-6.columns

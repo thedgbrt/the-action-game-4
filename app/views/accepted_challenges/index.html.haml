@@ -15,7 +15,10 @@
   %tbody
     - @accepted_challenges.each do |ac|
       %tr
-        %td= ac.description rescue 'Challenge Missing'
+        - if current_player.admin?
+          %td= link_to ac.description, edit_challenge_path(ac.challenge) rescue 'Challenge Missing'
+        - else
+          %td= ac.description rescue 'Challenge Missing'
         %td= ac.active rescue 'Missing'
         %td= ac.comments rescue 'Missing'
         - if current_player.admin?
