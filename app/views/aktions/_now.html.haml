@@ -7,7 +7,7 @@
       = "#{current_actions.count} playing"
     .text-center
       - current_actions.each do |a|
-        - title = a.player.first_name + ': ' + a.focus
-        - title += ' (' + a.verb.try(:name) + ' for ' + a.team.try(:name)
-        - title += ', project: ' + a.project.try(:name) + ')'
+        - title = a.player.first_name.to_s + ': ' + a.focus.to_s
+        - title += ' (' + a.verb.try(:name).to_s + ' for ' + a.team.try(:name).to_s
+        - title += ', project: ' + a.project.try(:name).to_s + ')'
         = link_to (image_tag a.player.gravatar), a.player, title: title
