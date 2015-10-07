@@ -200,7 +200,7 @@ class Aktion < ActiveRecord::Base
   end
   
   def rubric_stopped_at_the_bell
-    stop == '1' || status == :stopped || status == :reviewed
+    stop == '1' || status == 'stopped' || status == 'reviewed'
   end
   
   def rubric_kept_the_same_focus
