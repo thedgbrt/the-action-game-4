@@ -167,11 +167,11 @@ main {
   flex-direction: column;
   margin: 0px;
   padding: 0px;
-  width: 100px;
+  width: 128px;
   .today-summary {
     font-size: 80%;
     background: #666666;
-    width: 90px;
+    width: 118px;
     float: left;
     margin: 1px 5px;
   }
@@ -284,6 +284,5 @@ footer {
   .img, .name, .stats {
     display: table-cell;
     padding: 0px 1px;
-    font-size: 80%;
   }
 }

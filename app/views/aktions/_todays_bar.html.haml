@@ -18,10 +18,11 @@
     %span Breaths
   .today-summary.text-center
     - if current_player.active_challenges(2).count > 0
-      %span.yellow-text= link_to current_player.todays_pushups, accepted_challenges_path, title: 'See your Push-Up related challenges'
+      %span= current_player.todays_pushups
     - else
       %span= current_player.todays_pushups
     %span Push-Ups
+    %span.yellow-text= link_to '/100', accepted_challenges_path, title: 'See your Push-Up related challenges'
 
 .top-10
 .medium-12.block
