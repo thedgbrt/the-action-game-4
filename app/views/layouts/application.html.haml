@@ -17,9 +17,9 @@
     %main{:role => "main"}
       - if sidebars?
         #sidebar.large-1.medium-2.hide-for-small.group
-          - if Aktion.current && Aktion.current != []
-            #now= render 'aktions/now'
           = render 'aktions/todays_bar'
+          .bottom-10
+          = render 'aktions/now'
         #content.large-10.medium-8.small-12.group
           = render 'layouts/progress_bar'
           = render 'layouts/messages'

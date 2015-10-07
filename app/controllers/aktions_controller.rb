@@ -76,7 +76,7 @@ class AktionsController < ApplicationController
     end
     respond_to do |format|
       if @aktion.update(aktion_params)
-        if params[:commit] == 'STOP AT THE BELL'
+        if params[:commit] == 'STOP NOW'
           @aktion.update_attributes(status: :stopped)
         elsif params[:commit] == 'COUNT IT'
           @aktion.update_attributes(status: :reviewed, completed: true)

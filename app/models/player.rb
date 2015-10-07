@@ -214,4 +214,14 @@ class Player < ActiveRecord::Base
   def active_challenges(item=0)
     accepted_challenges.select{ |ac| ac.active && ac.challenge.item_type == item }
   end
+
+  def self.active_today
+    Player.all.select{|p| p.last_active.to_date == Time.zone.now.in_time_zone(p.current_time_zone).to_date }
+  end
+
+  def last_active
+    last_action = aktions.sort_by{|a| a.timeslot}.last
+    last_action.try(:timeslot) || created_at
+  end
+
 end

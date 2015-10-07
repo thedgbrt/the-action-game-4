@@ -279,20 +279,11 @@ footer {
   }
 }
 
-#now {
-  margin-bottom: 10px;
-}
-
 .sidebar-player {
   display: table-row;
-  .img {
+  .img, .name, .stats {
     display: table-cell;
-    padding: 0px;
-    font-size: 80%;
-  }
-  .etc {
-    display: table-cell;    
-    padding: 0px;
+    padding: 0px 1px;
     font-size: 80%;
   }
 }

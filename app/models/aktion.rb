@@ -63,9 +63,9 @@ class Aktion < ActiveRecord::Base
     return 3 unless rubric_stopped_at_the_bell
     return 3 unless rubric_kept_the_same_focus
     return 3 unless rubric_reflected_on_flow_value
-    return 3 if unrecovered_interruptions > 0
-    return 6 if recovered_interruptions > 1
-    return 8 if recovered_interruptions > 0
+    return 3 if unrecovered > 0
+    return 6 if recovered > 1
+    return 8 if recovered > 0
     return 6 if rubric_reflected_on_flow_value == 'numbers'
     10
   end
@@ -219,12 +219,41 @@ class Aktion < ActiveRecord::Base
 
   def recovered_interruptions
     return nil if !interruptions
+    interruptions.select{ |i| i.recovered && i.external }.count rescue 0
+  end
+
+  def recovered_distractions
+    return nil if !interruptions
+    interruptions.select{ |i| i.recovered && i.internal }.count rescue 0
+  end
+     
+  def recovered
+    return nil if !interruptions
     interruptions.select{ |i| i.recovered }.count rescue 0
   end
 
   def unrecovered_interruptions
     return nil if !interruptions
-    interruptions.reject{ |i| i.recovered }.count rescue 0
+    interruptions.select{ |i| !i.recovered && i.external }.count rescue 0
   end
      
+  def unrecovered_distractions
+    return nil if !interruptions
+    interruptions.select{ |i| !i.recovered && i.internal }.count rescue 0
+  end
+
+  def unrecovered
+    return nil if !interruptions
+    interruptions.select{ |i| !i.recovered }.count rescue 0
+  end
+
+  def all_interruptions
+    return nil if !interruptions
+    interruptions.select{ |i| i.external }.count rescue 0
+  end
+
+  def all_distractions
+    return nil if !interruptions
+    interruptions.select{ |i| i.internal }.count rescue 0
+  end
 end
