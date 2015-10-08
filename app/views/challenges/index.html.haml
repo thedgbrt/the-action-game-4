@@ -20,7 +20,7 @@
       %tr
         - ac = challenge.accepted_by(current_player)
         - if ac.first
-          %td.blue-text= link_to 'ACTIVE', ac.first
+          %td.blue-text= link_to 'ALREADY ACCEPTED', ac.first
         - else
           %td.green-text= link_to 'ACCEPT', new_accepted_challenge_path(challenge_id: challenge.id, player_id: current_player.id, active: true)
         %td= challenge.id

@@ -5,6 +5,7 @@
     %tr
       %th Challenge
       %th Active
+      %th Status
       %th Comments
       - if current_player.admin?
         %th Who
@@ -20,6 +21,7 @@
         - else
           %td= ac.description rescue 'Challenge Missing'
         %td= ac.active rescue 'Missing'
+        %td= Challenge.count(current_player, ac.item_type)
         %td= ac.comments rescue 'Missing'
         - if current_player.admin?
           %td= ac.player.first_name rescue 'Missing Name'
@@ -29,4 +31,4 @@
 
 %br
 
-= link_to 'New Accepted challenge', new_accepted_challenge_path
+= link_to 'Find A New Challenge!', challenges_path

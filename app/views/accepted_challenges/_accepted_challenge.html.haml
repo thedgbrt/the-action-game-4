@@ -1,0 +1,6 @@
+- if item_challenges.count > 0
+  .today-summary.text-center
+    %span= current_player.todays_actions(day).count
+    %span= Challenge::TYPES.to_h.invert[item_type]
+    - out_of = item_challenges.first.greater_than
+    %span.yellow-text= link_to "/#{out_of}", accepted_challenges_path, title: 'See your Action related challenges'
