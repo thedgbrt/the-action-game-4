@@ -17,7 +17,7 @@
   .large-6.medium-12.columns.boolean.break-action= f.input :soccer, as: :boolean, label: 'soccer'
   .large-6.medium-12.columns.boolean.break-action= f.input :change, as: :boolean, label: 'change'
   .large-12.medium-12.small-12.columns= f.input :intensity, collection: INTENSITIES, include_blank: true, prompt: INTENSITY_PROMPT, label: false
-  .large-12.medium-12.small-12.columns.relax-button= f.button :submit, "SAVE"
+  .large-12.medium-12.small-12.columns.text-center.relax-button= f.button :submit, "SAVE"
 - else
   %h5.large-12.columns= 'BREAK ACTIVITIES' if @aktion.break_activities_recorded
   .large-6.columns.review-item= "#{@aktion.pushups} Push-ups" if @aktion.pushups && @aktion.pushups != ''

@@ -10,7 +10,6 @@
   .large-12.columns= f.input :value_notes, label: false, input_html: {rows: 5}, placeholder: VALUE_PLACEHOLDER
   / - if current_player.review_first
   /   .large-12.medium-12.columns= f.input :intensity, collection: INTENSITIES, include_blank: true, prompt: INTENSITY_PROMPT, label: false
-  .large-12.medium-12.small-12.text-center.columns= f.button :submit, "SAVE"
 - elsif @aktion.status == 'reviewed' || @aktion.status == 'finished'
   .large-12.columns.review-item
     %span.bold Status:
