@@ -78,12 +78,8 @@ class AktionsController < ApplicationController
       if @aktion.update(aktion_params)
         if params[:commit] == 'STOP NOW'
           @aktion.update_attributes(status: :stopped)
-        elsif params[:commit] == 'COUNT IT'
-          @aktion.update_attributes(status: :reviewed, completed: true)
-        elsif params[:commit] == 'MISSED IT'
-          @aktion.update_attributes(status: :reviewed, completed: false)
-        elsif params[:commit] == 'FINISH'
-          @aktion.update_attributes(status: :finished)          
+        elsif params[:commit] == 'SAVE'
+          @aktion.update_attributes(status: :reviewed)
         end
         format.html { redirect_to aktion_form }
         format.json { render :show, status: :ok, location: @aktion }

@@ -28,21 +28,22 @@
         #insights
       %hr
     - unless params[:action] == 'show'
+      .large-12.medium-12.small-12.columns= f.input :intensity, collection: INTENSITIES, include_blank: true, prompt: INTENSITY_PROMPT, label: false
       .text-center.bold= f.button :submit, 'STOP NOW'
   - if @aktion.status == 'reviewed'
     / .self-reported.text-center= "Self-Reported: +#{@aktion.self_reported_score}"
     - if simple_rubric? || full_rubric?
       .large-12.columns.text-left= "Self-Reported Integrity Score: +#{@aktion.self_reported_score}"
-      .integrity-title.large-12.columns= "Rubric-Based Maximum Score: +#{@aktion.score}"
+      .integrity-title.large-12.columns= "Rubric-Based Maximum Score: +#{@aktion.max_score}"
       #scores-table.large-12
         - if @aktion.max_score == 3 || full_rubric?
           .row
             .score.cell +3
             .cell
-              .checklist-item= "✘ Did not commit on time" if !@aktion.rubric_started_on_time
-              .checklist-item= "✘ Did not stop at the bell" if !@aktion.rubric_stopped_at_the_bell
-              .checklist-item= "✘ Changed focus" if !@aktion.rubric_kept_the_same_focus
-              .checklist-item= "✘ Did not reflect on flow/value" if !@aktion.rubric_reflected_on_flow_value
+              .checklist-item= "✘ Did not commit on time" unless @aktion.rubric_started_on_time
+              .checklist-item= "✘ Did not stop at the bell" unless @aktion.rubric_stopped_at_the_bell
+              .checklist-item= "✘ Changed focus" unless @aktion.rubric_kept_the_same_focus
+              .checklist-item= "✘ Did not reflect on flow/value" unless @aktion.rubric_reflected_on_flow_value
               .checklist-item= "✘ Had 1+ unrecovered interruptions" if @aktion.unrecovered > 0
         - if @aktion.max_score == 6 || full_rubric?
           .row
