@@ -28,8 +28,10 @@
         #insights
       %hr
     - unless params[:action] == 'show'
+      .top-10
+      %hr
       .large-12.medium-12.small-12.columns= f.input :intensity, collection: INTENSITIES, include_blank: true, prompt: INTENSITY_PROMPT, label: false
-      .text-center.bold= f.button :submit, 'STOP NOW'
+      .large-12.medium-12.small-12.columns.text-center.bold= f.button :submit, 'STOP NOW'
   - if @aktion.status == 'reviewed'
     / .self-reported.text-center= "Self-Reported: +#{@aktion.self_reported_score}"
     - if simple_rubric? || full_rubric?

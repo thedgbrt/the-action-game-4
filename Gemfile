@@ -26,6 +26,7 @@ gem 'pg'
 gem 'pundit'
 gem 'simple_form'
 gem 'thin'
+gem 'bugsnag'
 group :development do
   gem 'better_errors'
   gem 'guard-bundler'
