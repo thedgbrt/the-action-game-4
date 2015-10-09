@@ -36,11 +36,6 @@ class Team < ActiveRecord::Base
     tm.destroy ? {notice: 'Successfully removed you from this team'} : {alert: 'Unable to remove you from this team'}
   end
 
-  #TODO: use (maybe move over to player.rb) or get rid of
-  def self.last_active(playa)
-    Team.find_by_id(playa.current_team_id) || playa.teams.last || Team.initialize_for(playa)
-  end
-
   def roles_api_url(api_key, player_id)
     if name == 'HolacracyOne'
       "https://glassfrog.holacracy.org/api/v3/roles?person_id=#{player_id}&api_key=#{api_key}"

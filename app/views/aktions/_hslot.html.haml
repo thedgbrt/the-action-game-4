@@ -1,12 +1,12 @@
-- now = slot == Aktion.current_timeslot.in_time_zone(current_player.current_time_zone)
+- now = slot == Aktion.current_timeslot.in_time_zone(tz)
 - color = a.try(:color) || '#333333'
 %div{"style" => "border: 1px solid #{color}"}
   - if now && a
     - display = a.status == 'reviewed' ? a.plus_score : 'NOW'
     = link_to display, a, title: a.time_summary_with_focus
   - elsif now
-    .empty-hslot= link_to 'NOW', start_aktions_path(timeslot: slot.in_time_zone(current_player.current_time_zone)), title: "Add #{slot.strftime('%b-%-d %l:%m %p')} Action"
+    .empty-hslot= link_to 'NOW', start_aktions_path(timeslot: slot.in_time_zone(tz)), title: "Add #{slot.strftime('%b-%-d %l:%m %p')} Action"
   - elsif a
     = link_to a.plus_score, edit_aktion_path(a, edit: true), title: a.time_summary_with_focus
   - else
-    .empty-hslot= link_to '+', start_aktions_path(timeslot: slot.in_time_zone(current_player.current_time_zone)), title: "Add #{slot.strftime('%b-%-d %l:%m %p')} Action"
+    .empty-hslot= link_to '+', start_aktions_path(timeslot: slot.in_time_zone(tz)), title: "Add #{slot.strftime('%b-%-d %l:%m %p')} Action"

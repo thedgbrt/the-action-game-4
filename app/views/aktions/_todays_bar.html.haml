@@ -1,4 +1,4 @@
-- day = Time.zone.now.in_time_zone(current_player.current_time_zone).to_date
+- day = Time.zone.now.in_time_zone(tz).to_date
 .medium-12.block
   .header.text-center
     %span.yellow-text= link_to 'CHALLENGES', accepted_challenges_path
@@ -22,7 +22,7 @@
 .top-10
 .medium-12.block
   .text-center.yellow-text MY DAY
-  - actions_by_part_of_day = Player.todays_grid(current_player.current_time_zone, @date).in_groups_of(12)
+  - actions_by_part_of_day = Player.todays_grid(tz, @date).in_groups_of(12)
   - actions_by_part_of_day.each_with_index do |part_of_days_slots, idx|
     - if false # current_player.actions_before_6am(@date).count > 0
       .sidebar-container

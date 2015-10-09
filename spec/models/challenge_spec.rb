@@ -1,5 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe Challenge, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before(:each) { @challenge = FactoryGirl.create(:challenge) }
+
+  it '#op should return correctly' do
+
+
+    @challenge.update_attributes(item_type: 99)
+    expect(@challenge.item).to be nil
+
+    @challenge.update_attributes(item_type: 0)
+    expect(@challenge.item).to eq 'Actions'
+
+    @challenge.update_attributes(item_type: 2)
+    expect(@challenge.item).to eq 'Push-ups'
+  end
+
 end

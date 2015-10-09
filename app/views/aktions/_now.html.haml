@@ -1,5 +1,5 @@
 - current_actions = Aktion.current.sort_by{ |a| a.player.first_name }
-- if current_actions
+- if current_actions.count > 0
   .medium-12.block
     .text-center.yellow-text NOW
     - current_actions.each do |a|
@@ -13,7 +13,7 @@
 
 - now_players = current_actions.map(&:player)
 - todays_players = Player.active_today - now_players
-- if todays_players
+- if todays_players.count > 0
   .medium-12.block  
     .text-center.yellow-text EARLIER
     - todays_players.each do |p|

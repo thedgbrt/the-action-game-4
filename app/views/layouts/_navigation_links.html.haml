@@ -1,4 +1,4 @@
-- day = Time.zone.now.in_time_zone(current_player.current_time_zone).to_date
+- day = Time.zone.now.in_time_zone(tz).to_date
 - if player_signed_in?
   %li= link_to 'MY DASHBOARD', player_aktions_path(player_id: current_player.id, date: day)
   - current_aktion = Aktion.current(current_player)

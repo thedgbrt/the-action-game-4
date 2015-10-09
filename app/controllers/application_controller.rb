@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
   helper_method :back_or_home
   helper_method :back_or_fallback
   helper_method :last_action
+  helper_method :tz
 
   around_filter :user_time_zone, if: :current_player
 
@@ -36,6 +37,10 @@ class ApplicationController < ActionController::Base
       unless current_player == @player
         redirect_to root_url, :alert => "Access denied."
       end
+    end
+
+    def tz
+      @tz ||= player_signed_in? ? current_player.current_time_zone : 'Pacific Time (US & Canada)'
     end
 
     def current_team
