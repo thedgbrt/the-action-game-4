@@ -1,9 +1,10 @@
-%tr{style: "background-color: #{aktion.team.color(current_player)}"}
+- color = aktion.team.color(current_player) rescue 'black'
+%tr{style: "background-color: #{color}"}
   %td= aktion.simple_time
   %td= link_to aktion.status_full, edit_aktion_path(aktion, edit: true)
   %td= link_to aktion.focus, aktion
   %td= link_to aktion.verb.name, aktion.verb if aktion.verb
-  %td= link_to aktion.team.short_safe, aktion.team, title: aktion.project.try(:name)
+  %td= link_to aktion.team.try(:short_safe), aktion.team, title: aktion.project.try(:name)
   %td= link_to aktion.role.short_safe, aktion.role if aktion.role
   %td= aktion.intensity
   %td= aktion.flow

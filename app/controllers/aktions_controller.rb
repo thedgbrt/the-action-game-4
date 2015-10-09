@@ -17,6 +17,8 @@ class AktionsController < ApplicationController
       @actions = @player.actions_in_date_range(@week.at_beginning_of_week, @week.at_end_of_week)
     elsif @month
       @actions = @player.actions_in_date_range(@month.at_beginning_of_month, @month.at_end_of_month)
+    else
+      @actions = @player.aktions
     end
   end
 

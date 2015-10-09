@@ -49,6 +49,7 @@ class Team < ActiveRecord::Base
   end
 
   def color(playa)
+    return 'black' unless playa
     tm = TeamMembership.find_by(team_id: self.id, player_id: playa.id)
     tm.try(:color) || default_color
   end

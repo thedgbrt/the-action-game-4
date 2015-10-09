@@ -53,6 +53,7 @@ class Aktion < ActiveRecord::Base
   end
 
   def color
+    return 'black' unless team
     team.color(player)
   end
 

@@ -1,5 +1,4 @@
-/ = react_component 'Aktions', { data: @actions }
-%h4= "#{@player.name}'s #{@actions.count} Actions"
+%h4= "#{@player.name}'s #{@actions.count rescue 0} Actions"
 = link_to 'ALL', aktions_path
 \-
 = link_to 'TODAY', aktions_path(date: Time.zone.now.to_date)
@@ -21,7 +20,7 @@
   - Hash[by_team_hash.sort_by{|k, v| v}.reverse].each do |team_id, actions_count|
     - team = Team.find_by_id(team_id)
     = actions_count
-    = team.name
+    = team.name rescue 'No Team'
     %br
   %h5 By Action Score
   - by_score_hash = @actions.group_by{ |a| a.score }
