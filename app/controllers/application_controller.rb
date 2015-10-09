@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
     end
 
     def user_time_zone(&block)
-      Time.use_zone(current_player.current_time_zone, &block)
+      Time.use_zone(tz, &block)
     end
 
     def back_or_home
