@@ -109,6 +109,16 @@ class Player < ActiveRecord::Base
     aktions.select{ |a| a.persisted? && a.timeslot >= starting && a.timeslot <= ending }
   end
 
+  def actions_count_before_2am_4am_6am(date=nil)
+    date ||= Time.zone.now.in_time_zone(current_time_zone).to_date
+    starting = date.at_beginning_of_day
+    (0..2).each.map do |idx|
+      ending = starting + 2.hours + idx.hours
+      puts "Search between starting=#{starting} and ending=#{ending}..."
+      aktions.select{ |a| a.persisted? && a.timeslot >= starting && a.timeslot <= ending }.count
+    end
+  end
+
   def actions_in_date_range(starting_on, ending_on)
     aktions.select{ |a| a.persisted? && a.in_date_range(starting_on, ending_on) }
   end

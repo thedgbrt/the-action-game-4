@@ -24,7 +24,7 @@
   .text-center.yellow-text MY DAY
   - actions_by_part_of_day = Player.todays_grid(tz, @date).in_groups_of(12)
   - actions_by_part_of_day.each_with_index do |part_of_days_slots, idx|
-    - if false # current_player.actions_before_6am(@date).count > 0
+    - if current_player.actions_before_6am.count > 0
       .sidebar-container
         - part_of_days_slots.each do |slot|
           - a = Aktion.get(current_player, slot)
