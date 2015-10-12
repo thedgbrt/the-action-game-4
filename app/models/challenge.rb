@@ -3,7 +3,7 @@ class Challenge < ActiveRecord::Base
     ['Actions', 0],
     ['Action Scores', 1],
     ['Push-ups', 2],
-    ['Conscious Breaths', 3],
+    ['Full Breaths', 3],
     ['+3 Actions', 4],
     ['Decent Actions', 5],
     ['Solid Actions', 6],

@@ -102,13 +102,6 @@ class Player < ActiveRecord::Base
     aktions.select{ |a| a.persisted? && a.timeslot.in_time_zone(self.current_time_zone).to_date == Time.zone.now.in_time_zone(self.current_time_zone).to_date }
   end
 
-  def actions_before_6am(date=nil)
-    date ||= Time.zone.now.in_time_zone(current_time_zone).to_date
-    starting = date.at_beginning_of_day
-    ending ||= starting + 6.hours
-    aktions.select{ |a| a.persisted? && a.timeslot >= starting && a.timeslot <= ending }
-  end
-
   def actions_count_before_2am_4am_6am(date=nil)
     date ||= Time.zone.now.in_time_zone(current_time_zone).to_date
     starting = date.at_beginning_of_day
@@ -132,6 +125,43 @@ class Player < ActiveRecord::Base
     date ||= Time.zone.now.in_time_zone(tz).to_date
     midnight = date.at_beginning_of_day
     (0..47).map{ |ts| midnight + (ts*30).minutes }
+  end
+
+  def todays_grid_plus(date=nil)
+    date ||= Time.zone.now.in_time_zone(current_time_zone).to_date
+    midnight = date.at_beginning_of_day
+    (0..47).map do |ts|
+      slot = midnight + (ts*30).minutes
+      [slot, Aktion.get(self, slot)]
+    end
+  end
+
+  def todays_actions_from_grid(date=nil)
+    date ||= Time.zone.now.in_time_zone(current_time_zone).to_date
+    todays_grid_plus(date).map{ |g| g[1] }.compact
+  end
+
+  def actions_before_6am(date=nil)
+    date ||= Time.zone.now.in_time_zone(current_time_zone).to_date
+    actions_before_2am_4am_6am(date).flatten.compact
+  end
+
+  def actions_before_2am_4am_6am(date=nil)
+    date ||= Time.zone.now.in_time_zone(current_time_zone).to_date
+    [
+      todays_grid_plus(date)[0..5].map{ |g| g[1] },
+      todays_grid_plus(date)[6..11].map{ |g| g[1] },
+      todays_grid_plus(date)[12..17].map{ |g| g[1] }
+    ]
+  end
+
+  def actions_count_before_2am_4am_6am(date=nil)
+    date ||= Time.zone.now.in_time_zone(current_time_zone).to_date
+    [
+      todays_grid_plus(date)[0..5].map{ |g| g[1] }.compact.count,
+      todays_grid_plus(date)[6..11].map{ |g| g[1] }.compact.count,
+      todays_grid_plus(date)[12..17].map{ |g| g[1] }.compact.count
+    ]
   end
 
   def self.weekly_grid(date=nil)

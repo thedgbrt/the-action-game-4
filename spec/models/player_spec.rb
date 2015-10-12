@@ -4,18 +4,31 @@ RSpec.describe Player, type: :model do
 
   before(:each) {
     @player = FactoryGirl.create(:player)
+    @team = FactoryGirl.create(:team)
   }
 
   subject { @player }
 
   it { should respond_to(:name) }
 
-  # it '#planned_actions should work' do
-  #   (1..5).each{ FactoryGirl.create(:aktion, status: 'finished', player_id: @player.id, team_id: @team.id) }
-  #   expect(Aktion.planned_by(@player).count).to eq(0)
-  #   @pa = Aktion.create!(planned: true, status: 'planned', player_id: @player.id, team_id: @team.id)
-  #   expect(Aktion.planned_by(@player).count).to eq(1)
-  # end
+  it '#actions_count_before_2am_4am_6am should work' do
+    slot = Time.zone.now.in_time_zone(@player.current_time_zone).at_beginning_of_day + 30.minutes
+    puts "slot.to_date is #{slot.to_date}"
+
+    expect(@player.todays_actions_from_grid.count).to eq(0)
+    expect(@player.current_time_zone).to eq('Hawaii')
+    expect(@player.actions_count_before_2am_4am_6am).to eq([0, 0, 0])
+    expect(Aktion.count).to eq(0)
+
+    slot = Time.zone.now.in_time_zone(@player.current_time_zone).at_beginning_of_day + 30.minutes
+    a = FactoryGirl.create(:aktion, player_id: @player.id, team_id: @team.id, timeslot: slot)
+    puts "a.timeslot is #{a.timeslot}"
+
+    expect(Aktion.count).to eq(1)
+    expect(@player.todays_actions_from_grid.count).to eq(1)
+    # expect(@player.actions_before_6am(slot.to_date).count).to eq(1)
+    expect(@player.actions_count_before_2am_4am_6am(slot.to_date)).to eq([1, 0, 0])
+  end
 
   it '#persist_sound_choice should change the sound' do
     expect(@player.sound_choice).to be nil
