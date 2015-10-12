@@ -143,7 +143,9 @@ class Player < ActiveRecord::Base
 
   def actions_before_6am(date=nil)
     date ||= Time.zone.now.in_time_zone(current_time_zone).to_date
-    actions_before_2am_4am_6am(date).flatten.compact
+    starting = date.at_beginning_of_day
+    ending = starting + 6.hours
+    aktions.select{ |a| a.persisted? && a.timeslot >= starting && a.timeslot <= ending }
   end
 
   def actions_before_2am_4am_6am(date=nil)

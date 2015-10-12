@@ -78,10 +78,18 @@
 
 .review-bg {
   background-color: #ffffcc;
-  button {
+  input {
+    font-weight: bold;
+    margin: 0px;
     padding: 10px;
     font-size: 130%;
-    font-weight: bold;
+  }
+  .review-button {
+    input {
+      color: black;
+      background-color: yellow;
+      margin: 0px;      
+    }
   }
 }
 
