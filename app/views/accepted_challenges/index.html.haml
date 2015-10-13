@@ -5,7 +5,7 @@
     %tr
       %th Challenge
       %th Active
-      %th Status
+      %th Today?
       %th Comments
       - if current_player.admin?
         %th Who
@@ -21,7 +21,12 @@
         - else
           %td= ac.description rescue 'Challenge Missing'
         %td= ac.active rescue 'Missing'
-        %td= Challenge.count(current_player, ac.item_type)
+        %td
+          - actual = Challenge.count(@player, ac.item_type)
+          - if actual >= ac.greater_than
+            .green-text= '✔︎ ' + actual.to_s
+          - else
+            .red-text= '✘ ' + actual.to_s
         %td= ac.comments rescue 'Missing'
         - if current_player.admin?
           %td= ac.player.first_name rescue 'Missing Name'

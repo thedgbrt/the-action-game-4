@@ -1,9 +1,10 @@
 class AcceptedChallengesController < ApplicationController
   before_action :set_accepted_challenge, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_player!
 
   def index
-    @player = Player.find_by_id(params[:player_id])
-    @accepted_challenges = @player ? @player.accepted_challenges : AcceptedChallenge.all
+    @player = Player.find_by_id(params[:player_id]) || current_player
+    @accepted_challenges = @player.accepted_challenges
   end
 
   def show

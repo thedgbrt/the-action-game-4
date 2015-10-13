@@ -4,8 +4,6 @@ RSpec.describe Challenge, type: :model do
   before(:each) { @challenge = FactoryGirl.create(:challenge) }
 
   it '#op should return correctly' do
-
-
     @challenge.update_attributes(item_type: 99)
     expect(@challenge.item).to be nil
 
