@@ -26,7 +26,7 @@
             .green-text= '✔︎ ' + actual.to_s
           - else
             .red-text= '✘ ' + actual.to_s
-        %td= ac.comments rescue 'Missing'
+        %td= ac.challenge.comments rescue 'Missing'
         - if current_player.admin?
           %td= ac.player.first_name rescue 'Missing Name'
         %td= ac.active rescue 'Missing'
