@@ -4,11 +4,11 @@
   %thead
     %tr
       %th Challenge
-      %th Active
       %th Today?
       %th Comments
       - if current_player.admin?
         %th Who
+      %th Active
       %th
       %th
       %th
@@ -20,7 +20,6 @@
           %td= link_to ac.description, edit_challenge_path(ac.challenge) rescue 'Challenge Missing'
         - else
           %td= ac.description rescue 'Challenge Missing'
-        %td= ac.active rescue 'Missing'
         %td
           - actual = Challenge.count(@player, ac.item_type)
           - if actual >= ac.greater_than
@@ -30,6 +29,7 @@
         %td= ac.comments rescue 'Missing'
         - if current_player.admin?
           %td= ac.player.first_name rescue 'Missing Name'
+        %td= ac.active rescue 'Missing'
         %td= link_to 'Show', ac
         %td= link_to 'Edit', edit_accepted_challenge_path(ac)
         %td= link_to 'Destroy', ac, :method => :delete, :data => { :confirm => 'Are you sure?' }

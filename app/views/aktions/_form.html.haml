@@ -28,4 +28,5 @@
     .large-6.small-6= f.association :location, as: :hidden
     .large-12.medium-12.small-12= f.association :player, include_blank: true, as: :hidden
 
-= link_to 'EDIT', edit_aktion_path(@aktion, edit: true), class: 'button white-text bigger'
+- if @aktion
+  = link_to 'EDIT', edit_aktion_path(@aktion, edit: true), class: 'button white-text bigger'
