@@ -16,4 +16,9 @@ class AcceptedChallenge < ActiveRecord::Base
   def greater_than
     challenge.try(:greater_than)
   end
+
+  def also_accepted_by
+    other_accepted_challenges = challenge.accepted_challenges - [self]
+    other_accepted_challenges.map{ |ac| ac.player }.compact
+  end
 end

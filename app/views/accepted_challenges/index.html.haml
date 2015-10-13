@@ -1,21 +1,23 @@
 %h1 My Accepted Challenges
 
+%p When you first join TheActionGame
+
 %table
   %thead
     %tr
+      %th
       %th Challenge
       %th Today?
-      %th Comments
+      %th Also Accepted By      
+      %th Challenge Comments
       - if current_player.admin?
         %th.review-bg Who
-      %th Active
-      %th
-      %th
-      %th
+        %th Active
 
   %tbody
     - @accepted_challenges.each do |ac|
       %tr
+        %td.green-text= link_to 'Remove', ac, :method => :delete, :data => { :confirm => 'Are you sure?' }
         - if current_player.admin?
           %td= link_to ac.description, edit_challenge_path(ac.challenge) rescue 'Challenge Missing'
         - else
@@ -26,14 +28,12 @@
             .green-text= '✔︎ ' + actual.to_s
           - else
             .red-text= '✘ ' + actual.to_s
+        %td= ac.also_accepted_by.map(&:first_name).join(', ')
         %td= ac.challenge.comments rescue 'Missing'
         - if current_player.admin?
           %td.review-bg= ac.player.first_name rescue 'Missing Name'
-        %td= ac.active rescue 'Missing'
-        %td= link_to 'Show', ac
-        %td= link_to 'Edit', edit_accepted_challenge_path(ac)
-        %td= link_to 'Destroy', ac, :method => :delete, :data => { :confirm => 'Are you sure?' }
+          %td= ac.active rescue 'Missing'
 
 %br
 
-= link_to 'Find A New Challenge!', challenges_path
+.button.white-text= link_to 'Accept Another Challenge!', challenges_path

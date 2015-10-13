@@ -1,10 +1,10 @@
 class Challenge < ActiveRecord::Base
   TYPES = [
     ['Actions', 0],
-    ['Action Scores', 1],
+    ['Action Points', 1],
     ['Push-ups', 2],
     ['Full Breaths', 3],
-    ['+3 Actions', 4],
+    ['Attempted Actions', 4],
     ['Decent Actions', 5],
     ['Solid Actions', 6],
     ['Perfect Actions', 7]
@@ -24,6 +24,8 @@ class Challenge < ActiveRecord::Base
   def self.count(playa, item_type)
     if item_type == 0
       playa.todays_actions.count
+    elsif item_type == 1
+      playa.todays_actions.map{ |a| a.score }.compact.sum
     elsif item_type == 2
       playa.todays_pushups
     elsif item_type == 3
