@@ -7,7 +7,7 @@
       %th Today?
       %th Comments
       - if current_player.admin?
-        %th Who
+        %th.review-bg Who
       %th Active
       %th
       %th
@@ -28,7 +28,7 @@
             .red-text= '✘ ' + actual.to_s
         %td= ac.challenge.comments rescue 'Missing'
         - if current_player.admin?
-          %td= ac.player.first_name rescue 'Missing Name'
+          %td.review-bg= ac.player.first_name rescue 'Missing Name'
         %td= ac.active rescue 'Missing'
         %td= link_to 'Show', ac
         %td= link_to 'Edit', edit_accepted_challenge_path(ac)

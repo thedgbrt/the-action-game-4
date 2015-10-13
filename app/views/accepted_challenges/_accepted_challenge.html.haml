@@ -1,6 +1,8 @@
 - if item_challenges.count > 0
+  - ac = item_challenges.first
   .today-summary.text-center
     %span= Challenge.count(current_player, item_type)
     %span= Challenge::TYPES.to_h.invert[item_type]
     - out_of = item_challenges.first.greater_than
-    %span.yellow-text= link_to "/#{out_of}", accepted_challenges_path, title: 'See your Action related challenges'
+    - t = "See this accepted challenge. #{ac.comments}"
+    %span.yellow-text= link_to "/#{out_of}", accepted_challenges_path, title: t
