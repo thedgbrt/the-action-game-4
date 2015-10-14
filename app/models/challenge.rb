@@ -31,13 +31,13 @@ class Challenge < ActiveRecord::Base
     elsif item_type == 3
       playa.todays_actions.select{ |a| a.score >= 8 }.count
     elsif item_type == 4
-      playa.todays_actions.map{ |a| a.score }.compact.sum
-    elsif item_type == 5
-      playa.todays_pushups
-    elsif item_type == 6
-      playa.todays_breaths
-    elsif item_type == 7
       playa.todays_actions.select{ |a| a.score >= 10 }.count
+    elsif item_type == 5
+      playa.todays_actions.map{ |a| a.score }.compact.sum
+    elsif item_type == 6
+      playa.todays_pushups
+    elsif item_type == 7
+      playa.todays_breaths
     end
   end
 
