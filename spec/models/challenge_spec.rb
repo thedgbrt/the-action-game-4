@@ -8,9 +8,9 @@ RSpec.describe Challenge, type: :model do
     expect(@challenge.item).to be nil
 
     @challenge.update_attributes(item_type: 0)
-    expect(@challenge.item).to eq 'Actions'
+    expect(@challenge.item).to eq 'Total Actions'
 
-    @challenge.update_attributes(item_type: 2)
+    @challenge.update_attributes(item_type: 6)
     expect(@challenge.item).to eq 'Push-ups'
   end
 

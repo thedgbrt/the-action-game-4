@@ -4,8 +4,13 @@
     %span.yellow-text= link_to 'CHALLENGES', accepted_challenges_path
     %span= link_to image_tag('settings.png', height: 16, width: 16), accepted_challenges_path
 
-  - current_player.itemized_challenges.sort_by{|k,v|k}.each do |key, value|
-    = render 'accepted_challenges/accepted_challenge', day: day, item_type: key, item_challenges: value
+  - (0..7).each do |idx|
+    - challenges = current_player.itemized_challenges[idx]
+    = render 'accepted_challenges/accepted_challenge', day: day, item_type: idx, item_challenges: challenges
+
+  / - current_player.itemized_challenges.sort_by{|k,v|k}.each do |key, value|
+  /   = render 'accepted_challenges/accepted_challenge', day: day, item_type: key, item_challenges: value
+
   / .today-summary.text-center= "+#{current_player.todays_actions.map{|a|a.score}.sum} Points"
   / .today-summary.text-center
   /   - if current_player.active_challenges(3).count > 0

@@ -193,7 +193,7 @@ main {
 
 .title-area {
   line-height: 100%;
-  width: 100px;
+  width: 112px;
   color: white;
   li {
     a   {
@@ -285,4 +285,18 @@ footer {
     display: table-cell;
     padding: 0px 1px;
   }
+}
+
+.challenge-count {
+  float: left;
+  padding: 0px 2px;
+}
+
+.challenge-item {
+  float: left;
+}
+
+.challenge-goal {
+  float: right;
+  margin-right: 2px;
 }

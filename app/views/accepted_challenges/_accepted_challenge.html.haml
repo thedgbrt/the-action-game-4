@@ -1,8 +1,10 @@
-- if item_challenges.count > 0
-  - ac = item_challenges.first
-  .today-summary.text-center
-    %span= Challenge.count(current_player, item_type)
-    %span= Challenge::TYPES.to_h.invert[item_type]
-    - out_of = item_challenges.first.greater_than
-    - t = "See this accepted challenge and more. #{ac.challenge.comments}"
-    %span.yellow-text= link_to "/#{out_of}", accepted_challenges_path, title: t
+.today-summary.challenge{"style" => "#{(1..4).include?(item_type) ? 'margin-left: 15px; width: 108px;' : ''}"}
+  - ac = item_challenges.try(:first)
+  - count = Challenge.count(current_player, item_type)
+  - if count > 0 || ac || item_type == 0 || item_type == 2
+    .challenge-count.text-right= count
+    .challenge-item= Challenge::TYPES.to_h.invert[item_type]
+    - if ac
+      - out_of = ac.greater_than
+      - t = "See this accepted challenge and more. #{ac.challenge.comments}"
+      .challenge-goal.yellow-text= link_to "/#{out_of}", accepted_challenges_path, title: t

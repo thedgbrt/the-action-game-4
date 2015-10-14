@@ -1,13 +1,13 @@
 class Challenge < ActiveRecord::Base
   TYPES = [
-    ['Actions', 0],
-    ['Action Points', 1],
-    ['Push-ups', 2],
-    ['Full Breaths', 3],
-    ['Attempted Actions', 4],
-    ['Decent Actions', 5],
-    ['Solid Actions', 6],
-    ['Perfect Actions', 7]
+    ['Total Actions', 0],
+    ['Attempted', 1],
+    ['Completed', 2],
+    ['Solid', 3],
+    ['Perfect', 4],
+    ['Action Points', 5],
+    ['Push-ups', 6],
+    ['Full Breaths', 7]
   ]
 
   OPERATIONS = [
