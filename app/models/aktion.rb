@@ -35,6 +35,17 @@ class Aktion < ActiveRecord::Base
 
   scope :by_timeslot, -> { order('timeslot DESC') }
 
+  def self.now_elements
+    Aktion.current.map{ |a| a.now_element }.join("\n")
+  end
+
+  def now_element
+    '<div class="sidebar-player today-summary">' +
+      '<div class="img"><img height="20" width="20" src="' + player.gravatar(20) + '"></div>' +
+      '<div class="now-focus">' + focus + '</div>' +
+    '</div>'
+  end
+
   def self.count_by(actions, resource_name)
     
   end

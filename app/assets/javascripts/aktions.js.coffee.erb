@@ -11,3 +11,9 @@ $(document).ready ->
     val = $('#aktion_team_id').val()
     old_params = window.location.search
     # window.location.search = '?team_id=' + val
+
+@Now =
+  pollForNewActions: ->
+    nowActions = '<%= Aktion.now_elements %>'
+    console.log nowActions
+    # $('#now-actions').html(nowActions)

@@ -30,3 +30,4 @@
 
 - if @aktion && @aktion.persisted?
   = link_to 'EDIT', edit_aktion_path(@aktion, edit: true), class: 'button white-text bigger'
+  / = link_to 'DELETE', @aktion, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'button white-text bigger'

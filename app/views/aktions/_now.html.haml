@@ -1,21 +1,21 @@
 - current_actions = Aktion.current.sort_by{ |a| a.player.first_name }
 - if current_actions.count > 0
   .medium-12.block
-    .text-center.yellow-text PLAYING NOW
-    - current_actions.each do |a|
-      - title = a.player.first_name.to_s + ': ' + a.focus.to_s
-      - title += ' (' + a.verb.try(:name).to_s + ' for ' + a.team.try(:name).to_s
-      - title += ', project: ' + a.project.try(:name).to_s + ')'
-      .sidebar-player.today-summary
-        .img= link_to (image_tag a.player.gravatar, height: 20, width: 20), player_aktions_path(a.player, date: Time.zone.now.to_date), title: title
-        .text-center.name= a.player.first_name
-        .text-right.stats= "#{a.player.todays_actions.count}/+#{a.player.todays_actions.map{|a|a.score}.sum}"
+    .text-center.yellow-text NOW TAGGING
+    #now-actions
+      - current_actions.each do |a|
+        - title = a.player.first_name.to_s + ': ' + a.focus.to_s
+        - title += ' (' + a.verb.try(:name).to_s + ' for ' + a.team.try(:name).to_s
+        - title += ', project: ' + a.project.try(:name).to_s + ')'
+        .sidebar-player.today-summary
+          .img= link_to (image_tag a.player.gravatar, height: 20, width: 20), player_aktions_path(a.player, date: Time.zone.now.to_date), title: title
+          .now-focus= a.focus
 
 - now_players = current_actions.map(&:player)
-- todays_players = Player.active_today - now_players
+- todays_players = Player.active_today.sort_by{ |p| p.todays_actions.count }
 - if todays_players.count > 0
   .medium-12.block  
-    .text-center.yellow-text EARLIER
+    .text-center.yellow-text TODAY
     - todays_players.each do |p|
       .sidebar-player.today-summary
         .img= link_to (image_tag p.gravatar, height: 20, width: 20), player_aktions_path(p, date: Time.zone.now.to_date)

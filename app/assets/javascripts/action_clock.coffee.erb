@@ -82,6 +82,8 @@ $(document).ready ->
     if temp > 1800 then temp - 1800 else temp
 
   startTime = ->
+    ProgressBar.moveArrow()
+    Now.pollForNewActions()
     totalSecUp = to_1800()
     status = updateStatus(totalSecUp)
     playSound(totalSecUp, status)
