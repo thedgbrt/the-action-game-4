@@ -12,7 +12,7 @@
           .now-focus= a.focus
 
 - now_players = current_actions.map(&:player)
-- todays_players = Player.active_today.sort_by{ |p| p.todays_actions.count }
+- todays_players = Player.active_today.sort_by{ |p| p.todays_points }.reverse
 - if todays_players.count > 0
   .medium-12.block  
     .text-center.yellow-text TODAY

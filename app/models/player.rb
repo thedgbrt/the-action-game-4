@@ -99,7 +99,13 @@ class Player < ActiveRecord::Base
   end
 
   def todays_actions(date=nil)
-    aktions.select{ |a| a.persisted? && a.timeslot.in_time_zone(self.current_time_zone).to_date == Time.zone.now.in_time_zone(self.current_time_zone).to_date }
+    date ||= Time.zone.now.in_time_zone(current_time_zone).to_date
+    aktions.select{ |a| a.persisted? && a.timeslot.in_time_zone(self.current_time_zone).to_date == date }
+  end
+
+  def todays_points(date=nil)
+    date ||= Time.zone.now.in_time_zone(current_time_zone).to_date
+    todays_actions(date).map{ |a| a.score }.sum
   end
 
   def actions_count_before_2am_4am_6am(date=nil)
