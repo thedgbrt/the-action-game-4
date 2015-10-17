@@ -11,7 +11,8 @@ class SessionsController < ApplicationController
     reset_session
     session[:player_id] = player.id
     player.update_attributes(current_team_id: player.teams.first.id, sound_choice: 'ticking',
-      ticking_volume: 30, warning_volume: 70, review_before_relax: 'true', commit_length: 3)
+      ticking_volume: 30, warning_volume: 70, review_before_relax: 'true', commit_length: 3,
+      show_sidebars: '1', show_insights: '0', show_rubric: 1)
     redirect_to edit_player_path(player), :notice => 'Signed in!'
   end
 

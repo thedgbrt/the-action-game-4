@@ -5,7 +5,8 @@
   %td= link_to player.teams.count, teams_path
   %td= link_to player.roles.count, roles_path
   %td= link_to player.projects.count, projects_path
-  %td= current_player.admin? || current_player == player ? player.email : '(e-mail hidden)'
+  %td= player.created_at
+  %td= current_player && current_player.admin? || current_player == player ? player.email : '(e-mail hidden)'
   %td= link_to 'Show', player
   %td= link_to 'Edit', edit_player_path(player)
   %td= link_to 'Destroy', player, :method => :delete, :data => { :confirm => 'Are you sure?' }

@@ -224,9 +224,6 @@ class Player < ActiveRecord::Base
     team = Team.initialize_for(self)
     Role.initialize_for(team, self)
     Project.initialize_for(team, self)
-    show_sidebars = '1'
-    show_insights = '0'
-    show_rubric = 1
   end
 
   def review_first

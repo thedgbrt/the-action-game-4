@@ -22,6 +22,12 @@ class AktionsController < ApplicationController
     end
   end
 
+  def current
+    @actions = Aktion.current
+    output = @actions.map{ |a| {gravatar: a.player.gravatar, focus: a.focus}}
+    render json: output
+  end
+
   def test
     @actions = Aktion.last(30)
   end

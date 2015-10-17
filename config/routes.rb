@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :interruptions
   resources :insights
   resources :aktions do
-    collection { get :continue, :start, :test }
+    collection { get :continue, :start, :test, :current }
   end
   resources :role_assignments
   resources :project_memberships
