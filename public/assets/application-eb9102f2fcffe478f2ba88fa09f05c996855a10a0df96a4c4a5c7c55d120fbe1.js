@@ -41717,6 +41717,10 @@ module.exports = warning;
 
 }).call(this);
 (function() {
+
+
+}).call(this);
+(function() {
   $(document).ready(function() {
     var bell, commit, commit_length, current_action, current_player_id, loadAudio, padWithZero, playSound, review_before_relax, sounds, startTime, statuses, tick, ticking_volume, to_1800, updateStatus, warning, warning_volume, whistle;
     current_player_id = document.getElementById('time').dataset.current_player_id;
@@ -41755,7 +41759,8 @@ module.exports = warning;
       0: bell,
       22.5: warning,
       23: bell,
-      29.5: whistle
+      29.5: whistle,
+      30: bell
     };
     if (review_before_relax) {
       statuses = [['commit', commit_length], ['focus', 23 - commit_length], ['relax', 5], ['review', 2]];
@@ -41817,6 +41822,8 @@ module.exports = warning;
     };
     startTime = function() {
       var actionSecDown, m_string, minDown, s_string, secDown, status, t, totalSecDown, totalSecUp;
+      ProgressBar.moveArrow();
+      Now.pollForNewActions();
       totalSecUp = to_1800();
       status = updateStatus(totalSecUp);
       playSound(totalSecUp, status);
@@ -41853,6 +41860,30 @@ module.exports = warning;
       return old_params = window.location.search;
     });
   });
+
+  this.Now = {
+    now_tag: function(action) {},
+    pollForNewActions: function() {
+      var nowActions;
+      return nowActions = $.ajax('/aktions/current').done(function(data) {
+        var action, result;
+        result = ((function() {
+          var i, len, results;
+          results = [];
+          for (i = 0, len = data.length; i < len; i++) {
+            action = data[i];
+            results.push('<div class="sidebar-player today-summary">' + '<div class="img"><img height="20" width="20" src="' + action.gravatar + '"></div>' + '<div class="now-focus">' + action.focus + '</div>' + '</div>');
+          }
+          return results;
+        })()).join('\n');
+        return $('#now-actions').html(result);
+      });
+    }
+  };
+
+}).call(this);
+(function() {
+
 
 }).call(this);
 (function() {
@@ -41895,31 +41926,36 @@ module.exports = warning;
 
 }).call(this);
 (function() {
-  var init, tick, timer;
-
-  timer = null;
-
-  init = function() {
-    timer = setInterval(tick, 2000);
-  };
-
-  tick = function() {
-    var fractionElapsed, leftPos, min, offsetArrow, width;
-    min = (new Date).getMinutes();
-    if (min > 30) {
-      min = min - 30;
-    }
-    fractionElapsed = min / 30;
-    leftPos = $('#progress-bar').offset().left;
-    width = $('#progress-bar').width();
-    offsetArrow = $('#arrow').offset();
-    offsetArrow.left = leftPos + width * fractionElapsed;
-    $('#arrow').offset(offsetArrow);
-  };
-
   $(document).ready(function() {
-    return init();
+    return $('#players-table').DataTable({
+      autoWidth: false,
+      searching: false,
+      order: [0, 'asc'],
+      pageLength: 25,
+      lengthMenu: [[10, 25, 50, -1], [10, 25, 50, 'All']],
+      language: {
+        lengthMenu: 'Display _MENU_ Actions'
+      }
+    });
   });
+
+}).call(this);
+(function() {
+  this.ProgressBar = {
+    moveArrow: function() {
+      var fractionElapsed, leftPos, min, offsetArrow, width;
+      min = (new Date).getMinutes();
+      if (min > 30) {
+        min = min - 30;
+      }
+      fractionElapsed = min / 30;
+      leftPos = $('#progress-bar').offset().left;
+      width = $('#progress-bar').width();
+      offsetArrow = $('#arrow').offset();
+      offsetArrow.left = leftPos + width * fractionElapsed;
+      $('#arrow').offset(offsetArrow);
+    }
+  };
 
 }).call(this);
 (function() {
