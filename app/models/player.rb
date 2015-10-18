@@ -189,6 +189,14 @@ class Player < ActiveRecord::Base
     todays_actions.map{ |a| a.breaths.to_i}.compact.sum
   end
 
+  def todays_calisthenics
+    todays_actions.map{ |a| a.pushups.to_i}.compact.sum +
+    todays_actions.map{ |a| a.situps.to_i}.compact.sum +
+    todays_actions.map{ |a| a.jumpjacks.to_i}.compact.sum +
+    todays_actions.map{ |a| a.chairdips.to_i}.compact.sum +
+    todays_actions.map{ |a| a.wallsits.to_i}.compact.sum
+  end
+
   def todays_pushups
     todays_actions.map{ |a| a.pushups.to_i}.compact.sum
   end

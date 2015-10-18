@@ -116,7 +116,7 @@ class AktionsController < ApplicationController
         :flow_notes, :value, :value_notes, :visible_to, :status, :intensity, :how_it_went, :music,
         :time_zone, :location_id, :role_id, :properties, :team_id, :water, :breaths, :pushups,
         :wallsits, :choice, :snack, :tidy, :stop, :restroom, :stretch, :games, :friends, :other,
-        :change, :planned_date, :planned_sequence_number, :planned, :deflected,
+        :change, :planned_date, :planned_sequence_number, :planned, :deflected, :jumpjacks, :chairdips,
         :distractions, :recovered, :started_at, :stopped_at, :declared_focus, :awesome_break, :tight_focus)
     end
 

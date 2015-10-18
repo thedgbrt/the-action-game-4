@@ -6,7 +6,7 @@ class Challenge < ActiveRecord::Base
     ['Solid', 3],
     ['Perfect', 4],
     ['Action Points', 5],
-    ['Push-ups', 6],
+    ['Calisthenics', 6],
     ['Full Breaths', 7]
   ]
 
@@ -35,7 +35,7 @@ class Challenge < ActiveRecord::Base
     elsif item_type == 5
       playa.todays_actions.map{ |a| a.score }.compact.sum
     elsif item_type == 6
-      playa.todays_pushups
+      playa.todays_calisthenics
     elsif item_type == 7
       playa.todays_breaths
     end
