@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   get '/contact' => 'visitors#contact'
   get '/welcome' => 'visitors#welcome'
   get '/help' => 'visitors#help'
+  get '/chat' => 'visitors#chat'
   get '/sounds' => 'visitors#sounds'
   get '/scores' => 'visitors#scores'
   get '/auth/:provider/callback' => 'sessions#create'

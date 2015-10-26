@@ -1,4 +1,7 @@
 class VisitorsController < ApplicationController
+  def chat
+  end
+
   def contact
   end
 
