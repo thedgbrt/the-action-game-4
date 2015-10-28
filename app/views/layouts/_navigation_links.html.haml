@@ -8,6 +8,8 @@
     %a{"data-dropdown" => "hover4", "data-options" => "is_hover:true; hover_timeout:200", href: "#{starting_path}"}
       .light-red-text START ACTION
     %ul#hover4.f-dropdown.medium{"data-dropdown-content" => ""}
+      - if current_aktion
+        %li.dropdown_item= link_to "CONTINUE", new_aktion_path(previous_aktion_id: current_aktion.id)
       - current_player.my_teams.each do |team|
         %li.dropdown_item= link_to "=> #{team.name}", new_aktion_path(team_id: team.id), {style: "color: #{team.color(current_player)}"}
       %hr

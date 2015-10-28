@@ -8,7 +8,7 @@
   .large-4.medium-4.small-4.columns.bigger= 'VALUE'
   .large-8.medium-8.small-8.columns= f.input :value, collection: FLOW_VALUE_OPTIONS, label: false
   .large-12.columns= f.input :value_notes, label: false, input_html: {rows: 5}, placeholder: VALUE_PLACEHOLDER
-  .large-12.medium-12.small-12.columns.text-center.review-button= f.button :submit, "SAVE"
+  .large-12.medium-12.small-12.columns.text-right.review-button= f.button :submit, "SAVE"
   / - if current_player.review_first
   /   .large-12.medium-12.columns= f.input :intensity, collection: INTENSITIES, include_blank: true, prompt: INTENSITY_PROMPT, label: false
 - elsif @aktion.status == 'reviewed' || @aktion.status == 'finished'

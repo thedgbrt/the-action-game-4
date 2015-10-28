@@ -55,6 +55,7 @@ class AktionsController < ApplicationController
       @aktion.verb = @old.verb
       @aktion.role = @old.role
       @aktion.project = @old.project
+      @aktion.focus = @old.focus
       # @aktion.intensity = @old.intensity
     end
   end
