@@ -83,9 +83,8 @@ $(document).ready ->
 
   startTime = ->
     ProgressBar.moveArrow()
+    Now.pollForNewActions()
     totalSecUp = to_1800()
-    if totalSecUp < 300
-      Now.pollForNewActions()
     status = updateStatus(totalSecUp)
     playSound(totalSecUp, status)
 
