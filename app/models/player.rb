@@ -25,6 +25,8 @@ class Player < ActiveRecord::Base
   after_initialize :set_default_role, :if => :new_record?
   after_save :init
 
+  default_scope -> { order(:name) }
+
   has_many :aktions  
   has_many :teams_created, foreign_key: :creator_id
   has_many :team_memberships

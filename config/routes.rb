@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :friendships
+  resources :friendships
   resources :accepted_challenges
   resources :challenges
   resources :interruptions
