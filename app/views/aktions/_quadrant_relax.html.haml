@@ -18,6 +18,8 @@
   .large-6.medium-12.columns.boolean.break-action= f.input :dancing, as: :boolean, label: 'dancing'
   .large-6.medium-12.columns.boolean.break-action= f.input :soccer, as: :boolean, label: 'soccer'
   .large-6.medium-12.columns.boolean.break-action= f.input :change, as: :boolean, label: 'change'
+  .large-6.medium-12.columns.boolean.break-action= f.input :reading, as: :boolean, label: 'reading'
+  .large-6.medium-12.columns.boolean.break-action= f.input :podcast, as: :boolean, label: 'podcast'
   .large-12.medium-12.small-12.columns= f.input :intensity, collection: INTENSITIES, include_blank: true, prompt: INTENSITY_PROMPT, label: false
   .large-12.medium-12.small-12.columns.relax-button= f.button :submit, "SAVE"
 - else
@@ -40,4 +42,6 @@
   .large-6.columns.review-item= "#{Aktion.checkmark(@aktion.dancing)} Dancing" if @aktion.dancing
   .large-6.columns.review-item= "#{Aktion.checkmark(@aktion.soccer)} Soccer" if @aktion.soccer
   .large-6.columns.review-item= "#{Aktion.checkmark(@aktion.change)} Change Stuff" if @aktion.change
+  .large-6.columns.review-item= "#{Aktion.checkmark(@aktion.reading)} Reading" if @aktion.reading
+  .large-6.columns.review-item= "#{Aktion.checkmark(@aktion.podcast)} Podcast" if @aktion.podcast
   .large-12.columns.review-item= @aktion.other if @aktion.other
