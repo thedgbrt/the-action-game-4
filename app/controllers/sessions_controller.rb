@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
+  skip_before_filter :verify_authenticity_token
 
   def new
-    skip_before_filter :verify_authenticity_token
     redirect_to '/auth/google_oauth2'
   end
 
