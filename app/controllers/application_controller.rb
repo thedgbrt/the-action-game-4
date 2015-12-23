@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
   helper_method :tz
 
   around_filter :user_time_zone, if: :current_player
+  before_action :initialize_omniauth_state
 
   private
     def last_action
@@ -64,4 +65,9 @@ class ApplicationController < ActionController::Base
     def back_or(fallback)
       request[:http_referer] || fallback
     end
+
+    def initialize_omniauth_state
+      session['omniauth.state'] = response.headers['X-CSRF-Token'] = form_authenticity_token
+    end
+
 end
