@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   end
 
   resources :friendships
-  resources :friendships
   resources :accepted_challenges
   resources :challenges
   resources :interruptions
