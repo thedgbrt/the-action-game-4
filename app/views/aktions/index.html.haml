@@ -31,21 +31,6 @@
     %br
 - scale_hash = FLOW_VALUE_OPTIONS.to_h.invert
 .large-2.medium-4.small-6.columns
-  / %h5= "By Flow Score"
-  / - by_flow_hash = @actions.group_by{ |a| a.flow }
-  / - by_flow_hash.each{ |flow, actions| by_flow_hash[flow] = actions.count }
-  / - Hash[by_flow_hash.sort.reverse].each do |flow, actions_count|
-  /   = actions_count
-  /   = "#{scale_hash[flow]} (#{flow})"
-  /   %br
-  / %h5= "By Value Score"
-  / - by_value_hash = @actions.group_by{ |a| a.value }
-  / - by_value_hash.each{ |value, actions| by_value_hash[value] = actions.count }
-  / - Hash[by_value_hash.sort.reverse].each do |value, actions_count|
-  /   = actions_count
-  /   = "#{scale_hash[value]} (+#{value})"
-  /   %br
-.large-2.medium-4.small-6.columns
   %h5 By Role
   - by_role_hash = @actions.group_by{ |a| a.role_id }
   - by_role_hash.each{ |role_id, actions| by_role_hash[role_id] = actions.count }
