@@ -4,6 +4,7 @@
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
     %title= content_for?(:title) ? yield(:title) : 'TAG.com Beta'
     %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'TheActionGame.com'}"}
+    %meta{:name => "google-site-verification", :content => "SZp6CBCupXHPAvYYH3E12WTVVhbRs3iTxaKZTivgEUM"}
     = favicon_link_tag
     = stylesheet_link_tag 'application', media: 'all'
     -# Modernizr is required for Zurb Foundation

@@ -19,7 +19,6 @@ gem 'haml-rails'
 gem 'high_voltage'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
-gem 'pg'
 gem 'pundit'
 gem 'simple_form'
 gem 'thin'
@@ -46,9 +45,12 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rubocop'
 end
+
 group :production do
   gem 'rails_12factor'
+  gem 'pg', '~> 0.21'
 end
+
 group :test do
   gem 'capybara'
   gem 'database_cleaner'
